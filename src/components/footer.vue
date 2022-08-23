@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:07:07
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-23 15:16:12
+ * @LastEditTime: 2022-08-23 15:23:31
  * @FilePath: \jungehousing\src\components\footer.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -30,7 +30,7 @@
             <li>
               <span>
                 <a href="javascript:;">
-                  <router-link to="/about" class="router-test">
+                  <router-link to="/terms" class="router-test">
                     <font style="vertical-align: inherit;">
                       <font style="vertical-align: inherit;">服务条款</font>
                     </font>
@@ -41,7 +41,7 @@
             <li>
               <span>
                 <a href="javascript:;">
-                  <router-link to="/about" class="router-test">
+                  <router-link to="/privacy" class="router-test">
                     <font style="vertical-align: inherit;">
                       <font style="vertical-align: inherit;">隐私声明</font>
                     </font>
