@@ -1,24 +1,29 @@
 <!--
  * @Description: 
  * @Author: wangcc
- * @Date: 2022-08-23 15:13:46
+ * @Date: 2022-08-23 15:19:05
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-23 15:16:24
- * @FilePath: \jungehousing\src\views\about\about.vue
+ * @LastEditTime: 2022-08-23 15:19:07
+ * @FilePath: \jungehousing\src\views\privacy\privacy.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
 <template>
-  <div>关于我们</div>
+<div>
+隐私声明
+</div>
 </template>
 
 <script>
 export default {
-  name: 'about',
-  data() {
-    return {};
+  name:'privacy',
+  data(){
+   return {
+
+   }
   }
-};
+}
 </script>
 
 <style  lang='scss' scoped>
+
 </style>

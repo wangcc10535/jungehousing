@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:07:07
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-23 15:13:17
+ * @LastEditTime: 2022-08-23 15:16:12
  * @FilePath: \jungehousing\src\components\footer.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -19,27 +19,33 @@
             <li>
               <span>
                 <a href="javascript:;">
-                  <font style="vertical-align: inherit;">
-                    <font style="vertical-align: inherit;">关于我们</font>
-                  </font>
+                  <router-link to="/about" class="router-test">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">关于我们</font>
+                    </font>
+                  </router-link>
                 </a>
               </span>
             </li>
             <li>
               <span>
                 <a href="javascript:;">
-                  <font style="vertical-align: inherit;">
-                    <font style="vertical-align: inherit;">服务条款</font>
-                  </font>
+                  <router-link to="/about" class="router-test">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">服务条款</font>
+                    </font>
+                  </router-link>
                 </a>
               </span>
             </li>
             <li>
               <span>
                 <a href="javascript:;">
-                  <font style="vertical-align: inherit;">
-                    <font style="vertical-align: inherit;">隐私声明</font>
-                  </font>
+                  <router-link to="/about" class="router-test">
+                    <font style="vertical-align: inherit;">
+                      <font style="vertical-align: inherit;">隐私声明</font>
+                    </font>
+                  </router-link>
                 </a>
               </span>
             </li>
