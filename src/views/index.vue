@@ -1,19 +1,20 @@
 <!--
- * @Description: 
+ * @Description: 网站首页
  * @Author: wangcc
- * @Date: 2022-08-23 10:07:07
+ * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-23 11:22:12
- * @FilePath: \jungehousing\src\components\footer.vue
+ * @LastEditTime: 2022-08-23 10:15:59
+ * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
 <template>
- <div class="wrap" id="app-footer">footer</div>
+  <div>123</div>
 </template>
 
 <script>
+
 export default {
-  name: 'app-footer',
+  name: 'index',
   data() {
     return {};
   }
