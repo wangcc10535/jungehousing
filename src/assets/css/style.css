@@ -1,0 +1,29 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-family: "Noto Sans Korean" !important;
+}
+a{
+  color: black;
+  text-shadow: none;
+  text-decoration: none;
+}
+ul{
+  list-style: none;
+}
+
+._container {
+  width: 1200px !important;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  max-width: none !important;
+}
+._container:after, ._container:before {
+  display: table;
+  content: " ";
+  clear: both;
+}

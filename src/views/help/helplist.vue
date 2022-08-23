@@ -1,20 +1,19 @@
 <!--
- * @Description: 网站首页
+ * @Description: 
  * @Author: wangcc
- * @Date: 2022-08-23 10:11:24
+ * @Date: 2022-08-23 14:41:12
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-23 14:42:32
- * @FilePath: \jungehousing\src\views\index.vue
+ * @LastEditTime: 2022-08-23 14:41:13
+ * @FilePath: \jungehousing\src\views\help\helplist.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
 <template>
-  <div>首页</div>
+  <div>常见问题</div>
 </template>
 
 <script>
-
 export default {
-  name: 'index',
+  name: 'helplist',
   data() {
     return {};
   }
