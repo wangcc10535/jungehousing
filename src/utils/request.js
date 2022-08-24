@@ -6,7 +6,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 
 // 创建axios实例
 const http = axios.create({
-  baseURL: '接口的前半部分加端口',
+  // baseURL: '接口的前半部分加端口',
   timeout: 5000 //响应时间
   // headers:{"Content-Type":"application/json;charset=utf-8"},
 });
