@@ -10,7 +10,7 @@
 <template>
   <div>
     <el-carousel height="443px">
-      <el-carousel-item v-for="(item,index) in imageList" :key="index">
+      <el-carousel-item v-for="(item, index) in imageList" :key="index">
         <img class="images" :src="item.url" alt />
       </el-carousel-item>
     </el-carousel>
@@ -18,12 +18,12 @@
       <div class="searchbox">
         <ul class="nav-search">
           <li
-            v-for="(tabs,index) in tab"
+            v-for="(tabs, index) in tab"
             :key="index"
-            :class="{active:currentClass==index}"
+            :class="{ active: currentClass == index }"
             @click="tabsClick(index)"
           >
-            <a href="javascript:;">{{tabs.name}}</a>
+            <a href="javascript:;">{{ tabs.name }}</a>
           </li>
         </ul>
         <div class="search-inner">
@@ -43,12 +43,7 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select
-            v-model="searchFrom.city"
-            v-if="currentClass == 0"
-            class="search-select"
-            placeholder="选择城市"
-          >
+          <el-select v-model="searchFrom.city" v-if="currentClass == 0" class="search-select" placeholder="选择城市">
             <el-option
               v-for="item in cityOptions"
               :key="item.value"
@@ -56,12 +51,7 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select
-            v-model="searchFrom.county"
-            v-if="currentClass == 0"
-            class="search-select"
-            placeholder="-"
-          >
+          <el-select v-model="searchFrom.county" v-if="currentClass == 0" class="search-select" placeholder="-">
             <el-option
               v-for="item in countyOptions"
               :key="item.value"
@@ -69,12 +59,7 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select
-            v-model="searchFrom.street"
-            v-if="currentClass == 0"
-            class="search-select"
-            placeholder="-"
-          >
+          <el-select v-model="searchFrom.street" v-if="currentClass == 0" class="search-select" placeholder="-">
             <el-option
               v-for="item in streetOptions"
               :key="item.value"
@@ -82,12 +67,7 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select
-            v-model="searchFrom.region"
-            v-if="currentClass == 1"
-            class="search-select"
-            placeholder="选择地区"
-          >
+          <el-select v-model="searchFrom.region" v-if="currentClass == 1" class="search-select" placeholder="选择地区">
             <el-option
               v-for="item in regionOptions"
               :key="item.value"
@@ -95,12 +75,7 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select
-            v-model="searchFrom.line"
-            v-if="currentClass == 1"
-            class="search-select"
-            placeholder="-"
-          >
+          <el-select v-model="searchFrom.line" v-if="currentClass == 1" class="search-select" placeholder="-">
             <el-option
               v-for="item in lineOptions"
               :key="item.value"
@@ -108,12 +83,7 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select
-            v-model="searchFrom.station"
-            v-if="currentClass == 1"
-            class="search-select"
-            placeholder="-"
-          >
+          <el-select v-model="searchFrom.station" v-if="currentClass == 1" class="search-select" placeholder="-">
             <el-option
               v-for="item in stationOptions"
               :key="item.value"
@@ -138,16 +108,11 @@
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="row theme">
-          <div
-            class="col-md-4 col-xs-6"
-            style="width:22.5%;"
-            v-for="(item,index) in homeSpot"
-            :key="index"
-          >
+          <div class="col-md-4 col-xs-6" style="width: 22.5%" v-for="(item, index) in homeSpot" :key="index">
             <div class="cell home_spot_cell">
               <div class="cell_holder home_spot">
                 <a href="javascript:;" class="cover-wrapper">
-                  <span>{{item.name}}</span>
+                  <span>{{ item.name }}</span>
                 </a>
                 <img :src="item.url" alt />
               </div>
@@ -158,7 +123,7 @@
     </div>
     <div class="home_section alternative_color">
       <div class="_container">
-        <div class="text-center" style="padding-bottom:10px">
+        <div class="text-center" style="padding-bottom: 10px">
           <h1>热门产品</h1>
           <hr class="hr_narrow hr_color" />
         </div>
@@ -172,15 +137,15 @@
             <el-radio-button :label="5">ETC</el-radio-button>
           </el-radio-group>
         </div>
-        <div id="recent_wrap" style="display: table;">
-          <div class="search-item-wide" v-for="(house,index) in houseList" :key="index">
+        <div id="recent_wrap" style="display: table">
+          <div class="search-item-wide" v-for="(house, index) in houseList" :key="index">
             <div class="view_product grid_photo">
               <div class="photo">
                 <img class="holder" :src="house.img" alt />
                 <div class="item_title">
-                  <h3>[{{house.id}}] {{house.title}}</h3>
+                  <h3>[{{ house.id }}] {{ house.title }}</h3>
                   <div class="address">
-                    <span>{{house.address}}</span>
+                    <span>{{ house.address }}</span>
                   </div>
                 </div>
                 <div class="tags">
@@ -201,20 +166,20 @@
                 <div>
                   <div class="price_wrap">
                     <span class="installation_span">最少</span>
-                    <strong class="price_strong">{{house.priceSmall}}</strong>
+                    <strong class="price_strong">{{ house.priceSmall }}</strong>
                     <span class="installation_span">房间</span>
-                    <strong class="price_strong">{{house.zoom}}</strong>
+                    <strong class="price_strong">{{ house.zoom }}</strong>
                     <span class="installation_span">贷款</span>
-                    <strong class="price_strong">{{house.fullPrice}}万韩元</strong>
+                    <strong class="price_strong">{{ house.fullPrice }}万韩元</strong>
                   </div>
                 </div>
               </div>
               <div class="meta">
                 <div class="meta_cell">
                   面积
-                  <span class="help">{{house.area}}</span>
+                  <span class="help">{{ house.area }}</span>
                 </div>
-                <div class="meta_cell">{{house.aces}}</div>
+                <div class="meta_cell">{{ house.aces }}</div>
               </div>
             </div>
           </div>
@@ -231,14 +196,17 @@
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="megafolio-container">
-          <div class="mega-entry-innerwrap">
-            <img src="@/assets/images/asd.jpg" alt />
+          <div class="mega-entry-innerwrap" v-for="(mega, index) in innerwrapList" :key="index">
+            <img :src="mega.img" alt />
             <div class="mega-hover">
-              <span class="mega-hovertitle">恭喜坡州签约~*</span>
+              <span class="mega-hovertitle">{{ mega.title }}</span>
               <div class="mega-hoverlink"></div>
               <div class="mega-hoverview"></div>
             </div>
           </div>
+        </div>
+        <div class="more">
+          <el-button icon="el-icon-plus">查看更多</el-button>
         </div>
       </div>
     </div>
@@ -248,7 +216,18 @@
           <h1>关于所有房地产</h1>
           <hr class="hr_narrow hr_color" />
         </div>
-        <div class="megafolio-container"></div>
+        <div class="megafolio-container">
+          <swiper :options="swiperOption">
+        <swiper-slide
+          class="swiper-item"
+          v-for="(item,index) in itemList"
+          :key="index"
+          
+        >
+        <img :src="item.img" alt="">
+          </swiper-slide>
+          </swiper>
+        </div>
       </div>
     </div>
     <div class="home_section main_color">
@@ -264,10 +243,28 @@
 </template>
 
 <script>
+import{ swiper, swiperSlide } from 'vue-awesome-swiper'
+require('swiper/dist/css/swiper.css')
 export default {
   name: 'index',
   data() {
     return {
+      swiperOption:{
+        direction:'vertical',
+        height:500,
+        slidesPerView:'auto',
+        loop:true,
+        spaceBetween:0,
+        speed:4000,
+        freeMode:false,
+        freeModeMomentum:false,
+      },
+      cardList: [],
+      itemList: [
+        {
+          img:require('@/assets/images/dbc.jpg')
+        }
+      ],
       homeSpot: [
         {
           id: 1,
@@ -308,6 +305,38 @@ export default {
           id: 8,
           name: '안양/군포/의왕시',
           url: require('@/assets/images/8.png')
+        }
+      ],
+      innerwrapList: [
+        {
+          id: 1,
+          img: require('@/assets/images/asd.jpg'),
+          title: '恭喜坡州签约~*'
+        },
+        {
+          id: 2,
+          img: require('@/assets/images/asd.jpg'),
+          title: '恭喜坡州签约~*'
+        },
+        {
+          id: 3,
+          img: require('@/assets/images/asd.jpg'),
+          title: '恭喜坡州签约~*'
+        },
+        {
+          id: 4,
+          img: require('@/assets/images/asd.jpg'),
+          title: '恭喜坡州签约~*'
+        },
+        {
+          id: 5,
+          img: require('@/assets/images/asd.jpg'),
+          title: '恭喜坡州签约~*'
+        },
+        {
+          id: 6,
+          img: require('@/assets/images/asd.jpg'),
+          title: '恭喜坡州签约~*'
         }
       ],
       searchFrom: {},
@@ -657,12 +686,13 @@ export default {
     searchClick() {
       console.log('搜索');
       console.log(this.searchFrom);
-    }
+    },
+    megaHover() {}
   }
 };
 </script>
 
-<style  lang='scss' scoped>
+<style lang="scss" scoped>
 .searchbox_wrapper_bottom {
   margin-top: -30px;
   position: relative;
@@ -879,12 +909,17 @@ hr {
 .more {
   width: 100%;
   text-align: center;
-  margin: 20px 0;
+  margin: 20px 0 40px;
+}
+.megafolio-container {
+  padding-bottom: 30px;
 }
 .mega-entry-innerwrap {
   width: 176px;
   height: 176px;
   position: relative;
+  display: inline-block;
+  margin: 12px;
   img {
     width: 100%;
     height: 100%;
@@ -912,53 +947,54 @@ hr {
   top: 0;
   left: 0;
 }
-.mega-hover:hover{
+.mega-hover:hover {
   opacity: 1;
 }
 .mega-hovertitle {
-    position: absolute;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 700;
-    text-align: center;
-    width: 60%;
-    padding: 0px 0px 15px;
-    left: 20%;
-    bottom: 40%;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    -moz-opacity: 0;
-    -khtml-opacity: 0;
-    opacity: 0;
+  position: absolute;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  width: 60%;
+  padding: 0px 0px 15px;
+  left: 20%;
+  bottom: 50%;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  // opacity: 0;
 }
-.mega-hoverlink, .mega-hoverview {
-    width: 33px;
-    height: 33px;
-    position: absolute;
-    top: 50%;
-    text-align: center;
-    margin-top: 0px;
-    cursor: pointer;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    -moz-opacity: 0;
-    -khtml-opacity: 0;
-    opacity: 0;
+.mega-hoverlink,
+.mega-hoverview {
+  width: 33px;
+  height: 33px;
+  position: absolute;
+  top: 50%;
+  text-align: center;
+  margin-top: 0px;
+  cursor: pointer;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  // opacity: 0;
 }
 .mega-hoverlink {
-    right: 50%;
-    margin-right: 33px;
-    background: url('@/assets/images/link.png') no-repeat center;
-    -webkit-transform: translateZ(10);
-    -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+  right: 50%;
+  margin-right: 10px;
+  background: url('@/assets/images/link.png') no-repeat center;
+  -webkit-transform: translateZ(10);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
 }
 .mega-hoverview {
-    left: 50%;
-    margin-left: 33px;
-    background: url('@/assets/images/lupe.png') no-repeat center;
-    -webkit-transform: translateZ(10);
-    -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+  left: 50%;
+  margin-left: 10px;
+  background: url('@/assets/images/lupe.png') no-repeat center;
+  -webkit-transform: translateZ(10);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
 }
 </style>
