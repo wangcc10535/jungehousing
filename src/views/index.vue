@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-24 16:06:31
+ * @LastEditTime: 2022-08-25 18:05:28
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -172,45 +172,92 @@
             <el-radio-button :label="5">ETC</el-radio-button>
           </el-radio-group>
         </div>
-        <div id="recent_wrap">
-            <div class="search-item-wide">
-                <div class="view_product grid_photo">
-                  <div class="photo">
-                    <img class="holder" src="../assets/images/0.png" alt="">
-                    <div class="item_title">
-                      <h3>[21464] ★清川洞★特价第一代…</h3>
-                      <div class="address">
-                        <span>仁川富平区清川洞葛山站1.2公里</span>
-                      </div>
-                    </div>
-                    <div class="tags">
-                      <div class="tag"><span>建议</span></div>
-                      <div class="tag tag_speed"><span>抢购</span></div>
-                      <div class="tag ribbon_orange"><span>最低价格</span></div>
-                    </div>
+        <div id="recent_wrap" style="display: table;">
+          <div class="search-item-wide" v-for="(house,index) in houseList" :key="index">
+            <div class="view_product grid_photo">
+              <div class="photo">
+                <img class="holder" :src="house.img" alt />
+                <div class="item_title">
+                  <h3>[{{house.id}}] {{house.title}}</h3>
+                  <div class="address">
+                    <span>{{house.address}}</span>
                   </div>
                 </div>
-                <div class="item">
-                  <div class="price_info">
-                    <div>
-                      <div class="price_wrap">
-                        <span class="installation_span">最少</span><strong class="price_strong">30500</strong>
-                        <span class="installation_span">房间 </span><strong class="price_strong">1500</strong>
-                        <span class="installation_span">贷款</span><strong class="price_strong">2900万韩元</strong>
-                      </div>
-                    </div>
+                <div class="tags">
+                  <div class="tag" v-if="house.tags == 1">
+                    <span>建议</span>
                   </div>
-                  <div class="meta">
-                    <div class="meta_cell">
-                      面积<span class="help">115.7㎡</span>
-                    </div>
-                    <div class="meta_cell">
-                      卧室 3 / 浴室 2
-                    </div>
+                  <div class="tag tag_speed" v-if="house.tagsO == 2">
+                    <span>抢购</span>
+                  </div>
+                  <div class="tag ribbon_orange" v-if="house.tagsZ == 3">
+                    <span>最低价格</span>
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="item">
+              <div class="price_info">
+                <div>
+                  <div class="price_wrap">
+                    <span class="installation_span">最少</span>
+                    <strong class="price_strong">{{house.priceSmall}}</strong>
+                    <span class="installation_span">房间</span>
+                    <strong class="price_strong">{{house.zoom}}</strong>
+                    <span class="installation_span">贷款</span>
+                    <strong class="price_strong">{{house.fullPrice}}万韩元</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="meta">
+                <div class="meta_cell">
+                  面积
+                  <span class="help">{{house.area}}</span>
+                </div>
+                <div class="meta_cell">{{house.aces}}</div>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="more">
+          <el-button icon="el-icon-plus">查看更多</el-button>
+        </div>
+      </div>
+    </div>
+    <div class="home_section main_color">
+      <div class="_container">
+        <div class="text-center">
+          <h1>顾客评论</h1>
+          <hr class="hr_narrow hr_color" />
+        </div>
+        <div class="megafolio-container">
+          <div class="mega-entry-innerwrap">
+            <img src="@/assets/images/asd.jpg" alt />
+            <div class="mega-hover">
+              <span class="mega-hovertitle">恭喜坡州签约~*</span>
+              <div class="mega-hoverlink"></div>
+              <div class="mega-hoverview"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="home_section alternative_color">
+      <div class="_container">
+        <div class="text-center">
+          <h1>关于所有房地产</h1>
+          <hr class="hr_narrow hr_color" />
+        </div>
+        <div class="megafolio-container"></div>
+      </div>
+    </div>
+    <div class="home_section main_color">
+      <div class="_container">
+        <div class="text-center">
+          <h1>合作方</h1>
+          <hr class="hr_narrow hr_color" />
+        </div>
+        <div class="megafolio-container"></div>
       </div>
     </div>
   </div>
@@ -265,7 +312,7 @@ export default {
       ],
       searchFrom: {},
       houseFrom: {
-        value:0
+        value: 0
       },
       // 交易类型
       dealOptions: [
@@ -374,14 +421,230 @@ export default {
         }
       ],
       currentClass: 0,
-      houseList:[
+      houseList: [
         {
           id: 21464,
           title: '★清川洞★特价第一代…',
           address: '仁川富平区清川洞葛山站1.2公里',
           priceSmall: '30500',
           room: '1500',
-          fullPrice: '2900'
+          fullPrice: '2900',
+          tags: 1,
+          tagsO: 2,
+          tagsZ: 3,
+          area: '115.7㎡',
+          aces: '卧室 3 / 浴室 2',
+          img: require('@/assets/images/0.png')
+        },
+        {
+          id: 21464,
+          title: '★清川洞★特价第一代…',
+          address: '仁川富平区清川洞葛山站1.2公里',
+          priceSmall: '30500',
+          room: '1500',
+          fullPrice: '2900',
+          tags: 1,
+          tagsO: 2,
+          tagsZ: 3,
+          area: '115.7㎡',
+          aces: '卧室 3 / 浴室 2',
+          img: require('@/assets/images/0.png')
+        },
+        {
+          id: 21464,
+          title: '★清川洞★特价第一代…',
+          address: '仁川富平区清川洞葛山站1.2公里',
+          priceSmall: '30500',
+          room: '1500',
+          fullPrice: '2900',
+          tags: 1,
+          tagsO: 2,
+          tagsZ: 3,
+          area: '115.7㎡',
+          aces: '卧室 3 / 浴室 2',
+          img: require('@/assets/images/0.png')
+        },
+        {
+          id: 21464,
+          title: '★清川洞★特价第一代…',
+          address: '仁川富平区清川洞葛山站1.2公里',
+          priceSmall: '30500',
+          room: '1500',
+          fullPrice: '2900',
+          tags: 1,
+          tagsO: 2,
+          tagsZ: 3,
+          area: '115.7㎡',
+          aces: '卧室 3 / 浴室 2',
+          img: require('@/assets/images/0.png')
+        },
+        {
+          id: 21464,
+          title: '★清川洞★特价第一代…',
+          address: '仁川富平区清川洞葛山站1.2公里',
+          priceSmall: '30500',
+          room: '1500',
+          fullPrice: '2900',
+          tags: 1,
+          tagsO: 2,
+          tagsZ: 3,
+          area: '115.7㎡',
+          aces: '卧室 3 / 浴室 2',
+          img: require('@/assets/images/0.png')
+        },
+        {
+          id: 21464,
+          title: '★清川洞★特价第一代…',
+          address: '仁川富平区清川洞葛山站1.2公里',
+          priceSmall: '30500',
+          room: '1500',
+          fullPrice: '2900',
+          tags: 1,
+          tagsO: 2,
+          tagsZ: 3,
+          area: '115.7㎡',
+          aces: '卧室 3 / 浴室 2',
+          img: require('@/assets/images/0.png')
+        },
+        {
+          id: 21464,
+          title: '★清川洞★特价第一代…',
+          address: '仁川富平区清川洞葛山站1.2公里',
+          priceSmall: '30500',
+          room: '1500',
+          fullPrice: '2900',
+          tags: 1,
+          tagsO: 2,
+          tagsZ: 3,
+          area: '115.7㎡',
+          aces: '卧室 3 / 浴室 2',
+          img: require('@/assets/images/0.png')
+        },
+        {
+          id: 21464,
+          title: '★清川洞★特价第一代…',
+          address: '仁川富平区清川洞葛山站1.2公里',
+          priceSmall: '30500',
+          room: '1500',
+          fullPrice: '2900',
+          tags: 1,
+          tagsO: 2,
+          tagsZ: 3,
+          area: '115.7㎡',
+          aces: '卧室 3 / 浴室 2',
+          img: require('@/assets/images/0.png')
+        },
+        {
+          id: 21464,
+          title: '★清川洞★特价第一代…',
+          address: '仁川富平区清川洞葛山站1.2公里',
+          priceSmall: '30500',
+          room: '1500',
+          fullPrice: '2900',
+          tags: 1,
+          tagsO: 2,
+          tagsZ: 3,
+          area: '115.7㎡',
+          aces: '卧室 3 / 浴室 2',
+          img: require('@/assets/images/0.png')
+        },
+        {
+          id: 21464,
+          title: '★清川洞★特价第一代…',
+          address: '仁川富平区清川洞葛山站1.2公里',
+          priceSmall: '30500',
+          room: '1500',
+          fullPrice: '2900',
+          tags: 1,
+          tagsO: 2,
+          tagsZ: 3,
+          area: '115.7㎡',
+          aces: '卧室 3 / 浴室 2',
+          img: require('@/assets/images/0.png')
+        },
+        {
+          id: 21464,
+          title: '★清川洞★特价第一代…',
+          address: '仁川富平区清川洞葛山站1.2公里',
+          priceSmall: '30500',
+          room: '1500',
+          fullPrice: '2900',
+          tags: 1,
+          tagsO: 2,
+          tagsZ: 3,
+          area: '115.7㎡',
+          aces: '卧室 3 / 浴室 2',
+          img: require('@/assets/images/0.png')
+        },
+        {
+          id: 21464,
+          title: '★清川洞★特价第一代…',
+          address: '仁川富平区清川洞葛山站1.2公里',
+          priceSmall: '30500',
+          room: '1500',
+          fullPrice: '2900',
+          tags: 1,
+          tagsO: 2,
+          tagsZ: 3,
+          area: '115.7㎡',
+          aces: '卧室 3 / 浴室 2',
+          img: require('@/assets/images/0.png')
+        },
+        {
+          id: 21464,
+          title: '★清川洞★特价第一代…',
+          address: '仁川富平区清川洞葛山站1.2公里',
+          priceSmall: '30500',
+          room: '1500',
+          fullPrice: '2900',
+          tags: 1,
+          tagsO: 2,
+          tagsZ: 3,
+          area: '115.7㎡',
+          aces: '卧室 3 / 浴室 2',
+          img: require('@/assets/images/0.png')
+        },
+        {
+          id: 21464,
+          title: '★清川洞★特价第一代…',
+          address: '仁川富平区清川洞葛山站1.2公里',
+          priceSmall: '30500',
+          room: '1500',
+          fullPrice: '2900',
+          tags: 1,
+          tagsO: 2,
+          tagsZ: 3,
+          area: '115.7㎡',
+          aces: '卧室 3 / 浴室 2',
+          img: require('@/assets/images/0.png')
+        },
+        {
+          id: 21464,
+          title: '★清川洞★特价第一代…',
+          address: '仁川富平区清川洞葛山站1.2公里',
+          priceSmall: '30500',
+          room: '1500',
+          fullPrice: '2900',
+          tags: 1,
+          tagsO: 2,
+          tagsZ: 3,
+          area: '115.7㎡',
+          aces: '卧室 3 / 浴室 2',
+          img: require('@/assets/images/0.png')
+        },
+        {
+          id: 21464,
+          title: '★清川洞★特价第一代…',
+          address: '仁川富平区清川洞葛山站1.2公里',
+          priceSmall: '30500',
+          room: '1500',
+          fullPrice: '2900',
+          tags: 1,
+          tagsO: 2,
+          tagsZ: 3,
+          area: '115.7㎡',
+          aces: '卧室 3 / 浴室 2',
+          img: require('@/assets/images/0.png')
         }
       ]
     };
@@ -612,5 +875,90 @@ hr {
   border-top-width: 1px;
   border-bottom-style: solid;
   border-top-style: solid;
+}
+.more {
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
+}
+.mega-entry-innerwrap {
+  width: 176px;
+  height: 176px;
+  position: relative;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.mega-hover {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: url('@/assets/images/grain.png') repeat;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  opacity: 0;
+  top: 0;
+  left: 0;
+}
+.mega-hover:hover{
+  opacity: 1;
+}
+.mega-hovertitle {
+    position: absolute;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    width: 60%;
+    padding: 0px 0px 15px;
+    left: 20%;
+    bottom: 40%;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    opacity: 0;
+}
+.mega-hoverlink, .mega-hoverview {
+    width: 33px;
+    height: 33px;
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    margin-top: 0px;
+    cursor: pointer;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    opacity: 0;
+}
+.mega-hoverlink {
+    right: 50%;
+    margin-right: 33px;
+    background: url('@/assets/images/link.png') no-repeat center;
+    -webkit-transform: translateZ(10);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+}
+.mega-hoverview {
+    left: 50%;
+    margin-left: 33px;
+    background: url('@/assets/images/lupe.png') no-repeat center;
+    -webkit-transform: translateZ(10);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
 }
 </style>

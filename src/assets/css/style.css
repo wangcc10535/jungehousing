@@ -30,8 +30,8 @@ ul{
 
 .search-item-wide {
   float: left;
-  height: 285px;
-  width: 285px;
+  /* height: 285px; */
+  width: 284px;
   position: relative;
   margin: 7px;
   padding: 0;
