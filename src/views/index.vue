@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-25 18:05:28
+ * @LastEditTime: 2022-08-26 10:46:42
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -43,7 +43,12 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select v-model="searchFrom.city" v-if="currentClass == 0" class="search-select" placeholder="选择城市">
+          <el-select
+            v-model="searchFrom.city"
+            v-if="currentClass == 0"
+            class="search-select"
+            placeholder="选择城市"
+          >
             <el-option
               v-for="item in cityOptions"
               :key="item.value"
@@ -51,7 +56,12 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select v-model="searchFrom.county" v-if="currentClass == 0" class="search-select" placeholder="-">
+          <el-select
+            v-model="searchFrom.county"
+            v-if="currentClass == 0"
+            class="search-select"
+            placeholder="-"
+          >
             <el-option
               v-for="item in countyOptions"
               :key="item.value"
@@ -59,7 +69,12 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select v-model="searchFrom.street" v-if="currentClass == 0" class="search-select" placeholder="-">
+          <el-select
+            v-model="searchFrom.street"
+            v-if="currentClass == 0"
+            class="search-select"
+            placeholder="-"
+          >
             <el-option
               v-for="item in streetOptions"
               :key="item.value"
@@ -67,7 +82,12 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select v-model="searchFrom.region" v-if="currentClass == 1" class="search-select" placeholder="选择地区">
+          <el-select
+            v-model="searchFrom.region"
+            v-if="currentClass == 1"
+            class="search-select"
+            placeholder="选择地区"
+          >
             <el-option
               v-for="item in regionOptions"
               :key="item.value"
@@ -75,7 +95,12 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select v-model="searchFrom.line" v-if="currentClass == 1" class="search-select" placeholder="-">
+          <el-select
+            v-model="searchFrom.line"
+            v-if="currentClass == 1"
+            class="search-select"
+            placeholder="-"
+          >
             <el-option
               v-for="item in lineOptions"
               :key="item.value"
@@ -83,7 +108,12 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select v-model="searchFrom.station" v-if="currentClass == 1" class="search-select" placeholder="-">
+          <el-select
+            v-model="searchFrom.station"
+            v-if="currentClass == 1"
+            class="search-select"
+            placeholder="-"
+          >
             <el-option
               v-for="item in stationOptions"
               :key="item.value"
@@ -108,7 +138,12 @@
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="row theme">
-          <div class="col-md-4 col-xs-6" style="width: 22.5%" v-for="(item, index) in homeSpot" :key="index">
+          <div
+            class="col-md-4 col-xs-6"
+            style="width: 22.5%"
+            v-for="(item, index) in homeSpot"
+            :key="index"
+          >
             <div class="cell home_spot_cell">
               <div class="cell_holder home_spot">
                 <a href="javascript:;" class="cover-wrapper">
@@ -217,15 +252,15 @@
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="megafolio-container">
-          <swiper :options="swiperOption">
-        <swiper-slide
-          class="swiper-item"
-          v-for="(item,index) in itemList"
-          :key="index"
-          
-        >
-        <img :src="item.img" alt="">
-          </swiper-slide>
+          <swiper :options="swiperOption" @swiper="onSwiper" @slideChange="onSlideChange">
+            <swiper-slide v-for="(img,index) in itemList" :key="index">
+              <div class="news-box">
+                <img :src="img.img" alt="">
+              </div>
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+            <div class="swiper-button-prev" slot="button-prev"></div>
+            <div class="swiper-button-next" slot="button-next"></div>
           </swiper>
         </div>
       </div>
@@ -236,34 +271,55 @@
           <h1>合作方</h1>
           <hr class="hr_narrow hr_color" />
         </div>
-        <div class="megafolio-container"></div>
+        <div class="megafolio-container">
+
+          <swiper :options="swiperOption" @swiper="onSwiper" @slideChange="onSlideChange">
+            <swiper-slide>7788</swiper-slide>
+            <swiper-slide>9988</swiper-slide>
+            <swiper-slide>6644</swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+            <!-- <div class="swiper-button-prev" slot="button-prev"></div>
+            <div class="swiper-button-next" slot="button-next"></div> -->
+          </swiper>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import{ swiper, swiperSlide } from 'vue-awesome-swiper'
-require('swiper/dist/css/swiper.css')
 export default {
   name: 'index',
   data() {
     return {
-      swiperOption:{
-        direction:'vertical',
-        height:500,
-        slidesPerView:'auto',
-        loop:true,
-        spaceBetween:0,
-        speed:4000,
-        freeMode:false,
-        freeModeMomentum:false,
+      swiperOption: {
+        slidesPerView: 4,
+        // 设置分页器
+        pagination: {
+          el: '.swiper-pagination',
+          // 设置点击可切换
+          clickable: true
+        },
+        // 设置前进后退按钮
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+        // 设置自动轮播
+        autoplay: {
+          delay: 2000 // 5秒切换一次
+        },
+        // 设置轮播可循环
+        loop: true
       },
       cardList: [],
       itemList: [
         {
-          img:require('@/assets/images/dbc.jpg')
-        }
+          img: require('@/assets/images/dbc.jpg')
+        },
+        {
+          img: require('@/assets/images/bbs.jpg')
+        },
       ],
       homeSpot: [
         {
@@ -687,7 +743,13 @@ export default {
       console.log('搜索');
       console.log(this.searchFrom);
     },
-    megaHover() {}
+    megaHover() {},
+    onSwiper () {
+
+    },
+    onSlideChange () {
+
+    }
   }
 };
 </script>
@@ -996,5 +1058,28 @@ hr {
   -webkit-transform: translateZ(10);
   -webkit-backface-visibility: hidden;
   -webkit-perspective: 1000;
+}
+::v-deep .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet{
+  margin: -1px 4px;
+}
+.news-box{
+  width: 272px;
+  height: 272px;
+  overflow: hidden;
+}
+.news-box img{
+  cursor: pointer;
+	/* 手指指针 */
+	transition: all 0.5s;
+	/* 浮动；所有属性，0.5秒 */
+	overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+.news-box img:hover{
+  transform: scale(1.1);
+	/* 变形：缩放，放大比例(1.1) */
+	overflow: hidden;
+
 }
 </style>
