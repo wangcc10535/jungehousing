@@ -15,6 +15,51 @@
       <div class="content">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="구하기(매수)" name="first">
+            <el-descriptions class="margin-top" :column="1" border>
+              <el-descriptions-item label="所需区域" label-class-name="lable-tit">
+                88952634
+              </el-descriptions-item>
+              <el-descriptions-item label="交易类型" label-class-name="lable-tit">
+                88952634
+              </el-descriptions-item>
+              <el-descriptions-item label="价格范围" label-class-name="lable-tit">
+                88952634
+              </el-descriptions-item>
+              <el-descriptions-item label="类型" label-class-name="lable-tit">
+
+              </el-descriptions-item>
+              <el-descriptions-item label="预计购买时间" label-class-name="lable-tit">
+
+              </el-descriptions-item>
+              <el-descriptions-item label="访问日期/时间" label-class-name="lable-tit">
+
+
+              </el-descriptions-item>
+              <el-descriptions-item label="区域" label-class-name="lable-tit">
+                <el-input v-model="fromData.region" placeholder="输入区域大小"></el-input>
+              </el-descriptions-item>
+              <el-descriptions-item label="接触" label-class-name="lable-tit">
+                <el-input class="contact" v-model="fromData.name" placeholder="姓名"></el-input>
+                <el-input class="contact" v-model="fromData.email" placeholder="电子邮件"></el-input>
+                <el-input class="contact" v-model="fromData.phone" placeholder="电话"></el-input>
+              </el-descriptions-item>
+              <el-descriptions-item label="查询或要求" label-class-name="lable-tit">
+                <el-input type="textarea" :rows="6" placeholder="请输入内容" v-model="fromData.textarea">
+                </el-input>
+              </el-descriptions-item>
+              <el-descriptions-item label-class-name="lable-tit">
+                <template slot="label">
+                  同意使用个人信息<el-link @click="tional()">[查看]</el-link>
+                </template>
+                <el-radio-group v-model="fromData.radioLook">
+                  <el-radio :label="3">同意</el-radio>
+                  <el-radio :label="6">不同意</el-radio>
+                </el-radio-group>
+              </el-descriptions-item>
+            </el-descriptions>
+            <div class="submit">
+              <el-button type="primary">提交</el-button>
+            </div>
 
           </el-tab-pane>
           <el-tab-pane label="부동산 QNA" name="second">
@@ -38,7 +83,7 @@
       </div>
     </div>
     <el-dialog :title="dialogtitle" :visible.sync="dialogVisible" width="30%">
-      <el-descriptions class="margin-top" :column="1" :size="size" border>
+      <el-descriptions class="margin-top" :column="1" border>
         <el-descriptions-item>
           <template slot="label">
             이름
@@ -78,9 +123,14 @@ export default {
   name: 'additional',
   data() {
     return {
+      value1: '',
       activeName: 'first',
       dialogVisible: false,
       dialogtitle: null,
+      fromData: {
+        checkList: []
+      },
+      rules: {},
       tableData: [
         {
           title: '88952634',
@@ -88,7 +138,23 @@ export default {
           state: '未答复',
           time: '2022-07-01 17:07:51'
         }
-      ]
+      ],
+      stutes: [{
+        id: 1,
+        label: '2 间客房'
+      }, {
+        id: 1,
+        label: '3 间客房'
+      }, {
+        id: 1,
+        label: '4 间客房'
+      }, {
+        id: 1,
+        label: '双工'
+      }, {
+        id: 1,
+        label: ' ETC'
+      }]
     };
   },
   methods: {
@@ -96,7 +162,9 @@ export default {
     tional(row) {
       this.dialogtitle = row.title;
       this.dialogVisible = true;
-    }
+
+    },
+    handleCheckedCitiesChange() { }
   }
 };
 </script>
@@ -116,5 +184,23 @@ export default {
 
 ::v-deep .el-tabs__item:hover {
   color: #ebb000;
+}
+
+::v-deep .lable-tit {
+  width: 229px;
+  text-align: right !important;
+}
+
+.contact {
+  margin-bottom: 10px;
+}
+
+.contact:last-child {
+  margin-bottom: 0;
+}
+.submit{
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
 }
 </style>

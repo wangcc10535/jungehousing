@@ -9,10 +9,7 @@
 -->
 <template>
 <div class="base-box">
-    <breadcrumb></breadcrumb>
-    <div class="_container">
-      123
-    </div>
+
   </div>
 </template>
 
@@ -28,5 +25,6 @@ export default {
 </script>
 
 <style  lang='scss' scoped>
+@import url('@/assets/css/order.css');
 
 </style>

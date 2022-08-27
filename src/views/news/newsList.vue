@@ -15,7 +15,7 @@
         <div class="top-search">
           <div class="search-title">
             <h2>所有房地产新闻</h2>
-            <span>({{ itemList.length }})</span>
+            <span v-if="itemList.length >0">({{ itemList.length }})</span>
           </div>
           <div class="search-box">
             <el-input v-model="searchInput" size="small" placeholder="请输入内容"></el-input>
