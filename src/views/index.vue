@@ -145,7 +145,7 @@
           </div>
         </div>
         <div class="more">
-          <router-link to="/houseList" class="router-test">
+          <router-link to="/housemap" class="router-test">
             <el-button icon="el-icon-plus">查看更多</el-button>
           </router-link>
 

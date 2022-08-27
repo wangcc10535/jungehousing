@@ -4,6 +4,7 @@ const name = '俊阁家园'
 module.exports = defineConfig({
   transpileDependencies: true,
   lintOnSave: false,
+  publicPath:'./',
   devServer: {
     host: '0.0.0.0',
     port,
