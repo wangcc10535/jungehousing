@@ -15,7 +15,7 @@ const routes = [
   {
     path: '/houseList',
     name: 'houseList',
-    component: () => import('../views/orderList/housemap.vue'),
+    component: () => import('../views/orderList/houselist.vue'),
     meta: {
       title: '房产'
     }

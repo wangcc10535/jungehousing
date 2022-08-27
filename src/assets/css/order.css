@@ -411,7 +411,7 @@
     position: absolute;
     top: 53px;
     right: 0px;
-    height: 82%;
+    height: 94%;
     width: 420px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -426,7 +426,8 @@
     
     padding-top: 1px;
     padding-bottom: 1px;
-    overflow: hidden;
+    /* overflow: hidden; */
+    height: 96%;
   }
   
   .relist {
@@ -506,9 +507,9 @@
 
   .btn-group {
     width: 100%;
-    display: flex;
+    /* display: flex;
     justify-content: right;
-    align-items: center;
+    align-items: center; */
     padding-bottom: 1px;
     background: #f3f3f3;
     border-top: 1px solid #e5e5e5;
@@ -549,7 +550,6 @@
   }
 
   .list_box_content {
-    display: none;
     width: 1210px;
     margin: 0 auto;
     max-width: none !important;
@@ -618,4 +618,6 @@
   .btn-a{
     width: 220px;
     display: flex;
+    float: right;
+    margin: 10px;
   }

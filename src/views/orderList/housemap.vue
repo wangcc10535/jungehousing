@@ -12,18 +12,32 @@
     <div id="container">
       <div class="btn-group">
         <div class="btn-a">
+
           <a href="javascript:;" class="icom-class active">
-            <img src="@/assets/images/icon/weizhi.png" alt="">
-            <span>定位</span>
+            <router-link to="/housemap" class="router-test">
+              <img src="@/assets/images/icon/weizhi.png" alt="">
+              <span>定位</span>
+            </router-link>
+
           </a>
+
           <a href="javascript:;" class="icom-class">
-            <img src="@/assets/images/icon/shuanglieliebiao.png" alt="">
-            <span>大图</span>
+            <router-link to="/houseList" class="router-test">
+              <img src="@/assets/images/icon/shuanglieliebiao.png" alt="">
+              <span>大图</span>
+            </router-link>
+
           </a>
+
+
           <a href="javascript:;" class="icom-class">
-            <img src="@/assets/images/icon/liebiaomoshi_kuai.png" alt="">
-            <span>列表</span>
+            <router-link to="/housetable" class="router-test">
+              <img src="@/assets/images/icon/liebiaomoshi_kuai.png" alt="">
+              <span>列表</span>
+            </router-link>
+
           </a>
+
         </div>
 
       </div>
@@ -500,7 +514,8 @@ export default {
 
 <style  lang='scss' scoped>
 @import url('@/assets/css/order.css');
-#container{
+
+#container {
   height: 79vh;
 }
 </style>
