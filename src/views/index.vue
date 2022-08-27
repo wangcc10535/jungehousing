@@ -11,7 +11,7 @@
   <div>
     <el-carousel height="443px">
       <el-carousel-item v-for="(item, index) in imageList" :key="index">
-        <img class="images" :src="item.url" alt />
+        <img class="banner-images" :src="item.url" alt />
       </el-carousel-item>
     </el-carousel>
     <div class="searchbox_wrapper_bottom">
@@ -43,12 +43,7 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select
-            v-model="searchFrom.city"
-            v-if="currentClass == 0"
-            class="search-select"
-            placeholder="选择城市"
-          >
+          <el-select v-model="searchFrom.city" v-if="currentClass == 0" class="search-select" placeholder="选择城市">
             <el-option
               v-for="item in cityOptions"
               :key="item.value"
@@ -56,12 +51,7 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select
-            v-model="searchFrom.county"
-            v-if="currentClass == 0"
-            class="search-select"
-            placeholder="-"
-          >
+          <el-select v-model="searchFrom.county" v-if="currentClass == 0" class="search-select" placeholder="-">
             <el-option
               v-for="item in countyOptions"
               :key="item.value"
@@ -69,12 +59,7 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select
-            v-model="searchFrom.street"
-            v-if="currentClass == 0"
-            class="search-select"
-            placeholder="-"
-          >
+          <el-select v-model="searchFrom.street" v-if="currentClass == 0" class="search-select" placeholder="-">
             <el-option
               v-for="item in streetOptions"
               :key="item.value"
@@ -82,12 +67,7 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select
-            v-model="searchFrom.region"
-            v-if="currentClass == 1"
-            class="search-select"
-            placeholder="选择地区"
-          >
+          <el-select v-model="searchFrom.region" v-if="currentClass == 1" class="search-select" placeholder="选择地区">
             <el-option
               v-for="item in regionOptions"
               :key="item.value"
@@ -95,12 +75,7 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select
-            v-model="searchFrom.line"
-            v-if="currentClass == 1"
-            class="search-select"
-            placeholder="-"
-          >
+          <el-select v-model="searchFrom.line" v-if="currentClass == 1" class="search-select" placeholder="-">
             <el-option
               v-for="item in lineOptions"
               :key="item.value"
@@ -108,12 +83,7 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select
-            v-model="searchFrom.station"
-            v-if="currentClass == 1"
-            class="search-select"
-            placeholder="-"
-          >
+          <el-select v-model="searchFrom.station" v-if="currentClass == 1" class="search-select" placeholder="-">
             <el-option
               v-for="item in stationOptions"
               :key="item.value"
@@ -138,12 +108,7 @@
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="row theme">
-          <div
-            class="col-md-4 col-xs-6"
-            style="width: 22.5%"
-            v-for="(item, index) in homeSpot"
-            :key="index"
-          >
+          <div class="col-md-4 col-xs-6" style="width: 22.5%" v-for="(item, index) in homeSpot" :key="index">
             <div class="cell home_spot_cell">
               <div class="cell_holder home_spot">
                 <a href="javascript:;" class="cover-wrapper">
@@ -233,10 +198,11 @@
         <div class="megafolio-container">
           <div class="mega-entry-innerwrap" v-for="(mega, index) in innerwrapList" :key="index">
             <img :src="mega.img" alt />
+            <!-- <el-image style="width: 100px; height: 100px" :src="mega.img" :preview-src-list="srcList"> </el-image> -->
             <div class="mega-hover">
               <span class="mega-hovertitle">{{ mega.title }}</span>
               <div class="mega-hoverlink"></div>
-              <div class="mega-hoverview"></div>
+              <div class="mega-hoverview" @click="megaHover(mega)"></div>
             </div>
           </div>
         </div>
@@ -252,15 +218,12 @@
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="megafolio-container">
-          <swiper :options="swiperOption" @swiper="onSwiper" @slideChange="onSlideChange">
-            <swiper-slide v-for="(img,index) in itemList" :key="index">
+          <swiper :options="swiperOption">
+            <swiper-slide v-for="(img, index) in itemList" :key="index">
               <div class="news-box">
-                <img :src="img.img" alt="">
+                <img :src="img.img" alt="" />
               </div>
             </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
-            <div class="swiper-button-prev" slot="button-prev"></div>
-            <div class="swiper-button-next" slot="button-next"></div>
           </swiper>
         </div>
       </div>
@@ -272,18 +235,21 @@
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="megafolio-container">
-
-          <swiper :options="swiperOption" @swiper="onSwiper" @slideChange="onSlideChange">
-            <swiper-slide>7788</swiper-slide>
-            <swiper-slide>9988</swiper-slide>
-            <swiper-slide>6644</swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
-            <!-- <div class="swiper-button-prev" slot="button-prev"></div>
-            <div class="swiper-button-next" slot="button-next"></div> -->
+          <swiper :options="friendshipOption">
+            <swiper-slide v-for="(link,index) in cardList" :key="index">
+              <div class="friendship-link">
+                <img :src="link.url" alt="">
+              </div>
+            </swiper-slide>
           </swiper>
         </div>
       </div>
     </div>
+    <el-dialog :visible.sync="imgVisible" width="30%">
+      <div class="logImg">
+        <img :src="dialogImg" alt="" />
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -292,6 +258,8 @@ export default {
   name: 'index',
   data() {
     return {
+      imgVisible: false,
+      dialogImg: null,
       swiperOption: {
         slidesPerView: 4,
         // 设置分页器
@@ -300,19 +268,35 @@ export default {
           // 设置点击可切换
           clickable: true
         },
-        // 设置前进后退按钮
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
-        },
         // 设置自动轮播
         autoplay: {
-          delay: 2000 // 5秒切换一次
-        },
+          delay: 4000 // 5秒切换一次
+        }
         // 设置轮播可循环
-        loop: true
+        // loop: true
       },
-      cardList: [],
+      friendshipOption:{
+        slidesPerView: 6,
+        pagination: {
+          el: '.swiper-pagination',
+          // 设置点击可切换
+          clickable: true
+        },
+        autoplay: {
+          delay: 5000 // 5秒切换一次
+        }
+      },
+      cardList: [
+        {
+          url: require('@/assets/images/nts.jpg')
+        },
+        {
+          url: require('@/assets/images/onnara.jpg')
+        },
+        {
+          url: require('@/assets/images/rtms.jpg')
+        },
+      ],
       itemList: [
         {
           img: require('@/assets/images/dbc.jpg')
@@ -320,6 +304,15 @@ export default {
         {
           img: require('@/assets/images/bbs.jpg')
         },
+        {
+          img: require('@/assets/images/bbs.jpg')
+        },
+        {
+          img: require('@/assets/images/bbs.jpg')
+        },
+        {
+          img: require('@/assets/images/bbs.jpg')
+        }
       ],
       homeSpot: [
         {
@@ -743,18 +736,20 @@ export default {
       console.log('搜索');
       console.log(this.searchFrom);
     },
-    megaHover() {},
-    onSwiper () {
-
-    },
-    onSlideChange () {
-
+    megaHover(item) {
+      this.imgVisible = true;
+      this.dialogImg = item.img;
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.banner-images{
+  width: 100%;
+  height: 100%;
+  
+}
 .searchbox_wrapper_bottom {
   margin-top: -30px;
   position: relative;
@@ -1059,27 +1054,41 @@ hr {
   -webkit-backface-visibility: hidden;
   -webkit-perspective: 1000;
 }
-::v-deep .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet{
+::v-deep .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
   margin: -1px 4px;
 }
-.news-box{
+.news-box {
   width: 272px;
   height: 272px;
   overflow: hidden;
 }
-.news-box img{
+.news-box img {
   cursor: pointer;
-	/* 手指指针 */
-	transition: all 0.5s;
-	/* 浮动；所有属性，0.5秒 */
-	overflow: hidden;
+  /* 手指指针 */
+  transition: all 0.5s;
+  /* 浮动；所有属性，0.5秒 */
+  overflow: hidden;
   width: 100%;
   height: 100%;
 }
-.news-box img:hover{
+.news-box img:hover {
   transform: scale(1.1);
-	/* 变形：缩放，放大比例(1.1) */
-	overflow: hidden;
-
+  /* 变形：缩放，放大比例(1.1) */
+  overflow: hidden;
+}
+.logImg{
+  width: 100%;
+  img {
+    width: 100%;
+  }
+}
+.friendship-link{
+  width: 192px;
+  height: 80px;
+  cursor: pointer;
+  img{
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

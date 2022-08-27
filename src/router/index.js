@@ -7,27 +7,42 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import('../views/index.vue')
+    component: () => import('../views/index.vue'),
+    meta: {
+      title: '首页'
+    }
   },
   {
     path: '/houseList',
     name: 'houseList',
-    component: () => import('../views/orderList/housemap.vue')
+    component: () => import('../views/orderList/housemap.vue'),
+    meta: {
+      title: '房产'
+    }
   },
   {
     path: '/housemap',
     name: 'housemap',
-    component: () => import('../views/orderList/housemap.vue')
+    component: () => import('../views/orderList/housemap.vue'),
+    meta: {
+      title: '房产'
+    }
   },
   {
     path: '/housetable',
     name: 'housetable',
-    component: () => import('../views/orderList/housetable.vue')
+    component: () => import('../views/orderList/housetable.vue'),
+    meta: {
+      title: '房产'
+    }
   },
   {
     path: '/newsList',
     name: 'newsList',
-    component: () => import('../views/news/newsList.vue')
+    component: () => import('../views/news/newsList.vue'),
+    meta: {
+      title: '新闻'
+    }
   },
   {
     path: '/additional',

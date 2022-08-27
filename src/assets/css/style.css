@@ -527,3 +527,17 @@ a {
   text-decoration: none;
 }
 
+.el-breadcrumb {
+  color: #5f6d7b;
+  font-size: 14px;
+  margin-bottom: 22px;
+}
+.el-breadcrumb__inner a, .el-breadcrumb__inner.is-link {
+  color: #606266 !important;
+}
+.el-breadcrumb__item:last-child .el-breadcrumb__inner {
+  color: #ebb000 !important;
+}
+.base-box{
+  padding-top: 20px;
+}

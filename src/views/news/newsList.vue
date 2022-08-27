@@ -8,7 +8,14 @@
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
 <template>
-  <div>新闻列表</div>
+  <div class="base-box">
+    <div class="_container">
+      <el-breadcrumb separator-class="el-icon-arrow-right">
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>新闻</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
+  </div>
 </template>
 
 <script>

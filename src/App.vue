@@ -3,6 +3,7 @@
     <app-header v-if="header_show"></app-header>
     <router-view  v-on:header='header' v-on:footer='footer' />
     <app-footer v-if="footer_show"></app-footer>
+    <el-backtop :bottom="100" :visibility-height="50"></el-backtop>
   </div>
 </template>
 
