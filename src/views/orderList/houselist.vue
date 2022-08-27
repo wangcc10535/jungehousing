@@ -9,7 +9,12 @@
 -->
 <template>
 <div>
-  列表
+ <div class="base-box">
+    <breadcrumb></breadcrumb>
+    <div class="_container">
+      123
+    </div>
+  </div>
 </div>
 </template>
 

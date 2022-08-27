@@ -8,9 +8,12 @@
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
 <template>
-<div>
-隐私声明
-</div>
+<div class="base-box">
+    <breadcrumb></breadcrumb>
+    <div class="_container">
+      123
+    </div>
+  </div>
 </template>
 
 <script>

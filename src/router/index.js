@@ -47,27 +47,42 @@ const routes = [
   {
     path: '/additional',
     name: 'additional',
-    component: () => import('../views/additional/additional.vue')
+    component: () => import('../views/additional/additional.vue'),
+    meta: {
+      title: '委托'
+    }
   },
   {
     path: '/helplist',
     name: 'helplist',
-    component: () => import('../views/help/helplist.vue')
+    component: () => import('../views/help/helplist.vue'),
+    meta: {
+      title: '常见问题'
+    }
   },
   {
     path: '/about',
     name: 'about',
-    component: () => import('../views/about/about.vue')
+    component: () => import('../views/about/about.vue'),
+    meta: {
+      title: '关于我们'
+    }
   },
   {
     path: '/terms',
     name: 'terms',
-    component: () => import('../views/terms/terms.vue')
+    component: () => import('../views/terms/terms.vue'),
+    meta: {
+      title: '服务条款'
+    }
   },
   {
     path: '/privacy',
     name: 'privacy',
-    component: () => import('../views/privacy/privacy.vue')
+    component: () => import('../views/privacy/privacy.vue'),
+    meta: {
+      title: '隐私声明'
+    }
   }
 ];
 

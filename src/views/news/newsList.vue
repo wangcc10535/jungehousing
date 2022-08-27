@@ -9,11 +9,9 @@
 -->
 <template>
   <div class="base-box">
+    <breadcrumb></breadcrumb>
     <div class="_container">
-      <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>新闻</el-breadcrumb-item>
-      </el-breadcrumb>
+      123
     </div>
   </div>
 </template>
