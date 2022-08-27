@@ -83,7 +83,23 @@ const routes = [
     meta: {
       title: '隐私声明'
     }
-  }
+  },
+  {
+    path: '/baseDetail',
+    name: 'baseDetail',
+    component: () => import('../views/base/baseDetail.vue'),
+    meta: {
+      title: '详情'
+    }
+  },
+  {
+    path: '/commentlist',
+    name: 'commentlist',
+    component: () => import('../views/comment/commentlist.vue'),
+    meta: {
+      title: '评论'
+    }
+  },
 ];
 
 const router = new VueRouter({

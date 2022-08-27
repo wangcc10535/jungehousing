@@ -69,14 +69,14 @@
             <li>
               <span>
                 <font style="vertical-align: inherit;">
-                  <font style="vertical-align: inherit;">名称：蓝虫</font>
+                  <font style="vertical-align: inherit;">名称：junland housing</font>
                 </font>
               </span>
             </li>
             <li>
               <span>
                 <font style="vertical-align: inherit;">
-                  <font style="vertical-align: inherit;">代表人物：李新成</font>
+                  <font style="vertical-align: inherit;">代表人物：소팀장님</font>
                 </font>
               </span>
             </li>
@@ -95,16 +95,16 @@
               <font style="vertical-align: inherit;">
                 <font style="vertical-align: inherit;">地址：</font>
               </font>
-              <span class="help" data-toggle="tooltip" title="#1703, 648, 高阳大路, 一山西区, 高阳市, 京畿道">
+              <span class="help" data-toggle="tooltip" title="인천시 남동구 경인로 740 1층 준부동산">
                 <font style="vertical-align: inherit;">
-                  <font style="vertical-align: inherit;">京畿道高阳市一山西区高阳大路648#1703</font>
+                  <font style="vertical-align: inherit;">인천시 남동구 경인로 740 1층 준부동산</font>
                 </font>
               </span>
             </li>
             <li>
               <span>
                 <font style="vertical-align: inherit;">
-                  <font style="vertical-align: inherit;">电话：050-7872-6000</font>
+                  <font style="vertical-align: inherit;">电话：032-362-8883</font>
                 </font>
               </span>
             </li>
@@ -112,7 +112,7 @@
               <span>
                 <a href="mailto:blueworm77@gmail.com">
                   <font style="vertical-align: inherit;">
-                    <font style="vertical-align: inherit;">blueworm77@gmail.com</font>
+                    <font style="vertical-align: inherit;">jun-housing@naver.com</font>
                   </font>
                 </a>
               </span>
@@ -121,13 +121,13 @@
 
           <p class="margin-top-40">
             <font style="vertical-align: inherit;">
-              <font style="vertical-align: inherit;">2018 © 蓝虫。</font>
+              <font style="vertical-align: inherit;">2018 © junland。</font>
               <font style="vertical-align: inherit;">照片、列表、社区 - 网站上的所有信息都受到保护。</font>
               <font style="vertical-align: inherit;">由</font>
             </font>
             <a href="http://www.realsoft.co.kr/" style="text-decoration:underline;">
               <font style="vertical-align: inherit;">
-                <font style="vertical-align: inherit;">realsoft.co.kr提供支持</font>
+                <font style="vertical-align: inherit;">junland housing提供支持</font>
               </font>
             </a>
           </p>

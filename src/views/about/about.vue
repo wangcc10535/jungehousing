@@ -11,7 +11,10 @@
   <div class="base-box">
     <breadcrumb></breadcrumb>
     <div class="_container">
-      123
+      <h3>关于我们</h3>
+       <div class="content">
+        内容
+      </div>
     </div>
   </div>
 </template>
@@ -26,4 +29,7 @@ export default {
 </script>
 
 <style  lang='scss' scoped>
+.content {
+  padding: 20px 0;
+}
 </style>
