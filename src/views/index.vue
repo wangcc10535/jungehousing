@@ -17,7 +17,7 @@
     <div class="searchbox_wrapper_bottom">
       <div class="searchbox">
         <ul class="nav-search">
-          <li v-for="(tabs, index) in tab" :key="index" :class="{ active: currentClass == index }"
+          <li v-for="(tabs, index) in tab" :key="index" :class="{ activeX: currentClass == index }"
             @click="tabsClick(index)">
             <a href="javascript:;">{{ tabs.name }}</a>
           </li>
@@ -794,12 +794,13 @@ export default {
   color: white;
 }
 
-.nav-search>li.active a {
+.nav-search>li.activeX a {
   font-weight: bold;
   color: #ffc525;
+  background-color: transparent;
 }
 
-.nav-search>li.active>a:after {
+.nav-search>li.activeX>a:after {
   content: '';
   border-radius: 0 !important;
   bottom: 0;

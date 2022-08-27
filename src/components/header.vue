@@ -25,7 +25,7 @@
         <ul>
           <!-- 웹 메뉴 -->
           <li>
-            <router-link to="/houseList" class="router-test">
+            <router-link to="/housemap" class="router-test">
               <a href="javascript:;">{{$t("message.navList")}}</a>
             </router-link>
           </li>
