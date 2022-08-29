@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:01:35
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-23 14:45:07
+ * @LastEditTime: 2022-08-29 14:32:34
  * @FilePath: \jungehousing\src\components\header.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -18,7 +18,7 @@
       <div class="call_box">
         <div class="description">
           <span>{{ $t("message.topPhone") }}</span>
-          <big>050-7872-6000</big>
+          <big>032-362-8883</big>
         </div>
       </div>
       <div class="header-navigation pull-right">

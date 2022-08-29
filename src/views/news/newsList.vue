@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 14:33:28
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-23 14:35:09
+ * @LastEditTime: 2022-08-29 15:19:14
  * @FilePath: \jungehousing\src\views\news\newsList.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -11,7 +11,7 @@
   <div class="base-box">
     <breadcrumb></breadcrumb>
     <div class="_container">
-      <div class="right">
+      <div class="left">
         <div class="top-search">
           <div class="search-title">
             <h2>所有房地产新闻</h2>
@@ -34,17 +34,24 @@
           </div>
         </div>
       </div>
-
+      <div class="right-box">
+        <rightList :rightTitle="rightTitle"></rightList>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import rightList from '@/components/rightList.vue'
 export default {
   name: 'newsList',
+  components:{
+    rightList
+  },
   data() {
     return {
       searchInput:'',
+      rightTitle: '最新房产',
       itemList: [
         {
           id:'123',
@@ -89,7 +96,7 @@ export default {
 </script>
 
 <style  lang='scss' scoped>
-.right{
+.left{
   float: left;
   width: 900px;
   .top-search{
@@ -145,5 +152,10 @@ export default {
       }
     }
   }
+}
+.right-box{
+  width: 300px;
+  float: right;
+  margin-top: 80px;
 }
 </style>

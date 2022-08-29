@@ -1,12 +1,13 @@
 const { defineConfig } = require('@vue/cli-service')
+const { resolve } = require("path");
 const port = 9010
 const name = '俊阁家园'
 module.exports = defineConfig({
   transpileDependencies: true,
   lintOnSave: false,
-  publicPath:'./',
+  outputDir: process.env.ENV + "-dist",
   devServer: {
-    host: '0.0.0.0',
+    host: "0.0.0.0",
     port,
     proxy: {
       // 开发模式请求基础api反代理
@@ -14,9 +15,24 @@ module.exports = defineConfig({
         target: `https://wx.hw.hongweisoft.com/veterans`,
         changeOrigin: true,
         pathRewrite: {
-          ['^' + process.env.VUE_APP_BASE_API]: ''
-        }
-      }
-    }
-  }
-})
+          ["^" + process.env.VUE_APP_BASE_API]: "",
+        },
+      },
+    },
+  },
+  configureWebpack: {
+    name,
+    resolve: {
+      alias: {
+        "@": resolve("src"),
+      },
+    },
+  },
+  chainWebpack(config) {
+    config.plugin("html").tap((args) => {
+      // 标题
+      args[0].title = name;
+      return args;
+    });
+  },
+});

@@ -100,6 +100,14 @@ const routes = [
       title: '评论'
     }
   },
+  {
+    path: '/houseDetail',
+    name: 'houseDetail',
+    component: () => import('../views/orderList/detail/houseDetail.vue'),
+    meta: {
+      title: '房产详情'
+    }
+  },
 ];
 
 const router = new VueRouter({
