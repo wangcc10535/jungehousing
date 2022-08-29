@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 14:38:13
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-29 11:53:25
+ * @LastEditTime: 2022-08-29 11:55:30
  * @FilePath: \jungehousing\src\views\additional\additional.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -52,7 +52,9 @@
                   ></el-option>
                 </el-select>
               </el-descriptions-item>
-              <el-descriptions-item label="价格范围" label-class-name="lable-tit">88952634</el-descriptions-item>
+              <el-descriptions-item label="价格范围" label-class-name="lable-tit">
+                <el-input class="contact" v-model="fromAddData.money" placeholder="请输入"></el-input>
+              </el-descriptions-item>
               <el-descriptions-item label="类型" label-class-name="lable-tit">
                 <el-checkbox-group v-model="fromAddData.checkList">
                   <el-checkbox :label="check.label" v-for="(check,index) in stuArr" :key="index"></el-checkbox>

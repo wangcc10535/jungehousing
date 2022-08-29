@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-29 11:43:35
+ * @LastEditTime: 2022-08-29 11:56:39
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -318,7 +318,7 @@ export default {
         },
         {
           id: 8,
-          name: '안양/군포/의왕시',
+          name: '城南',
           url: require('@/assets/images/8.png')
         }
       ],
