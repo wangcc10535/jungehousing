@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-26 10:46:42
+ * @LastEditTime: 2022-08-29 11:43:35
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -283,37 +283,37 @@ export default {
       homeSpot: [
         {
           id: 1,
-          name: '서울',
+          name: '安阳',
           url: require('@/assets/images/1.png')
         },
         {
           id: 2,
-          name: '인천/부천',
+          name: '高阳',
           url: require('@/assets/images/2.png')
         },
         {
           id: 3,
-          name: '고양/파주',
+          name: '九里',
           url: require('@/assets/images/3.png')
         },
         {
           id: 4,
-          name: '의정부/양주',
+          name: '仁川',
           url: require('@/assets/images/4.png')
         },
         {
           id: 5,
-          name: '수원/용인',
+          name: '首尔',
           url: require('@/assets/images/5.png')
         },
         {
           id: 6,
-          name: '성남/광주',
+          name: '水源',
           url: require('@/assets/images/6.png')
         },
         {
           id: 7,
-          name: '구리/남양주',
+          name: '议政府',
           url: require('@/assets/images/7.png')
         },
         {
