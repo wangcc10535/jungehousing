@@ -119,7 +119,7 @@ export default {
   align-items: center;
   position: absolute;
   right: 10px;
-  top: 20px;
+  top: 0;
 
   span {
     display: inline-block;

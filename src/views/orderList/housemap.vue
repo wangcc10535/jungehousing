@@ -709,6 +709,14 @@ export default {
           $(clusterMarker.getElement()).find('div.marker-box-html').text(count);
         }
       });
+    },
+    seDetail(item) {
+      this.$router.push({
+        name: 'houseDetail',
+        query: {
+          id: item.id
+        }
+      })
     }
   }
 };

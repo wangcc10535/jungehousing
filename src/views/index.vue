@@ -101,7 +101,7 @@
           </el-radio-group>
         </div>
         <div id="recent_wrap" style="display: table">
-          <div class="search-item-wide" v-for="(house, index) in houseList" :key="index">
+          <div class="search-item-wide" v-for="(house, index) in houseList" :key="index" @click="seDetail(house)">
             <div class="view_product grid_photo">
               <div class="photo">
                 <img class="holder" :src="house.img" alt />
@@ -728,6 +728,14 @@ export default {
         name: 'baseDetail',
         query: {
           name: 'see',
+          id: item.id
+        }
+      })
+    },
+    seDetail(item) {
+      this.$router.push({
+        name: 'houseDetail',
+        query: {
           id: item.id
         }
       })

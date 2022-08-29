@@ -7,7 +7,7 @@
     list-style: none;
   }
   
-  .search-item-wide {
+  /* .search-item-wide {
     float: left;
     height: 285px;
     width: 285px;
@@ -18,7 +18,7 @@
     padding: 0px 0px 10px 0px;
     border: 1px solid #f0f0f0;
     background-color: #fff;
-  }
+  } */
   
   .view_product {
     cursor: pointer;
