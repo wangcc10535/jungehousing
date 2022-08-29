@@ -5,7 +5,7 @@ const name = '俊阁家园'
 module.exports = defineConfig({
   transpileDependencies: true,
   lintOnSave: false,
-  outputDir: process.env.ENV + "-dist",
+  publicPath:'./',
   devServer: {
     host: "0.0.0.0",
     port,
