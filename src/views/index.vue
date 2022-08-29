@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-29 11:56:39
+ * @LastEditTime: 2022-08-29 13:48:57
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -89,12 +89,15 @@
         </div>
         <div class="text-center" id="recent_menus">
           <el-radio-group v-model="houseFrom.value" size="small">
-            <el-radio-button :label="0">全部</el-radio-button>
-            <el-radio-button :label="1">2间客房</el-radio-button>
-            <el-radio-button :label="2">3间客房</el-radio-button>
-            <el-radio-button :label="3">4间客房</el-radio-button>
-            <el-radio-button :label="4">双工</el-radio-button>
-            <el-radio-button :label="5">ETC</el-radio-button>
+            <el-radio-button :label="0">全部住宅</el-radio-button>
+            <el-radio-button :label="1">1间</el-radio-button>
+            <el-radio-button :label="2">2间</el-radio-button>
+            <el-radio-button :label="3">3间</el-radio-button>
+            <el-radio-button :label="4">4间</el-radio-button>
+            <el-radio-button :label="4">复式</el-radio-button>
+            <el-radio-button :label="4">都市型</el-radio-button>
+            <el-radio-button :label="4">APT</el-radio-button>
+            <el-radio-button :label="5">Officetel</el-radio-button>
           </el-radio-group>
         </div>
         <div id="recent_wrap" style="display: table">
@@ -710,7 +713,7 @@ export default {
     },
     goList(item) {
       this.$router.push({
-        name:'houseList',
+        name:'housemap',
         query:{
           id:item.id
         }
