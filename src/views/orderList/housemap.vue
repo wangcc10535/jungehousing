@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 14:21:15
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-29 14:09:47
+ * @LastEditTime: 2022-08-30 17:23:11
  * @FilePath: \jungehousing\src\views\orderList\housemap.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -572,71 +572,64 @@
 </template>
 
 <script>
-// import { MarkerClustering } from '@/utils/MarkerClustering';
-import axios from 'axios';
 export default {
   name: 'housemap',
   data() {
     return {
       map: null,
       marker: null,
-      accidentDeath: {
-        searchResult: {
-          accidentDeath: [
-            {
-              year: '2014',
-              dt_006: '2014031411',
-              dt_006_lv8: '40',
-              address: '宜昌东',
-              x_coord: '960824  ',
-              y_coord: '1905922 ',
-              grd_lo: '127.05882791',
-              grd_la: '37.15120216'
-            },
-            {
-              year: '2014',
-              dt_006: '2014031313',
-              dt_006_lv8: '23',
-              address: '城东区',
-              x_coord: '1045257 ',
-              y_coord: '1843983 ',
-              grd_lo: '128.01221855',
-              grd_la: '36.58983435'
-            },
-            {
-              year: '2014',
-              dt_006: '2014031121',
-              dt_006_lv8: '10',
-              address: '龙山区',
-              x_coord: '974095  ',
-              y_coord: '1828345 ',
-              grd_lo: '127.21091471',
-              grd_la: '36.45233748'
-            },
-            {
-              year: '2014',
-              dt_006: '2014031205',
-              dt_006_lv8: '37',
-              address: '城南中原区',
-              x_coord: '1094818 ',
-              y_coord: '2021380 ',
-              grd_lo: '128.58271469',
-              grd_la: '38.18770048'
-            },
-            {
-              year: '2014',
-              dt_006: '2014031209',
-              dt_006_lv8: '50',
-              address: '广津区',
-              x_coord: '1103199 ',
-              y_coord: '1766794 ',
-              grd_lo: '128.64345545',
-              grd_la: '35.89231981'
-            }
-          ]
+      accidentDeath: [
+        {
+          year: '2014',
+          dt_006: '2014031411',
+          dt_006_lv8: '40',
+          address: '宜昌东',
+          x_coord: '960824  ',
+          y_coord: '1905922 ',
+          grd_lo: '127.05882791',
+          grd_la: '37.15120216'
         },
-        resultCode: 'Success'
-      }
+        {
+          year: '2014',
+          dt_006: '2014031313',
+          dt_006_lv8: '23',
+          address: '城东区',
+          x_coord: '1045257 ',
+          y_coord: '1843983 ',
+          grd_lo: '128.01221855',
+          grd_la: '36.58983435'
+        },
+        {
+          year: '2014',
+          dt_006: '2014031121',
+          dt_006_lv8: '10',
+          address: '龙山区',
+          x_coord: '974095  ',
+          y_coord: '1828345 ',
+          grd_lo: '127.21091471',
+          grd_la: '36.45233748'
+        },
+        {
+          year: '2014',
+          dt_006: '2014031205',
+          dt_006_lv8: '37',
+          address: '城南中原区',
+          x_coord: '1094818 ',
+          y_coord: '2021380 ',
+          grd_lo: '128.58271469',
+          grd_la: '38.18770048'
+        },
+        {
+          year: '2014',
+          dt_006: '2014031209',
+          dt_006_lv8: '50',
+          address: '广津区',
+          x_coord: '1103199 ',
+          y_coord: '1766794 ',
+          grd_lo: '128.64345545',
+          grd_la: '35.89231981'
+        }
+      ]
     };
   },
   mounted() {
@@ -658,12 +651,12 @@ export default {
         }
       };
       this.map = new naver.maps.Map('map', mapOptions);
-      this.onLoad(map);
+      this.onLoad(this.map);
     },
     onLoad(map) {
       var markers = [],
         number = null,
-        data = this.accidentDeath.searchResult.accidentDeath;
+        data = this.accidentDeath;
       var htmlMarker2 = {
         content: '<div class="marker-box-html"></div>',
         size: N.Size(40, 40),
@@ -716,7 +709,7 @@ export default {
         query: {
           id: item.id
         }
-      })
+      });
     }
   }
 };

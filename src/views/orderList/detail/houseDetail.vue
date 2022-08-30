@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-29 13:49:18
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-30 15:28:40
+ * @LastEditTime: 2022-08-30 18:02:58
  * @FilePath: \jungehousing\src\views\orderList\detail\houseDetail.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -96,16 +96,61 @@
                   </span>
                 </p>
               </el-descriptions-item>
-              <el-descriptions-item label="联系地址">江苏省苏州市吴中区吴中大道 1188 号</el-descriptions-item>
-              <el-descriptions-item label="选项信息">江苏省苏州市吴中区吴中大道 1188 号</el-descriptions-item>
-              <el-descriptions-item label="电话">江苏省苏州市吴中区吴中大道 1188 号</el-descriptions-item>
+              <el-descriptions-item label="选项信息">
+                <div class="option-box"></div>
+              </el-descriptions-item>
+              <el-descriptions-item label="电话">
+                <p class="base-row">050-7872-6008</p>
+              </el-descriptions-item>
             </el-descriptions>
           </div>
           <div class="order-list-detail">
             <h3>详细说明</h3>
             <div></div>
           </div>
-          <div class="map-box">地图</div>
+          <div class="map-box">
+            <div id="map" style="width: 100%;height: 100%; position: relative;">
+              
+            </div>
+            <ul id="category_icon">
+                <li data-key="MT1" data-order="MT1" class="on">
+                  <span class="category_bg MT1 pharmacy"></span>
+                  대형마트
+                </li>
+                <li data-key="CS2" data-order="CS2" class>
+                  <span class="category_bg CS2 pharmacy"></span>
+                  편의점
+                </li>
+                <li data-key="PS3" data-order="PS3" class>
+                  <span class="category_bg PS3 pharmacy"></span>
+                  어린이집, 유치원
+                </li>
+                <li data-key="SC4" data-order="SC4" class>
+                  <span class="category_bg SC4 pharmacy"></span>
+                  학교
+                </li>
+                <li data-key="BK9" data-order="BK9" class>
+                  <span class="category_bg BK9 pharmacy"></span>
+                  은행
+                </li>
+                <li data-key="CT1" data-order="CT1" class>
+                  <span class="category_bg CT1 pharmacy"></span>
+                  문화시설
+                </li>
+                <li data-key="PO3" data-order="PO3" class>
+                  <span class="category_bg PO3 pharmacy"></span>
+                  공공기관
+                </li>
+                <li data-key="AT4" data-order="AT4" class>
+                  <span class="category_bg AT4 pharmacy"></span>
+                  관광명소
+                </li>
+                <li data-key="HP8" data-order="HP8" class>
+                  <span class="category_bg HP8 pharmacy"></span>
+                  병원
+                </li>
+              </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -159,6 +204,7 @@ export default {
   components: { rightList },
   data() {
     return {
+      map: null,
       customerFrom: {},
       rightTitle: '附近房产',
       swiperOptionTop: {
@@ -264,6 +310,27 @@ export default {
       swiperTop.controller.control = swiperThumbs;
       swiperThumbs.controller.control = swiperTop;
     });
+    this.initMap();
+  },
+  methods: {
+    initMap() {
+      var mapOptions = {
+        center: new naver.maps.LatLng(37.3595704, 127.105399),
+        zoom: 16,
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+          style: naver.maps.MapTypeControlStyle.BUTTON,
+          position: naver.maps.Position.RIGHT_TOP
+        },
+        zoomControl: true,
+        zoomControlOptions: {
+          position: naver.maps.Position.RIGHT_CENTER
+          // style: naver.maps.ZoomControlStyle.SMALL
+        }
+      };
+      this.map = new naver.maps.Map('map', mapOptions);
+      // this.onLoad(map);
+    }
   }
 };
 </script>
@@ -287,6 +354,7 @@ export default {
 }
 .main {
   padding-top: 20px;
+  margin-bottom: 20px;
 }
 .friendship-link {
   width: 100%;
@@ -487,13 +555,51 @@ export default {
   padding: 3px 15px;
   margin-right: 4px;
 }
-.base-play{
+.base-play {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  span.base-play-box{
+  span.base-play-box {
     display: inline-block;
     width: 50%;
   }
+}
+.map-box {
+  width: 100%;
+  height: 500px;
+}
+#category_icon {
+    margin-left: 80px;
+}
+#category_icon {
+    position: absolute;
+    margin-top: -95px;
+    left: 30px;
+    border-radius: 5px;
+    border: 1px solid #909090;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 40%);
+    background: rgba(255,255,255,0.8);
+    overflow: hidden;
+    z-index: 2;
+    z-index: 99;
+    font-size: 11px;
+}
+#category_icon li.on {
+    background: #eee;
+}
+#category_icon li {
+    float: left;
+    list-style: none;
+    width: 75px;
+    border-right: 1px solid #acacac;
+    padding: 6px 0;
+    text-align: center;
+    cursor: pointer;
+}
+#category_icon li.on .category_bg.MT1 {
+    background: url('@/assets/images/marker/mt1_o.png') no-repeat;
+}
+#category_icon li .category_bg.CS2 {
+    background: url('@/assets/images/marker/cs2.png') no-repeat;
 }
 </style>
