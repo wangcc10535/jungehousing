@@ -8,6 +8,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import i18n from './utils/index'
 import 'swiper/css/swiper.css'
 import breadcrumb from '@/components/breadcrumb.vue'
+import '@/assets/css/iconfont/iconfont.css'
 
 Vue.component('breadcrumb', breadcrumb)
 Vue.use(VueAwesomeSwiper)
