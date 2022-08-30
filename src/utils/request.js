@@ -4,11 +4,12 @@ import { getToken } from '@/utils/auth'
 import { tansParams } from '@/utils/utils'
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
-
+console.log(process.env.VUE_APP_BASE_API);
 // 创建axios实例
 const service = axios.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分
   baseURL: process.env.VUE_APP_BASE_API,
+  // baseURL:'http://1785s28l17.iask.in:36629',
   // 超时
   timeout: 60000
 })
@@ -28,7 +29,7 @@ service.interceptors.request.use(
       config.headers['Authorization'] = `Bearer ${getToken()}`
     }
     // url拼接时间戳参数
-    config.url = `${config.url}?_t=${new Date().getTime()}`
+    config.url = `${config.url}`
     // get请求映射params参数
     if (config.method === 'get' && config.params) {
       let url = config.url + '&' + tansParams(config.params)

@@ -27,11 +27,7 @@
                     </div>
                   </swiper-slide>
                 </swiper>
-                <swiper
-                  class="swiper gallery-thumbs"
-                  :options="swiperOptionThums"
-                  ref="swiperThumbs"
-                >
+                <swiper class="swiper gallery-thumbs" :options="swiperOptionThums" ref="swiperThumbs">
                   <swiper-slide class="slide-list" v-for="(link, index) in cardList" :key="index">
                     <div class="friendship-Thums">
                       <img :src="link.url" alt />
@@ -58,8 +54,7 @@
                 <div class="address">
                   <p>京畿道高阳市德阳区东山洞</p>
                   <p>
-                    <span class="metro">3号线</span>松站 1.2 公里
-                    <span class="metro">3号线</span>直竹站 1.5 公里
+                    <span class="metro">3号线</span>松站 1.2 公里 <span class="metro">3号线</span>直竹站 1.5 公里
                     <span class="metro">3号线</span>古帕巴尔站 1.9 公里
                   </p>
                 </div>
@@ -97,7 +92,9 @@
                 </p>
               </el-descriptions-item>
               <el-descriptions-item label="选项信息">
-                <div class="option-box"></div>
+                <div class="option-box">
+                  
+                </div>
               </el-descriptions-item>
               <el-descriptions-item label="电话">
                 <p class="base-row">050-7872-6008</p>
@@ -106,50 +103,21 @@
           </div>
           <div class="order-list-detail">
             <h3>详细说明</h3>
-            <div></div>
+            <div class="order-list-detail-center">详情内容</div>
           </div>
           <div class="map-box">
-            <div id="map" style="width: 100%;height: 100%; position: relative;">
-              
-            </div>
+            <div id="map" style="width: 100%; height: 100%"></div>
             <ul id="category_icon">
-                <li data-key="MT1" data-order="MT1" class="on">
-                  <span class="category_bg MT1 pharmacy"></span>
-                  대형마트
-                </li>
-                <li data-key="CS2" data-order="CS2" class>
-                  <span class="category_bg CS2 pharmacy"></span>
-                  편의점
-                </li>
-                <li data-key="PS3" data-order="PS3" class>
-                  <span class="category_bg PS3 pharmacy"></span>
-                  어린이집, 유치원
-                </li>
-                <li data-key="SC4" data-order="SC4" class>
-                  <span class="category_bg SC4 pharmacy"></span>
-                  학교
-                </li>
-                <li data-key="BK9" data-order="BK9" class>
-                  <span class="category_bg BK9 pharmacy"></span>
-                  은행
-                </li>
-                <li data-key="CT1" data-order="CT1" class>
-                  <span class="category_bg CT1 pharmacy"></span>
-                  문화시설
-                </li>
-                <li data-key="PO3" data-order="PO3" class>
-                  <span class="category_bg PO3 pharmacy"></span>
-                  공공기관
-                </li>
-                <li data-key="AT4" data-order="AT4" class>
-                  <span class="category_bg AT4 pharmacy"></span>
-                  관광명소
-                </li>
-                <li data-key="HP8" data-order="HP8" class>
-                  <span class="category_bg HP8 pharmacy"></span>
-                  병원
-                </li>
-              </ul>
+              <li
+                :class="{ on: iconIndex == index }"
+                v-for="(icon, index) in categoryIcon"
+                :key="index"
+                @click="iconTab(icon, index)"
+              >
+                <span class="category_bg pharmacy" :class="icon.className"></span>
+                {{ icon.clickName }}
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -161,14 +129,10 @@
           <div class="agent-box-header-img">
             <img src="@/assets/images/liheying.jpg" alt />
           </div>
-          <p class="agent-box-header-name">
-            <i class="iconfont icon-yonghufill"></i> 李贺英
-          </p>
+          <p class="agent-box-header-name"><i class="iconfont icon-yonghufill"></i> 李贺英</p>
         </div>
         <div class="agent-box-contact">
-          <span class="agent-box-contact-phone">
-            <i class="iconfont icon-dianhua"></i>050-7872-6008
-          </span>
+          <span class="agent-box-contact-phone"> <i class="iconfont icon-dianhua"></i>050-7872-6008 </span>
           <span class="agent-box-contact-kakao">
             <i class="iconfont icon-kakao-talk-fill kakao-talk-fill"></i>电源
           </span>
@@ -199,11 +163,51 @@
 
 <script>
 import rightList from '@/components/rightList.vue';
+import { captchaImage } from '@/api/http';
 export default {
   name: 'houseDetail',
   components: { rightList },
   data() {
     return {
+      iconIndex: null,
+      categoryIcon: [
+        {
+          className: 'MT1',
+          clickName: '超级市场'
+        },
+        {
+          className: 'CS2',
+          clickName: '便利店'
+        },
+        {
+          className: 'PS3',
+          clickName: '幼儿园'
+        },
+        {
+          className: 'SC4',
+          clickName: '学校'
+        },
+        {
+          className: 'BK9',
+          clickName: '银行'
+        },
+        {
+          className: 'CT1',
+          clickName: '娱乐设施'
+        },
+        {
+          className: 'PO3',
+          clickName: '公共机构'
+        },
+        {
+          className: 'AT4',
+          clickName: '景点'
+        },
+        {
+          className: 'HP8',
+          clickName: '医院'
+        }
+      ],
       map: null,
       customerFrom: {},
       rightTitle: '附近房产',
@@ -300,9 +304,12 @@ export default {
           aces: '卧室 3 / 浴室 2',
           img: require('@/assets/images/0.png')
         }
-      ]
+      ],
+      iconMarkerArr: [],
+      iconMarker:null
     };
   },
+  created() {},
   mounted() {
     this.$nextTick(() => {
       const swiperTop = this.$refs.swiperTop.$swiper;
@@ -312,11 +319,12 @@ export default {
     });
     this.initMap();
   },
+
   methods: {
     initMap() {
       var mapOptions = {
         center: new naver.maps.LatLng(37.3595704, 127.105399),
-        zoom: 16,
+        zoom: 8,
         mapTypeControl: true,
         mapTypeControlOptions: {
           style: naver.maps.MapTypeControlStyle.BUTTON,
@@ -330,6 +338,60 @@ export default {
       };
       this.map = new naver.maps.Map('map', mapOptions);
       // this.onLoad(map);
+    },
+    iconTab(icon, index) {
+      const marr = [
+          {
+            grd_lo: '128.64345545',
+            grd_la: '35.89231981'
+          },
+          {
+            grd_lo: '128.58271469',
+            grd_la: '38.18770048'
+          }
+        ];
+      if (icon.className == 'MT1') {
+        console.log('超级市场');
+        // this.map.clear()
+        marr.forEach((item) => {
+         let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
+         this.iconMarker = new naver.maps.Marker({
+            position: latlng,
+            draggable: false,
+            map: this.map,
+            icon: require('@/assets/images/marker/mt1_o.png')
+          });
+          this.iconMarkerArr.push(this.iconMarker)
+        });
+      } else if (icon.className == 'CS2') {
+        // this.map.remove(this.iconMarkerArr)
+        console.log('便利店');
+        marr.forEach((item) => {
+         let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
+         this.iconMarker = new naver.maps.Marker({
+            position: latlng,
+            draggable: false,
+            map: this.map,
+            icon: require('@/assets/images/marker/cs2.png')
+          });
+          // this.iconMarkerArr.push(iconMarker)
+        });
+      } else if (icon.className == 'PS3') {
+        console.log('幼儿园');
+      } else if (icon.className == 'SC4') {
+        console.log('学校');
+      } else if (icon.className == 'BK9') {
+        console.log('银行');
+      } else if (icon.className == 'CT1') {
+        console.log('娱乐设施');
+      } else if (icon.className == 'PO3') {
+        console.log('公共机构');
+      } else if (icon.className == 'AT4') {
+        console.log('景点');
+      } else if (icon.className == 'HP8') {
+        console.log('医院');
+      }
+      this.iconIndex = index;
     }
   }
 };
@@ -567,39 +629,100 @@ export default {
 .map-box {
   width: 100%;
   height: 500px;
+  position: relative;
 }
 #category_icon {
-    margin-left: 80px;
+  margin-left: 80px;
 }
 #category_icon {
-    position: absolute;
-    margin-top: -95px;
-    left: 30px;
-    border-radius: 5px;
-    border: 1px solid #909090;
-    box-shadow: 0 1px 1px rgb(0 0 0 / 40%);
-    background: rgba(255,255,255,0.8);
-    overflow: hidden;
-    z-index: 2;
-    z-index: 99;
-    font-size: 11px;
+  position: absolute;
+  margin-top: -56px;
+  left: 30px;
+  border-radius: 5px;
+  border: 1px solid #909090;
+  box-shadow: 0 1px 1px rgb(0 0 0 / 40%);
+  background: rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+  z-index: 2;
+  z-index: 999;
+  font-size: 11px;
 }
 #category_icon li.on {
-    background: #eee;
+  background: #eee;
 }
 #category_icon li {
-    float: left;
-    list-style: none;
-    width: 75px;
-    border-right: 1px solid #acacac;
-    padding: 6px 0;
-    text-align: center;
-    cursor: pointer;
+  float: left;
+  list-style: none;
+  width: 75px;
+  border-right: 1px solid #acacac;
+  padding: 6px 0;
+  text-align: center;
+  cursor: pointer;
 }
-#category_icon li.on .category_bg.MT1 {
-    background: url('@/assets/images/marker/mt1_o.png') no-repeat;
+// #category_icon li.on .category_bg.MT1 {
+//     background: url('@/assets/images/marker/mt1_o.png') no-repeat;
+// }
+#category_icon li .category_bg.MT1 {
+  background: url('@/assets/images/marker/mt1_o.png') no-repeat;
 }
 #category_icon li .category_bg.CS2 {
-    background: url('@/assets/images/marker/cs2.png') no-repeat;
+  background: url('@/assets/images/marker/cs2.png') no-repeat;
+}
+#category_icon li .category_bg.PS3 {
+  background: url('@/assets/images/marker/ps3.png') no-repeat;
+}
+#category_icon li .category_bg.SC4 {
+  background: url('@/assets/images/marker/sc4.png') no-repeat;
+}
+#category_icon li .category_bg.BK9 {
+  background: url('@/assets/images/marker/bk9.png') no-repeat;
+}
+#category_icon li .category_bg.CT1 {
+  background: url('@/assets/images/marker/ct1.png') no-repeat;
+}
+#category_icon li .category_bg.PO3 {
+  background: url('@/assets/images/marker/po3.png') no-repeat;
+}
+#category_icon li .category_bg.AT4 {
+  background: url('@/assets/images/marker/at4.png') no-repeat;
+}
+#category_icon li .category_bg.HP8 {
+  background: url('@/assets/images/marker/hp8.png') no-repeat;
+}
+#category_icon li span {
+  display: block;
+  margin: 0 auto 3px;
+  width: 28px;
+  height: 28px;
+}
+.order-list-detail {
+  width: 100%;
+  margin-top: 20px;
+  h3 {
+    font-weight: normal;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  &-center {
+    margin-bottom: 20px;
+  }
+}
+::v-deep .el-descriptions__header {
+  margin-bottom: 10px;
+}
+.order-name {
+  margin: 10px 0;
+  position: relative;
+  height: 20px;
+  line-height: 20px;
+  padding-left: 5px;
+}
+.order-name::after {
+  content: '';
+  width: 4px;
+  height: 20px;
+  background-color: #0286b7;
+  position: absolute;
+  left: 0;
 }
 </style>

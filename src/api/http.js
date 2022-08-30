@@ -3,13 +3,10 @@ import request from '@/utils/request'//导入已经写好的拦截器
  
 // 封装所有的API接口
  
-export function getTrainingList(params) {
+export function captchaImage(params) {
   return request({
-    url: '/app/adaptTrainOnline/queryList',
+    url: '/captchaImage',
     method: 'get',
-    headers: {
-      noLoginFlag: true
-    },
     params
   })
 }

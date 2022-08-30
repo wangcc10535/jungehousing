@@ -12,7 +12,7 @@ module.exports = defineConfig({
     proxy: {
       // 开发模式请求基础api反代理
       [process.env.VUE_APP_BASE_API]: {
-        target: `https://wx.hw.hongweisoft.com/veterans`,
+        target: `http://1785s28l17.iask.in:36629`,
         changeOrigin: true,
         pathRewrite: {
           ["^" + process.env.VUE_APP_BASE_API]: "",
