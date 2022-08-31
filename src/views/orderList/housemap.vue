@@ -832,14 +832,14 @@ export default {
   height: 100%;
   align-items: center;
   justify-content: left;
-  width: 87%;
+  width: 82%;
   margin-left: 10px;
   &-searchEZ {
     margin-right: 6px;
   }
 }
 .base-size {
-  width: 140px;
+  width: 33%;
   // margin: 0 6px;
 }
 </style>
