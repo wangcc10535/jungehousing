@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:01:35
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-29 14:32:34
+ * @LastEditTime: 2022-08-31 16:01:49
  * @FilePath: \jungehousing\src\components\header.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -82,8 +82,14 @@ export default {
       ]
     };
   },
-  created() { },
+  created() {
+    
+   },
+   mounted() {
+    console.log(this.$route.path.query);
+   },
   methods: {
+    
     changeLangEvent(e) {
       this.$confirm('确定切换语言吗?', '提示', {
         confirmButtonText: '确定',
