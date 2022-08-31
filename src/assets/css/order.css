@@ -555,12 +555,11 @@
     width: 1210px;
     margin: 0 auto;
     max-width: none !important;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 
   .maps {
     width: 100% !important;
-    ;
   }
 
   .marker-box {
@@ -621,5 +620,5 @@
     width: 220px;
     display: flex;
     float: right;
-    margin: 10px;
+    margin: 10px 0;
   }

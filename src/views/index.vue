@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-29 13:48:57
+ * @LastEditTime: 2022-08-31 11:37:42
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -29,6 +29,10 @@
           </el-select>
           <el-select v-model="searchFrom.sale" class="search-select" placeholder="销售类型">
             <el-option v-for="item in saleOptions" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+          <el-select v-model="searchFrom.sale" class="search-select" placeholder="住宅类型">
+            <el-option v-for="item in houseOptions" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
           <el-select v-model="searchFrom.city" v-if="currentClass == 0" class="search-select" placeholder="选择城市">
@@ -375,6 +379,25 @@ export default {
           value: 3,
           label: '全税'
         }
+      ],
+      // 住宅类型
+      houseOptions: [
+        {
+          value: 0,
+          label: '田园住宅'
+        },
+        {
+          value: 1,
+          label: '别墅'
+        },
+        {
+          value: 2,
+          label: 'officetel'
+        },
+        {
+          value: 3,
+          label: '都市型APT'
+        },
       ],
       // 销售类型
       saleOptions: [
@@ -846,7 +869,7 @@ export default {
 }
 
 .search-select {
-  width: 160px;
+  width: 130px;
   padding-right: 10px;
 }
 

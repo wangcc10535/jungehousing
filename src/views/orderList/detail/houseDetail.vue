@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-29 13:49:18
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-30 18:02:58
+ * @LastEditTime: 2022-08-31 10:46:44
  * @FilePath: \jungehousing\src\views\orderList\detail\houseDetail.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -27,7 +27,11 @@
                     </div>
                   </swiper-slide>
                 </swiper>
-                <swiper class="swiper gallery-thumbs" :options="swiperOptionThums" ref="swiperThumbs">
+                <swiper
+                  class="swiper gallery-thumbs"
+                  :options="swiperOptionThums"
+                  ref="swiperThumbs"
+                >
                   <swiper-slide class="slide-list" v-for="(link, index) in cardList" :key="index">
                     <div class="friendship-Thums">
                       <img :src="link.url" alt />
@@ -54,7 +58,8 @@
                 <div class="address">
                   <p>京畿道高阳市德阳区东山洞</p>
                   <p>
-                    <span class="metro">3号线</span>松站 1.2 公里 <span class="metro">3号线</span>直竹站 1.5 公里
+                    <span class="metro">3号线</span>松站 1.2 公里
+                    <span class="metro">3号线</span>直竹站 1.5 公里
                     <span class="metro">3号线</span>古帕巴尔站 1.9 公里
                   </p>
                 </div>
@@ -93,7 +98,7 @@
               </el-descriptions-item>
               <el-descriptions-item label="选项信息">
                 <div class="option-box">
-                  
+                  <span class="option-box-label"><i class="iconfont icon-tingchechang"></i>停车场</span>
                 </div>
               </el-descriptions-item>
               <el-descriptions-item label="电话">
@@ -129,10 +134,14 @@
           <div class="agent-box-header-img">
             <img src="@/assets/images/liheying.jpg" alt />
           </div>
-          <p class="agent-box-header-name"><i class="iconfont icon-yonghufill"></i> 李贺英</p>
+          <p class="agent-box-header-name">
+            <i class="iconfont icon-yonghufill"></i> 李贺英
+          </p>
         </div>
         <div class="agent-box-contact">
-          <span class="agent-box-contact-phone"> <i class="iconfont icon-dianhua"></i>050-7872-6008 </span>
+          <span class="agent-box-contact-phone">
+            <i class="iconfont icon-dianhua"></i>050-7872-6008
+          </span>
           <span class="agent-box-contact-kakao">
             <i class="iconfont icon-kakao-talk-fill kakao-talk-fill"></i>电源
           </span>
@@ -306,10 +315,12 @@ export default {
         }
       ],
       iconMarkerArr: [],
-      iconMarker:null
+      iconMarker: null
     };
   },
-  created() {},
+  created() {
+    // this.getImg()
+  },
   mounted() {
     this.$nextTick(() => {
       const swiperTop = this.$refs.swiperTop.$swiper;
@@ -324,7 +335,7 @@ export default {
     initMap() {
       var mapOptions = {
         center: new naver.maps.LatLng(37.3595704, 127.105399),
-        zoom: 8,
+        zoom: 16,
         mapTypeControl: true,
         mapTypeControlOptions: {
           style: naver.maps.MapTypeControlStyle.BUTTON,
@@ -339,36 +350,44 @@ export default {
       this.map = new naver.maps.Map('map', mapOptions);
       // this.onLoad(map);
     },
+    getImg() {
+      captchaImage().then(res =>{
+        console.log(res);
+      })
+    },
     iconTab(icon, index) {
+      if (this.iconMarker) {
+        this.iconMarker.setMap(null);
+        this.iconMarkerArr = [];
+      }
       const marr = [
-          {
-            grd_lo: '128.64345545',
-            grd_la: '35.89231981'
-          },
-          {
-            grd_lo: '128.58271469',
-            grd_la: '38.18770048'
-          }
-        ];
+        {
+          grd_lo: '128.64345545',
+          grd_la: '35.89231981'
+        },
+        {
+          grd_lo: '128.58271469',
+          grd_la: '38.18770048'
+        }
+      ];
       if (icon.className == 'MT1') {
         console.log('超级市场');
-        // this.map.clear()
+        // this.iconMarker.remove()
         marr.forEach((item) => {
-         let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
-         this.iconMarker = new naver.maps.Marker({
+          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
+          this.iconMarker = new naver.maps.Marker({
             position: latlng,
             draggable: false,
             map: this.map,
             icon: require('@/assets/images/marker/mt1_o.png')
           });
-          this.iconMarkerArr.push(this.iconMarker)
+          this.iconMarkerArr.push(this.iconMarker);
         });
       } else if (icon.className == 'CS2') {
-        // this.map.remove(this.iconMarkerArr)
         console.log('便利店');
         marr.forEach((item) => {
-         let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
-         this.iconMarker = new naver.maps.Marker({
+          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
+          this.iconMarker = new naver.maps.Marker({
             position: latlng,
             draggable: false,
             map: this.map,
@@ -378,18 +397,88 @@ export default {
         });
       } else if (icon.className == 'PS3') {
         console.log('幼儿园');
+        marr.forEach((item) => {
+          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
+          this.iconMarker = new naver.maps.Marker({
+            position: latlng,
+            draggable: false,
+            map: this.map,
+            icon: require('@/assets/images/marker/ps3.png')
+          });
+          this.iconMarkerArr.push(this.iconMarker);
+        });
       } else if (icon.className == 'SC4') {
         console.log('学校');
+        marr.forEach((item) => {
+          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
+          this.iconMarker = new naver.maps.Marker({
+            position: latlng,
+            draggable: false,
+            map: this.map,
+            icon: require('@/assets/images/marker/sc4.png')
+          });
+          this.iconMarkerArr.push(this.iconMarker);
+        });
       } else if (icon.className == 'BK9') {
         console.log('银行');
+        marr.forEach((item) => {
+          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
+          this.iconMarker = new naver.maps.Marker({
+            position: latlng,
+            draggable: false,
+            map: this.map,
+            icon: require('@/assets/images/marker/bk9.png')
+          });
+          this.iconMarkerArr.push(this.iconMarker);
+        });
       } else if (icon.className == 'CT1') {
         console.log('娱乐设施');
+        marr.forEach((item) => {
+          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
+          this.iconMarker = new naver.maps.Marker({
+            position: latlng,
+            draggable: false,
+            map: this.map,
+            icon: require('@/assets/images/marker/ct1.png')
+          });
+          this.iconMarkerArr.push(this.iconMarker);
+        });
       } else if (icon.className == 'PO3') {
         console.log('公共机构');
+        marr.forEach((item) => {
+          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
+          this.iconMarker = new naver.maps.Marker({
+            position: latlng,
+            draggable: false,
+            map: this.map,
+            icon: require('@/assets/images/marker/po3.png')
+          });
+          this.iconMarkerArr.push(this.iconMarker);
+        });
       } else if (icon.className == 'AT4') {
         console.log('景点');
+        marr.forEach((item) => {
+          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
+          this.iconMarker = new naver.maps.Marker({
+            position: latlng,
+            draggable: false,
+            map: this.map,
+            icon: require('@/assets/images/marker/at4.png')
+          });
+          this.iconMarkerArr.push(this.iconMarker);
+        });
       } else if (icon.className == 'HP8') {
         console.log('医院');
+        marr.forEach((item) => {
+          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
+          this.iconMarker = new naver.maps.Marker({
+            position: latlng,
+            draggable: false,
+            map: this.map,
+            icon: require('@/assets/images/marker/hp8.png')
+          });
+          this.iconMarkerArr.push(this.iconMarker);
+        });
       }
       this.iconIndex = index;
     }
@@ -724,5 +813,21 @@ export default {
   background-color: #0286b7;
   position: absolute;
   left: 0;
+}
+.option-box{
+  padding: 0 20px;
+  &-label {
+    width: 120px;
+    height: 24px;
+    line-height: 24px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin-right: 10px;
+  }
+  &-label:last-child {
+    margin-right: 0;
+  }
 }
 </style>

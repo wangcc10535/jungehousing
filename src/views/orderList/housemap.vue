@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 14:21:15
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-30 17:23:11
+ * @LastEditTime: 2022-08-31 11:59:35
  * @FilePath: \jungehousing\src\views\orderList\housemap.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -11,6 +11,55 @@
   <div style="position: relative;">
     <div id="container">
       <div class="btn-group">
+        <div class="order-search-box">
+          <div class="order-search-box-searchEZ">
+            <span>销售类型：</span>
+            <el-select class="base-size" size="small" v-model="searchFrom.state" multiple collapse-tags placeholder="请选择">
+              <el-option
+                v-for="item in saleOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
+          </div>
+          <div class="order-search-box-searchEZ">
+            <span>住宅类型：</span>
+            <el-select class="base-size" size="small" v-model="searchFrom.house " multiple collapse-tags placeholder="请选择">
+              <el-option
+                v-for="item in houseOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
+          </div>
+          <div class="order-search-box-searchEZ">
+            <span>按地铁搜索：</span>
+            <el-select class="base-size" size="small" v-model="searchFrom.dt" multiple collapse-tags placeholder="请选择">
+              <el-option
+                v-for="item in lineOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
+          </div>
+          <div class="order-search-box-searchEZ">
+            <span>供给面积：</span>
+            <el-input class="base-size" size="small" v-model="searchFrom.mj1" placeholder="请输入内容"></el-input>
+            <span>-</span>
+            <el-input class="base-size" size="small" v-model="searchFrom.mj2" placeholder="请输入内容"></el-input>
+          </div>
+          <div class="order-search-box-searchEZ">
+            <span>实际面积：</span>
+            <el-input class="base-size" size="small" v-model="searchFrom.sj1" placeholder="请输入内容"></el-input>
+            <span>-</span>
+            <el-input class="base-size" size="small" v-model="searchFrom.sj2" placeholder="请输入内容"></el-input>
+          </div>
+          <el-button size="small">搜索</el-button>
+          <el-button size="small">重置</el-button>
+        </div>
         <div class="btn-a">
           <a href="javascript:;" class="icom-class active">
             <router-link to="/housemap" class="router-test">
@@ -578,6 +627,9 @@ export default {
     return {
       map: null,
       marker: null,
+      searchFrom: {},
+      // 地铁线路
+      lineOptions: [],
       accidentDeath: [
         {
           year: '2014',
@@ -628,6 +680,60 @@ export default {
           y_coord: '1766794 ',
           grd_lo: '128.64345545',
           grd_la: '35.89231981'
+        }
+      ],
+      // 销售类型
+      saleOptions: [
+        {
+          value: 0,
+          label: '全部住宅'
+        },
+        {
+          value: 1,
+          label: '1间'
+        },
+        {
+          value: 2,
+          label: '2间'
+        },
+        {
+          value: 3,
+          label: '3间'
+        },
+        {
+          value: 4,
+          label: '4间'
+        },
+        {
+          value: 5,
+          label: '复式'
+        },
+        {
+          value: 6,
+          label: '都市型 APT'
+        },
+        {
+          value: 7,
+          label: 'Officetel'
+        }
+      ],
+      // 住宅类型
+      houseOptions: [
+        {
+          value: 0,
+          label: '田园住宅'
+        },
+        {
+          value: 1,
+          label: '别墅'
+        },
+        {
+          value: 2,
+          label: 'officetel'
+        },
+        {
+          value: 3,
+          label: '都市型APT'
         }
       ]
     };
@@ -718,7 +824,22 @@ export default {
 <style  lang='scss' scoped>
 @import url('@/assets/css/order.css');
 
-#container {
-  height: 79vh;
+// #container {
+//   height: 79vh;
+// }
+.order-search-box {
+  display: inline-flex;
+  height: 100%;
+  align-items: center;
+  justify-content: left;
+  width: 87%;
+  margin-left: 10px;
+  &-searchEZ {
+    margin-right: 6px;
+  }
+}
+.base-size {
+  width: 140px;
+  // margin: 0 6px;
 }
 </style>

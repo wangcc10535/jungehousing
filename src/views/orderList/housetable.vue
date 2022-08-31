@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 14:21:53
  * @LastEditors: wangcc
- * @LastEditTime: 2022-08-23 14:21:54
+ * @LastEditTime: 2022-08-31 11:58:30
  * @FilePath: \jungehousing\src\views\orderList\housetable.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -300,7 +300,7 @@ export default {
 
 <style  lang='scss' scoped>
 @import url('@/assets/css/order.css');
-#container {
-  height: 79vh;
-}
+// #container {
+//   height: 79vh;
+// }
 </style>
