@@ -18,7 +18,7 @@
       <div class="call_box">
         <div class="description">
           <span>{{ $t("message.topPhone") }}</span>
-          <big>032-362-8883</big>
+          <big>032-361-8884</big>
         </div>
       </div>
       <div class="header-navigation pull-right">

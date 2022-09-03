@@ -424,14 +424,6 @@ export default {
         {
           value: 5,
           label: '复式'
-        },
-        {
-          value: 6,
-          label: '都市型 APT'
-        },
-        {
-          value: 7,
-          label: 'Officetel'
         }
       ],
       // 选择城市
@@ -469,11 +461,11 @@ export default {
       imageList: [
         {
           id: 1,
-          url: require('@/assets/images/banner1.png')
+          url: require('@/assets/images/b1.jpg')
         },
         {
           id: 2,
-          url: require('@/assets/images/banner2.jpg')
+          url: require('@/assets/images/b2.jpg')
         }
       ],
       tab: [
@@ -771,7 +763,7 @@ export default {
 .banner-images {
   width: 100%;
   height: 100%;
-
+  object-fit: cover;
 }
 
 .searchbox_wrapper_bottom {

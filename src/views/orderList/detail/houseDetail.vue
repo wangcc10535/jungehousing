@@ -219,7 +219,7 @@ export default {
       ],
       map: null,
       customerFrom: {},
-      rightTitle: '附近房产',
+      rightTitle: '热门房产',
       swiperOptionTop: {
         loop: true,
         loopedSlides: 8,
