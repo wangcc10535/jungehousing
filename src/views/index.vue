@@ -11,24 +11,33 @@
   <div>
     <el-carousel height="443px">
       <el-carousel-item v-for="(item, index) in imageList" :key="index">
-        <img class="banner-images" :src="item.url" alt />
+        <img class="banner-images" :src="item.dictValue" alt />
       </el-carousel-item>
     </el-carousel>
     <div class="searchbox_wrapper_bottom">
       <div class="searchbox">
         <ul class="nav-search">
-          <li v-for="(tabs, index) in tab" :key="index" :class="{ activeX: currentClass == index }"
-            @click="tabsClick(index)">
+          <li
+            v-for="(tabs, index) in tab"
+            :key="index"
+            :class="{ activeX: currentClass == index }"
+            @click="tabsClick(index)"
+          >
             <a href="javascript:;">{{ tabs.name }}</a>
           </li>
         </ul>
         <div class="search-inner">
           <el-select v-model="searchFrom.deal" class="search-select" placeholder="交易类型">
-            <el-option v-for="item in dealOptions" :key="item.value" :label="item.label" :value="item.value">
+            <el-option v-for="item in dealOptions" :key="item.dictValue" :label="item.dictLabel" :value="item.dictValue">
             </el-option>
           </el-select>
-          <el-select v-model="searchFrom.sale" class="search-select" placeholder="销售类型">
-            <el-option v-for="item in saleOptions" :key="item.value" :label="item.label" :value="item.value">
+          <el-select v-model="searchFrom.saleType" class="search-select" placeholder="销售类型">
+            <el-option
+              v-for="item in saleOptions"
+              :key="item.dictValue"
+              :label="item.dictLabel"
+              :value="item.dictValue"
+            >
             </el-option>
           </el-select>
           <el-select v-model="searchFrom.sale" class="search-select" placeholder="住宅类型">
@@ -59,7 +68,12 @@
             <el-option v-for="item in stationOptions" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
-          <el-input v-model="searchFrom.input" class="search-input" v-if="currentClass == 2" placeholder="地址、地铁、挂牌号、标题">
+          <el-input
+            v-model="searchFrom.input"
+            class="search-input"
+            v-if="currentClass == 2"
+            placeholder="地址、地铁、挂牌号、标题"
+          >
           </el-input>
           <el-button type="warning" icon="el-icon-search" @click="searchClick">搜索</el-button>
         </div>
@@ -72,13 +86,19 @@
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="row theme">
-          <div class="col-md-4 col-xs-6" style="width: 22.5%" v-for="(item, index) in homeSpot" :key="index" @click="goList(item)">
+          <div
+            class="col-md-4 col-xs-6"
+            style="width: 22.5%"
+            v-for="(item, index) in homeSpot"
+            :key="index"
+            @click="goList(item)"
+          >
             <div class="cell home_spot_cell">
               <div class="cell_holder home_spot">
                 <a href="javascript:;" class="cover-wrapper">
-                  <span>{{ item.name }}</span>
+                  <span>{{ item.dictLabel }}</span>
                 </a>
-                <img :src="item.url" alt />
+                <img :src="item.dictValue" alt />
               </div>
             </div>
           </div>
@@ -92,70 +112,71 @@
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="text-center" id="recent_menus">
-          <el-radio-group v-model="houseFrom.value" size="small">
-            <el-radio-button :label="0">全部住宅</el-radio-button>
-            <el-radio-button :label="1">1间</el-radio-button>
-            <el-radio-button :label="2">2间</el-radio-button>
-            <el-radio-button :label="3">3间</el-radio-button>
-            <el-radio-button :label="4">4间</el-radio-button>
-            <el-radio-button :label="4">复式</el-radio-button>
-            <el-radio-button :label="4">都市型</el-radio-button>
-            <el-radio-button :label="4">APT</el-radio-button>
-            <el-radio-button :label="5">Officetel</el-radio-button>
+          <el-radio-group v-model="houseFrom.value" size="small" @change="radioChange">
+            <el-radio-button :label="''">全部</el-radio-button>
+            <el-radio-button v-for="(item, index) in saleOptions" :key="index" :label="item.dictValue">{{
+              item.dictLabel
+            }}</el-radio-button>
           </el-radio-group>
         </div>
-        <div id="recent_wrap" style="display: table">
-          <div class="search-item-wide" v-for="(house, index) in houseList" :key="index" @click="seDetail(house)">
-            <div class="view_product grid_photo">
-              <div class="photo">
-                <img class="holder" :src="house.img" alt />
-                <div class="item_title">
-                  <h3>[{{ house.id }}] {{ house.title }}</h3>
-                  <div class="address">
-                    <span>{{ house.address }}</span>
+        <div id="recent_wrap" style="overflow: hidden">
+          <div v-if="houseList.length > 0">
+            <div class="search-item-wide" v-for="(house, index) in houseList" :key="index" @click="seDetail(house)">
+              <div class="view_product grid_photo">
+                <div class="photo">
+                  <img class="holder" :src="house.image" alt />
+                  <div class="item_title">
+                    <h3>[{{ house.homeNum }}] {{ house.title }}</h3>
+                    <div class="address">
+                      <span>{{ house.address }}</span>
+                    </div>
                   </div>
-                </div>
-                <div class="tags">
-                  <div class="tag" v-if="house.tags == 1">
-                    <span>建议</span>
-                  </div>
-                  <div class="tag tag_speed" v-if="house.tagsO == 2">
-                    <span>抢购</span>
-                  </div>
-                  <div class="tag ribbon_orange" v-if="house.tagsZ == 3">
-                    <span>最低价格</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="price_info">
-                <div>
-                  <div class="price_wrap">
-                    <span class="installation_span">最少</span>
-                    <strong class="price_strong">{{ house.priceSmall }}</strong>
-                    <span class="installation_span">房间</span>
-                    <strong class="price_strong">{{ house.zoom }}</strong>
-                    <span class="installation_span">贷款</span>
-                    <strong class="price_strong">{{ house.fullPrice }}万韩元</strong>
+                  <div class="tags">
+                    <div v-for="(tags,tIndex) in house.titleLabel" :key="tIndex">
+                      <span class="tag" v-if="tags == 1">推荐</span>
+                      <span class="tag tag_speed" v-if="tags == 2">速卖通</span>
+                    </div>
+                    <!-- <div class="tag tag_speed" v-if="house.tagsO == 2">
+                      <span>抢购</span>
+                    </div>
+                    <div class="tag ribbon_orange" v-if="house.tagsZ == 3">
+                      <span>最低价格</span>
+                    </div> -->
                   </div>
                 </div>
               </div>
-              <div class="meta">
-                <div class="meta_cell">
-                  面积
-                  <span class="help">{{ house.area }}</span>
+              <div class="item">
+                <div class="price_info">
+                  <div>
+                    <div class="price_wrap">
+                      <span class="installation_span">总价</span>
+                      <strong class="price_strong">{{ house.lastPrice }}</strong>
+                      <span class="installation_span">首付</span>
+                      <strong class="price_strong">{{ house.roomPrice }}</strong>
+                      <span class="installation_span">贷款</span>
+                      <strong class="price_strong">{{ house.loans }}万韩元</strong>
+                    </div>
+                  </div>
                 </div>
-                <div class="meta_cell">{{ house.aces }}</div>
+                <div class="meta">
+                  <div class="meta_cell">
+                    面积：
+                    <span class="help">{{ house.actualArea }}㎡</span>
+                  </div>
+                  楼层：
+                  <div class="meta_cell">{{ house.floor }}</div>
+                </div>
               </div>
             </div>
           </div>
+          <div v-else>
+            <el-empty description="暂无数据"></el-empty>
+          </div>
         </div>
-        <div class="more">
+        <div class="more" v-if="houseList.length > 16">
           <router-link to="/housemap" class="router-test">
             <el-button icon="el-icon-plus">查看更多</el-button>
           </router-link>
-
         </div>
       </div>
     </div>
@@ -166,8 +187,8 @@
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="megafolio-container">
-          <div class="mega-entry-innerwrap" v-for="(mega, index) in innerwrapList" :key="index" >
-            <img :src="mega.img" alt />
+          <div class="mega-entry-innerwrap" v-for="(mega, index) in innerwrapList" :key="index">
+            <img :src="mega.image" alt />
             <!-- <el-image style="width: 100px; height: 100px" :src="mega.img" :preview-src-list="srcList"> </el-image> -->
             <div class="mega-hover">
               <span class="mega-hovertitle">{{ mega.title }}</span>
@@ -176,25 +197,24 @@
             </div>
           </div>
         </div>
-        <div class="more">
+        <div class="more" v-if="innerwrapList.length > 12">
           <router-link to="/commentlist" class="router-test">
             <el-button icon="el-icon-plus">查看更多</el-button>
           </router-link>
-
         </div>
       </div>
     </div>
     <div class="home_section alternative_color">
       <div class="_container">
         <div class="text-center">
-          <h1>关于所有房地产</h1>
+          <h1>房地产新闻</h1>
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="megafolio-container">
           <swiper :options="swiperOption">
             <swiper-slide v-for="(img, index) in itemList" :key="index">
-              <div class="news-box">
-                <img :src="img.img" alt="" />
+              <div class="news-box" @click="geoNews(img)">
+                <img :src="img.image" alt="" />
               </div>
             </swiper-slide>
           </swiper>
@@ -211,7 +231,9 @@
           <swiper :options="friendshipOption">
             <swiper-slide v-for="(link, index) in cardList" :key="index">
               <div class="friendship-link">
-                <img :src="link.url" alt="">
+                <a :href="link.dictLabel" target="_blank" rel="noopener noreferrer">
+                  <img :src="link.dictValue" alt="" />
+                </a>
               </div>
             </swiper-slide>
           </swiper>
@@ -227,6 +249,17 @@
 </template>
 
 <script>
+import {
+  getBanners,
+  getRegion,
+  searchRoom,
+  getCooperation,
+  listNews,
+  listApplaud,
+  getSaletype,
+  getTitleType,
+  getDicts
+} from '@/api/http';
 export default {
   name: 'index',
   data() {
@@ -259,127 +292,16 @@ export default {
           delay: 5000 // 5秒切换一次
         }
       },
-      cardList: [
-        {
-          url: require('@/assets/images/nts.jpg')
-        },
-        {
-          url: require('@/assets/images/onnara.jpg')
-        },
-        {
-          url: require('@/assets/images/rtms.jpg')
-        },
-      ],
-      itemList: [
-        {
-          img: require('@/assets/images/dbc.jpg')
-        },
-        {
-          img: require('@/assets/images/bbs.jpg')
-        },
-        {
-          img: require('@/assets/images/bbs.jpg')
-        },
-        {
-          img: require('@/assets/images/bbs.jpg')
-        },
-        {
-          img: require('@/assets/images/bbs.jpg')
-        }
-      ],
-      homeSpot: [
-        {
-          id: 1,
-          name: '安阳',
-          url: require('@/assets/images/1.png')
-        },
-        {
-          id: 2,
-          name: '高阳',
-          url: require('@/assets/images/2.png')
-        },
-        {
-          id: 3,
-          name: '九里',
-          url: require('@/assets/images/3.png')
-        },
-        {
-          id: 4,
-          name: '仁川',
-          url: require('@/assets/images/4.png')
-        },
-        {
-          id: 5,
-          name: '首尔',
-          url: require('@/assets/images/5.png')
-        },
-        {
-          id: 6,
-          name: '水源',
-          url: require('@/assets/images/6.png')
-        },
-        {
-          id: 7,
-          name: '议政府',
-          url: require('@/assets/images/7.png')
-        },
-        {
-          id: 8,
-          name: '城南',
-          url: require('@/assets/images/8.png')
-        }
-      ],
-      innerwrapList: [
-        {
-          id: 1,
-          img: require('@/assets/images/asd.jpg'),
-          title: '恭喜坡州签约~*'
-        },
-        {
-          id: 2,
-          img: require('@/assets/images/asd.jpg'),
-          title: '恭喜坡州签约~*'
-        },
-        {
-          id: 3,
-          img: require('@/assets/images/asd.jpg'),
-          title: '恭喜坡州签约~*'
-        },
-        {
-          id: 4,
-          img: require('@/assets/images/asd.jpg'),
-          title: '恭喜坡州签约~*'
-        },
-        {
-          id: 5,
-          img: require('@/assets/images/asd.jpg'),
-          title: '恭喜坡州签约~*'
-        },
-        {
-          id: 6,
-          img: require('@/assets/images/asd.jpg'),
-          title: '恭喜坡州签约~*'
-        }
-      ],
+      cardList: [],
+      itemList: [],
+      homeSpot: [],
+      innerwrapList: [],
       searchFrom: {},
       houseFrom: {
-        value: 0
+        value: ''
       },
       // 交易类型
-      dealOptions: [
-        {
-          value: 1,
-          label: '买卖'
-        },
-        {
-          value: 2,
-          label: '月租'
-        },
-        {
-          value: 3,
-          label: '全税'
-        }
-      ],
+      dealOptions: [],
       // 住宅类型
       houseOptions: [
         {
@@ -397,35 +319,10 @@ export default {
         {
           value: 3,
           label: '都市型APT'
-        },
-      ],
-      // 销售类型
-      saleOptions: [
-        {
-          value: 0,
-          label: '全部住宅'
-        },
-        {
-          value: 1,
-          label: '1间'
-        },
-        {
-          value: 2,
-          label: '2间'
-        },
-        {
-          value: 3,
-          label: '3间'
-        },
-        {
-          value: 4,
-          label: '4间'
-        },
-        {
-          value: 5,
-          label: '复式'
         }
       ],
+      // 销售类型
+      saleOptions: [],
       // 选择城市
       cityOptions: [
         {
@@ -458,16 +355,7 @@ export default {
       lineOptions: [],
       // 地铁站
       stationOptions: [],
-      imageList: [
-        {
-          id: 1,
-          url: require('@/assets/images/b1.jpg')
-        },
-        {
-          id: 2,
-          url: require('@/assets/images/b2.jpg')
-        }
-      ],
+      imageList: [],
       tab: [
         {
           id: 1,
@@ -483,260 +371,137 @@ export default {
         }
       ],
       currentClass: 0,
-      houseList: [
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        }
-      ]
+      houseList: [],
+      titleType: []
     };
   },
+  created() {
+    this.getBanner();
+    this.getRengon();
+    this.getCooperation();
+    this.getNewsList();
+    this.getComments();
+    this.getSaletype();
+    this.getList();
+    this.getTitleLabel();
+    this.getTransaction();
+  },
   methods: {
+    // 获取广告banner
+    getBanner() {
+      getBanners().then((res) => {
+        if (res.code == 200) {
+          this.imageList = res.data;
+        }
+      });
+    },
+    // 获取地区
+    getRengon() {
+      getRegion().then((res) => {
+        if (res.code == 200) {
+          this.homeSpot = res.data;
+        }
+      });
+    },
+    getTransaction() {
+      getDicts('transaction_type').then(res =>{
+        
+        if(res.code == 200) {
+          this.dealOptions =  res.data;
+        }
+      })
+    },
+    // 获取房产列表
+    getList(saleType) {
+      let queryParams = {
+        pageNum: 1,
+        pageSize: 16
+      };
+      searchRoom({ saleType: saleType, ...queryParams }).then((res) => {
+        this.houseList = res.rows;
+        this.houseList.forEach((item) => {
+          item.titleLabel = item.titleLabel.split(',');
+        });
+        console.log(this.houseList);
+      });
+    },
+    // 获取标题标签
+    getTitleLabel() {
+      getTitleType().then((res) => {
+        this.titleType = res.data;
+      });
+    },
+    // 获取房产新闻列表
+    getNewsList() {
+      listNews({}).then((res) => {
+        if (res.code == 200) {
+          this.itemList = res.rows;
+        }
+      });
+    },
+    // 获取合作企业列表
+    getCooperation() {
+      getCooperation().then((res) => {
+        this.cardList = res.data;
+      });
+    },
+    // 获取客户评论列表
+    getComments() {
+      let queryParams = {
+        pageNum: 1,
+        pageSize: 12
+      };
+      listApplaud({ ...queryParams }).then((res) => {
+        if (res.code == 200) {
+          this.innerwrapList = res.rows;
+        }
+      });
+    },
+    // 新闻详情跳转
+    geoNews(item) {
+      this.$router.push({
+        name: 'baseDetail',
+        query: {
+          name: 'news',
+          id: item.id
+        }
+      });
+    },
+    // 获取销售类型
+    getSaletype() {
+      getSaletype().then((res) => {
+        this.saleOptions = res.data;
+      });
+    },
+    // 选项改变
+    radioChange(e) {
+      this.getList(e);
+    },
     tabsClick(e) {
       this.currentClass = e;
       this.searchFrom = {};
     },
     searchClick() {
       if (JSON.stringify(this.searchFrom) == '{}') {
-        this.$message.error('请选择搜索条件！')
+        this.$message.error('请选择搜索条件！');
         return false;
       }
       this.$router.push({
-        name:'houseList',
-        query:this.searchFrom
-      })
+        name: 'houseList',
+        query: this.searchFrom
+      });
     },
     goList(item) {
       this.$router.push({
-        name:'housemap',
-        query:{
-          id:item.id
+        name: 'housemap',
+        query: {
+          id: item.id
         }
-      })
+      });
     },
     megaHover(item) {
       this.imgVisible = true;
-      this.dialogImg = item.img;
+      this.dialogImg = item.image;
     },
     seeClick(item) {
       this.$router.push({
@@ -745,7 +510,7 @@ export default {
           name: 'see',
           id: item.id
         }
-      })
+      });
     },
     seDetail(item) {
       this.$router.push({
@@ -753,7 +518,7 @@ export default {
         query: {
           id: item.id
         }
-      })
+      });
     }
   }
 };
@@ -807,7 +572,7 @@ export default {
   margin-bottom: 0px;
 }
 
-.nav-search>li {
+.nav-search > li {
   position: relative;
   display: table-cell;
   vertical-align: bottom;
@@ -816,17 +581,17 @@ export default {
   float: left;
 }
 
-.nav-search>li a {
+.nav-search > li a {
   color: white;
 }
 
-.nav-search>li.activeX a {
+.nav-search > li.activeX a {
   font-weight: bold;
   color: #ffc525;
   background-color: transparent;
 }
 
-.nav-search>li.activeX>a:after {
+.nav-search > li.activeX > a:after {
   content: '';
   border-radius: 0 !important;
   bottom: 0;
@@ -876,7 +641,7 @@ export default {
 }
 
 .search-input {
-  width: 500px;
+  width: 416px;
   padding-right: 10px;
 }
 
@@ -901,7 +666,7 @@ export default {
     font-size: 24px;
   }
 
-  ::v-deep .el-radio-button__orig-radio:checked+.el-radio-button__inner {
+  ::v-deep .el-radio-button__orig-radio:checked + .el-radio-button__inner {
     background-color: #e6e6e6;
     border-color: #adadad;
     box-shadow: -1px 0 0 0 #adadad;
@@ -937,7 +702,7 @@ hr {
 .row {
   margin-right: -15px;
   margin-left: -15px;
-  display: table;
+  overflow: hidden;
 }
 
 .col-md-4,
@@ -1115,7 +880,7 @@ hr {
   -webkit-perspective: 1000;
 }
 
-::v-deep .swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
+::v-deep .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
   margin: -1px 4px;
 }
 

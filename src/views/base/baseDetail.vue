@@ -4,36 +4,41 @@
     <div class="_container">
       <div class="detail-title">
         <h2>{{detailTitle}}</h2>
-        <h3>기획부동산/일반부동산/부동산컨설팅</h3>
+        <h3>{{baseFrom.newsTitle}}</h3>
       </div>
       <div class="brief-box" v-if="requestName == 'news'">
         <i class="el-icon-s-ticket icon-color"></i>
-        <p>기획부동산,일반부동산,부동산컨설팅</p>
+        <p>{{baseFrom.info}}</p>
       </div>
       <div class="brief-box" v-if="requestName == 'see'">
         <i class="el-icon-date icon-color"></i>
         <p>2021-12-29 11:57:58</p>
       </div>
-      <div class="content">
-        内容
-      </div>
+      <div class="content" v-html="baseFrom.newsBody"></div>
     </div>
   </div>
 </template>
 
 <script>
+  import {newsDetail} from '@/api/http';
 export default {
     name:'baseDetail',
     data() {
         return{
           requestName:this.$route.query.name,
+          qId:this.$route.query.id,
           detailTitle: null,
+          baseFrom: {}
         }
     },
     created() {
       console.log(this.requestName);
       if (this.requestName == 'news') {
         this.detailTitle = '新闻'
+        newsDetail({id:this.qId}).then(  res =>{
+          console.log(res);
+          this.baseFrom = res.data
+        })
       }else if(this.requestName == 'see') {
         this.detailTitle = '评论'
       }

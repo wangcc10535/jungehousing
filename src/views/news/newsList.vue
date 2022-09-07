@@ -30,10 +30,10 @@
             @click="setDetail(news)"
           >
             <div class="newsimg-box">
-              <img :src="news.img" alt />
+              <img :src="news.image" alt />
             </div>
             <div class="news-title">
-              <h2>{{news.name}}</h2>
+              <h2>{{news.newsTitle}}</h2>
               <span>查看更多</span>
             </div>
           </div>
@@ -48,6 +48,7 @@
 
 <script>
 import rightList from '@/components/rightList.vue';
+import {listNews} from '@/api/http';
 export default {
   name: 'newsList',
   components: {
@@ -57,33 +58,7 @@ export default {
     return {
       searchInput: '',
       rightTitle: '最新房产',
-      itemList: [
-        {
-          id: '123',
-          name: '规划不动产 / 一般不动产 / 不动产咨询',
-          img: require('@/assets/images/dbc.jpg')
-        },
-        {
-          id: '123',
-          name: '规划不动产 / 一般不动产 / 不动产咨询',
-          img: require('@/assets/images/bbs.jpg')
-        },
-        {
-          id: '123',
-          name: '规划不动产 / 一般不动产 / 不动产咨询',
-          img: require('@/assets/images/bbs.jpg')
-        },
-        {
-          id: '123',
-          name: '规划不动产 / 一般不动产 / 不动产咨询',
-          img: require('@/assets/images/bbs.jpg')
-        },
-        {
-          id: '123',
-          name: '规划不动产 / 一般不动产 / 不动产咨询',
-          img: require('@/assets/images/bbs.jpg')
-        }
-      ],
+      itemList: [],
       houseList: [
         {
           id: 21464,
@@ -144,7 +119,18 @@ export default {
       ]
     };
   },
+  created() {
+    this.getNewsList()
+  },
   methods: {
+    // 获取房产新闻列表
+    getNewsList() {
+      listNews({}).then((res) => {
+        if (res.code == 200) {
+          this.itemList = res.rows;
+        }
+      });
+    },
     setDetail(item) {
       this.$router.push({
         name: 'baseDetail',
