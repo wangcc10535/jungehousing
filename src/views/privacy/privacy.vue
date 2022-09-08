@@ -12,20 +12,31 @@
     <breadcrumb></breadcrumb>
     <div class="_container">
       <h3>隐私声明</h3>
-      <div class="content">
-        内容
-      </div>
+      <div class="content" v-html="privacy.dictValue"></div>
     </div>
   </div>
 </template>
 
 <script>
+  import { getDicts } from '@/api/http';
 export default {
   name:'privacy',
   data(){
    return {
-
+    privacy: {}
    }
+  },
+  created() {
+    this.getPrivacy()
+  },
+  methods: {
+    getPrivacy() {
+      getDicts('statement').then((res) => {
+        if (res.code == 200) {
+          this.privacy = res.data[0];
+        }
+      });
+    }
   }
 }
 </script>

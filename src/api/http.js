@@ -79,3 +79,42 @@ export function newsDetail(data) {
     data: data
   });
 }
+
+// 查询问题
+export function listFaq(data) {
+  return request({
+    url: "/faq/selectList",
+    method: "post",
+    data: data
+  });
+}
+
+// /room/selectById
+
+// 查询房产详情
+export function roomDetail(data) {
+  return request({
+    url: "/room/selectById",
+    method: "post",
+    data: data
+  });
+}
+
+// 查询地址区域
+export function address(data) {
+  return request({
+    url: "/address/selectList",
+    method: "post",
+    data: data
+  });
+}
+
+
+// 查询地址区域
+export function applaudDetail(data) {
+  return request({
+    url: "/applaud/selectById",
+    method: "post",
+    data: data
+  });
+}

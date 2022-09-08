@@ -12,18 +12,32 @@
     <breadcrumb></breadcrumb>
     <div class="_container">
       <h3>关于我们</h3>
-       <div class="content">
-        内容
+       <div class="content" v-html="aboutUs.dictValue">
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import { getDicts } from '@/api/http';
 export default {
   name: 'about',
   data() {
-    return {};
+    return {
+      aboutUs:{}
+    };
+  },
+  created() {
+    this.getAboutus()
+  },
+  methods: {
+    getAboutus() {
+      getDicts('aboutus').then((res) => {
+        if (res.code == 200) {
+          this.aboutUs = res.data[0];
+        }
+      });
+    }
   }
 };
 </script>

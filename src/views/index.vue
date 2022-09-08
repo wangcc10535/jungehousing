@@ -28,7 +28,12 @@
         </ul>
         <div class="search-inner">
           <el-select v-model="searchFrom.deal" class="search-select" placeholder="交易类型">
-            <el-option v-for="item in dealOptions" :key="item.dictValue" :label="item.dictLabel" :value="item.dictValue">
+            <el-option
+              v-for="item in dealOptions"
+              :key="item.dictValue"
+              :label="item.dictLabel"
+              :value="item.dictValue"
+            >
             </el-option>
           </el-select>
           <el-select v-model="searchFrom.saleType" class="search-select" placeholder="销售类型">
@@ -44,16 +49,48 @@
             <el-option v-for="item in houseOptions" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
-          <el-select v-model="searchFrom.city" v-if="currentClass == 0" class="search-select" placeholder="选择城市">
-            <el-option v-for="item in cityOptions" :key="item.value" :label="item.label" :value="item.value">
+          <el-select
+            v-model="cityFrom.city"
+            v-if="currentClass == 0"
+            @change="cityChange('1', $event)"
+            class="search-select"
+            placeholder="选择城市"
+          >
+            <el-option
+              v-for="item in cityOptions"
+              :key="item.code"
+              :label="item.name"
+              :value="{label:item.name,value:item.code}"
+            >
             </el-option>
           </el-select>
-          <el-select v-model="searchFrom.county" v-if="currentClass == 0" class="search-select" placeholder="-">
-            <el-option v-for="item in countyOptions" :key="item.value" :label="item.label" :value="item.value">
+          <el-select
+            v-model="cityFrom.county"
+            v-if="currentClass == 0"
+            @change="cityChange('2', $event)"
+            class="search-select"
+            placeholder="-"
+          >
+            <el-option
+              v-for="item in countyOptions"
+              :key="item.code"
+              :label="item.name"
+              :value="{label:item.name,value:item.code}"
+            >
             </el-option>
           </el-select>
-          <el-select v-model="searchFrom.street" v-if="currentClass == 0" class="search-select" placeholder="-">
-            <el-option v-for="item in streetOptions" :key="item.value" :label="item.label" :value="item.value">
+          <el-select
+            v-model="cityFrom.street"
+            v-if="currentClass == 0"
+            class="search-select"
+            placeholder="-"
+          >
+            <el-option
+              v-for="item in streetOptions"
+              :key="item.code"
+              :label="item.name"
+              :value="{label:item.name,value:item.code}"
+            >
             </el-option>
           </el-select>
           <el-select v-model="searchFrom.region" v-if="currentClass == 1" class="search-select" placeholder="选择地区">
@@ -132,7 +169,7 @@
                     </div>
                   </div>
                   <div class="tags">
-                    <div v-for="(tags,tIndex) in house.titleLabel" :key="tIndex">
+                    <div v-for="(tags, tIndex) in house.titleLabel" :key="tIndex">
                       <span class="tag" v-if="tags == 1">推荐</span>
                       <span class="tag tag_speed" v-if="tags == 2">速卖通</span>
                     </div>
@@ -197,7 +234,7 @@
             </div>
           </div>
         </div>
-        <div class="more" v-if="innerwrapList.length > 12">
+        <div class="more">
           <router-link to="/commentlist" class="router-test">
             <el-button icon="el-icon-plus">查看更多</el-button>
           </router-link>
@@ -258,7 +295,8 @@ import {
   listApplaud,
   getSaletype,
   getTitleType,
-  getDicts
+  getDicts,
+  address
 } from '@/api/http';
 export default {
   name: 'index',
@@ -324,24 +362,7 @@ export default {
       // 销售类型
       saleOptions: [],
       // 选择城市
-      cityOptions: [
-        {
-          value: 1,
-          label: '首尔'
-        },
-        {
-          value: 2,
-          label: '仁川'
-        },
-        {
-          value: 3,
-          label: '京畿道'
-        },
-        {
-          value: 4,
-          label: '忠清南道'
-        }
-      ],
+      cityOptions: [],
       countyOptions: [],
       streetOptions: [],
       // 区域
@@ -371,8 +392,10 @@ export default {
         }
       ],
       currentClass: 0,
+      pid: '0',
       houseList: [],
-      titleType: []
+      titleType: [],
+      cityFrom: {}
     };
   },
   created() {
@@ -385,6 +408,7 @@ export default {
     this.getList();
     this.getTitleLabel();
     this.getTransaction();
+    this.getCity();
   },
   methods: {
     // 获取广告banner
@@ -404,12 +428,38 @@ export default {
       });
     },
     getTransaction() {
-      getDicts('transaction_type').then(res =>{
-        
-        if(res.code == 200) {
-          this.dealOptions =  res.data;
+      getDicts('transaction_type').then((res) => {
+        if (res.code == 200) {
+          this.dealOptions = res.data;
         }
-      })
+      });
+    },
+    // 获取城市
+    getCity(index,e) {
+      console.log(e);
+      if (index == 1) {
+        this.pid = e.value;
+      } else if (index == 2) {
+        this.pid = e.value;
+      } else {
+        this.pid = '0';
+      }
+      address({ pid: this.pid }).then((res) => {
+        console.log(res);
+        if (index == 1) {
+          this.countyOptions = res.rows;
+        } else if (index == 2) {
+          this.streetOptions = res.rows;
+        } else {
+          this.cityOptions = res.rows;
+        }
+      });
+    },
+    // 选择城市
+    cityChange(index, e) {
+      console.log(index);
+      console.log(e);
+      this.getCity(index,e);
     },
     // 获取房产列表
     getList(saleType) {
@@ -482,14 +532,19 @@ export default {
       this.searchFrom = {};
     },
     searchClick() {
-      if (JSON.stringify(this.searchFrom) == '{}') {
-        this.$message.error('请选择搜索条件！');
-        return false;
-      }
-      this.$router.push({
-        name: 'houseList',
-        query: this.searchFrom
-      });
+      
+      
+      this.searchFrom.city = this.cityFrom.city.name + ',' + this.cityFrom.county.name + ',' +this.cityFrom.street.name
+
+      console.log(this.searchFrom);
+      // if (JSON.stringify(this.searchFrom) == '{}') {
+      //   this.$message.error('请选择搜索条件！');
+      //   return false;
+      // }
+      // this.$router.push({
+      //   name: 'houseList',
+      //   query: this.searchFrom
+      // });
     },
     goList(item) {
       this.$router.push({

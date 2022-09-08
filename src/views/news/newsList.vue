@@ -19,7 +19,7 @@
           </div>
           <div class="search-box">
             <el-input v-model="searchInput" size="small" placeholder="请输入内容"></el-input>
-            <el-button type="warning" size="small">搜索</el-button>
+            <el-button type="warning" size="small" @click="search">搜索</el-button>
           </div>
         </div>
         <div class="news-list">
@@ -48,7 +48,7 @@
 
 <script>
 import rightList from '@/components/rightList.vue';
-import {listNews} from '@/api/http';
+import {listNews, searchRoom} from '@/api/http';
 export default {
   name: 'newsList',
   components: {
@@ -59,73 +59,20 @@ export default {
       searchInput: '',
       rightTitle: '最新房产',
       itemList: [],
-      houseList: [
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        }
-      ]
+      houseList: []
     };
   },
   created() {
-    this.getNewsList()
+    this.getNewsList();
+    this.getList();
   },
   methods: {
+    search() {
+      this.getNewsList()
+    },
     // 获取房产新闻列表
     getNewsList() {
-      listNews({}).then((res) => {
+      listNews({name:this.searchInput}).then((res) => {
         if (res.code == 200) {
           this.itemList = res.rows;
         }
@@ -138,6 +85,16 @@ export default {
           name: 'news',
           id: item.id
         }
+      });
+    },
+    // 获取房产列表
+    getList() {
+      let queryParams = {
+        pageNum: 1,
+        pageSize: 10
+      };
+      searchRoom({...queryParams }).then((res) => {
+        this.houseList = res.rows;
       });
     }
   }

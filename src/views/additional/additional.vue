@@ -82,16 +82,6 @@
                   v-model="fromAddData.textarea"
                 ></el-input>
               </el-descriptions-item>
-              <el-descriptions-item label-class-name="lable-tit">
-                <template slot="label">
-                  同意使用个人信息
-                  <el-link @click="tional()">[查看]</el-link>
-                </template>
-                <el-radio-group v-model="fromAddData.radioLook">
-                  <el-radio :label="3">同意</el-radio>
-                  <el-radio :label="6">不同意</el-radio>
-                </el-radio-group>
-              </el-descriptions-item>
             </el-descriptions>
             <div class="submit">
               <el-button type="primary">提交</el-button>

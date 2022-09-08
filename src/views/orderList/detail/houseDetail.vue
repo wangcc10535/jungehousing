@@ -172,12 +172,13 @@
 
 <script>
 import rightList from '@/components/rightList.vue';
-import { captchaImage } from '@/api/http';
+import {roomDetail, searchRoom} from '@/api/http';
 export default {
   name: 'houseDetail',
   components: { rightList },
   data() {
     return {
+      houseId:this.$route.query.id,
       iconIndex: null,
       categoryIcon: [
         {
@@ -256,70 +257,16 @@ export default {
           url: require('@/assets/images/0 (5).png')
         }
       ],
-      houseList: [
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        },
-        {
-          id: 21464,
-          title: '★清川洞★特价第一代…',
-          address: '仁川富平区清川洞葛山站1.2公里',
-          priceSmall: '30500',
-          room: '1500',
-          fullPrice: '2900',
-          tags: 1,
-          tagsO: 2,
-          tagsZ: 3,
-          area: '115.7㎡',
-          aces: '卧室 3 / 浴室 2',
-          img: require('@/assets/images/0.png')
-        }
-      ],
+      houseList: [],
       iconMarkerArr: [],
-      iconMarker: null
+      iconMarker: null,
+      houseData: {}
     };
   },
   created() {
     // this.getImg()
+    this.getList();
+    this.getDetail();
   },
   mounted() {
     this.$nextTick(() => {
@@ -328,10 +275,18 @@ export default {
       swiperTop.controller.control = swiperThumbs;
       swiperThumbs.controller.control = swiperTop;
     });
-    this.initMap();
+    
   },
 
   methods: {
+    // 获取详情
+    getDetail() {
+      roomDetail({id:this.houseId}).then( res =>{
+        console.log(res);
+        // this.houseData
+        this.initMap();
+      })
+    },
     initMap() {
       var mapOptions = {
         center: new naver.maps.LatLng(37.3595704, 127.105399),
@@ -350,8 +305,8 @@ export default {
       this.map = new naver.maps.Map('map', mapOptions);
       // this.onLoad(map);
     },
-    getImg() {
-      captchaImage().then(res =>{
+    getHousData() {
+      roomDetail().then(res =>{
         console.log(res);
       })
     },
@@ -481,8 +436,19 @@ export default {
         });
       }
       this.iconIndex = index;
+    },
+      // 获取房产列表
+  getList() {
+      let queryParams = {
+        pageNum: 1,
+        pageSize: 10
+      };
+      searchRoom({...queryParams }).then((res) => {
+        this.houseList = res.rows;
+      });
     }
-  }
+  },
+
 };
 </script>
 

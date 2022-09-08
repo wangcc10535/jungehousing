@@ -5,17 +5,17 @@
       <li class="list" v-for="(item,index) in houseList" :key="index" @click="setDetail(item)">
         <div class="row-box">
           <div class="rowImg">
-            <img :src="item.img" alt />
+            <img :src="item.image" alt />
           </div>
           <div class="marg-right">
-            <p class="marg-title">[{{item.address.slice(0,3)}}] {{item.title}}</p>
+            <p class="marg-title">[{{item.address.slice(0,6)}}] {{item.title}}</p>
             <div class="price_wrap">
-              <span class="installation_span">最少</span>
-              <strong class="price_strong">{{item.priceSmall}}</strong>
-              <span class="installation_span">房间</span>
-              <strong class="price_strong">{{item.room}}</strong>
+              <span class="installation_span">总价</span>
+              <strong class="price_strong">{{item.lastPrice}}</strong>
+              <span class="installation_span">首付</span>
+              <strong class="price_strong">{{item.roomPrice}}</strong>
               <span class="installation_span">贷款</span>
-              <strong class="price_strong">{{item.fullPrice}}万韩元</strong>
+              <strong class="price_strong">{{item.loans}}万韩元</strong>
             </div>
           </div>
         </div>
@@ -63,6 +63,7 @@ export default {
 .list_widget {
   width: 100%;
   display: table;
+  margin-bottom: 40px;
 }
 .list_widget {
   border: 1px solid rgba(0, 0, 0, 0.1);

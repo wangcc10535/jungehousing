@@ -12,18 +12,31 @@
     <breadcrumb></breadcrumb>
     <div class="_container">
       <h3>服务条款</h3>
-       <div class="content">
-        内容
-      </div>
+       <div class="content" v-html="terms.dictValue"></div>
     </div>
   </div>
 </template>
 
 <script>
+  import { getDicts } from '@/api/http';
 export default {
   name: 'terms',
   data() {
-    return {};
+    return {
+      terms: {}
+    };
+  },
+  created() {
+    this.getTerms()
+  },
+  methods: {
+    getTerms() {
+      getDicts('terms').then((res) => {
+        if (res.code == 200) {
+          this.terms = res.data[0];
+        }
+      });
+    }
   }
 };
 </script>

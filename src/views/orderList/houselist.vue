@@ -41,21 +41,25 @@
     <div class="list_box">
       <div class="list_box_content">
         <ul class="list">
-          <li class="list_1" id="list_1">
+          <li class="list_1" id="list_1" v-for="(house,index) in houseList" :key="index" @click="seDetail(house)">
             <div class="search-item-wide">
               <div class="view_product grid_photo">
                 <div class="photo">
-                  <img class="holder" src="@/assets/images/0.png" alt="">
+                  <img class="holder" :src="house.image" alt="">
                   <div class="item_title">
-                    <h3>[21464] ★清川洞★特价第一代…</h3>
+                    <h3>[{{house.familyNum}}] {{house.title}}</h3>
                     <div class="address">
-                      <span>仁川富平区清川洞葛山站1.2公里</span>
+                      <span>{{house.address}}</span>
                     </div>
                   </div>
                   <div class="tags">
-                    <div class="tag"><span>建议</span></div>
+                    <div v-for="(tags,tIndex) in house.titleLabel" :key="tIndex">
+                      <span class="tag" v-if="tags == 1">推荐</span>
+                      <span class="tag tag_speed" v-if="tags == 2">速卖通</span>
+                    </div>
+                    <!-- <div class="tag"><span>建议</span></div>
                     <div class="tag tag_speed"><span>抢购</span></div>
-                    <div class="tag ribbon_orange"><span>最低价格</span></div>
+                    <div class="tag ribbon_orange"><span>最低价格</span></div> -->
                   </div>
                 </div>
               </div>
@@ -63,135 +67,19 @@
                 <div class="price_info">
                   <div>
                     <div class="price_wrap">
-                      <span class="installation_span">最少</span> <strong class="price_strong">30500</strong>
-                      <span class="installation_span">房间 </span><strong class="price_strong">1500</strong>
-                      <span class="installation_span">贷款</span> <strong class="price_strong">2900万韩元</strong>
+                      <span class="installation_span">总价</span> <strong class="price_strong">{{ house.lastPrice }}</strong>
+                      <span class="installation_span">首付 </span><strong class="price_strong">{{ house.roomPrice }}</strong>
+                      <span class="installation_span">贷款</span> <strong class="price_strong">{{ house.loans }}万韩元</strong>
                     </div>
                   </div>
                 </div>
                 <div class="meta">
                   <div class="meta_cell">
-                    面积<span class="help">115.7㎡</span>
+                    面积<span class="help">{{ house.actualArea }}㎡</span>
                   </div>
                   <div class="meta_cell">
-                    卧室 3 / 浴室 2
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="list_1" id="list_1">
-            <div class="search-item-wide">
-              <div class="view_product grid_photo">
-                <div class="photo">
-                  <img class="holder" src="@/assets/images/0.png" alt="">
-                  <div class="item_title">
-                    <h3>[21464] ★清川洞★特价第一代…</h3>
-                    <div class="address">
-                      <span>仁川富平区清川洞葛山站1.2公里</span>
-                    </div>
-                  </div>
-                  <div class="tags">
-                    <div class="tag"><span>建议</span></div>
-                    <div class="tag tag_speed"><span>抢购</span></div>
-                    <div class="tag ribbon_orange"><span>最低价格</span></div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="price_info">
-                  <div>
-                    <div class="price_wrap">
-                      <span class="installation_span">最少</span> <strong class="price_strong">30500</strong>
-                      <span class="installation_span">房间 </span><strong class="price_strong">1500</strong>
-                      <span class="installation_span">贷款</span> <strong class="price_strong">2900万韩元</strong>
-                    </div>
-                  </div>
-                </div>
-                <div class="meta">
-                  <div class="meta_cell">
-                    面积<span class="help">115.7㎡</span>
-                  </div>
-                  <div class="meta_cell">
-                    卧室 3 / 浴室 2
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="list_1" id="list_1">
-            <div class="search-item-wide">
-              <div class="view_product grid_photo">
-                <div class="photo">
-                  <img class="holder" src="@/assets/images/0.png" alt="">
-                  <div class="item_title">
-                    <h3>[21464] ★清川洞★特价第一代…</h3>
-                    <div class="address">
-                      <span>仁川富平区清川洞葛山站1.2公里</span>
-                    </div>
-                  </div>
-                  <div class="tags">
-                    <div class="tag"><span>建议</span></div>
-                    <div class="tag tag_speed"><span>抢购</span></div>
-                    <div class="tag ribbon_orange"><span>最低价格</span></div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="price_info">
-                  <div>
-                    <div class="price_wrap">
-                      <span class="installation_span">最少</span> <strong class="price_strong">30500</strong>
-                      <span class="installation_span">房间 </span><strong class="price_strong">1500</strong>
-                      <span class="installation_span">贷款</span> <strong class="price_strong">2900万韩元</strong>
-                    </div>
-                  </div>
-                </div>
-                <div class="meta">
-                  <div class="meta_cell">
-                    面积<span class="help">115.7㎡</span>
-                  </div>
-                  <div class="meta_cell">
-                    卧室 3 / 浴室 2
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="list_1" id="list_1">
-            <div class="search-item-wide">
-              <div class="view_product grid_photo">
-                <div class="photo">
-                  <img class="holder" src="@/assets/images/0.png" alt="">
-                  <div class="item_title">
-                    <h3>[21464] ★清川洞★特价第一代…</h3>
-                    <div class="address">
-                      <span>仁川富平区清川洞葛山站1.2公里</span>
-                    </div>
-                  </div>
-                  <div class="tags">
-                    <div class="tag"><span>建议</span></div>
-                    <div class="tag tag_speed"><span>抢购</span></div>
-                    <div class="tag ribbon_orange"><span>最低价格</span></div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="price_info">
-                  <div>
-                    <div class="price_wrap">
-                      <span class="installation_span">最少</span> <strong class="price_strong">30500</strong>
-                      <span class="installation_span">房间 </span><strong class="price_strong">1500</strong>
-                      <span class="installation_span">贷款</span> <strong class="price_strong">2900万韩元</strong>
-                    </div>
-                  </div>
-                </div>
-                <div class="meta">
-                  <div class="meta_cell">
-                    面积<span class="help">115.7㎡</span>
-                  </div>
-                  <div class="meta_cell">
-                    卧室 3 / 浴室 2
+                    楼层：
+                  <span class="help">{{ house.floor }}</span>
                   </div>
                 </div>
               </div>
@@ -205,11 +93,35 @@
 </template>
 
 <script>
+  import { searchRoom, getDicts } from '@/api/http';
 export default {
   name: 'houselist',
   data() {
     return {
-
+      searchFrom: {},
+      houseList: []
+    }
+  },
+  created() {
+    this.getList();
+  },
+  methods:{
+    getList() {
+      let queryParams = {
+        pageNum: 1,
+        pageSize: 10
+      };
+      searchRoom({ ...queryParams,...this.searchFrom }).then((res) => {
+        this.houseList = res.rows;
+      });
+    },
+    seDetail(item) {
+      this.$router.push({
+        name: 'houseDetail',
+        query: {
+          id: item.id
+        }
+      });
     }
   }
 }
