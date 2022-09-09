@@ -14,45 +14,43 @@
         <div class="order-search-box">
           <div class="order-search-box-searchEZ">
             <span>模糊搜索：</span>
-            <el-input class="base-size" size="small" v-model="searchFrom.searchName" placeholder="请输入标题、城市等相关信息搜索"></el-input>
+            <el-input
+              class="base-size"
+              size="small"
+              v-model="searchFrom.searchName"
+              placeholder="请输入标题、城市等相关信息搜索"
+            ></el-input>
           </div>
           <div class="order-search-box-searchEZ">
             <span>销售类型：</span>
-            <el-select
-              class="base-size"
-              size="small"
-              v-model="searchFrom.saleType"
-              collapse-tags
-              placeholder="请选择"
-            >
+            <el-select class="base-size" size="small" v-model="searchFrom.saleType" collapse-tags placeholder="请选择">
               <el-option
                 v-for="item in saleOptions"
                 :key="item.dictValue"
-              :label="item.dictLabel"
-              :value="item.dictValue"
+                :label="item.dictLabel"
+                :value="item.dictValue"
               ></el-option>
             </el-select>
           </div>
           <div class="order-search-box-searchEZ">
             <span>住宅类型：</span>
-            <el-select
-              class="base-size"
-              size="small"
-              v-model="searchFrom.house"
-              collapse-tags
-              placeholder="请选择"
-            >
+            <el-select class="base-size" size="small" v-model="searchFrom.house" collapse-tags placeholder="请选择">
               <el-option
                 v-for="item in houseOptions"
                 :key="item.dictValue"
-              :label="item.dictLabel"
-              :value="item.dictValue"
+                :label="item.dictLabel"
+                :value="item.dictValue"
               ></el-option>
             </el-select>
           </div>
           <div class="order-search-box-searchEZ">
             <span>按地铁搜索：</span>
-            <el-input class="base-size" size="small" v-model="searchFrom.subway" placeholder="请输入地铁线路"></el-input>
+            <el-input
+              class="base-size"
+              size="small"
+              v-model="searchFrom.subway"
+              placeholder="请输入地铁线路"
+            ></el-input>
             <!-- <el-select
               class="base-size"
               size="small"
@@ -151,7 +149,9 @@
                             </font>
                           </div>
                           <font style="vertical-align: inherit">
-                            <font style="vertical-align: inherit">&nbsp;防水： {{house.waterRepellent}}间 | 浴室 {{house.showerRoom}}间</font>
+                            <font style="vertical-align: inherit"
+                              >&nbsp;防水： {{ house.waterRepellent }}间 | 浴室 {{ house.showerRoom }}间</font
+                            >
                           </font>
                         </div>
                       </small>
@@ -243,6 +243,15 @@
                 </div>
               </div>
             </div>
+            <!--   分页   -->
+            <div class="pagination-box" v-if="total > 10">
+              <pagination
+                :total="total"
+                :page.sync="queryParams.pageNum"
+                :limit.sync="queryParams.pageSize"
+                @pagination="getList"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -268,32 +277,37 @@ export default {
       // 住宅类型
       houseOptions: [],
       waterproofOptions: [],
-      showerOptions: []
+      showerOptions: [],
+      queryParams: {
+        pageNum: 1,
+        pageSize: 10
+      },
+      total: 0
     };
   },
   created() {
+    if (JSON.stringify(this.$route.query) != '{}') {
+      this.searchFrom = this.$route.query;
+    }
     this.getList();
     this.getSaletype();
     this.getHousetype();
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     searchSub() {
       this.getList();
     },
     react() {
-      this.searchFrom = {}
+      this.searchFrom = {};
       this.getList();
     },
     // 获取房产列表
     getList() {
-      let queryParams = {
-        pageNum: 1,
-        pageSize: 10
-      };
-      searchRoom({ ...queryParams,...this.searchFrom }).then((res) => {
+
+      searchRoom({ ...this.queryParams, ...this.searchFrom }).then((res) => {
         this.houseList = res.rows;
+        this.total = res.total;
         this.initMap();
       });
     },
@@ -311,22 +325,20 @@ export default {
         }
       });
     },
-     // 获取销售类型
-     getSaletype() {
+    // 获取销售类型
+    getSaletype() {
       getDicts('sale_type').then((res) => {
         if (res.code == 200) {
           this.saleOptions = res.data;
         }
-        
       });
     },
-     // 获取住宅类型
-     getHousetype() {
+    // 获取住宅类型
+    getHousetype() {
       getDicts('residence_type').then((res) => {
         if (res.code == 200) {
           this.houseOptions = res.data;
         }
-        
       });
     },
 

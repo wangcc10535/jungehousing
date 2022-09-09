@@ -27,7 +27,7 @@
           </li>
         </ul>
         <div class="search-inner">
-          <el-select v-model="searchFrom.deal" class="search-select" placeholder="交易类型">
+          <el-select v-model="searchFrom.tradeType" class="search-select" placeholder="交易类型">
             <el-option
               v-for="item in dealOptions"
               :key="item.dictValue"
@@ -46,11 +46,16 @@
             </el-option>
           </el-select>
           <el-select v-model="searchFrom.sale" class="search-select" placeholder="住宅类型">
-            <el-option v-for="item in houseOptions" :key="item.value" :label="item.label" :value="item.value">
+            <el-option
+              v-for="item in houseOptions"
+              :key="item.dictValue"
+              :label="item.dictLabel"
+              :value="item.dictLabel"
+            >
             </el-option>
           </el-select>
           <el-select
-            v-model="cityFrom.city"
+            v-model="cityFrom"
             v-if="currentClass == 0"
             @change="cityChange('1', $event)"
             class="search-select"
@@ -60,12 +65,12 @@
               v-for="item in cityOptions"
               :key="item.code"
               :label="item.name"
-              :value="{label:item.name,value:item.code}"
+              :value="{ label: item.name, value: item.code }"
             >
             </el-option>
           </el-select>
           <el-select
-            v-model="cityFrom.county"
+            v-model="countyFrom"
             v-if="currentClass == 0"
             @change="cityChange('2', $event)"
             class="search-select"
@@ -75,25 +80,20 @@
               v-for="item in countyOptions"
               :key="item.code"
               :label="item.name"
-              :value="{label:item.name,value:item.code}"
+              :value="{ label: item.name, value: item.code }"
             >
             </el-option>
           </el-select>
-          <el-select
-            v-model="cityFrom.street"
-            v-if="currentClass == 0"
-            class="search-select"
-            placeholder="-"
-          >
+          <el-select v-model="streetFrom" v-if="currentClass == 0" class="search-select" placeholder="-">
             <el-option
               v-for="item in streetOptions"
               :key="item.code"
               :label="item.name"
-              :value="{label:item.name,value:item.code}"
+              :value="{ label: item.name, value: item.code }"
             >
             </el-option>
           </el-select>
-          <el-select v-model="searchFrom.region" v-if="currentClass == 1" class="search-select" placeholder="选择地区">
+          <!-- <el-select v-model="searchFrom.region" v-if="currentClass == 1" class="search-select" placeholder="选择地区">
             <el-option v-for="item in regionOptions" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
@@ -104,11 +104,11 @@
           <el-select v-model="searchFrom.station" v-if="currentClass == 1" class="search-select" placeholder="-">
             <el-option v-for="item in stationOptions" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
-          </el-select>
+          </el-select> -->
           <el-input
-            v-model="searchFrom.input"
+            v-model="searchFrom.searchName"
             class="search-input"
-            v-if="currentClass == 2"
+            v-if="currentClass == 2 || currentClass == 1"
             placeholder="地址、地铁、挂牌号、标题"
           >
           </el-input>
@@ -341,24 +341,7 @@ export default {
       // 交易类型
       dealOptions: [],
       // 住宅类型
-      houseOptions: [
-        {
-          value: 0,
-          label: '田园住宅'
-        },
-        {
-          value: 1,
-          label: '别墅'
-        },
-        {
-          value: 2,
-          label: 'officetel'
-        },
-        {
-          value: 3,
-          label: '都市型APT'
-        }
-      ],
+      houseOptions: [],
       // 销售类型
       saleOptions: [],
       // 选择城市
@@ -366,12 +349,7 @@ export default {
       countyOptions: [],
       streetOptions: [],
       // 区域
-      regionOptions: [
-        {
-          value: 1,
-          label: '都市区'
-        }
-      ],
+      regionOptions: [],
       // 地铁线路
       lineOptions: [],
       // 地铁站
@@ -395,7 +373,9 @@ export default {
       pid: '0',
       houseList: [],
       titleType: [],
-      cityFrom: {}
+      cityFrom: {},
+      countyFrom: {},
+      streetFrom: {}
     };
   },
   created() {
@@ -409,6 +389,7 @@ export default {
     this.getTitleLabel();
     this.getTransaction();
     this.getCity();
+    this.getHouseType();
   },
   methods: {
     // 获取广告banner
@@ -434,8 +415,16 @@ export default {
         }
       });
     },
+    // 获取住宅类型
+    getHouseType() {
+      getDicts('residence_type').then((res) => {
+        if (res.code == 200) {
+          this.houseOptions = res.data;
+        }
+      });
+    },
     // 获取城市
-    getCity(index,e) {
+    getCity(index, e) {
       console.log(e);
       if (index == 1) {
         this.pid = e.value;
@@ -459,7 +448,7 @@ export default {
     cityChange(index, e) {
       console.log(index);
       console.log(e);
-      this.getCity(index,e);
+      this.getCity(index, e);
     },
     // 获取房产列表
     getList(saleType) {
@@ -532,19 +521,19 @@ export default {
       this.searchFrom = {};
     },
     searchClick() {
-      
-      
-      this.searchFrom.city = this.cityFrom.city.name + ',' + this.cityFrom.county.name + ',' +this.cityFrom.street.name
+      if (this.cityFrom.label || this.countyFrom.label || this.streetFrom.label) {
+        this.searchFrom.city = this.cityFrom.label + ',' + this.countyFrom.label + ',' + this.streetFrom.label;
+      }
 
       console.log(this.searchFrom);
-      // if (JSON.stringify(this.searchFrom) == '{}') {
-      //   this.$message.error('请选择搜索条件！');
-      //   return false;
-      // }
-      // this.$router.push({
-      //   name: 'houseList',
-      //   query: this.searchFrom
-      // });
+      if (JSON.stringify(this.searchFrom) == '{}') {
+        this.$message.error('请选择搜索条件！');
+        return false;
+      }
+      this.$router.push({
+        name: 'housemap',
+        query: this.searchFrom
+      });
     },
     goList(item) {
       this.$router.push({

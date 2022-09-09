@@ -87,6 +87,15 @@
           </li>
         </ul>
       </div>
+      <!--   分页   -->
+      <div class="pagination-box" v-if="total > 10">
+              <pagination
+                :total="total"
+                :page.sync="queryParams.pageNum"
+                :limit.sync="queryParams.pageSize"
+                @pagination="getList"
+              />
+            </div>
     </div>
 
   </div>
@@ -99,7 +108,12 @@ export default {
   data() {
     return {
       searchFrom: {},
-      houseList: []
+      houseList: [],
+      queryParams: {
+        pageNum: 1,
+        pageSize: 10
+      },
+      total: 0
     }
   },
   created() {
@@ -107,12 +121,10 @@ export default {
   },
   methods:{
     getList() {
-      let queryParams = {
-        pageNum: 1,
-        pageSize: 10
-      };
-      searchRoom({ ...queryParams,...this.searchFrom }).then((res) => {
+
+      searchRoom({ ...this.queryParams,...this.searchFrom }).then((res) => {
         this.houseList = res.rows;
+        this.total = res.total
       });
     },
     seDetail(item) {

@@ -426,7 +426,7 @@
     
     padding-top: 1px;
     padding-bottom: 1px;
-    /* overflow: hidden; */
+    overflow: auto;
     height: 96%;
   }
   

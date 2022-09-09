@@ -12,7 +12,16 @@
           </div>
         </div>
         <div class="more" v-if="innerwrapList.lenght > 12">
-          <el-button icon="el-icon-plus" @click="addMore">查看更多</el-button>
+          <!-- <el-button icon="el-icon-plus" @click="addMore">查看更多</el-button> -->
+          <!--   分页   -->
+          <div class="pagination-box" v-if="total > 18">
+              <pagination
+                :total="total"
+                :page.sync="queryParams.pageNum"
+                :limit.sync="queryParams.pageSize"
+                @pagination="getComments"
+              />
+            </div>
         </div>
       </div>
     </div>
@@ -32,7 +41,12 @@ export default {
     return {
       imgVisible: false,
       dialogImg: null,
-      innerwrapList: []
+      innerwrapList: [],
+      queryParams: {
+        pageNum: 1,
+        pageSize: 18
+      },
+      total: 0
     };
   },
   created() {
@@ -58,13 +72,11 @@ export default {
     },
     // 获取客户评论列表
     getComments() {
-      let queryParams = {
-        pageNum: 1,
-        pageSize: 12
-      };
-      listApplaud({ ...queryParams }).then((res) => {
+
+      listApplaud({ ...this.queryParams }).then((res) => {
         if (res.code == 200) {
           this.innerwrapList = res.rows;
+          this.total = res.total
         }
       });
     }
