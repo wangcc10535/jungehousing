@@ -48,7 +48,7 @@
 
 <script>
 import rightList from '@/components/rightList.vue';
-import {listNews, searchRoom} from '@/api/http';
+import {listNews, roomSelectHot} from '@/api/http';
 export default {
   name: 'newsList',
   components: {
@@ -93,7 +93,7 @@ export default {
         pageNum: 1,
         pageSize: 10
       };
-      searchRoom({...queryParams }).then((res) => {
+      roomSelectHot({...queryParams }).then((res) => {
         this.houseList = res.rows;
       });
     }

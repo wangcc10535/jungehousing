@@ -9,7 +9,9 @@ import i18n from './utils/index'
 import 'swiper/css/swiper.css'
 import breadcrumb from '@/components/breadcrumb.vue'
 import '@/assets/css/iconfont/iconfont.css'
-
+// 分页组件
+import Pagination from "@/components/Pagination";
+Vue.component('Pagination', Pagination)
 Vue.component('breadcrumb', breadcrumb)
 Vue.use(VueAwesomeSwiper)
 Vue.config.productionTip = false

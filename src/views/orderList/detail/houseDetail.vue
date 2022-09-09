@@ -11,104 +11,105 @@
   <div class="_container main">
     <div class="left">
       <div class="article">
-        <h3>货号：21502</h3>
+        <h3>货号：{{ houseData.homeNum }}</h3>
       </div>
       <div class="banner-icon">
         <div class="megafolio-container">
           <div class="firstDiv">
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <!-- <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div> -->
             <div class="centerDiv">
               <div class="thumb-example">
                 <swiper class="swiper gallery-top" :options="swiperOptionTop" ref="swiperTop">
-                  <swiper-slide v-for="(link, index) in cardList" :key="index">
+                  <swiper-slide v-for="(link, index) in houseData.roomImages" :key="index">
                     <div class="friendship-link">
-                      <img :src="link.url" alt />
+                      <img :src="link.image" alt />
                     </div>
                   </swiper-slide>
                 </swiper>
-                <swiper
-                  class="swiper gallery-thumbs"
-                  :options="swiperOptionThums"
-                  ref="swiperThumbs"
-                >
-                  <swiper-slide class="slide-list" v-for="(link, index) in cardList" :key="index">
+                <swiper class="swiper gallery-thumbs" :options="swiperOptionThums" ref="swiperThumbs">
+                  <swiper-slide class="slide-list" v-for="(link, index) in houseData.roomImages" :key="index">
                     <div class="friendship-Thums">
-                      <img :src="link.url" alt />
+                      <img :src="link.image" alt />
                     </div>
                   </swiper-slide>
                 </swiper>
               </div>
             </div>
           </div>
-          <p class="order-name">【东山洞】我喜欢剩下的家庭基础设施</p>
+          <p class="order-name">【{{ houseData.city }}】{{ houseData.title }}</p>
           <div class="information">
             <el-descriptions title="基本信息" :column="1" border>
               <el-descriptions-item label="金额信息">
                 <div class="price_wrap">
-                  <span class="installation_span">最少</span>
-                  <strong class="price_strong">22000</strong>
-                  <span class="installation_span">房间</span>
-                  <strong class="price_strong">3000</strong>
+                  <span class="installation_span">总价</span>
+                  <strong class="price_strong">{{ houseData.lastPrice }}</strong>
+                  <span class="installation_span">首付</span>
+                  <strong class="price_strong">{{ houseData.roomPrice }}</strong>
                   <span class="installation_span">贷款</span>
-                  <strong class="price_strong">19000万韩元</strong>
+                  <strong class="price_strong">{{ houseData.loans }}万韩元</strong>
                 </div>
               </el-descriptions-item>
               <el-descriptions-item label="地点信息">
                 <div class="address">
-                  <p>京畿道高阳市德阳区东山洞</p>
+                  <p>{{ houseData.addresss }}</p>
                   <p>
-                    <span class="metro">3号线</span>松站 1.2 公里
-                    <span class="metro">3号线</span>直竹站 1.5 公里
-                    <span class="metro">3号线</span>古帕巴尔站 1.9 公里
+                    <span v-for="(metro, index) in houseData.roomSubways" :key="index">
+                      <span class="metro">{{ metro.name }}</span
+                      >{{ metro.info }}
+                    </span>
                   </p>
                 </div>
               </el-descriptions-item>
               <el-descriptions-item label="建筑信息">
                 <p class="base-row">
                   <span class="tags">楼层</span>
-                  4楼
+                  {{ houseData.floor }}
                 </p>
               </el-descriptions-item>
               <el-descriptions-item label="更多信息">
                 <p class="base-row">
                   <span class="tags">面积</span>
-                  92.56㎡
+                  {{ houseData.actualArea }}㎡
                 </p>
                 <p class="base-row base-play">
                   <span class="base-play-box">
                     <span class="tags">防水</span>
-                    3室
+                    {{ houseData.waterRepellent }}室
                   </span>
                   <span class="base-play-box">
                     <span class="tags">浴室</span>
-                    2室
+                    {{ houseData.showerRoom }}室
                   </span>
                 </p>
                 <p class="base-row base-play">
                   <span class="base-play-box">
                     <span class="tags">加热</span>
-                    城市燃气
+                    <span v-if="houseData.heat == 2">城市供暖</span>
+                    <span v-if="houseData.heat == 1">无供暖</span>
                   </span>
-                  <span class="base-play-box">
+                  <!-- <span class="base-play-box">
                     <span class="tags">入住日期</span>
                     面议
-                  </span>
+                  </span> -->
                 </p>
               </el-descriptions-item>
               <el-descriptions-item label="选项信息">
                 <div class="option-box">
-                  <span class="option-box-label"><i class="iconfont icon-tingchechang"></i>停车场</span>
+                  <!-- <i class="iconfont icon-tingchechang"></i> -->
+                  <span class="option-box-label" v-for="(metro, index) in houseData.option" :key="index">{{
+                    metro
+                  }}</span>
                 </div>
               </el-descriptions-item>
               <el-descriptions-item label="电话">
-                <p class="base-row">050-7872-6008</p>
+                <p class="base-row">{{ houseData.phone }}</p>
               </el-descriptions-item>
             </el-descriptions>
           </div>
           <div class="order-list-detail">
             <h3>详细说明</h3>
-            <div class="order-list-detail-center">详情内容</div>
+            <div class="order-list-detail-center" v-html="houseData.item"></div>
           </div>
           <div class="map-box">
             <div id="map" style="width: 100%; height: 100%"></div>
@@ -130,27 +131,24 @@
     <div class="right-box">
       <div class="agent-box">
         <div class="agent-box-header">
-          <h4>经理</h4>
+          <h4>{{houseData.middlemanJob}}</h4>
           <div class="agent-box-header-img">
-            <img src="@/assets/images/liheying.jpg" alt />
+            <img v-if="houseData.middlemanImg" :src="houseData.middlemanImg" alt />
+            <el-avatar v-else :size="50" style="width:100%;height:100%" :src="circleUrl"></el-avatar>
           </div>
-          <p class="agent-box-header-name">
-            <i class="iconfont icon-yonghufill"></i> 李贺英
-          </p>
+          <p class="agent-box-header-name"><i class="iconfont icon-yonghufill"></i> {{houseData.middlemanName}}</p>
         </div>
         <div class="agent-box-contact">
-          <span class="agent-box-contact-phone">
-            <i class="iconfont icon-dianhua"></i>050-7872-6008
-          </span>
+          <span class="agent-box-contact-phone"> <i class="iconfont icon-dianhua"></i>{{houseData.phone}} </span>
           <span class="agent-box-contact-kakao">
-            <i class="iconfont icon-kakao-talk-fill kakao-talk-fill"></i>电源
+            <i class="iconfont icon-kakao-talk-fill kakao-talk-fill"></i>{{houseData.middlemanTalk}}
           </span>
         </div>
         <div class="agent-box-customer">
           <p class="agent-box-customer-ps">留下您的联系方式，我们会与您联系。</p>
           <el-input
             class="agent-box-customer-input"
-            v-model="customerFrom.input"
+            v-model="customerFrom.adsw"
             placeholder="电话号码或邮箱"
           ></el-input>
           <el-input
@@ -158,10 +156,10 @@
             type="textarea"
             :rows="3"
             placeholder="咨询内容"
-            v-model="customerFrom.textarea"
+            v-model="customerFrom.qwera"
           ></el-input>
           <div class="agent-box-customer-submit">
-            <el-button class="agent-box-customer-submit-btn" type="warning">保持联系</el-button>
+            <el-button class="agent-box-customer-submit-btn" type="warning" @click="addRequireUse">保持联系</el-button>
           </div>
         </div>
       </div>
@@ -172,48 +170,58 @@
 
 <script>
 import rightList from '@/components/rightList.vue';
-import {roomDetail, searchRoom} from '@/api/http';
+import { roomDetail, roomSelectHot,listmiddleman,addRequire } from '@/api/http';
 export default {
   name: 'houseDetail',
   components: { rightList },
   data() {
     return {
-      houseId:this.$route.query.id,
+      houseId: this.$route.query.id,
+      circleUrl:'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
       iconIndex: null,
       categoryIcon: [
         {
+          id: 1,
           className: 'MT1',
           clickName: '超级市场'
         },
         {
+          id: 2,
           className: 'CS2',
           clickName: '便利店'
         },
         {
+          id: 3,
           className: 'PS3',
           clickName: '幼儿园'
         },
         {
+          id: 4,
           className: 'SC4',
           clickName: '学校'
         },
         {
+          id: 5,
           className: 'BK9',
           clickName: '银行'
         },
         {
+          id: 6,
           className: 'CT1',
           clickName: '娱乐设施'
         },
         {
+          id: 7,
           className: 'PO3',
           clickName: '公共机构'
         },
         {
+          id: 8,
           className: 'AT4',
           clickName: '景点'
         },
         {
+          id: 9,
           className: 'HP8',
           clickName: '医院'
         }
@@ -225,7 +233,6 @@ export default {
         loop: true,
         loopedSlides: 8,
         spaceBetween: 10,
-
         navigation: {
           nextEl: 'swiper-button-next',
           prevEl: 'swiper-button-prev'
@@ -240,33 +247,24 @@ export default {
         touchRatio: 0.2,
         slideToClickedSlide: true
       },
-      cardList: [
-        {
-          url: require('@/assets/images/0 (1).png')
-        },
-        {
-          url: require('@/assets/images/0 (2).png')
-        },
-        {
-          url: require('@/assets/images/0 (3).png')
-        },
-        {
-          url: require('@/assets/images/0 (4).png')
-        },
-        {
-          url: require('@/assets/images/0 (5).png')
-        }
-      ],
       houseList: [],
       iconMarkerArr: [],
       iconMarker: null,
-      houseData: {}
+      houseData: {},
+      middleman: []
     };
   },
   created() {
-    // this.getImg()
+    this.getlistmiddleman();
     this.getList();
     this.getDetail();
+  },
+  watch: {
+    '$route.query.id': {
+      handler(newName, oldName) {
+        location.reload()
+      }
+    }
   },
   mounted() {
     this.$nextTick(() => {
@@ -275,21 +273,50 @@ export default {
       swiperTop.controller.control = swiperThumbs;
       swiperThumbs.controller.control = swiperTop;
     });
-    
   },
 
   methods: {
+    // 获取经纪人
+    getlistmiddleman() {
+      listmiddleman({}).then( res => {
+        console.log(res.rows);
+        this.middleman = res.rows
+      })
+    },
     // 获取详情
     getDetail() {
-      roomDetail({id:this.houseId}).then( res =>{
-        console.log(res);
-        // this.houseData
+      roomDetail({ id: this.houseId }).then((res) => {
+        this.houseData = res.data;
+        // this.houseData.city = this.houseData.city.split(',');
+        this.houseData.option = this.houseData.option.split(',');
+        this.middleman.forEach(item =>{
+          if (item.id == this.houseData.middlemanId) {
+            this.houseData.middlemanImg = item.headerImg;
+            this.houseData.middlemanJob = item.job;
+            this.houseData.middlemanName = item.name;
+            this.houseData.middlemanTalk = item.talk;
+          }
+        })
+        console.log(this.houseData);
         this.initMap();
+      });
+    },
+    // 用户提交需求
+    addRequireUse() {
+      this.customerFrom.mid = this.houseData.middlemanId;
+      this.customerFrom.homeNum = this.houseData.homeNum;
+      addRequire({...this.customerFrom}).then( res =>{
+        if(res.code == 200) {
+          this.$message.success('提交成功！')
+          this.customerFrom = {}
+        }
       })
     },
     initMap() {
+      let lat = this.houseData.lat;
+      let lng = this.houseData.lon;
       var mapOptions = {
-        center: new naver.maps.LatLng(37.3595704, 127.105399),
+        center: new naver.maps.LatLng(lat, lng),
         zoom: 16,
         mapTypeControl: true,
         mapTypeControlOptions: {
@@ -305,150 +332,156 @@ export default {
       this.map = new naver.maps.Map('map', mapOptions);
       // this.onLoad(map);
     },
-    getHousData() {
-      roomDetail().then(res =>{
-        console.log(res);
-      })
-    },
     iconTab(icon, index) {
-      if (this.iconMarker) {
-        this.iconMarker.setMap(null);
-        this.iconMarkerArr = [];
+      let _this = this;
+      if (this.iconMarkerArr.length > 0) {
+        this.iconMarkerArr.forEach((item) => {
+          item.setMap(null);
+        });
       }
-      const marr = [
-        {
-          grd_lo: '128.64345545',
-          grd_la: '35.89231981'
-        },
-        {
-          grd_lo: '128.58271469',
-          grd_la: '38.18770048'
-        }
-      ];
+      const marr = this.houseData.roomNeighbors;
       if (icon.className == 'MT1') {
         console.log('超级市场');
         // this.iconMarker.remove()
         marr.forEach((item) => {
-          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
-          this.iconMarker = new naver.maps.Marker({
-            position: latlng,
-            draggable: false,
-            map: this.map,
-            icon: require('@/assets/images/marker/mt1_o.png')
-          });
-          this.iconMarkerArr.push(this.iconMarker);
+          if (item.type == icon.id) {
+            let latlng = new naver.maps.LatLng(item.lat, item.lon);
+            this.iconMarker = new naver.maps.Marker({
+              position: latlng,
+              draggable: false,
+              map: this.map,
+              icon: require('@/assets/images/marker/mt1_o.png')
+            });
+            this.iconMarkerArr.push(this.iconMarker);
+          }
         });
       } else if (icon.className == 'CS2') {
         console.log('便利店');
         marr.forEach((item) => {
-          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
-          this.iconMarker = new naver.maps.Marker({
-            position: latlng,
-            draggable: false,
-            map: this.map,
-            icon: require('@/assets/images/marker/cs2.png')
-          });
-          // this.iconMarkerArr.push(iconMarker)
+          if (item.type == icon.id) {
+            let latlng = new naver.maps.LatLng(item.lat, item.lon);
+            this.iconMarker = new naver.maps.Marker({
+              position: latlng,
+              draggable: false,
+              map: this.map,
+              icon: require('@/assets/images/marker/cs2.png')
+            });
+            this.iconMarkerArr.push(this.iconMarker);
+          }
         });
       } else if (icon.className == 'PS3') {
         console.log('幼儿园');
         marr.forEach((item) => {
-          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
-          this.iconMarker = new naver.maps.Marker({
-            position: latlng,
-            draggable: false,
-            map: this.map,
-            icon: require('@/assets/images/marker/ps3.png')
-          });
-          this.iconMarkerArr.push(this.iconMarker);
+          if (item.type == icon.id) {
+            let latlng = new naver.maps.LatLng(item.lat, item.lon);
+            this.iconMarker = new naver.maps.Marker({
+              position: latlng,
+              draggable: false,
+              map: this.map,
+              icon: require('@/assets/images/marker/ps3.png')
+            });
+            this.iconMarkerArr.push(this.iconMarker);
+          }
         });
       } else if (icon.className == 'SC4') {
         console.log('学校');
         marr.forEach((item) => {
-          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
-          this.iconMarker = new naver.maps.Marker({
-            position: latlng,
-            draggable: false,
-            map: this.map,
-            icon: require('@/assets/images/marker/sc4.png')
-          });
-          this.iconMarkerArr.push(this.iconMarker);
+          if (item.type == icon.id) {
+            let latlng = new naver.maps.LatLng(item.lat, item.lon);
+            this.iconMarker = new naver.maps.Marker({
+              position: latlng,
+              draggable: false,
+              map: this.map,
+              icon: require('@/assets/images/marker/sc4.png')
+            });
+            this.iconMarkerArr.push(this.iconMarker);
+          }
         });
       } else if (icon.className == 'BK9') {
         console.log('银行');
         marr.forEach((item) => {
-          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
-          this.iconMarker = new naver.maps.Marker({
-            position: latlng,
-            draggable: false,
-            map: this.map,
-            icon: require('@/assets/images/marker/bk9.png')
-          });
-          this.iconMarkerArr.push(this.iconMarker);
+          if (item.type == icon.id) {
+            let latlng = new naver.maps.LatLng(item.lat, item.lon);
+            this.iconMarker = new naver.maps.Marker({
+              position: latlng,
+              draggable: false,
+              map: this.map,
+              icon: require('@/assets/images/marker/bk9.png')
+            });
+            this.iconMarkerArr.push(this.iconMarker);
+          }
         });
       } else if (icon.className == 'CT1') {
         console.log('娱乐设施');
         marr.forEach((item) => {
-          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
-          this.iconMarker = new naver.maps.Marker({
-            position: latlng,
-            draggable: false,
-            map: this.map,
-            icon: require('@/assets/images/marker/ct1.png')
-          });
-          this.iconMarkerArr.push(this.iconMarker);
+          if (item.type == icon.id) {
+            let latlng = new naver.maps.LatLng(item.lat, item.lon);
+            this.iconMarker = new naver.maps.Marker({
+              position: latlng,
+              draggable: false,
+              map: this.map,
+              icon: require('@/assets/images/marker/ct1.png')
+            });
+            this.iconMarkerArr.push(this.iconMarker);
+          }
         });
       } else if (icon.className == 'PO3') {
         console.log('公共机构');
         marr.forEach((item) => {
-          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
-          this.iconMarker = new naver.maps.Marker({
-            position: latlng,
-            draggable: false,
-            map: this.map,
-            icon: require('@/assets/images/marker/po3.png')
-          });
-          this.iconMarkerArr.push(this.iconMarker);
+          if (item.type == icon.id) {
+            let latlng = new naver.maps.LatLng(item.lat, item.lon);
+            this.iconMarker = new naver.maps.Marker({
+              position: latlng,
+              draggable: false,
+              map: this.map,
+              icon: require('@/assets/images/marker/po3.png')
+            });
+            this.iconMarkerArr.push(this.iconMarker);
+          }
         });
       } else if (icon.className == 'AT4') {
         console.log('景点');
         marr.forEach((item) => {
-          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
-          this.iconMarker = new naver.maps.Marker({
-            position: latlng,
-            draggable: false,
-            map: this.map,
-            icon: require('@/assets/images/marker/at4.png')
-          });
-          this.iconMarkerArr.push(this.iconMarker);
+          if (item.type == icon.id) {
+            let latlng = new naver.maps.LatLng(item.lat, item.lon);
+            this.iconMarker = new naver.maps.Marker({
+              position: latlng,
+              draggable: false,
+              map: this.map,
+              icon: require('@/assets/images/marker/at4.png')
+            });
+            this.iconMarkerArr.push(this.iconMarker);
+          }
         });
       } else if (icon.className == 'HP8') {
         console.log('医院');
         marr.forEach((item) => {
-          let latlng = new naver.maps.LatLng(item.grd_la, item.grd_lo);
-          this.iconMarker = new naver.maps.Marker({
-            position: latlng,
-            draggable: false,
-            map: this.map,
-            icon: require('@/assets/images/marker/hp8.png')
-          });
-          this.iconMarkerArr.push(this.iconMarker);
+          if (item.type == icon.id) {
+            let latlng = new naver.maps.LatLng(item.lat, item.lon);
+            this.iconMarker = new naver.maps.Marker({
+              position: latlng,
+              draggable: false,
+              map: this.map,
+              icon: require('@/assets/images/marker/hp8.png')
+            });
+            this.iconMarkerArr.push(this.iconMarker);
+          }
         });
       }
+
       this.iconIndex = index;
     },
-      // 获取房产列表
-  getList() {
+    // 获取房产列表
+    getList() {
       let queryParams = {
         pageNum: 1,
         pageSize: 10
       };
-      searchRoom({...queryParams }).then((res) => {
+      roomSelectHot({ ...queryParams }).then((res) => {
         this.houseList = res.rows;
       });
     }
-  },
-
+  }
 };
 </script>
 
@@ -780,14 +813,14 @@ export default {
   position: absolute;
   left: 0;
 }
-.option-box{
+.option-box {
   padding: 0 20px;
   &-label {
     width: 120px;
     height: 24px;
     line-height: 24px;
     text-align: left;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: left;
     margin-right: 10px;

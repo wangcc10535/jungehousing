@@ -118,3 +118,48 @@ export function applaudDetail(data) {
     data: data
   });
 }
+
+// 查询经济人
+export function listmiddleman(data) {
+  return request({
+    url: "/middleman/selectList",
+    method: "post",
+    data: data
+  });
+}
+
+// 查询最新房产
+export function roomSelectHot(data) {
+  return request({
+    url: "/room/selectHot",
+    method: "post",
+    data: data
+  });
+}
+
+// 新增用户需求
+export function addRequire(data) {
+  return request({
+    url: "/require/add",
+    method: "post",
+    data: data
+  });
+}
+
+// 新增买卖委托
+export function addQna(data) {
+  return request({
+    url: "/qna/add",
+    method: "post",
+    data: data
+  });
+}
+
+// 查询买卖委托
+export function listQna(data) {
+  return request({
+    url: "/qna/selectList",
+    method: "post",
+    data: data
+  });
+}

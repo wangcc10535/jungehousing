@@ -49,7 +49,7 @@ export default {
             query: {
                 id:item.id
             }
-        })
+        }).catch(err=>err)
     }
   }
 };
