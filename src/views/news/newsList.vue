@@ -14,12 +14,12 @@
       <div class="left">
         <div class="top-search">
           <div class="search-title">
-            <h2>所有房地产新闻</h2>
+            <h2>{{$t('message.AllNews')}}</h2>
             <span v-if="itemList.length >0">({{ itemList.length }})</span>
           </div>
           <div class="search-box">
-            <el-input v-model="searchInput" size="small" placeholder="请输入内容"></el-input>
-            <el-button type="warning" size="small" @click="search">搜索</el-button>
+            <el-input v-model="searchInput" size="small" :placeholder="$t('message.inputPlaceholder')"></el-input>
+            <el-button type="warning" size="small" @click="search">{{$t('message.SearchBtn')}}</el-button>
           </div>
         </div>
         <div class="news-list">
@@ -34,7 +34,7 @@
             </div>
             <div class="news-title">
               <h2>{{news.newsTitle}}</h2>
-              <span>查看更多</span>
+              <span>{{$t('message.SeeMore')}}</span>
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@ export default {
   data() {
     return {
       searchInput: '',
-      rightTitle: '最新房产',
+      rightTitle: this.$t('message.LatestProperty'),
       itemList: [],
       houseList: []
     };

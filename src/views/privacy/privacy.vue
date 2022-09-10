@@ -11,7 +11,7 @@
 <div class="base-box">
     <breadcrumb></breadcrumb>
     <div class="_container">
-      <h3>隐私声明</h3>
+      <h3>{{$t('message.Privacystatement')}}</h3>
       <div class="content" v-html="privacy.dictValue"></div>
     </div>
   </div>

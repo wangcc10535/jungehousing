@@ -11,7 +11,7 @@
   <div class="base-box">
     <breadcrumb></breadcrumb>
     <div class="_container">
-      <h3>关于我们</h3>
+      <h3>{{$t('message.aboutUs')}}</h3>
        <div class="content" v-html="aboutUs.dictValue">
       </div>
     </div>

@@ -11,7 +11,7 @@
   <div class="base-box">
     <breadcrumb></breadcrumb>
     <div class="_container">
-      <h3>자주 묻는 질문</h3>
+      <h3>{{$t('message.commonProblem')}}</h3>
       <div class="content">
         <el-collapse v-model="activeNames">
           <el-collapse-item v-for="(item,index) in helpFrom" :title="item.question" :key="index" name="1">

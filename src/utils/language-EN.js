@@ -17,7 +17,7 @@ export default {
         'businessCircles':'Industrial and Commercial Registration No',
         'address':'address',
         'addressInfo':'Quasi real estate, 1f, 740 Jingren Road, Nandong District, Incheon City',
-        'phone':'phnoe',
+        'phone':'phone',
         'copyright':'2018 © junland。Photos, lists, communities - all information on the website is protected. Supported by junland housing',
         'aboutUs':'About Us',
         'Termsofservice':'Terms Of Service',
@@ -75,6 +75,39 @@ export default {
         'transaction': 'TRANSACTION',
         'TitleAddress': 'TITLE & ADDRESS',
         'AdditionalInformation': 'ADDITIONAL INFORMATION',
-        'Room':'ROOM'
+        'Room':'ROOM',
+
+
+// 新闻列表页
+        'AllNews': 'All real estate news',
+        'inputPlaceholder': 'Please enter the content',
+        'LatestProperty': 'Latest Property',
+
+        // 委托页面
+        'entrust': 'ENTRUST',
+        'tabFirst': 'Commission (buy / sell)',
+        'tabSecond': 'Delegation list (QnA)',
+        'RequiredArea': 'Required Area',
+        'Price':'Price',
+        'floorPrice':'floor Price',
+        'ceilingPrice':'Ceiling Price',
+        'CommissionType': 'Commission Type',
+        'EstimatedTime': 'Estimated purchase / sale time',
+        'accessTime': 'Date / time of access',
+        'selectTile': 'Select date and time',
+        'HouseSize': 'House size',
+        'information': 'information',
+        'name':'name',
+        'eMail': 'eMail',
+        'Display': 'Display',
+        'demand': 'Demand',
+        'Submit': 'Submit',
+        'SerialNumber': 'Number',
+        'buy':'BUY',
+        'sell':'SELL',
+        'SubmissionDate': 'Submission Date',
+
+        // 常见问题
+        'commonProblem': 'Common Problem'
     }
 }

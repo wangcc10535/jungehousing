@@ -11,7 +11,7 @@
   <div class="base-box">
     <breadcrumb></breadcrumb>
     <div class="_container">
-      <h3>服务条款</h3>
+      <h3>{{$t('message.Termsofservice')}}</h3>
        <div class="content" v-html="terms.dictValue"></div>
     </div>
   </div>

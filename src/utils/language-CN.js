@@ -79,7 +79,38 @@ export default {
         'TitleAddress': '标题/地址',
         'AdditionalInformation': '附加信息',
         'Room':'间客房',
-        
 
+        // 新闻列表页
+        'AllNews': '所有房地产新闻',
+        'inputPlaceholder': '请输入内容',
+        'LatestProperty': '最新房产',
+
+        // 委托页面
+        'entrust': '委托',
+        'tabFirst': '委托（买/卖）',
+        'tabSecond': '委托列表（QNA）',
+        'RequiredArea': '所需区域',
+        'Price':'价格',
+        'floorPrice':'最低价格',
+        'ceilingPrice':'最高价格',
+        'CommissionType': '委托类型',
+        'EstimatedTime': '预计购买/卖时间',
+        'accessTime': '访问日期/时间',
+        'selectTile': '选择日期时间',
+        'HouseSize': '房屋大小',
+        'information': '信息',
+        'name':'姓名',
+        'eMail': '邮箱',
+        'Display': '是否显示',
+        'demand': '需求',
+        'Submit': '提交',
+        'SerialNumber': '序号',
+        'buy':'购买',
+        'sell':'出售',
+        'SubmissionDate': '提交时间',
+
+        // 常见问题
+        'commonProblem': '常见问题'
+        
     }
 };

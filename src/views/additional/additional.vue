@@ -11,18 +11,18 @@
   <div class="base-box">
     <breadcrumb></breadcrumb>
     <div class="_container">
-      <h3>委托</h3>
+      <h3>{{$t('message.entrust')}}</h3>
       <div class="content">
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="구하기(매수/팔다)" name="first">
+          <el-tab-pane :label="$t('message.tabFirst')" name="first">
             <el-descriptions class="margin-top" :column="1" border>
-              <el-descriptions-item label="所需区域" label-class-name="lable-tit">
+              <el-descriptions-item :label="$t('message.RequiredArea')" label-class-name="lable-tit">
                 <el-select
                   v-model="provinceFrom"
                   @change="cityChange('1', $event)"
                   class="search-select"
                   style="margin-right: 10px"
-                  placeholder="选择城市"
+                  :placeholder="$t('message.selectCity')"
                 >
                   <el-option
                     v-for="item in cityOptions"
@@ -58,92 +58,92 @@
                   </el-option>
                 </el-select>
               </el-descriptions-item>
-              <el-descriptions-item label="价格" label-class-name="lable-tit">
+              <el-descriptions-item :label="$t('message.Price')" label-class-name="lable-tit">
                 <el-input
                   class="contact"
                   style="margin-right: 10px; width: 300px"
                   v-model="fromAddData.lowPrice"
-                  placeholder="请输入最低价格"
+                  :placeholder="$t('message.floorPrice')"
                 ></el-input>
                 <el-input
                   class="contact"
                   style="margin-right: 10px; width: 300px"
                   v-model="fromAddData.highPrice"
-                  placeholder="请输入最高价格"
+                  :placeholder="$t('message.ceilingPrice')"
                 ></el-input>
               </el-descriptions-item>
-              <el-descriptions-item label="类型" label-class-name="lable-tit">
+              <el-descriptions-item :label="$t('message.type')" label-class-name="lable-tit">
                 <el-checkbox-group v-model="saleTypecheckList">
                   <el-checkbox :label="item.dictLabel" v-for="(item, index) in saleArr" :key="index"></el-checkbox>
                 </el-checkbox-group>
               </el-descriptions-item>
-              <el-descriptions-item label="房屋类型" label-class-name="lable-tit">
+              <el-descriptions-item :label="$t('message.ResidentialType')" label-class-name="lable-tit">
                 <el-checkbox-group v-model="houseTypecheckList">
                   <el-checkbox :label="item.dictLabel" v-for="(item, index) in stuArr" :key="index"></el-checkbox>
                 </el-checkbox-group>
               </el-descriptions-item>
-              <el-descriptions-item label="委托类型" label-class-name="lable-tit">
+              <el-descriptions-item :label="$t('message.CommissionType')" label-class-name="lable-tit">
                 <el-radio-group v-model="fromAddData.type">
                   <el-radio :label="item.dictValue" v-for="(item, index) in entrustType" :key="index">{{
                     item.dictLabel
                   }}</el-radio>
                 </el-radio-group>
               </el-descriptions-item>
-              <el-descriptions-item label="预计购买/卖时间" label-class-name="lable-tit">
+              <el-descriptions-item :label="$t('message.EstimatedTime')" label-class-name="lable-tit">
                 <el-date-picker
                   v-model="fromAddData.payTime"
                   value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetime"
-                  placeholder="选择日期"
+                  :placeholder="$t('message.selectTile')"
                 ></el-date-picker>
               </el-descriptions-item>
-              <el-descriptions-item label="访问日期/时间" label-class-name="lable-tit">
+              <el-descriptions-item :label="$t('message.accessTime')" label-class-name="lable-tit">
                 <el-date-picker
                   v-model="fromAddData.comeTime"
                   value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetime"
-                  placeholder="选择日期"
+                  :placeholder="$t('message.selectTile')"
                 ></el-date-picker>
               </el-descriptions-item>
-              <el-descriptions-item label="房屋大小" label-class-name="lable-tit">
-                <el-input v-model="fromAddData.homeSize" placeholder="输入房屋大小"></el-input>
+              <el-descriptions-item :label="$t('message.HouseSize')" label-class-name="lable-tit">
+                <el-input v-model="fromAddData.homeSize" :placeholder="$t('message.HouseSize')"></el-input>
               </el-descriptions-item>
-              <el-descriptions-item label="信息" label-class-name="lable-tit">
-                <el-input class="contact" v-model="fromAddData.name" placeholder="姓名"></el-input>
-                <el-input class="contact" v-model="fromAddData.emily" placeholder="电子邮件"></el-input>
-                <el-input class="contact" v-model="fromAddData.phone" placeholder="电话"></el-input>
+              <el-descriptions-item :label="$t('message.information')" label-class-name="lable-tit">
+                <el-input class="contact" v-model="fromAddData.name" :placeholder="$t('message.name')"></el-input>
+                <el-input class="contact" v-model="fromAddData.emily" :placeholder="$t('message.eMail')"></el-input>
+                <el-input class="contact" v-model="fromAddData.phone" :placeholder="$t('message.phone')"></el-input>
               </el-descriptions-item>
-              <el-descriptions-item label="是否同意显示个人信息" label-class-name="lable-tit">
+              <el-descriptions-item :label="$t('message.Display')" label-class-name="lable-tit">
                 <el-radio-group v-model="fromAddData.show">
                   <el-radio :label="check.dictValue" v-for="(check, index) in showType" :key="index">{{
                     check.dictLabel
                   }}</el-radio>
                 </el-radio-group>
               </el-descriptions-item>
-              <el-descriptions-item label="查询或要求" label-class-name="lable-tit">
-                <el-input type="textarea" :rows="6" placeholder="请输入内容" v-model="fromAddData.info"></el-input>
+              <el-descriptions-item :label="$t('message.demand')" label-class-name="lable-tit">
+                <el-input type="textarea" :rows="6" :placeholder="$t('message.inputPlaceholder')" v-model="fromAddData.info"></el-input>
               </el-descriptions-item>
             </el-descriptions>
             <div class="submit">
-              <el-button type="primary" @click="submitFrom">提交</el-button>
+              <el-button type="primary" @click="submitFrom">{{$t('message.Submit')}}</el-button>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="부동산 QNA" name="second">
+          <el-tab-pane :label="$t('message.tabSecond')" name="second">
             <el-table :data="tableData" border style="width: 100%" size="small">
-              <el-table-column type="index" label="번호" width="80" align="center"></el-table-column>
-              <el-table-column label="제목" width="380" align="center">
+              <el-table-column type="index" :label="$t('message.SerialNumber')" width="80" align="center"></el-table-column>
+              <el-table-column :label="$t('message.phone')" width="380" align="center">
                 <template slot-scope="{ row }">
                   <el-link @click="tional(row)">{{ row.phone }}</el-link>
                 </template>
               </el-table-column>
-              <el-table-column prop="name" label="이름" align="center"></el-table-column>
+              <el-table-column prop="name" :label="$t('message.CommissionType')" align="center"></el-table-column>
               <el-table-column label="상태" align="center">
                 <template slot-scope="{ row }">
-                  <span v-if="row.type == 1">팔다</span>
-                  <span v-if="row.type == 0">매수</span>
+                  <span v-if="row.type == 1">{{$t('message.sell')}}</span>
+                  <span v-if="row.type == 0">{{$t('message.buy')}}</span>
                 </template>
               </el-table-column>
-              <el-table-column prop="updateTime" label="등록일" align="center"></el-table-column>
+              <el-table-column prop="updateTime" :label="$t('message.SubmissionDate')" align="center"></el-table-column>
             </el-table>
             <!--   分页   -->
             <div class="pagination-box" v-if="total > 0">
@@ -161,19 +161,19 @@
     <el-dialog :title="dialogtitle" :visible.sync="dialogVisible" width="30%">
       <el-descriptions class="margin-top" :column="1" border>
         <el-descriptions-item>
-          <template slot="label">이름</template>
+          <template slot="label">{{$t('message.name')}}</template>
           {{rowData.name}}
         </el-descriptions-item>
         <el-descriptions-item>
-          <template slot="label">전화</template>
+          <template slot="label">{{$t('message.phone')}}</template>
           {{rowData.phone}}
         </el-descriptions-item>
         <el-descriptions-item>
-          <template slot="label">이메일</template>
+          <template slot="label">{{$t('message.eMail')}}</template>
           {{rowData.emily}}
         </el-descriptions-item>
         <el-descriptions-item>
-          <template slot="label">내용</template>
+          <template slot="label">{{$t('message.demand')}}</template>
           {{rowData.info}}
         </el-descriptions-item>
       </el-descriptions>
@@ -197,33 +197,13 @@ export default {
       provinceFrom: {},
       cityFrom: {},
       districtFrom: {},
-      tableData: [
-        {
-          title: '88952634',
-          name: '8895263',
-          state: '未答复',
-          time: '2022-07-01 17:07:51'
-        }
-      ],
+      tableData: [],
       // 选择城市
       cityOptions: [],
       countyOptions: [],
       streetOptions: [],
       // 交易类型
-      dealOptions: [
-        {
-          value: 1,
-          label: '买卖'
-        },
-        {
-          value: 2,
-          label: '月租'
-        },
-        {
-          value: 3,
-          label: '全税'
-        }
-      ],
+      dealOptions: [],
       entrustType: [],
       stuArr: [],
       showType: [],
