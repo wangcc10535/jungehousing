@@ -91,17 +91,14 @@ export default {
   methods: {
     
     changeLangEvent(e) {
-      this.$confirm('确定切换语言吗?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(this.$t("message.LanguageSwitching"), this.$t("message.Tips"), {
+        confirmButtonText: this.$t("message.yes"),
+        cancelButtonText: this.$t("message.no"),
         type: 'warning'
       }).then(() => {
         this.$i18n.locale = e
       }).catch(() => {
         console.log('catch');
-        this.$message({
-          type: 'info',
-        });
       });
     }
   },

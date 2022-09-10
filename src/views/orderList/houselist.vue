@@ -14,7 +14,7 @@
         <a href="javascript:;" class="icom-class ">
             <router-link to="/housemap" class="router-test">
               <img src="@/assets/images/icon/weizhi.png" alt="">
-              <span>定位</span>
+              <span>{{$t('message.location')}}</span>
             </router-link>
 
           </a>
@@ -22,7 +22,7 @@
           <a href="javascript:;" class="icom-class active">
             <router-link to="/houseList" class="router-test">
               <img src="@/assets/images/icon/shuanglieliebiao.png" alt="">
-              <span>大图</span>
+              <span>{{$t('message.LargePicture')}}</span>
             </router-link>
 
           </a>
@@ -31,7 +31,7 @@
           <a href="javascript:;" class="icom-class">
             <router-link to="/housetable" class="router-test">
               <img src="@/assets/images/icon/liebiaomoshi_kuai.png" alt="">
-              <span>列表</span>
+              <span>{{$t('message.list')}}</span>
             </router-link>
 
           </a>
@@ -54,8 +54,8 @@
                   </div>
                   <div class="tags">
                     <div v-for="(tags,tIndex) in house.titleLabel" :key="tIndex">
-                      <span class="tag" v-if="tags == 1">推荐</span>
-                      <span class="tag tag_speed" v-if="tags == 2">速卖通</span>
+                      <span class="tag" v-if="tags == 1">{{$t('message.recommend')}}</span>
+                      <span class="tag tag_speed" v-if="tags == 2">{{$t('message.Aliexpress')}}</span>
                     </div>
                     <!-- <div class="tag"><span>建议</span></div>
                     <div class="tag tag_speed"><span>抢购</span></div>
@@ -67,18 +67,18 @@
                 <div class="price_info">
                   <div>
                     <div class="price_wrap">
-                      <span class="installation_span">总价</span> <strong class="price_strong">{{ house.lastPrice }}</strong>
-                      <span class="installation_span">首付 </span><strong class="price_strong">{{ house.roomPrice }}</strong>
-                      <span class="installation_span">贷款</span> <strong class="price_strong">{{ house.loans }}万韩元</strong>
+                      <span class="installation_span">{{$t('message.TotalPrice')}}</span> <strong class="price_strong">{{ house.lastPrice }}</strong>
+                      <span class="installation_span">{{$t('message.downPayments')}} </span><strong class="price_strong">{{ house.roomPrice }}</strong>
+                      <span class="installation_span">{{$t('message.loan')}}</span> <strong class="price_strong">{{ house.loans }}{{$t('message.TenThousandWon')}}</strong>
                     </div>
                   </div>
                 </div>
                 <div class="meta">
                   <div class="meta_cell">
-                    面积<span class="help">{{ house.actualArea }}㎡</span>
+                    {{$t('message.area')}}：<span class="help">{{ house.actualArea }}㎡</span>
                   </div>
                   <div class="meta_cell">
-                    楼层：
+                    {{$t('message.floor')}}：
                   <span class="help">{{ house.floor }}</span>
                   </div>
                 </div>

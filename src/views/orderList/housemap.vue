@@ -13,17 +13,17 @@
       <div class="btn-group">
         <div class="order-search-box">
           <div class="order-search-box-searchEZ">
-            <span>模糊搜索：</span>
+            <span>{{$t("message.SearchBtn")}}：</span>
             <el-input
               class="base-size"
               size="small"
               v-model="searchFrom.searchName"
-              placeholder="请输入标题、城市等相关信息搜索"
+              :placeholder="$t('message.fuzzySearch')"
             ></el-input>
           </div>
           <div class="order-search-box-searchEZ">
-            <span>销售类型：</span>
-            <el-select class="base-size" size="small" v-model="searchFrom.saleType" collapse-tags placeholder="请选择">
+            <span>{{$t('message.SalesType')}}：</span>
+            <el-select class="base-size" size="small" v-model="searchFrom.saleType" collapse-tags :placeholder="$t('message.PleaseSelect')">
               <el-option
                 v-for="item in saleOptions"
                 :key="item.dictValue"
@@ -33,8 +33,8 @@
             </el-select>
           </div>
           <div class="order-search-box-searchEZ">
-            <span>住宅类型：</span>
-            <el-select class="base-size" size="small" v-model="searchFrom.house" collapse-tags placeholder="请选择">
+            <span>{{$t('message.ResidentialType')}}：</span>
+            <el-select class="base-size" size="small" v-model="searchFrom.house" collapse-tags :placeholder="$t('message.PleaseSelect')">
               <el-option
                 v-for="item in houseOptions"
                 :key="item.dictValue"
@@ -44,7 +44,7 @@
             </el-select>
           </div>
           <div class="order-search-box-searchEZ">
-            <span>按地铁搜索：</span>
+            <span>{{$t('message.MetroSearch')}}：</span>
             <el-input
               class="base-size"
               size="small"
@@ -73,28 +73,28 @@
             <span>-</span>
             <el-input class="base-size" size="small" v-model="searchFrom.mj2" placeholder="请输入内容"></el-input>
           </div> -->
-          <el-button size="small" @click="searchSub">搜索</el-button>
-          <el-button size="small" @click="react">重置</el-button>
+          <el-button size="small" @click="searchSub">{{$t('message.SearchBtn')}}</el-button>
+          <el-button size="small" @click="react">{{$t('message.Reset')}}</el-button>
         </div>
         <div class="btn-a">
           <a href="javascript:;" class="icom-class active">
             <router-link to="/housemap" class="router-test">
               <img src="@/assets/images/icon/weizhi.png" alt />
-              <span>定位</span>
+              <span>{{$t('message.location')}}</span>
             </router-link>
           </a>
 
           <a href="javascript:;" class="icom-class">
             <router-link to="/houseList" class="router-test">
               <img src="@/assets/images/icon/shuanglieliebiao.png" alt />
-              <span>大图</span>
+              <span>{{$t('message.LargePicture')}}</span>
             </router-link>
           </a>
 
           <a href="javascript:;" class="icom-class">
             <router-link to="/housetable" class="router-test">
               <img src="@/assets/images/icon/liebiaomoshi_kuai.png" alt />
-              <span>列表</span>
+              <span>{{$t('message.list')}}</span>
             </router-link>
           </a>
         </div>
@@ -127,7 +127,7 @@
                   <div>
                     <a class="view_product" data-toggle="modal" data-target="#view_dialog" href="#">
                       <font style="vertical-align: inherit">
-                        <font style="vertical-align: inherit">【 {{ house.familyNum }} 间】 {{ house.title }}</font>
+                        <font style="vertical-align: inherit">【 {{ house.familyNum }} {{$t('message.between')}}】 {{ house.title }}</font>
                       </font>
                     </a>
                     <div class="address">
@@ -141,7 +141,7 @@
                         </div>
                         <div class="link">
                           <font style="vertical-align: inherit">
-                            <font style="vertical-align: inherit">区域：</font>
+                            <font style="vertical-align: inherit">{{$t('message.region')}}：</font>
                           </font>
                           <div style="display: inline" class="help" data-toggle="tooltip" title="22坪">
                             <font style="vertical-align: inherit">
@@ -150,7 +150,7 @@
                           </div>
                           <font style="vertical-align: inherit">
                             <font style="vertical-align: inherit"
-                              >&nbsp;防水： {{ house.waterRepellent }}间 | 浴室 {{ house.showerRoom }}间</font
+                              >&nbsp;{{$t('message.waterproof')}}： {{ house.waterRepellent }}{{$t('message.between')}} | {{$t('message.ShowerRoom')}} {{ house.showerRoom }}{{$t('message.between')}}</font
                             >
                           </font>
                         </div>
@@ -183,7 +183,7 @@
                       "
                     >
                       <font style="vertical-align: inherit">
-                        <font style="vertical-align: inherit">全款</font>
+                        <font style="vertical-align: inherit">{{$t('message.TotalPrice')}}</font>
                       </font>
                     </span>
                     <strong class="price_strong" style="font-size: 16px; font-weight: normal">
@@ -204,7 +204,7 @@
                       "
                     >
                       <font style="vertical-align: inherit">
-                        <font style="vertical-align: inherit">首付</font>
+                        <font style="vertical-align: inherit">{{$t('message.downPayments')}}</font>
                       </font>
                     </span>
                     <strong class="price_strong" style="font-size: 16px; font-weight: normal">
@@ -225,7 +225,7 @@
                       "
                     >
                       <font style="vertical-align: inherit">
-                        <font style="vertical-align: inherit">贷款</font>
+                        <font style="vertical-align: inherit">{{$t('message.loan')}}</font>
                       </font>
                     </span>
                     <strong class="price_strong" style="font-size: 16px; font-weight: normal">
@@ -236,7 +236,7 @@
 
                     <span class="price_unit">
                       <font style="vertical-align: inherit">
-                        <font style="vertical-align: inherit">万韩元</font>
+                        <font style="vertical-align: inherit">{{$t('message.TenThousandWon')}}</font>
                       </font>
                     </span>
                   </div>
@@ -439,7 +439,7 @@ export default {
   }
 }
 .base-size {
-  width: 60%;
+  width: 50%;
   // margin: 0 6px;
 }
 </style>

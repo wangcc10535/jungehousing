@@ -14,21 +14,21 @@
         <a href="javascript:;" class="icom-class">
           <router-link to="/housemap" class="router-test">
             <img src="@/assets/images/icon/weizhi.png" alt="" />
-            <span>定位</span>
+            <span>{{$t('message.location')}}</span>
           </router-link>
         </a>
 
         <a href="javascript:;" class="icom-class">
           <router-link to="/houseList" class="router-test">
             <img src="@/assets/images/icon/shuanglieliebiao.png" alt="" />
-            <span>大图</span>
+            <span>{{$t('message.LargePicture')}}</span>
           </router-link>
         </a>
 
         <a href="javascript:;" class="icom-class active">
           <router-link to="/housetable" class="router-test">
             <img src="@/assets/images/icon/liebiaomoshi_kuai.png" alt="" />
-            <span>列表</span>
+            <span>{{$t('message.list')}}</span>
           </router-link>
         </a>
       </div>
@@ -38,13 +38,13 @@
         <table class="table table-bordered table-striped table-condensed flip-content margin-top-10">
           <thead>
             <tr>
-              <th style="width: 80px">照片</th>
-              <th style="width: 130px">地址</th>
-              <th style="width: 70px">类型</th>
-              <th style="width: 50px">交易</th>
-              <th>标题/地址</th>
-              <th style="width: 120px">面积</th>
-              <th style="width: 120px">附加信息</th>
+              <th style="width: 80px">{{$t('message.Photo')}}</th>
+              <th style="width: 130px">{{$t('message.address')}}</th>
+              <th style="width: 70px">{{$t('message.type')}}</th>
+              <th style="width: 50px">{{$t('message.transaction')}}</th>
+              <th>{{$t('message.TitleAddress')}}</th>
+              <th style="width: 120px">{{$t('message.area')}}</th>
+              <th style="width: 120px">{{$t('message.AdditionalInformation')}}</th>
             </tr>
           </thead>
           <tbody id="search-items">
@@ -61,14 +61,14 @@
                 </p>
               </td>
               <td>
-                <span>{{ house.familyNum }} 间客房</span>
+                <span>{{ house.familyNum }} {{$t('message.Room')}}</span>
               </td>
               <td class="table_category"><span>{{house.tradeType}}</span></td>
               <td>
                 <p style="margin-bottom: 5px">
                   <span v-for="(tags, tIndex) in house.titleLabel" :key="tIndex">
-                    <span class="label label-sm label-danger" v-if="tags == 1"> 推荐 </span>
-                    <span class="label label-sm label-success" v-if="tags == 2"> 速卖通 </span>
+                    <span class="label label-sm label-danger" v-if="tags == 1"> {{$t('message.recommend')}} </span>
+                    <span class="label label-sm label-success" v-if="tags == 2"> {{$t('message.Aliexpress')}} </span>
                   </span>
 
                   <b
@@ -77,20 +77,20 @@
                   <!-- <span class="label label-sm label-warning">入住</span> -->
                 </p>
                 <div class="price_wrap" style="color: #f6910b">
-                  <span class="price_sell_span installation_span">总价</span>
+                  <span class="price_sell_span installation_span">{{$t('message.TotalPrice')}}</span>
                   <strong class="price_strong">{{ house.lastPrice }}</strong>
-                  <span class="price_sell_span installation_span">首付</span>
+                  <span class="price_sell_span installation_span">{{$t('message.downPayments')}}</span>
                   <strong class="price_strong">{{ house.roomPrice }}</strong>
-                  <span class="price_sell_span installation_span installation_loan">贷款</span>
+                  <span class="price_sell_span installation_span installation_loan">{{$t('message.loan')}}</span>
                   <strong class="price_strong" style="font-size: 16px; font-weight: normal">{{ house.loans }}</strong>
-                  <span class="price_unit">万韩元</span>
+                  <span class="price_unit">{{$t('message.TenThousandWon')}}</span>
                 </div>
               </td>
               <td class="custom_text_right"><span>{{ house.actualArea }}㎡</span></td>
               <td class="table_etc_td">
                 <div class="table_etc_content_1">
-                  <span>防水：{{house.waterRepellent}}</span>
-                  <span>浴室：{{house.showerRoom}}</span>
+                  <span>{{$t('message.waterproof')}}：{{house.waterRepellent}}</span>
+                  <span>{{$t('message.ShowerRoom')}}：{{house.showerRoom}}</span>
                 </div>
               </td>
             </tr>

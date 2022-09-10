@@ -10,12 +10,12 @@
           <div class="marg-right">
             <p class="marg-title">[{{item.address.slice(0,6)}}] {{item.title}}</p>
             <div class="price_wrap">
-              <span class="installation_span">总价</span>
+              <span class="installation_span">{{$t('message.TotalPrice')}}</span>
               <strong class="price_strong">{{item.lastPrice}}</strong>
-              <span class="installation_span">首付</span>
+              <span class="installation_span">{{$t('message.downPayments')}}</span>
               <strong class="price_strong">{{item.roomPrice}}</strong>
-              <span class="installation_span">贷款</span>
-              <strong class="price_strong">{{item.loans}}万韩元</strong>
+              <span class="installation_span">{{$t('message.loan')}}</span>
+              <strong class="price_strong">{{item.loans}}{{$t('message.TenThousandWon')}}</strong>
             </div>
           </div>
         </div>

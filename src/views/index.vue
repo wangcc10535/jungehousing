@@ -27,7 +27,7 @@
           </li>
         </ul>
         <div class="search-inner">
-          <el-select v-model="searchFrom.tradeType" class="search-select" placeholder="交易类型">
+          <el-select v-model="searchFrom.tradeType" class="search-select" :placeholder="$t('message.AddressSearch')">
             <el-option
               v-for="item in dealOptions"
               :key="item.dictValue"
@@ -36,7 +36,7 @@
             >
             </el-option>
           </el-select>
-          <el-select v-model="searchFrom.saleType" class="search-select" placeholder="销售类型">
+          <el-select v-model="searchFrom.saleType" class="search-select" :placeholder="$t('message.SalesType')">
             <el-option
               v-for="item in saleOptions"
               :key="item.dictValue"
@@ -45,7 +45,7 @@
             >
             </el-option>
           </el-select>
-          <el-select v-model="searchFrom.sale" class="search-select" placeholder="住宅类型">
+          <el-select v-model="searchFrom.sale" class="search-select" :placeholder="$t('message.ResidentialType')">
             <el-option
               v-for="item in houseOptions"
               :key="item.dictValue"
@@ -59,7 +59,7 @@
             v-if="currentClass == 0"
             @change="cityChange('1', $event)"
             class="search-select"
-            placeholder="选择城市"
+            :placeholder="$t('message.selectCity')"
           >
             <el-option
               v-for="item in cityOptions"
@@ -109,17 +109,17 @@
             v-model="searchFrom.searchName"
             class="search-input"
             v-if="currentClass == 2 || currentClass == 1"
-            placeholder="地址、地铁、挂牌号、标题"
+            :placeholder="$t('message.fuzzySearch')"
           >
           </el-input>
-          <el-button type="warning" icon="el-icon-search" @click="searchClick">搜索</el-button>
+          <el-button type="warning" icon="el-icon-search" @click="searchClick">{{$t('message.SearchBtn')}}</el-button>
         </div>
       </div>
     </div>
     <div class="home_section main_color">
       <div class="_container">
         <div class="text-center">
-          <h1>前往地区</h1>
+          <h1>{{$t('message.Gotoarea')}}</h1>
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="row theme">
@@ -145,12 +145,12 @@
     <div class="home_section alternative_color">
       <div class="_container">
         <div class="text-center" style="padding-bottom: 10px">
-          <h1>热门产品</h1>
+          <h1>{{$t('message.PopularProducts')}}</h1>
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="text-center" id="recent_menus">
           <el-radio-group v-model="houseFrom.value" size="small" @change="radioChange">
-            <el-radio-button :label="''">全部</el-radio-button>
+            <el-radio-button :label="''">{{$t('message.whole')}}</el-radio-button>
             <el-radio-button v-for="(item, index) in saleOptions" :key="index" :label="item.dictValue">{{
               item.dictLabel
             }}</el-radio-button>
@@ -170,8 +170,8 @@
                   </div>
                   <div class="tags">
                     <div v-for="(tags, tIndex) in house.titleLabel" :key="tIndex">
-                      <span class="tag" v-if="tags == 1">推荐</span>
-                      <span class="tag tag_speed" v-if="tags == 2">速卖通</span>
+                      <span class="tag" v-if="tags == 1">{{$t('message.recommend')}}</span>
+                      <span class="tag tag_speed" v-if="tags == 2">{{$t('message.Aliexpress')}}</span>
                     </div>
                     <!-- <div class="tag tag_speed" v-if="house.tagsO == 2">
                       <span>抢购</span>
@@ -186,33 +186,33 @@
                 <div class="price_info">
                   <div>
                     <div class="price_wrap">
-                      <span class="installation_span">总价</span>
+                      <span class="installation_span">{{$t('message.TotalPrice')}}</span>
                       <strong class="price_strong">{{ house.lastPrice }}</strong>
-                      <span class="installation_span">首付</span>
+                      <span class="installation_span">{{$t('message.downPayments')}}</span>
                       <strong class="price_strong">{{ house.roomPrice }}</strong>
-                      <span class="installation_span">贷款</span>
-                      <strong class="price_strong">{{ house.loans }}万韩元</strong>
+                      <span class="installation_span">{{$t('message.loan')}}</span>
+                      <strong class="price_strong">{{ house.loans }}{{$t('message.TenThousandWon')}}</strong>
                     </div>
                   </div>
                 </div>
                 <div class="meta">
                   <div class="meta_cell">
-                    面积：
+                    {{$t('message.area')}}：
                     <span class="help">{{ house.actualArea }}㎡</span>
                   </div>
-                  楼层：
+                  {{$t('message.floor')}}：
                   <div class="meta_cell">{{ house.floor }}</div>
                 </div>
               </div>
             </div>
           </div>
           <div v-else>
-            <el-empty description="暂无数据"></el-empty>
+            <el-empty :description="$t('message.NoDataYet')"></el-empty>
           </div>
         </div>
         <div class="more" v-if="houseList.length > 16">
           <router-link to="/housemap" class="router-test">
-            <el-button icon="el-icon-plus">查看更多</el-button>
+            <el-button icon="el-icon-plus">{{$t('message.SeeMore')}}</el-button>
           </router-link>
         </div>
       </div>
@@ -220,7 +220,7 @@
     <div class="home_section main_color">
       <div class="_container">
         <div class="text-center">
-          <h1>顾客评论</h1>
+          <h1>{{$t('message.CustomerComments')}}</h1>
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="megafolio-container">
@@ -236,7 +236,7 @@
         </div>
         <div class="more">
           <router-link to="/commentlist" class="router-test">
-            <el-button icon="el-icon-plus">查看更多</el-button>
+            <el-button icon="el-icon-plus">{{$t('message.SeeMore')}}</el-button>
           </router-link>
         </div>
       </div>
@@ -244,7 +244,7 @@
     <div class="home_section alternative_color">
       <div class="_container">
         <div class="text-center">
-          <h1>房地产新闻</h1>
+          <h1>{{$t('message.RealEstateNews')}}</h1>
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="megafolio-container">
@@ -261,7 +261,7 @@
     <div class="home_section main_color">
       <div class="_container">
         <div class="text-center">
-          <h1>合作方</h1>
+          <h1>{{$t('message.Partner')}}</h1>
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="megafolio-container">
@@ -358,15 +358,15 @@ export default {
       tab: [
         {
           id: 1,
-          name: '地址搜索'
+          name: this.$t("message.AddressSearch")
         },
         {
           id: 2,
-          name: '地铁搜索'
+          name: this.$t("message.MetroSearch")
         },
         {
           id: 3,
-          name: '搜索'
+          name: this.$t("message.seach")
         }
       ],
       currentClass: 0,
@@ -670,7 +670,7 @@ export default {
 }
 
 .search-select {
-  width: 130px;
+  width: 126px;
   padding-right: 10px;
 }
 
@@ -685,7 +685,7 @@ export default {
 }
 
 .search-input {
-  width: 416px;
+  width: 398px;
   padding-right: 10px;
 }
 

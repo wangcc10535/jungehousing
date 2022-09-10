@@ -21,7 +21,7 @@
                 <a href="javascript:;">
                   <router-link to="/about" class="router-test">
                     <font style="vertical-align: inherit;">
-                      <font style="vertical-align: inherit;">关于我们</font>
+                      <font style="vertical-align: inherit;">{{ $t("message.aboutUs") }}</font>
                     </font>
                   </router-link>
                 </a>
@@ -32,7 +32,7 @@
                 <a href="javascript:;">
                   <router-link to="/terms" class="router-test">
                     <font style="vertical-align: inherit;">
-                      <font style="vertical-align: inherit;">服务条款</font>
+                      <font style="vertical-align: inherit;">{{ $t("message.Termsofservice") }}</font>
                     </font>
                   </router-link>
                 </a>
@@ -43,7 +43,7 @@
                 <a href="javascript:;">
                   <router-link to="/privacy" class="router-test">
                     <font style="vertical-align: inherit;">
-                      <font style="vertical-align: inherit;">隐私声明</font>
+                      <font style="vertical-align: inherit;">{{ $t("message.Privacystatement") }}</font>
                     </font>
                   </router-link>
                 </a>
@@ -69,14 +69,14 @@
             <li>
               <span>
                 <font style="vertical-align: inherit;">
-                  <font style="vertical-align: inherit;">名称：junland housing</font>
+                  <font style="vertical-align: inherit;">{{ $t("message.corporateName") }}：{{ $t("message.junge") }}</font>
                 </font>
               </span>
             </li>
             <li>
               <span>
                 <font style="vertical-align: inherit;">
-                  <font style="vertical-align: inherit;">代表人物：소팀장님</font>
+                  <font style="vertical-align: inherit;">{{ $t("message.representativeFigure") }}：{{ $t("message.TeamLeader") }}</font>
                 </font>
               </span>
             </li>
@@ -84,7 +84,7 @@
             <li>
               <span>
                 <font style="vertical-align: inherit;">
-                  <font style="vertical-align: inherit;">工商登记号：6651401462</font>
+                  <font style="vertical-align: inherit;">{{ $t("message.businessCircles") }}：6651401462</font>
                 </font>
               </span>
             </li>
@@ -93,18 +93,18 @@
           <ul class="list-unstyled list-inline seperator">
             <li>
               <font style="vertical-align: inherit;">
-                <font style="vertical-align: inherit;">地址：</font>
+                <font style="vertical-align: inherit;">{{ $t("message.address") }}：</font>
               </font>
               <span class="help" data-toggle="tooltip" title="인천시 남동구 경인로 740 1층 준부동산">
                 <font style="vertical-align: inherit;">
-                  <font style="vertical-align: inherit;">인천시 남동구 경인로 740 1층 준부동산</font>
+                  <font style="vertical-align: inherit;">{{ $t("message.addressInfo") }}</font>
                 </font>
               </span>
             </li>
             <li>
               <span>
                 <font style="vertical-align: inherit;">
-                  <font style="vertical-align: inherit;">电话：032-361-8884</font>
+                  <font style="vertical-align: inherit;">{{ $t("message.phone") }}：032-361-8884</font>
                 </font>
               </span>
             </li>
@@ -121,15 +121,8 @@
 
           <p class="margin-top-40">
             <font style="vertical-align: inherit;">
-              <font style="vertical-align: inherit;">2018 © junland。</font>
-              <font style="vertical-align: inherit;">照片、列表、社区 - 网站上的所有信息都受到保护。</font>
-              <font style="vertical-align: inherit;">由</font>
+              <font style="vertical-align: inherit;">{{ $t("message.copyright") }}</font>
             </font>
-            <a href="http://www.realsoft.co.kr/" style="text-decoration:underline;">
-              <font style="vertical-align: inherit;">
-                <font style="vertical-align: inherit;">junland housing提供支持</font>
-              </font>
-            </a>
           </p>
         </div>
       </div>
