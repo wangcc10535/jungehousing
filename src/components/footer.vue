@@ -84,7 +84,7 @@
             <li>
               <span>
                 <font style="vertical-align: inherit;">
-                  <font style="vertical-align: inherit;">{{ $t("message.businessCircles") }}：6651401462</font>
+                  <font style="vertical-align: inherit;">{{ $t("message.businessCircles") }}：538-01-02515</font>
                 </font>
               </span>
             </li>
