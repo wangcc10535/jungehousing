@@ -42,7 +42,7 @@ export default {
         'PopularProducts': '热门产品',
         'whole': '全部',
         'recommend': '推荐',
-        'Aliexpress': '速卖通',
+        'Aliexpress': '速卖',
         'TotalPrice': '总价',
         'downPayments': '首付',
         'loan': '贷款',
@@ -78,7 +78,7 @@ export default {
         'transaction': '交易',
         'TitleAddress': '标题/地址',
         'AdditionalInformation': '附加信息',
-        'Room':'间客房',
+        'Room':'室',
 
         // 新闻列表页
         'AllNews': '所有房地产新闻',
@@ -110,7 +110,33 @@ export default {
         'SubmissionDate': '提交时间',
 
         // 常见问题
-        'commonProblem': '常见问题'
+        'commonProblem': '常见问题',
         
+        // 房产详情页
+        'ArticleNo': '货号',
+        'pis': '留下您的联系方式，我们会与您联系。',
+        'essentialInformation': '基本信息',
+        'AmountInformation': '金额信息',
+        'LocationInformation': '地点信息',
+        'BuildingInformation': '建筑信息',
+        'MoreInformation': '更多信息',
+        'heating': '加热',
+        'NoHeating' : '无供暖',
+        'UrbanHeating': '城市供暖',
+        'OptionInformation' :  '选项信息',
+        'detailedDescription' :'详细说明',
+        'PhoneNumberOrEmail' :'电话号码或邮箱',
+        'ConsultationContents' : '咨询内容',
+        'KeepInContact' : '保持联系',
+        'MT1': '超级市场',
+        'CS2':'便利店',
+        'PS3':'幼儿园',
+        'SC4':'学校',
+        'BK9':'银行',
+        'CT1':'娱乐设施',
+        'PO3':'公共机构',
+        'AT4':'景点',
+        'HP8':'医院',
+        'PopularRealEstate':'热门房产'
     }
 };

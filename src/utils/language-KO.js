@@ -42,7 +42,7 @@ export default {
         'PopularProducts': '최신 매불', 
         'whole': '전체',  
         'recommend': '추천', 
-        'distress sale': '급매', 
+        'Aliexpress': '급매', 
         'TotalPrice': '분양가', 
         'downPayments': '실입주금', 
         'loan': '융자금', 
@@ -110,7 +110,33 @@ export default {
         'SubmissionDate': '등록 시간', 
 
         // 常见问题 
-        'commonProblem': '자주 뭇는 질문' 
+        'commonProblem': '자주 뭇는 질문' ,
         
+        // 房产详情页
+        'ArticleNo': '상품id', 
+        'pis': '연락처를 남겨주시면 바로 연락드리겠습니다.',
+        'essentialInformation': '기본 정보', 
+        'AmountInformation': '금액 정보', 
+        'LocationInformation': '주소 정보', 
+        'BuildingInformation': '건축 정보', 
+        'MoreInformation': '추가정보', 
+        'heating': '가열', 
+        'NoHeating' : '난방 없음', 
+        'UrbanHeating': '도시 난방', 
+        'OptionInformation' :  '옵션 정보', 
+        'detailedDescription' :'상세 설명', 	
+        'PhoneNumberOrEmail' :'전화번호 및 이메일', 
+        'ConsultationContents' : '상담대용', 
+        'KeepInContact' : '연락 유지', 
+        'MT1': '슈퍼', 
+        'CS2':'편의점', 
+        'PS3':'유치원', 
+        'SC4':'학교',  
+        'BK9':'은행', 
+        'CT1':'유락시설', 
+        'PO3':'공공기관', 
+        'AT4':'명소', 
+        'HP8':'의원',  
+        'PopularRealEstate':'인기 부동산' 
     }
 };

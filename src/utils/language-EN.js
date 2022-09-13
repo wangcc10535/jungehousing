@@ -40,7 +40,7 @@ export default {
         'PopularProducts': 'POPULAR PRODUCTS',
         'whole': 'WHOLE',
         'recommend': 'RECOMMEND',
-        'Aliexpress': 'ALIEXPRESS',
+        'Aliexpress': 'INSTANT SALE',
         'TotalPrice': 'Total Price',
         'downPayments': 'Down Payments',
         'loan': 'LOAN',
@@ -108,6 +108,33 @@ export default {
         'SubmissionDate': 'Submission Date',
 
         // 常见问题
-        'commonProblem': 'Common Problem'
+        'commonProblem': 'Common Problem',
+
+        // 房产详情页
+        'ArticleNo': 'Article No',
+        'pis': 'Leave your contact information and we will contact you.',
+        'essentialInformation': 'Essential Information',
+        'AmountInformation': 'Amount Information',
+        'LocationInformation': 'Location Information',
+        'BuildingInformation': 'Building Information',
+        'MoreInformation': 'More Information',
+        'heating': 'HEATING',
+        'NoHeating' : 'No Heating',
+        'UrbanHeating': 'Urban Heating',
+        'OptionInformation' :  'Option Information',
+        'detailedDescription' :'detailed Description',
+        'PhoneNumberOrEmail' :'Phone Number Or Email',
+        'ConsultationContents' : 'Consultation Contents',
+        'KeepInContact' : 'Keep In Contact',
+        'MT1': 'supermarket',
+        'CS2':'Convenience Store',
+        'PS3':'kindergarten',
+        'SC4':'school',
+        'BK9':'bank',
+        'CT1':'Entertainment facilities',
+        'PO3':'Public institutions',
+        'AT4':'scenic spot',
+        'HP8':'hospital',
+        'PopularRealEstate':'Popular Real Estate'
     }
 }

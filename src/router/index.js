@@ -108,6 +108,14 @@ const routes = [
       title: '房产详情'
     }
   },
+  {
+    path: '/m_index',
+    name: 'm_index',
+    component: () => import('../views/mobile/m_index.vue'),
+    meta: {
+      title: '房产详情'
+    }
+  },
 ];
 
 const router = new VueRouter({

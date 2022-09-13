@@ -11,7 +11,7 @@
   <div class="_container main">
     <div class="left">
       <div class="article">
-        <h3>货号：{{ houseData.homeNum }}</h3>
+        <h3>{{$t('message.ArticleNo')}}：{{ houseData.homeNum }}</h3>
       </div>
       <div class="banner-icon">
         <div class="megafolio-container">
@@ -39,18 +39,18 @@
           </div>
           <p class="order-name">【{{ houseData.city }}】{{ houseData.title }}</p>
           <div class="information">
-            <el-descriptions title="基本信息" :column="1" border>
-              <el-descriptions-item label="金额信息">
+            <el-descriptions :title="$t('message.essentialInformation')" :column="1" border>
+              <el-descriptions-item :label="$t('message.AmountInformation')">
                 <div class="price_wrap">
-                  <span class="installation_span">总价</span>
+                  <span class="installation_span">{{$t('message.TotalPrice')}}</span>
                   <strong class="price_strong">{{ houseData.lastPrice }}</strong>
-                  <span class="installation_span">首付</span>
+                  <span class="installation_span">{{$t('message.downPayments')}}</span>
                   <strong class="price_strong">{{ houseData.roomPrice }}</strong>
-                  <span class="installation_span">贷款</span>
-                  <strong class="price_strong">{{ houseData.loans }}万韩元</strong>
+                  <span class="installation_span">{{$t('message.loan')}}</span>
+                  <strong class="price_strong">{{ houseData.loans }}{{$t('message.TenThousandWon')}}</strong>
                 </div>
               </el-descriptions-item>
-              <el-descriptions-item label="地点信息">
+              <el-descriptions-item :label="$t('message.LocationInformation')">
                 <div class="address">
                   <p>{{ houseData.addresss }}</p>
                   <p>
@@ -61,40 +61,41 @@
                   </p>
                 </div>
               </el-descriptions-item>
-              <el-descriptions-item label="建筑信息">
+              <el-descriptions-item :label="$t('message.BuildingInformation')">
                 <p class="base-row">
-                  <span class="tags">楼层</span>
+                  <span class="tags">{{$t('message.floor')}}</span>
                   {{ houseData.floor }}
                 </p>
               </el-descriptions-item>
-              <el-descriptions-item label="更多信息">
+              <el-descriptions-item :label="$t('message.MoreInformation')">
                 <p class="base-row">
-                  <span class="tags">面积</span>
+                  <span class="tags">{{$t('message.area')}}</span>
                   {{ houseData.actualArea }}㎡
                 </p>
                 <p class="base-row base-play">
                   <span class="base-play-box">
-                    <span class="tags">防水</span>
-                    {{ houseData.waterRepellent }}室
+                    <span class="tags">{{$t('message.waterproof')}}</span>
+                    {{ houseData.waterRepellent }}{{$t('message.Room')}}
                   </span>
                   <span class="base-play-box">
-                    <span class="tags">浴室</span>
-                    {{ houseData.showerRoom }}室
+                    <span class="tags">{{$t('message.ShowerRoom')}}</span>
+                    {{ houseData.showerRoom }}{{$t('message.Room')}}
                   </span>
                 </p>
                 <p class="base-row base-play">
                   <span class="base-play-box">
-                    <span class="tags">加热</span>
-                    <span v-if="houseData.heat == 2">城市供暖</span>
-                    <span v-if="houseData.heat == 1">无供暖</span>
+                    <span class="tags">{{$t('message.heating')}}</span>
+                    <span v-if="houseData.heat == 2">{{$t('message.NoHeating')}}</span>
+                    <span v-if="houseData.heat == 1">{{$t('message.UrbanHeating')}}</span>
                   </span>
+                  <span class="base-play-box"></span>
                   <!-- <span class="base-play-box">
                     <span class="tags">入住日期</span>
                     面议
                   </span> -->
                 </p>
               </el-descriptions-item>
-              <el-descriptions-item label="选项信息">
+              <el-descriptions-item :label="$t('message.OptionInformation')">
                 <div class="option-box">
                   <!-- <i class="iconfont icon-tingchechang"></i> -->
                   <span class="option-box-label" v-for="(metro, index) in houseData.option" :key="index">{{
@@ -102,13 +103,13 @@
                   }}</span>
                 </div>
               </el-descriptions-item>
-              <el-descriptions-item label="电话">
+              <el-descriptions-item :label="$t('message.phone')">
                 <p class="base-row">{{ houseData.phone }}</p>
               </el-descriptions-item>
             </el-descriptions>
           </div>
           <div class="order-list-detail">
-            <h3>详细说明</h3>
+            <h3>{{$t('message.detailedDescription')}}</h3>
             <div class="order-list-detail-center" v-html="houseData.item"></div>
           </div>
           <div class="map-box">
@@ -145,21 +146,21 @@
           </span>
         </div>
         <div class="agent-box-customer">
-          <p class="agent-box-customer-ps">留下您的联系方式，我们会与您联系。</p>
+          <p class="agent-box-customer-ps">{{$t('message.pis')}}</p>
           <el-input
             class="agent-box-customer-input"
             v-model="customerFrom.adsw"
-            placeholder="电话号码或邮箱"
+            :placeholder="$t('message.PhoneNumberOrEmail')"
           ></el-input>
           <el-input
             class="agent-box-customer-textarea"
             type="textarea"
             :rows="3"
-            placeholder="咨询内容"
+            :placeholder="$t('message.ConsultationContents')"
             v-model="customerFrom.qwera"
           ></el-input>
           <div class="agent-box-customer-submit">
-            <el-button class="agent-box-customer-submit-btn" type="warning" @click="addRequireUse">保持联系</el-button>
+            <el-button class="agent-box-customer-submit-btn" type="warning" @click="addRequireUse">{{$t('message.KeepInContact')}}</el-button>
           </div>
         </div>
       </div>
@@ -183,52 +184,52 @@ export default {
         {
           id: 1,
           className: 'MT1',
-          clickName: '超级市场'
+          clickName: this.$t('message.MT1')
         },
         {
           id: 2,
           className: 'CS2',
-          clickName: '便利店'
+          clickName: this.$t('message.CS2')
         },
         {
           id: 3,
           className: 'PS3',
-          clickName: '幼儿园'
+          clickName: this.$t('message.PS3')
         },
         {
           id: 4,
           className: 'SC4',
-          clickName: '学校'
+          clickName: this.$t('message.SC4')
         },
         {
           id: 5,
           className: 'BK9',
-          clickName: '银行'
+          clickName: this.$t('message.BK9')
         },
         {
           id: 6,
           className: 'CT1',
-          clickName: '娱乐设施'
+          clickName: this.$t('message.CT1')
         },
         {
           id: 7,
           className: 'PO3',
-          clickName: '公共机构'
+          clickName: this.$t('message.PO3')
         },
         {
           id: 8,
           className: 'AT4',
-          clickName: '景点'
+          clickName: this.$t('message.AT4')
         },
         {
           id: 9,
           className: 'HP8',
-          clickName: '医院'
+          clickName: this.$t('message.HP8')
         }
       ],
       map: null,
       customerFrom: {},
-      rightTitle: '热门房产',
+      rightTitle: this.$t('message.PopularRealEstate'),
       swiperOptionTop: {
         loop: true,
         loopedSlides: 8,

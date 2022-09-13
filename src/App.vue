@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <app-header v-if="header_show"></app-header>
-    <router-view  v-on:header='header' v-on:footer='footer' />
+    <router-view v-on:header="header" v-on:footer="footer" />
     <app-footer v-if="footer_show"></app-footer>
     <el-backtop :bottom="100" :visibility-height="50"></el-backtop>
   </div>
@@ -22,7 +22,11 @@ export default {
     'app-header': Header,
     'app-footer': Footer
   },
+  mounted() {
+
+  },
   methods: {
+
     //是否显示头部
     header: function (bool) {
       this.header_show = bool;
