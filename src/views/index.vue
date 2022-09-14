@@ -18,7 +18,7 @@
       <div class="searchbox">
         <ul class="nav-search">
           <li
-            v-for="(tabs, index) in tab"
+            v-for="(tabs, index) in tabList"
             :key="index"
             :class="{ activeX: currentClass == index }"
             @click="tabsClick(index)"
@@ -112,14 +112,14 @@
             :placeholder="$t('message.fuzzySearch')"
           >
           </el-input>
-          <el-button type="warning" icon="el-icon-search" @click="searchClick">{{$t('message.SearchBtn')}}</el-button>
+          <el-button type="warning" icon="el-icon-search" @click="searchClick">{{ $t('message.SearchBtn') }}</el-button>
         </div>
       </div>
     </div>
     <div class="home_section main_color">
       <div class="_container">
         <div class="text-center">
-          <h1>{{$t('message.Gotoarea')}}</h1>
+          <h1>{{ $t('message.Gotoarea') }}</h1>
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="row theme">
@@ -145,14 +145,14 @@
     <div class="home_section alternative_color">
       <div class="_container">
         <div class="text-center" style="padding-bottom: 10px">
-          <h1>{{$t('message.PopularProducts')}}</h1>
+          <h1>{{ $t('message.PopularProducts') }}</h1>
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="text-center" id="recent_menus">
           <el-radio-group v-model="houseFrom.value" size="small" @change="radioChange">
-            <el-radio-button :label="''">{{$t('message.whole')}}</el-radio-button>
-            <el-radio-button v-for="(item, index) in saleOptions" :key="index" :label="item.dictValue">{{
-              item.dictLabel
+            <el-radio-button :label="''">{{ $t('message.whole') }}</el-radio-button>
+            <el-radio-button v-for="(item, index) in saleList" :key="index" :label="item.id">{{
+              item.name
             }}</el-radio-button>
           </el-radio-group>
         </div>
@@ -170,8 +170,8 @@
                   </div>
                   <div class="tags">
                     <div v-for="(tags, tIndex) in house.titleLabel" :key="tIndex">
-                      <span class="tag" v-if="tags == 1">{{$t('message.recommend')}}</span>
-                      <span class="tag tag_speed" v-if="tags == 2">{{$t('message.Aliexpress')}}</span>
+                      <span class="tag" v-if="tags == 1">{{ $t('message.recommend') }}</span>
+                      <span class="tag tag_speed" v-if="tags == 2">{{ $t('message.Aliexpress') }}</span>
                     </div>
                     <!-- <div class="tag tag_speed" v-if="house.tagsO == 2">
                       <span>抢购</span>
@@ -186,21 +186,21 @@
                 <div class="price_info">
                   <div>
                     <div class="price_wrap">
-                      <span class="installation_span">{{$t('message.TotalPrice')}}</span>
+                      <span class="installation_span">{{ $t('message.TotalPrice') }}</span>
                       <strong class="price_strong">{{ house.lastPrice }}</strong>
-                      <span class="installation_span">{{$t('message.downPayments')}}</span>
+                      <span class="installation_span">{{ $t('message.downPayments') }}</span>
                       <strong class="price_strong">{{ house.roomPrice }}</strong>
-                      <span class="installation_span">{{$t('message.loan')}}</span>
-                      <strong class="price_strong">{{ house.loans }}{{$t('message.TenThousandWon')}}</strong>
+                      <span class="installation_span">{{ $t('message.loan') }}</span>
+                      <strong class="price_strong">{{ house.loans }}{{ $t('message.TenThousandWon') }}</strong>
                     </div>
                   </div>
                 </div>
                 <div class="meta">
                   <div class="meta_cell">
-                    {{$t('message.area')}}：
+                    {{ $t('message.area') }}：
                     <span class="help">{{ house.actualArea }}㎡</span>
                   </div>
-                  {{$t('message.floor')}}：
+                  {{ $t('message.floor') }}：
                   <div class="meta_cell">{{ house.floor }}</div>
                 </div>
               </div>
@@ -212,7 +212,7 @@
         </div>
         <div class="more" v-if="houseList.length > 16">
           <router-link to="/housemap" class="router-test">
-            <el-button icon="el-icon-plus">{{$t('message.SeeMore')}}</el-button>
+            <el-button icon="el-icon-plus">{{ $t('message.SeeMore') }}</el-button>
           </router-link>
         </div>
       </div>
@@ -220,7 +220,7 @@
     <div class="home_section main_color">
       <div class="_container">
         <div class="text-center">
-          <h1>{{$t('message.CustomerComments')}}</h1>
+          <h1>{{ $t('message.CustomerComments') }}</h1>
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="megafolio-container">
@@ -236,7 +236,7 @@
         </div>
         <div class="more">
           <router-link to="/commentlist" class="router-test">
-            <el-button icon="el-icon-plus">{{$t('message.SeeMore')}}</el-button>
+            <el-button icon="el-icon-plus">{{ $t('message.SeeMore') }}</el-button>
           </router-link>
         </div>
       </div>
@@ -244,7 +244,7 @@
     <div class="home_section alternative_color">
       <div class="_container">
         <div class="text-center">
-          <h1>{{$t('message.RealEstateNews')}}</h1>
+          <h1>{{ $t('message.RealEstateNews') }}</h1>
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="megafolio-container">
@@ -261,7 +261,7 @@
     <div class="home_section main_color">
       <div class="_container">
         <div class="text-center">
-          <h1>{{$t('message.Partner')}}</h1>
+          <h1>{{ $t('message.Partner') }}</h1>
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="megafolio-container">
@@ -358,15 +358,15 @@ export default {
       tab: [
         {
           id: 1,
-          name: this.$t("message.AddressSearch")
+          name: this.$t('message.AddressSearch')
         },
         {
           id: 2,
-          name: this.$t("message.MetroSearch")
+          name: this.$t('message.MetroSearch')
         },
         {
           id: 3,
-          name: this.$t("message.seach")
+          name: this.$t('message.seach')
         }
       ],
       currentClass: 0,
@@ -390,6 +390,48 @@ export default {
     this.getTransaction();
     this.getCity();
     this.getHouseType();
+  },
+  computed: {
+    tabList() {
+      return [
+        {
+          id: 1,
+          name: this.$t('message.AddressSearch')
+        },
+        {
+          id: 2,
+          name: this.$t('message.MetroSearch')
+        },
+        {
+          id: 3,
+          name: this.$t('message.seach')
+        }
+      ];
+    },
+    saleList() {
+      return [
+      {
+          id: 1,
+          name: this.$t('message.room1')
+        },
+        {
+          id: 2,
+          name: this.$t('message.room2')
+        },
+        {
+          id: 3,
+          name: this.$t('message.room3')
+        },
+        {
+          id: 4,
+          name: this.$t('message.room4')
+        },
+        {
+          id: 5,
+          name: this.$t('message.compound')
+        },
+      ];
+    }
   },
   methods: {
     // 获取广告banner

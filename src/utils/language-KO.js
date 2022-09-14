@@ -40,7 +40,12 @@ export default {
         // 模块标题
         'Gotoarea':'지역별 바로가기', 
         'PopularProducts': '최신 매불', 
-        'whole': '전체',  
+        'whole': '전체', 
+        'room1':'1룸',
+        'room2':'2룸',
+        'room3':'3룸',
+        'room4':'4룸',
+        'compound':'복층', 
         'recommend': '추천', 
         'Aliexpress': '급매', 
         'TotalPrice': '분양가', 
