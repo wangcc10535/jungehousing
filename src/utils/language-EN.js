@@ -73,7 +73,7 @@ export default {
         'list': 'LIST',
         'between': 'between',
         'region':'region',
-        'waterproof': 'waterproof',
+        'waterproof': 'Room',
         'ShowerRoom': 'ShowerRoom',
         'Photo': 'PHOTO',
         'type': 'TYPE',

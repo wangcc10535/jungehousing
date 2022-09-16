@@ -76,7 +76,7 @@ export default {
         'list': '시계', 
         'between': '사이', 
         'region':'지방', 
-        'waterproof': '방수', 
+        'waterproof': '방', 
         'ShowerRoom': '욕실', 
         'Photo': '사진', 
         'type': '유형', 

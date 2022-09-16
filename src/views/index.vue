@@ -27,7 +27,7 @@
           </li>
         </ul>
         <div class="search-inner">
-          <el-select v-model="searchFrom.tradeType" class="search-select" :placeholder="$t('message.AddressSearch')">
+          <el-select v-model="searchFrom.tradeType" class="search-select" :placeholder="$t('message.TransactionType')">
             <el-option
               v-for="item in dealOptions"
               :key="item.dictValue"

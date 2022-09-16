@@ -75,7 +75,7 @@
                 <p class="base-row base-play">
                   <span class="base-play-box">
                     <span class="tags">{{$t('message.waterproof')}}</span>
-                    {{ houseData.waterRepellent }}{{$t('message.Room')}}
+                    {{ houseData.familyNum }}{{$t('message.Room')}}
                   </span>
                   <span class="base-play-box">
                     <span class="tags">{{$t('message.ShowerRoom')}}</span>

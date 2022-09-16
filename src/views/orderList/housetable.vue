@@ -89,7 +89,7 @@
               <td class="custom_text_right"><span>{{ house.actualArea }}㎡</span></td>
               <td class="table_etc_td">
                 <div class="table_etc_content_1">
-                  <span>{{$t('message.waterproof')}}：{{house.waterRepellent}}</span>
+                  <span>{{$t('message.waterproof')}}：{{house.familyNum}}</span>
                   <span>{{$t('message.ShowerRoom')}}：{{house.showerRoom}}</span>
                 </div>
               </td>

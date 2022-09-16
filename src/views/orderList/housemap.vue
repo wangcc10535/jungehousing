@@ -150,7 +150,7 @@
                           </div>
                           <font style="vertical-align: inherit">
                             <font style="vertical-align: inherit"
-                              >&nbsp;{{$t('message.waterproof')}}： {{ house.waterRepellent }}{{$t('message.between')}} | {{$t('message.ShowerRoom')}} {{ house.showerRoom }}{{$t('message.between')}}</font
+                              >&nbsp;{{$t('message.waterproof')}}： {{ house.familyNum }}{{$t('message.between')}} | {{$t('message.ShowerRoom')}} {{ house.showerRoom }}{{$t('message.between')}}</font
                             >
                           </font>
                         </div>

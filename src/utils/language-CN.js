@@ -76,7 +76,7 @@ export default {
         'list': '列表',
         'between': '间',
         'region':'区域',
-        'waterproof': '防水',
+        'waterproof': '房间',
         'ShowerRoom': '浴室',
         'Photo': '照片',
         'type': '类型',
