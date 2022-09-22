@@ -1,10 +1,16 @@
+<!--
+ * @Author: wangcc 1053578651@qq.com
+ * @Date: 2022-09-21 21:56:02
+ * @LastEditors: wangcc 1053578651@qq.com
+ * @LastEditTime: 2022-09-22 22:57:16
+ * @FilePath: \jungehousing\src\App.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <template>
   <div id="app">
     <app-header v-if="header_show"></app-header>
-    <m-header v-if="m_header_show"></m-header>
     <router-view v-on:header="header" v-on:footer="footer" />
     <app-footer v-if="footer_show"></app-footer>
-    <m-footer v-if="m_footer_show"></m-footer>
     <el-backtop :bottom="100" :visibility-height="50"></el-backtop>
   </div>
 </template>
@@ -12,38 +18,28 @@
 <script>
 import Header from '@/components/header';
 import Footer from '@/components/footer';
-import m_headerVue from './components/mobile_c/m_header.vue';
-import m_footerVue from './components/mobile_c/m_footer.vue';
 export default {
   name: 'App',
   data() {
     return {
       header_show: true,
       footer_show: true,
-      m_header_show: false,
-      m_footer_show: false,
     };
   },
   components: {
     'app-header': Header,
-    'app-footer': Footer,
-    'm-header'  : m_headerVue,
-    'm-footer'  : m_footerVue
+    'app-footer': Footer
   },
   mounted() {
     if (this.isMobile()) {
       console.log('移动端');
       this.header_show = false;
       this.footer_show = false;
-      this.m_header_show = true;
-      this.m_footer_show = true;
       this.$router.replace('/m_index');
     } else {
       console.log('pc端');
       this.header_show = true;
       this.footer_show = true;
-      this.m_header_show = false;
-      this.m_footer_show = false;
       this.$router.replace('/');
     }
   },
