@@ -113,7 +113,7 @@ const routes = [
     name: 'm_index',
     component: () => import('../views/mobile/m_index.vue'),
     meta: {
-      title: '房产详情'
+      title: '首页'
     }
   },
 ];
