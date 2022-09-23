@@ -2,16 +2,16 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-21 21:56:02
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-22 22:57:16
+ * @LastEditTime: 2022-09-23 21:23:08
  * @FilePath: \jungehousing\src\App.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div id="app">
+  <div id="app" :class="mStyle">
     <app-header v-if="header_show"></app-header>
     <router-view v-on:header="header" v-on:footer="footer" />
     <app-footer v-if="footer_show"></app-footer>
-    <el-backtop :bottom="100" :visibility-height="50"></el-backtop>
+    <el-backtop :bottom="100" :visibility-height="50" v-if="header_show"></el-backtop>
   </div>
 </template>
 
@@ -24,6 +24,7 @@ export default {
     return {
       header_show: true,
       footer_show: true,
+      mStyle: ''
     };
   },
   components: {
@@ -35,9 +36,11 @@ export default {
       console.log('移动端');
       this.header_show = false;
       this.footer_show = false;
+      this.mStyle = 'bodyStyle'
       this.$router.replace('/m_index');
     } else {
       console.log('pc端');
+      this.mStyle = ''
       this.header_show = true;
       this.footer_show = true;
       this.$router.replace('/');
@@ -64,4 +67,7 @@ export default {
 </script>
 <style>
 @import url('@/assets/css/style.css');
+.bodyStyle{
+  background-color: #f4f4f6;
+}
 </style>
