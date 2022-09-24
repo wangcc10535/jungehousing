@@ -2,7 +2,7 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-24 22:15:16
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-25 00:11:57
+ * @LastEditTime: 2022-09-25 00:43:02
  * @FilePath: \jungehousing\src\views\mobile\m_additional\m_additional.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -73,11 +73,13 @@
                         <el-input v-model="fromAddData.homeSize" :placeholder="$t('message.HouseSize')"></el-input>
                     </el-form-item>
                     <el-form-item :label="$t('message.information') + ':'">
-                        <el-input style="margin-bottom:10px" v-model="fromAddData.name" :placeholder="$t('message.name')">
+                        <el-input style="margin-bottom:10px" v-model="fromAddData.name"
+                            :placeholder="$t('message.name')">
                         </el-input>
-                        <el-input style="margin-bottom:10px" v-model="fromAddData.emily" :placeholder="$t('message.eMail')">
+                        <el-input style="margin-bottom:10px" v-model="fromAddData.emily"
+                            :placeholder="$t('message.eMail')">
                         </el-input>
-                        <el-input  v-model="fromAddData.phone" :placeholder="$t('message.phone')">
+                        <el-input v-model="fromAddData.phone" :placeholder="$t('message.phone')">
                         </el-input>
                     </el-form-item>
                     <el-form-item :label="$t('message.Display') + ':'">
@@ -100,7 +102,7 @@
     </div>
 </template>
 <script>
-import { address, addQna, getDicts, listQna } from '@/api/http';
+import { address, addQna, getDicts } from '@/api/http';
 export default {
     name: '',
     data() {
@@ -187,7 +189,22 @@ export default {
                 }
             });
         },
-        submitFrom(){}
+        submitFrom() {
+            this.fromAddData.province = this.provinceFrom.label;
+            this.fromAddData.city = this.cityFrom.label;
+            this.fromAddData.district = this.districtFrom.label;
+            this.fromAddData.homeType = this.houseTypecheckList.toString();
+            this.fromAddData.dealType = this.saleTypecheckList.toString();
+            addQna({ ...this.fromAddData }).then((res) => {
+                if (res.code == 200) {
+                    this.$message.success('제출 성공!');
+                    this.getlistQna();
+                    this.fromAddData = {};
+                    this.houseTypecheckList = [];
+                    this.saleTypecheckList = [];
+                }
+            });
+        }
     }
 };
 </script>
@@ -234,10 +251,12 @@ export default {
 .contact {
     width: 46%;
 }
-.submit{
+
+.submit {
     width: 100%;
     text-align: center;
-    .sub-btn{
+
+    .sub-btn {
         width: 70%;
     }
 }
