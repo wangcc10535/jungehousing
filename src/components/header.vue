@@ -2,8 +2,8 @@
  * @Description: 
  * @Author: wangcc
  * @Date: 2022-08-23 10:01:35
- * @LastEditors: wangcc
- * @LastEditTime: 2022-08-31 16:01:49
+ * @LastEditors: wangcc 1053578651@qq.com
+ * @LastEditTime: 2022-09-24 21:35:15
  * @FilePath: \jungehousing\src\components\header.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -83,13 +83,13 @@ export default {
     };
   },
   created() {
-    
-   },
-   mounted() {
+
+  },
+  mounted() {
     console.log(this.$route.path.query);
-   },
+  },
   methods: {
-    
+
     changeLangEvent(e) {
       this.$confirm(this.$t("message.LanguageSwitching"), this.$t("message.Tips"), {
         confirmButtonText: this.$t("message.yes"),

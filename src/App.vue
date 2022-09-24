@@ -2,7 +2,7 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-21 21:56:02
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-23 21:23:08
+ * @LastEditTime: 2022-09-25 00:06:24
  * @FilePath: \jungehousing\src\App.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -67,7 +67,14 @@ export default {
 </script>
 <style>
 @import url('@/assets/css/style.css');
+body,html {
+  height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
 .bodyStyle{
+  width: 100%;
+     /* min-height: 100%; */
   background-color: #f4f4f6;
 }
 </style>

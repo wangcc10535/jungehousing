@@ -2,7 +2,7 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-21 21:56:02
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-24 00:53:26
+ * @LastEditTime: 2022-09-25 00:40:50
  * @FilePath: \jungehousing\src\views\mobile\m_index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -36,7 +36,7 @@
           <swiper :options="friendshipOption">
             <swiper-slide v-for="(link, index) in homeSpot" :key="index">
               <div class="friendship-link">
-                  <img :src="link.dictValue" alt="" />
+                <img :src="link.dictValue" alt="" />
                 <span class="pos-title">{{link.dictLabel}}</span>
               </div>
             </swiper-slide>
@@ -54,7 +54,7 @@
           <swiper :options="houseOption">
             <swiper-slide v-for="(link, index) in houseList" :key="index">
               <div class="friendship-link">
-                  <img :src="link.image" alt="" />
+                <img :src="link.image" alt="" />
                 <span class="pos-title">{{link.title}}</span>
               </div>
             </swiper-slide>
@@ -88,9 +88,9 @@
         <div class="top-title"><i class="iconfont icon-pinglun"></i>{{ $t('message.CustomerComments') }}</div>
         <div class="swiper-container-box" id="swiperCustomer">
           <swiper :options="CustomerSwiperOption">
-            <swiper-slide v-for="(link, index) in innerwrapList" :key="index">
-              <div class="friendship-link">
-                  <img :src="link.image" alt="" />
+            <swiper-slide v-for="(link, index) in innerwrapList" :key="index" >
+              <div class="friendship-link" @click="customerClick(link)">
+                <img :src="link.image" alt="" />
                 <span class="pos-title">{{link.title}}</span>
               </div>
             </swiper-slide>
@@ -101,7 +101,6 @@
           <div class="swiper-button-next"></div>
         </div>
       </div>
-      
     </div>
     <div class="footer">
       <p>{{ $t("message.corporateName") }}：{{ $t("message.junge") }}</p>
@@ -112,6 +111,12 @@
       <p>jun-housing@naver.com {{ $t("message.copyright") }}</p>
     </div>
     <nav-list ref="navRef"></nav-list>
+
+    <el-dialog :visible.sync="dialogVisible" width="80%" :before-close="handleClose">
+      <span>
+        <img width="100%" :src="dialogImg" alt="">
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -121,12 +126,7 @@ import {
   getRegion,
   searchRoom,
   getCooperation,
-  listNews,
   listApplaud,
-  getSaletype,
-  getTitleType,
-  getDicts,
-  address
 } from '@/api/http';
 export default {
   name: 'm_index',
@@ -135,6 +135,8 @@ export default {
   },
   data() {
     return {
+      dialogVisible:false,
+      dialogImg:'',
       imageList: [],
       homeSpot: [],
       cardList: [],
@@ -289,6 +291,14 @@ export default {
     },
     navClick() {
       this.$refs.navRef.openNav()
+    },
+    customerClick(item) {
+      console.log(item);
+      this.dialogVisible = true;
+      this.dialogImg = item.image
+    },
+    handleClose() {
+      this.dialogVisible = false;
     }
   }
 };
@@ -485,7 +495,8 @@ export default {
     margin-bottom: 10px;
   }
 }
-.footer{
+
+.footer {
   margin-top: 15px;
   padding: 6px 10px;
   overflow: hidden;

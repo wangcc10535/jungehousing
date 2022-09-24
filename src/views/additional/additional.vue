@@ -2,8 +2,8 @@
  * @Description: 
  * @Author: wangcc
  * @Date: 2022-08-23 14:38:13
- * @LastEditors: wangcc
- * @LastEditTime: 2022-08-29 11:55:30
+ * @LastEditors: wangcc 1053578651@qq.com
+ * @LastEditTime: 2022-09-25 00:03:37
  * @FilePath: \jungehousing\src\views\additional\additional.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -17,60 +17,29 @@
           <el-tab-pane :label="$t('message.tabFirst')" name="first">
             <el-descriptions class="margin-top" :column="1" border>
               <el-descriptions-item :label="$t('message.RequiredArea')" label-class-name="lable-tit">
-                <el-select
-                  v-model="provinceFrom"
-                  @change="cityChange('1', $event)"
-                  class="search-select"
-                  style="margin-right: 10px"
-                  :placeholder="$t('message.selectCity')"
-                >
-                  <el-option
-                    v-for="item in cityOptions"
-                    :key="item.code"
-                    :label="item.name"
-                    :value="{ label: item.name, value: item.code }"
-                  >
+                <el-select v-model="provinceFrom" @change="cityChange('1', $event)" class="search-select"
+                  style="margin-right: 10px" :placeholder="$t('message.selectCity')">
+                  <el-option v-for="item in cityOptions" :key="item.code" :label="item.name"
+                    :value="{ label: item.name, value: item.code }">
                   </el-option>
                 </el-select>
-                <el-select
-                  v-model="cityFrom"
-                  @change="cityChange('2', $event)"
-                  class="search-select"
-                  style="margin-right: 10px"
-                  placeholder="-"
-                >
-                  <el-option
-                    v-for="item in countyOptions"
-                    :key="item.code"
-                    :label="item.name"
-                    :value="{ label: item.name, value: item.code }"
-                  >
+                <el-select v-model="cityFrom" @change="cityChange('2', $event)" class="search-select"
+                  style="margin-right: 10px" placeholder="-">
+                  <el-option v-for="item in countyOptions" :key="item.code" :label="item.name"
+                    :value="{ label: item.name, value: item.code }">
                   </el-option>
                 </el-select>
                 <el-select v-model="districtFrom" class="search-select" placeholder="-">
-                  <el-option
-                    v-for="item in streetOptions"
-                    :key="item.code"
-                    :label="item.name"
-                    style="margin-right: 10px"
-                    :value="{ label: item.name, value: item.code }"
-                  >
+                  <el-option v-for="item in streetOptions" :key="item.code" :label="item.name"
+                    style="margin-right: 10px" :value="{ label: item.name, value: item.code }">
                   </el-option>
                 </el-select>
               </el-descriptions-item>
               <el-descriptions-item :label="$t('message.Price')" label-class-name="lable-tit">
-                <el-input
-                  class="contact"
-                  style="margin-right: 10px; width: 300px"
-                  v-model="fromAddData.lowPrice"
-                  :placeholder="$t('message.floorPrice')"
-                ></el-input>
-                <el-input
-                  class="contact"
-                  style="margin-right: 10px; width: 300px"
-                  v-model="fromAddData.highPrice"
-                  :placeholder="$t('message.ceilingPrice')"
-                ></el-input>
+                <el-input class="contact" style="margin-right: 10px; width: 300px" v-model="fromAddData.lowPrice"
+                  :placeholder="$t('message.floorPrice')"></el-input>
+                <el-input class="contact" style="margin-right: 10px; width: 300px" v-model="fromAddData.highPrice"
+                  :placeholder="$t('message.ceilingPrice')"></el-input>
               </el-descriptions-item>
               <el-descriptions-item :label="$t('message.type')" label-class-name="lable-tit">
                 <el-checkbox-group v-model="saleTypecheckList">
@@ -85,25 +54,17 @@
               <el-descriptions-item :label="$t('message.CommissionType')" label-class-name="lable-tit">
                 <el-radio-group v-model="fromAddData.type">
                   <el-radio :label="item.dictValue" v-for="(item, index) in entrustType" :key="index">{{
-                    item.dictLabel
+                  item.dictLabel
                   }}</el-radio>
                 </el-radio-group>
               </el-descriptions-item>
               <el-descriptions-item :label="$t('message.EstimatedTime')" label-class-name="lable-tit">
-                <el-date-picker
-                  v-model="fromAddData.payTime"
-                  value-format="yyyy-MM-dd HH:mm:ss"
-                  type="datetime"
-                  :placeholder="$t('message.selectTile')"
-                ></el-date-picker>
+                <el-date-picker v-model="fromAddData.payTime" value-format="yyyy-MM-dd HH:mm:ss" type="datetime"
+                  :placeholder="$t('message.selectTile')"></el-date-picker>
               </el-descriptions-item>
               <el-descriptions-item :label="$t('message.accessTime')" label-class-name="lable-tit">
-                <el-date-picker
-                  v-model="fromAddData.comeTime"
-                  value-format="yyyy-MM-dd HH:mm:ss"
-                  type="datetime"
-                  :placeholder="$t('message.selectTile')"
-                ></el-date-picker>
+                <el-date-picker v-model="fromAddData.comeTime" value-format="yyyy-MM-dd HH:mm:ss" type="datetime"
+                  :placeholder="$t('message.selectTile')"></el-date-picker>
               </el-descriptions-item>
               <el-descriptions-item :label="$t('message.HouseSize')" label-class-name="lable-tit">
                 <el-input v-model="fromAddData.homeSize" :placeholder="$t('message.HouseSize')"></el-input>
@@ -116,12 +77,13 @@
               <el-descriptions-item :label="$t('message.Display')" label-class-name="lable-tit">
                 <el-radio-group v-model="fromAddData.show">
                   <el-radio :label="check.dictValue" v-for="(check, index) in showType" :key="index">{{
-                    check.dictLabel
+                  check.dictLabel
                   }}</el-radio>
                 </el-radio-group>
               </el-descriptions-item>
               <el-descriptions-item :label="$t('message.demand')" label-class-name="lable-tit">
-                <el-input type="textarea" :rows="6" :placeholder="$t('message.inputPlaceholder')" v-model="fromAddData.info"></el-input>
+                <el-input type="textarea" :rows="6" :placeholder="$t('message.inputPlaceholder')"
+                  v-model="fromAddData.info"></el-input>
               </el-descriptions-item>
             </el-descriptions>
             <div class="submit">
@@ -130,7 +92,8 @@
           </el-tab-pane>
           <el-tab-pane :label="$t('message.tabSecond')" name="second">
             <el-table :data="tableData" border style="width: 100%" size="small">
-              <el-table-column type="index" :label="$t('message.SerialNumber')" width="80" align="center"></el-table-column>
+              <el-table-column type="index" :label="$t('message.SerialNumber')" width="80" align="center">
+              </el-table-column>
               <el-table-column :label="$t('message.phone')" width="380" align="center">
                 <template slot-scope="{ row }">
                   <el-link @click="tional(row)">{{ row.phone }}</el-link>
@@ -147,12 +110,8 @@
             </el-table>
             <!--   分页   -->
             <div class="pagination-box" v-if="total > 0">
-              <pagination
-                :total="total"
-                :page.sync="queryParams.pageNum"
-                :limit.sync="queryParams.pageSize"
-                @pagination="getlistQna"
-              />
+              <pagination :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
+                @pagination="getlistQna" />
             </div>
           </el-tab-pane>
         </el-tabs>
@@ -210,11 +169,11 @@ export default {
       saleArr: [],
       saleTypecheckList: [],
       queryParams: {
-          pageNum: 1,
-          pageSize: 10,
-        },
-        total: 0,
-        rowData: {}
+        pageNum: 1,
+        pageSize: 10,
+      },
+      total: 0,
+      rowData: {}
     };
   },
   created() {
@@ -227,13 +186,13 @@ export default {
   },
 
   methods: {
-    handleClick() {},
+    handleClick() { },
     tional(row) {
       this.dialogtitle = row.title;
       this.dialogVisible = true;
       this.rowData = row
     },
-    handleCheckedCitiesChange() {},
+    handleCheckedCitiesChange() { },
     // 获取城市
     getCity(index, e) {
       console.log(e);
@@ -308,7 +267,7 @@ export default {
     },
     getlistQna() {
       this.tableData = [];
-      listQna({ type: '-1', show: '1',...this.queryParams}).then((res) => {
+      listQna({ type: '-1', show: '1', ...this.queryParams }).then((res) => {
         if (res.code == 200) {
           console.log(res);
           this.tableData = res.rows;
@@ -349,14 +308,16 @@ export default {
 .contact:last-child {
   margin-bottom: 0;
 }
+
 .submit {
   width: 100%;
   text-align: center;
   margin: 20px 0;
 }
+
 .pagination-box {
-   width: 100%;
-   display: flex;
-   justify-content: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 </style>

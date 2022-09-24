@@ -2,7 +2,7 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-22 20:44:38
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-24 01:54:26
+ * @LastEditTime: 2022-09-24 22:18:01
  * @FilePath: \jungehousing\src\components\mobile_c\m_nav.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -17,8 +17,10 @@
       <div class="nav-box">
         <ul>
           <li>
-            <i class="el-icon-house"></i>
-            <span>{{$t('message.home')}}</span>
+            <router-link to="/m_index" class="router-test">
+              <i class="el-icon-house"></i>
+              <span>{{$t('message.home')}}</span>
+            </router-link>
           </li>
           <li>
             <i class="el-icon-location-outline"></i>
@@ -29,16 +31,30 @@
             <span>{{$t('message.SearchBtn')}}</span>
           </li>
           <li>
-            <i class="iconfont icon-chakan"></i>
-            <span>{{$t('message.news')}}</span>
+            <router-link to="/m_newsList" class="router-test">
+              <i class="iconfont icon-chakan"></i>
+              <span>{{$t('message.news')}}</span>
+            </router-link>
           </li>
           <li>
-            <i class="el-icon-s-comment"></i>
-            <span>{{$t('message.entrust')}}</span>
+            <router-link to="/m_additional" class="router-test">
+              <i class="el-icon-s-comment"></i>
+              <span>{{$t('message.entrust')}}</span>
+            </router-link>
+
           </li>
           <li>
-            <i class="iconfont icon-50wenti"></i>
-            <span>{{$t('message.problem')}}</span>
+            <router-link to="/m_helplist" class="router-test">
+              <i class="iconfont icon-50wenti"></i>
+              <span>{{$t('message.problem')}}</span>
+            </router-link>
+          </li>
+          <li>
+            <i class="el-icon-refresh"></i>
+            <el-select v-model="value" :placeholder="$t('message.select')" @change="changeLangEvent">
+              <el-option v-for="item in languageOptions" :key="item.lg" :label="item.name" :value="item.lg">
+              </el-option>
+            </el-select>
           </li>
         </ul>
       </div>
@@ -56,7 +72,22 @@ export default {
   name: 'm_nav',
   data() {
     return {
-      navDrawer: false
+      navDrawer: false,
+      value: this.$i18n.locale,
+      languageOptions: [
+        {
+          lg: 'cn',
+          name: this.$t("message.CN")
+        },
+        {
+          lg: 'en',
+          name: this.$t("message.EN")
+        },
+        {
+          lg: 'ko',
+          name: this.$t("message.KO")
+        },
+      ]
     }
   },
   methods: {
@@ -65,6 +96,18 @@ export default {
     },
     handleClose() {
       this.navDrawer = false;
+    },
+    changeLangEvent(e) {
+      this.$confirm(this.$t("message.LanguageSwitching"), this.$t("message.Tips"), {
+        confirmButtonText: this.$t("message.yes"),
+        cancelButtonText: this.$t("message.no"),
+        type: 'warning'
+      }).then(() => {
+        this.$i18n.locale = e
+        this.handleClose()
+      }).catch(() => {
+        console.log('catch');
+      });
     }
   }
 }

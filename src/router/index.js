@@ -116,10 +116,42 @@ const routes = [
       title: '首页'
     }
   },
+  {
+    path: '/m_helplist',
+    name: 'm_helplist',
+    component: () => import('../views/mobile/m_help/m_helplist.vue'),
+    meta: {
+      title: '常见问题'
+    }
+  },
+  {
+    path: '/m_newsList',
+    name: 'm_newsList',
+    component: () => import('../views/mobile/m_news/m_newsList.vue'),
+    meta: {
+      title: '房地产新闻'
+    }
+  },
+  {
+    path: '/m_additional',
+    name: 'm_additional',
+    component: () => import('../views/mobile/m_additional/m_additional.vue'),
+    meta: {
+      title: '委托'
+    }
+  },
+  {
+    path: '/m_newsDetail',
+    name: 'm_newsDetail',
+    component: () => import('../views/mobile/m_news/m_newsDetail/m_newsDetail.vue'),
+    meta: {
+      title: '详情'
+    }
+  },
 ];
+
 
 const router = new VueRouter({
   routes
 });
-
 export default router;
