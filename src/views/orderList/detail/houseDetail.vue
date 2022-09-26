@@ -2,8 +2,8 @@
  * @Description: 
  * @Author: wangcc
  * @Date: 2022-08-29 13:49:18
- * @LastEditors: wangcc
- * @LastEditTime: 2022-08-31 10:46:44
+ * @LastEditors: wangcc 1053578651@qq.com
+ * @LastEditTime: 2022-09-26 21:40:40
  * @FilePath: \jungehousing\src\views\orderList\detail\houseDetail.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -37,7 +37,7 @@
               </div>
             </div>
           </div>
-          <p class="order-name">【{{ houseData.city }}】{{ houseData.title }}</p>
+          <p class="order-name">【{{ houseData.address }}】{{ houseData.title }}</p>
           <div class="information">
             <el-descriptions :title="$t('message.essentialInformation')" :column="1" border>
               <el-descriptions-item :label="$t('message.AmountInformation')">
@@ -55,8 +55,7 @@
                   <p>{{ houseData.addresss }}</p>
                   <p>
                     <span v-for="(metro, index) in houseData.roomSubways" :key="index">
-                      <span class="metro">{{ metro.name }}</span
-                      >{{ metro.info }}
+                      <span class="metro">{{ metro.name }}</span>{{ metro.info }}
                     </span>
                   </p>
                 </div>
@@ -99,7 +98,7 @@
                 <div class="option-box">
                   <!-- <i class="iconfont icon-tingchechang"></i> -->
                   <span class="option-box-label" v-for="(metro, index) in houseData.option" :key="index">{{
-                    metro
+                  metro
                   }}</span>
                 </div>
               </el-descriptions-item>
@@ -115,12 +114,8 @@
           <div class="map-box">
             <div id="map" style="width: 100%; height: 100%"></div>
             <ul id="category_icon">
-              <li
-                :class="{ on: iconIndex == index }"
-                v-for="(icon, index) in categoryIcon"
-                :key="index"
-                @click="iconTab(icon, index)"
-              >
+              <li :class="{ on: iconIndex == index }" v-for="(icon, index) in categoryIcon" :key="index"
+                @click="iconTab(icon, index)">
                 <span class="category_bg pharmacy" :class="icon.className"></span>
                 {{ icon.clickName }}
               </li>
@@ -147,20 +142,13 @@
         </div>
         <div class="agent-box-customer">
           <p class="agent-box-customer-ps">{{$t('message.pis')}}</p>
-          <el-input
-            class="agent-box-customer-input"
-            v-model="customerFrom.adsw"
-            :placeholder="$t('message.PhoneNumberOrEmail')"
-          ></el-input>
-          <el-input
-            class="agent-box-customer-textarea"
-            type="textarea"
-            :rows="3"
-            :placeholder="$t('message.ConsultationContents')"
-            v-model="customerFrom.qwera"
-          ></el-input>
+          <el-input class="agent-box-customer-input" v-model="customerFrom.adsw"
+            :placeholder="$t('message.PhoneNumberOrEmail')"></el-input>
+          <el-input class="agent-box-customer-textarea" type="textarea" :rows="3"
+            :placeholder="$t('message.ConsultationContents')" v-model="customerFrom.qwera"></el-input>
           <div class="agent-box-customer-submit">
-            <el-button class="agent-box-customer-submit-btn" type="warning" @click="addRequireUse">{{$t('message.KeepInContact')}}</el-button>
+            <el-button class="agent-box-customer-submit-btn" type="warning" @click="addRequireUse">
+              {{$t('message.KeepInContact')}}</el-button>
           </div>
         </div>
       </div>
@@ -171,14 +159,14 @@
 
 <script>
 import rightList from '@/components/rightList.vue';
-import { roomDetail, roomSelectHot,listmiddleman,addRequire } from '@/api/http';
+import { roomDetail, roomSelectHot, listmiddleman, addRequire } from '@/api/http';
 export default {
   name: 'houseDetail',
   components: { rightList },
   data() {
     return {
       houseId: this.$route.query.id,
-      circleUrl:'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
+      circleUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
       iconIndex: null,
       categoryIcon: [
         {
@@ -279,7 +267,7 @@ export default {
   methods: {
     // 获取经纪人
     getlistmiddleman() {
-      listmiddleman({}).then( res => {
+      listmiddleman({}).then(res => {
         console.log(res.rows);
         this.middleman = res.rows
       })
@@ -290,7 +278,7 @@ export default {
         this.houseData = res.data;
         // this.houseData.city = this.houseData.city.split(',');
         this.houseData.option = this.houseData.option.split(',');
-        this.middleman.forEach(item =>{
+        this.middleman.forEach(item => {
           if (item.id == this.houseData.middlemanId) {
             this.houseData.middlemanImg = item.headerImg;
             this.houseData.middlemanJob = item.job;
@@ -306,8 +294,8 @@ export default {
     addRequireUse() {
       this.customerFrom.mid = this.houseData.middlemanId;
       this.customerFrom.homeNum = this.houseData.homeNum;
-      addRequire({...this.customerFrom}).then( res =>{
-        if(res.code == 200) {
+      addRequire({ ...this.customerFrom }).then(res => {
+        if (res.code == 200) {
           this.$message.success('提交成功！')
           this.customerFrom = {}
         }
@@ -498,41 +486,50 @@ export default {
   /* padding: 10px 0; */
   border: 1px solid #dcdcdc;
   text-align: center;
+
   h3 {
     margin: 0;
     padding: 0;
   }
 }
+
 .main {
   padding-top: 20px;
   margin-bottom: 20px;
 }
+
 .friendship-link {
   width: 100%;
   height: 458px;
+
   img {
     width: 100%;
     height: 100%;
   }
 }
+
 .friendship-Thums {
   width: 96px;
   height: 72px;
+
   img {
     width: 100%;
     height: 100%;
   }
 }
+
 .left {
   float: left;
   width: 860px;
 }
+
 .right-box {
   width: 300px;
   float: right;
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
 .firstDiv {
   width: 100%;
   height: 550px;
@@ -546,10 +543,12 @@ export default {
   left: 0;
   top: 0;
 }
+
 .thumb-example {
   height: 550px;
   background-color: transparent;
 }
+
 .swiper-button-prev,
 .swiper-button-next {
   color: #fff;
@@ -560,10 +559,12 @@ export default {
   line-height: 30px;
   background-color: #0c0c0c;
 }
+
 .swiper-button-prev:after,
 .swiper-button-next:after {
   font-size: 18px;
 }
+
 .swiper-slide {
   background-size: cover;
   background-position: center;
@@ -573,22 +574,27 @@ export default {
   height: 83%;
   width: 100%;
 }
+
 .gallery-thumbs {
   height: 92px;
   box-sizing: border-box;
   padding: 10px 0;
 }
+
 .gallery-thumbs .swiper-slide {
   width: 96px;
   height: 72px;
   opacity: 0.4;
 }
+
 .gallery-thumbs .swiper-slide-active {
   opacity: 1;
 }
+
 .agent-box {
   padding: 20px 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
+
   &-header {
     display: flex;
     flex-direction: column;
@@ -597,11 +603,13 @@ export default {
     width: 100%;
     // padding: 10px 0 10px 0;
     padding-bottom: 10px;
+
     h4 {
       color: #7a7366;
       padding: 5px 0 5px 0;
       font-size: 14px;
     }
+
     &-name {
       line-height: 22px;
       display: flex;
@@ -609,6 +617,7 @@ export default {
       align-items: flex-end;
       margin-top: 6px;
     }
+
     &-img {
       width: 80px;
       height: 80px;
@@ -616,6 +625,7 @@ export default {
       padding: 2px;
       border: 1px solid rgba(0, 0, 0, 0.1);
       overflow: hidden;
+
       img {
         width: 100%;
         height: 100%;
@@ -623,6 +633,7 @@ export default {
       }
     }
   }
+
   &-contact {
     border-top: 1px dashed rgba(0, 0, 0, 0.1);
     border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
@@ -630,6 +641,7 @@ export default {
     flex-direction: column;
     padding: 10px 0;
     margin-top: 10px;
+
     &-phone {
       color: #fff;
       background-color: #333;
@@ -638,12 +650,14 @@ export default {
       text-align: center;
       position: relative;
       font-weight: 600;
+
       i {
         position: absolute;
         left: 6px;
         top: 8px;
       }
     }
+
     &-kakao {
       margin-top: 10px;
       background-color: #fef212 !important;
@@ -653,6 +667,7 @@ export default {
       text-align: center;
       position: relative;
       font-weight: 500;
+
       i {
         font-size: 20px;
         position: absolute;
@@ -661,17 +676,21 @@ export default {
       }
     }
   }
+
   &-customer {
     padding: 10px 0;
+
     &-ps {
       font-size: 14px;
       text-align: left;
     }
+
     &-input,
     &-textarea,
     &-submit {
       margin-top: 10px;
     }
+
     &-submit {
       &-btn {
         width: 100%;
@@ -679,12 +698,14 @@ export default {
     }
   }
 }
+
 .address {
   p {
     margin-bottom: 6px;
     color: #000;
   }
 }
+
 .metro {
   border: 2px solid #ee5a2a;
   color: #ee5a2a;
@@ -693,36 +714,44 @@ export default {
   font-size: 11px;
   margin-right: 5px;
 }
+
 .base-row {
   color: #000;
   margin-bottom: 6px;
 }
+
 .base-row:last-child {
   margin-bottom: 0;
 }
+
 .tags {
   background-color: #666;
   color: #fff;
   padding: 3px 15px;
   margin-right: 4px;
 }
+
 .base-play {
   display: flex;
   justify-content: space-around;
   width: 100%;
+
   span.base-play-box {
     display: inline-block;
     width: 50%;
   }
 }
+
 .map-box {
   width: 100%;
   height: 500px;
   position: relative;
 }
+
 #category_icon {
   margin-left: 80px;
 }
+
 #category_icon {
   position: absolute;
   margin-top: -56px;
@@ -736,9 +765,11 @@ export default {
   z-index: 999;
   font-size: 11px;
 }
+
 #category_icon li.on {
   background: #eee;
 }
+
 #category_icon li {
   float: left;
   list-style: none;
@@ -748,57 +779,72 @@ export default {
   text-align: center;
   cursor: pointer;
 }
+
 // #category_icon li.on .category_bg.MT1 {
 //     background: url('@/assets/images/marker/mt1_o.png') no-repeat;
 // }
 #category_icon li .category_bg.MT1 {
   background: url('@/assets/images/marker/mt1_o.png') no-repeat;
 }
+
 #category_icon li .category_bg.CS2 {
   background: url('@/assets/images/marker/cs2.png') no-repeat;
 }
+
 #category_icon li .category_bg.PS3 {
   background: url('@/assets/images/marker/ps3.png') no-repeat;
 }
+
 #category_icon li .category_bg.SC4 {
   background: url('@/assets/images/marker/sc4.png') no-repeat;
 }
+
 #category_icon li .category_bg.BK9 {
   background: url('@/assets/images/marker/bk9.png') no-repeat;
 }
+
 #category_icon li .category_bg.CT1 {
   background: url('@/assets/images/marker/ct1.png') no-repeat;
 }
+
 #category_icon li .category_bg.PO3 {
   background: url('@/assets/images/marker/po3.png') no-repeat;
 }
+
 #category_icon li .category_bg.AT4 {
   background: url('@/assets/images/marker/at4.png') no-repeat;
 }
+
 #category_icon li .category_bg.HP8 {
   background: url('@/assets/images/marker/hp8.png') no-repeat;
 }
+
 #category_icon li span {
   display: block;
   margin: 0 auto 3px;
   width: 28px;
   height: 28px;
 }
+
 .order-list-detail {
   width: 100%;
   margin-top: 20px;
+
   h3 {
     font-weight: normal;
     margin-bottom: 10px;
     text-align: left;
   }
+
   &-center {
     margin-bottom: 20px;
   }
 }
+
 ::v-deep .el-descriptions__header {
   margin-bottom: 10px;
 }
+
 .order-name {
   margin: 10px 0;
   position: relative;
@@ -806,6 +852,7 @@ export default {
   line-height: 20px;
   padding-left: 5px;
 }
+
 .order-name::after {
   content: '';
   width: 4px;
@@ -814,18 +861,21 @@ export default {
   position: absolute;
   left: 0;
 }
+
 .option-box {
   padding: 0 20px;
+
   &-label {
-    width: 120px;
+    // width: 120px;
     height: 24px;
     line-height: 24px;
     text-align: left;
     display: inline-flex;
     align-items: center;
     justify-content: left;
-    margin-right: 10px;
+    margin-right: 20px;
   }
+
   &-label:last-child {
     margin-right: 0;
   }

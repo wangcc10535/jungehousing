@@ -142,6 +142,10 @@ export default {
         'PO3':'公共机构',
         'AT4':'景点',
         'HP8':'医院',
-        'PopularRealEstate':'热门房产'
+        'PopularRealEstate':'热门房产',
+
+        // 手机
+        "lookMapList": '查看该区域房产',
+        "call": '呼叫'
     }
 };

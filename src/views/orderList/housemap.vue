@@ -2,8 +2,8 @@
  * @Description: 
  * @Author: wangcc
  * @Date: 2022-08-23 14:21:15
- * @LastEditors: wangcc
- * @LastEditTime: 2022-08-31 11:59:35
+ * @LastEditors: wangcc 1053578651@qq.com
+ * @LastEditTime: 2022-09-26 23:59:03
  * @FilePath: \jungehousing\src\views\orderList\housemap.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -127,7 +127,7 @@
                   <div>
                     <a class="view_product" data-toggle="modal" data-target="#view_dialog" href="#">
                       <font style="vertical-align: inherit">
-                        <font style="vertical-align: inherit">【 {{ house.familyNum }} {{$t('message.between')}}】 {{ house.title }}</font>
+                        <font style="vertical-align: inherit; ">【 {{ house.familyNum }} {{$t('message.between')}}】 {{ house.title }}</font>
                       </font>
                     </a>
                     <div class="address">

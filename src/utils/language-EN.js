@@ -140,6 +140,10 @@ export default {
         'PO3':'Public institutions',
         'AT4':'scenic spot',
         'HP8':'hospital',
-        'PopularRealEstate':'Popular Real Estate'
+        'PopularRealEstate':'Popular Real Estate',
+
+        // 手机
+        "lookMapList": 'See properties in this area',
+        "call": 'call'
     }
 }

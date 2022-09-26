@@ -2,7 +2,7 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-21 21:56:02
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-25 00:40:50
+ * @LastEditTime: 2022-09-27 01:15:31
  * @FilePath: \jungehousing\src\views\mobile\m_index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -11,7 +11,7 @@
     <div class="index-beader">
       <el-link class="top-icon" icon="el-icon-s-unfold" :underline="false" @click="navClick"></el-link>
       <img class="top-logo" src="@/assets/images/m_ing/mlogo.jpg" alt="">
-      <el-link class="top-icon" icon="el-icon-search" :underline="false"></el-link>
+      <el-link class="top-icon" icon="el-icon-search" :underline="false" @click="jumpSearch"></el-link>
     </div>
     <el-carousel :interval="5000" height="115px" arrow="always">
       <el-carousel-item v-for="(item, index) in imageList" :key="index">
@@ -22,11 +22,11 @@
       <!-- 定位功能 -->
       <div class="search-box">
         <div class="left-map">
-          <img src="@/assets/images/m_ing/mBan_1.png" alt="">
+          <img src="@/assets/images/m_ing/mBan_1.png" alt="" @click="jumpList">
         </div>
         <div class="right-search">
-          <img src="@/assets/images/m_ing/mBan_2.png" alt="">
-          <img src="@/assets/images/m_ing/mBan_3.png" alt="">
+          <img src="@/assets/images/m_ing/mBan_2.png" alt="" @click="jumpAddressSearch">
+          <img src="@/assets/images/m_ing/mBan_3.png" alt="" @click="jumpSearch">
         </div>
       </div>
       <!-- 前往区域 -->
@@ -35,7 +35,7 @@
         <div class="swiper-container-box" id="swiper-area">
           <swiper :options="friendshipOption">
             <swiper-slide v-for="(link, index) in homeSpot" :key="index">
-              <div class="friendship-link">
+              <div class="friendship-link" @click="jumpList">
                 <img :src="link.dictValue" alt="" />
                 <span class="pos-title">{{link.dictLabel}}</span>
               </div>
@@ -53,7 +53,7 @@
         <div class="swiper-container-box" id="swiper-house">
           <swiper :options="houseOption">
             <swiper-slide v-for="(link, index) in houseList" :key="index">
-              <div class="friendship-link">
+              <div class="friendship-link" @click="setList(link)">
                 <img :src="link.image" alt="" />
                 <span class="pos-title">{{link.title}}</span>
               </div>
@@ -71,7 +71,7 @@
         <div class="swiper-container-box" id="swiperType">
           <swiper :options="typeSwiperOption">
             <swiper-slide v-for="(link, index) in saleList" :key="index">
-              <div class="sale-type">
+              <div class="sale-type" @click="jumpSearch">
                 <i class="iconfont icon-classfangwujiaju fonSize"></i>
                 <span class="pos-title">{{link.name}}</span>
               </div>
@@ -88,7 +88,7 @@
         <div class="top-title"><i class="iconfont icon-pinglun"></i>{{ $t('message.CustomerComments') }}</div>
         <div class="swiper-container-box" id="swiperCustomer">
           <swiper :options="CustomerSwiperOption">
-            <swiper-slide v-for="(link, index) in innerwrapList" :key="index" >
+            <swiper-slide v-for="(link, index) in innerwrapList" :key="index">
               <div class="friendship-link" @click="customerClick(link)">
                 <img :src="link.image" alt="" />
                 <span class="pos-title">{{link.title}}</span>
@@ -135,8 +135,8 @@ export default {
   },
   data() {
     return {
-      dialogVisible:false,
-      dialogImg:'',
+      dialogVisible: false,
+      dialogImg: '',
       imageList: [],
       homeSpot: [],
       cardList: [],
@@ -299,6 +299,19 @@ export default {
     },
     handleClose() {
       this.dialogVisible = false;
+    },
+    jumpList() {
+      this.$router.push({ name: 'm_mapList' })
+    },
+    setList(item) {
+      console.log(item);
+      this.$router.push({ name: 'm_detail', query: {id:item.id} })
+    },
+    jumpSearch() {
+      this.$router.push({ name: 'm_typeSearch' })
+    },
+    jumpAddressSearch() {
+      this.$router.push({ name: 'm_addressSearch' })
     }
   }
 };

@@ -74,7 +74,7 @@ export default {
         'location': '지도', 
         'LargePicture': '목록', 
         'list': '시계', 
-        'between': '사이', 
+        'between': '룸', 
         'region':'지방', 
         'waterproof': '방', 
         'ShowerRoom': '욕실', 
@@ -142,6 +142,9 @@ export default {
         'PO3':'공공기관', 
         'AT4':'명소', 
         'HP8':'의원',  
-        'PopularRealEstate':'인기 부동산' 
+        'PopularRealEstate':'인기 부동산',
+        // 手机
+        "lookMapList": '이 지역 매물보기',
+        "call": ' 전화하기'
     }
 };

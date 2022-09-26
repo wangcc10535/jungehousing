@@ -145,7 +145,47 @@ const routes = [
     name: 'm_newsDetail',
     component: () => import('../views/mobile/m_news/m_newsDetail/m_newsDetail.vue'),
     meta: {
-      title: '详情'
+      title: '新闻详情'
+    }
+  },
+  {
+    path: '/m_mapList',
+    name: 'm_mapList',
+    component: () => import('../views/mobile/m_orderList/m_mapList.vue'),
+    meta: {
+      title: '地图位置'
+    }
+  },
+  {
+    path: '/m_list',
+    name: 'm_list',
+    component: () => import('../views/mobile/m_orderList/m_list.vue'),
+    meta: {
+      title: '房产列表'
+    }
+  },
+  {
+    path: '/m_detail',
+    name: 'm_detail',
+    component: () => import('../views/mobile/m_orderList/m_details/m_detail.vue'),
+    meta: {
+      title: '房产详情'
+    }
+  },
+  {
+    path: '/m_typeSearch',
+    name: 'm_typeSearch',
+    component: () => import('../views/mobile/m_search/m_typeSearch.vue'),
+    meta: {
+      title: '搜索'
+    }
+  },
+  {
+    path: '/m_addressSearch',
+    name: 'm_addressSearch',
+    component: () => import('../views/mobile/m_search/m_addressSearch.vue'),
+    meta: {
+      title: '搜索'
     }
   },
 ];
