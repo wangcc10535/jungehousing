@@ -2,7 +2,7 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-26 21:09:26
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-27 02:39:15
+ * @LastEditTime: 2022-09-27 02:48:22
  * @FilePath: \jungehousing\src\views\mobile\m_orderList\m_details\m_detail.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -19,8 +19,8 @@
             <div class="swiper-container-box" id="swiper-area">
                 <swiper :options="detailShipOption">
                     <swiper-slide v-for="(link, index) in detailData.roomImages" :key="index">
-                        <div class="friendship-link">
-                            <img :src="link.image" alt="" />
+                        <div class="friendship-link" v-viewer>
+                            <img :src="link.image"  alt="" />
                         </div>
                     </swiper-slide>
                 </swiper>
@@ -104,7 +104,7 @@
                 <div class="agent-box-header">
                     <h3>[{{$t('message.ArticleNo')}}：{{detailData.homeNum}}]</h3>
                     <h4>{{detailData.middlemanJob}}</h4>
-                    <div class="agent-box-header-img">
+                    <div class="agent-box-header-img" v-viewer>
                         <img v-if="detailData.middlemanImg" :src="detailData.middlemanImg" alt />
                         <el-avatar v-else :size="50" style="width:100%;height:100%" :src="circleUrl"></el-avatar>
                     </div>
@@ -277,7 +277,6 @@ export default {
 .friendship-link {
     height: 15.6rem;
     width: 100%;
-
     img {
         width: 100%;
         height: 100%;
