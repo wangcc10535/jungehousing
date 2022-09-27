@@ -2,8 +2,8 @@
  * @Description: 网站首页
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
- * @LastEditors: wangcc
- * @LastEditTime: 2022-08-31 11:37:42
+ * @LastEditors: wangcc 1053578651@qq.com
+ * @LastEditTime: 2022-09-27 17:02:07
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -17,80 +17,42 @@
     <div class="searchbox_wrapper_bottom">
       <div class="searchbox">
         <ul class="nav-search">
-          <li
-            v-for="(tabs, index) in tabList"
-            :key="index"
-            :class="{ activeX: currentClass == index }"
-            @click="tabsClick(index)"
-          >
+          <li v-for="(tabs, index) in tabList" :key="index" :class="{ activeX: currentClass == index }"
+            @click="tabsClick(index)">
             <a href="javascript:;">{{ tabs.name }}</a>
           </li>
         </ul>
         <div class="search-inner">
           <el-select v-model="searchFrom.tradeType" class="search-select" :placeholder="$t('message.TransactionType')">
-            <el-option
-              v-for="item in dealOptions"
-              :key="item.dictValue"
-              :label="item.dictLabel"
-              :value="item.dictValue"
-            >
+            <el-option v-for="item in dealOptions" :key="item.dictValue" :label="item.dictLabel"
+              :value="item.dictValue">
             </el-option>
           </el-select>
           <el-select v-model="searchFrom.saleType" class="search-select" :placeholder="$t('message.SalesType')">
-            <el-option
-              v-for="item in saleOptions"
-              :key="item.dictValue"
-              :label="item.dictLabel"
-              :value="item.dictValue"
-            >
+            <el-option v-for="item in saleOptions" :key="item.dictValue" :label="item.dictLabel"
+              :value="item.dictValue">
             </el-option>
           </el-select>
           <el-select v-model="searchFrom.sale" class="search-select" :placeholder="$t('message.ResidentialType')">
-            <el-option
-              v-for="item in houseOptions"
-              :key="item.dictValue"
-              :label="item.dictLabel"
-              :value="item.dictLabel"
-            >
+            <el-option v-for="item in houseOptions" :key="item.dictValue" :label="item.dictLabel"
+              :value="item.dictLabel">
             </el-option>
           </el-select>
-          <el-select
-            v-model="cityFrom"
-            v-if="currentClass == 0"
-            @change="cityChange('1', $event)"
-            class="search-select"
-            :placeholder="$t('message.selectCity')"
-          >
-            <el-option
-              v-for="item in cityOptions"
-              :key="item.code"
-              :label="item.name"
-              :value="{ label: item.name, value: item.code }"
-            >
+          <el-select v-model="cityFrom" v-if="currentClass == 0" @change="cityChange('1', $event)" class="search-select"
+            :placeholder="$t('message.selectCity')">
+            <el-option v-for="item in cityOptions" :key="item.code" :label="item.name"
+              :value="{ label: item.name, value: item.code }">
             </el-option>
           </el-select>
-          <el-select
-            v-model="countyFrom"
-            v-if="currentClass == 0"
-            @change="cityChange('2', $event)"
-            class="search-select"
-            placeholder="-"
-          >
-            <el-option
-              v-for="item in countyOptions"
-              :key="item.code"
-              :label="item.name"
-              :value="{ label: item.name, value: item.code }"
-            >
+          <el-select v-model="countyFrom" v-if="currentClass == 0" @change="cityChange('2', $event)"
+            class="search-select" placeholder="-">
+            <el-option v-for="item in countyOptions" :key="item.code" :label="item.name"
+              :value="{ label: item.name, value: item.code }">
             </el-option>
           </el-select>
           <el-select v-model="streetFrom" v-if="currentClass == 0" class="search-select" placeholder="-">
-            <el-option
-              v-for="item in streetOptions"
-              :key="item.code"
-              :label="item.name"
-              :value="{ label: item.name, value: item.code }"
-            >
+            <el-option v-for="item in streetOptions" :key="item.code" :label="item.name"
+              :value="{ label: item.name, value: item.code }">
             </el-option>
           </el-select>
           <!-- <el-select v-model="searchFrom.region" v-if="currentClass == 1" class="search-select" placeholder="选择地区">
@@ -105,12 +67,8 @@
             <el-option v-for="item in stationOptions" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select> -->
-          <el-input
-            v-model="searchFrom.searchName"
-            class="search-input"
-            v-if="currentClass == 2 || currentClass == 1"
-            :placeholder="$t('message.fuzzySearch')"
-          >
+          <el-input v-model="searchFrom.searchName" class="search-input" v-if="currentClass == 2 || currentClass == 1"
+            :placeholder="$t('message.fuzzySearch')">
           </el-input>
           <el-button type="warning" icon="el-icon-search" @click="searchClick">{{ $t('message.SearchBtn') }}</el-button>
         </div>
@@ -123,13 +81,8 @@
           <hr class="hr_narrow hr_color" />
         </div>
         <div class="row theme">
-          <div
-            class="col-md-4 col-xs-6"
-            style="width: 22.5%"
-            v-for="(item, index) in homeSpot"
-            :key="index"
-            @click="goList(item)"
-          >
+          <div class="col-md-4 col-xs-6" style="width: 22.5%" v-for="(item, index) in homeSpot" :key="index"
+            @click="goList(item)">
             <div class="cell home_spot_cell">
               <div class="cell_holder home_spot">
                 <a href="javascript:;" class="cover-wrapper">
@@ -152,7 +105,7 @@
           <el-radio-group v-model="houseFrom.value" size="small" @change="radioChange">
             <el-radio-button :label="''">{{ $t('message.whole') }}</el-radio-button>
             <el-radio-button v-for="(item, index) in saleList" :key="index" :label="item.id">{{
-              item.name
+            item.name
             }}</el-radio-button>
           </el-radio-group>
         </div>
@@ -282,6 +235,21 @@
         <img :src="dialogImg" alt="" />
       </div>
     </el-dialog>
+    <div class="main_admin_banner visible-lg no_print">
+      <h3>동포하우징</h3>
+      <img src="@/assets/images/logo.png" class="avatar-lg" alt="프로필">
+      <h4>대표 담당자 : 이영우</h4>
+      <p class="text-muted m-t-sm">신축빌라 아파트 분양 전문 </p>
+      <h5><i class="el-icon-phone"></i> 1600-5528</h5>
+      <h5><i class="el-icon-mobile"></i> 1600-5528</h5>
+      <h5><i class="el-icon-chat-dot-round"></i> weChat:zjzsedx</h5>
+      <div class="snsBox">
+        <a  href="https://open.kakao.com/me/zjlik"
+          class="btn btn-kakao_open btn-xs" target="_blank">
+          <h5><i class="el-icon-chat-line-round"></i> 오픈채팅</h5>
+        </a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -410,7 +378,7 @@ export default {
     },
     saleList() {
       return [
-      {
+        {
           id: 1,
           name: this.$t('message.room1')
         },
@@ -658,7 +626,7 @@ export default {
   margin-bottom: 0px;
 }
 
-.nav-search > li {
+.nav-search>li {
   position: relative;
   display: table-cell;
   vertical-align: bottom;
@@ -667,17 +635,17 @@ export default {
   float: left;
 }
 
-.nav-search > li a {
+.nav-search>li a {
   color: white;
 }
 
-.nav-search > li.activeX a {
+.nav-search>li.activeX a {
   font-weight: bold;
   color: #ffc525;
   background-color: transparent;
 }
 
-.nav-search > li.activeX > a:after {
+.nav-search>li.activeX>a:after {
   content: '';
   border-radius: 0 !important;
   bottom: 0;
@@ -752,7 +720,7 @@ export default {
     font-size: 24px;
   }
 
-  ::v-deep .el-radio-button__orig-radio:checked + .el-radio-button__inner {
+  ::v-deep .el-radio-button__orig-radio:checked+.el-radio-button__inner {
     background-color: #e6e6e6;
     border-color: #adadad;
     box-shadow: -1px 0 0 0 #adadad;
@@ -966,7 +934,7 @@ hr {
   -webkit-perspective: 1000;
 }
 
-::v-deep .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+::v-deep .swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
   margin: -1px 4px;
 }
 
@@ -1009,5 +977,82 @@ hr {
     width: 100%;
     height: 100%;
   }
+}
+.main_admin_banner {
+    padding: 20px;
+    background-color: rgba(255,255,255,0.7);
+    width: 280px;
+    border-radius: 4px;
+    border: 1px solid #dcdcdc;
+    text-align: center;
+    position: fixed;
+    z-index: 10;
+    bottom: 20px;
+    left: 20px;
+}
+.main_admin_banner h3 {
+    margin: 0;
+}
+.avatar-lg {
+    width: 200px !important;
+    height: 60px !important;
+    // border-radius: 50%;
+    max-width: 100%;
+}
+.main_admin_banner h4 {
+    margin: 10px 0;
+}
+.m-t-sm {
+    margin-top: 10px;
+}
+.text-muted {
+    color: #777;
+}
+.main_admin_banner .snsBox {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: -5px;
+    float: left;
+}
+.main_admin_banner .snsBox>*:not(:last-child) {
+    margin-right: 5px;
+}
+.main_admin_banner .snsBox>* {
+    margin-bottom: 5px;
+}
+.btn-naver_talk {
+    color: #fff !important;
+    background-color: #00c73c;
+}
+.btn-kakao_open {
+    color: #fff !important;
+    background-color: #ffb341;
+}
+.btn-group-xs>.btn, .btn-xs {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }
 </style>
