@@ -90,7 +90,8 @@ export default {
 
         // 委托页面
         'entrust': 'ENTRUST',
-        'tabFirst': 'Commission (buy / sell)',
+        'tabFirst': 'Commission（buy）',
+        'tabSale': 'Commission（sell）',
         'tabSecond': 'Delegation list (QnA)',
         'RequiredArea': 'Required Area',
         'Price':'Price',

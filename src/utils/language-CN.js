@@ -92,7 +92,8 @@ export default {
 
         // 委托页面
         'entrust': '委托',
-        'tabFirst': '委托（买/卖）',
+        'tabFirst': '委托（购买）',
+        'tabSale': '委托（出售）',
         'tabSecond': '委托列表（QNA）',
         'RequiredArea': '所需区域',
         'Price':'价格',

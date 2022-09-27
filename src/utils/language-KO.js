@@ -93,6 +93,8 @@ export default {
         // 委托页面 
         'entrust': '의뢰하기', 
         'tabFirst': '구하기 매수/팔다', 
+        'tabFirst': '구하기（사다）',
+        'tabSale': '구하기（팔다）',
         'tabSecond': '위탁(QNA)', 
         'RequiredArea': '원하는 지역', 
         'Price':'가격', 
