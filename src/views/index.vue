@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-27 17:02:07
+ * @LastEditTime: 2022-09-29 21:19:39
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -236,12 +236,13 @@
       </div>
     </el-dialog>
     <div class="main_admin_banner visible-lg no_print">
-      <h3>동포하우징</h3>
+      <h3>준각하우징</h3>
       <img src="@/assets/images/logo.png" class="avatar-lg" alt="프로필">
-      <h4>대표 담당자 : 이영우</h4>
-      <p class="text-muted m-t-sm">신축빌라 아파트 분양 전문 </p>
-      <h5><i class="el-icon-phone"></i> 1600-5528</h5>
-      <h5><i class="el-icon-mobile"></i> 1600-5528</h5>
+      <!-- <h4>{{ $t("message.representativeFigure") }} : {{ $t("message.TeamLeader") }}</h4> -->
+      <h4>대표담당자: 소해은</h4>
+      <p class="text-muted m-t-sm">{{ $t("message.addressInfo") }}</p>
+      <h5><i class="el-icon-phone"></i> 032-361-8884</h5>
+      <h5><i class="el-icon-mobile"></i> 032-361-8884</h5>
       <h5><i class="el-icon-chat-dot-round"></i> weChat:zjzsedx</h5>
       <div class="snsBox">
         <a  href="https://open.kakao.com/me/zjlik"
@@ -987,8 +988,8 @@ hr {
     text-align: center;
     position: fixed;
     z-index: 10;
-    bottom: 20px;
-    left: 20px;
+    bottom: 150px;
+    right: 20px;
 }
 .main_admin_banner h3 {
     margin: 0;
