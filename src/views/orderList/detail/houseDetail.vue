@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-29 13:49:18
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-26 21:40:40
+ * @LastEditTime: 2022-10-07 12:55:47
  * @FilePath: \jungehousing\src\views\orderList\detail\houseDetail.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -505,6 +505,7 @@ export default {
   img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 }
 

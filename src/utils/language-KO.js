@@ -15,7 +15,7 @@ export default {
         'corporateName':'이름', 
         'junge':'준 하우징', 
         'representativeFigure':'회사대표', 
-        'TeamLeader':'팀장', 
+        'TeamLeader':'최요원', 
         'businessCircles':'사업자 등록번호', 
         'address':'주소', 
         'addressInfo':'인천시 남동구 경연로740 준하우징', 

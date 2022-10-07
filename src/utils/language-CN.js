@@ -14,8 +14,8 @@ export default {
         //底部
         'corporateName':'名称',
         'junge':'俊阁家园',
-        'representativeFigure':'代表人物',
-        'TeamLeader':'组长',
+        'representativeFigure':'公司代表',
+        'TeamLeader':'崔代表',
         'businessCircles':'工商登记号',
         'address':'地址',
         'addressInfo':'仁川市南东区京仁路740 1层准房地产',

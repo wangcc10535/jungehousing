@@ -12,8 +12,8 @@ export default {
         //底部
         'corporateName':'corporate name',
         'junge':'junge housing',
-        'representativeFigure':'representative figure',
-        'TeamLeader':'Team Leader',
+        'representativeFigure':'CEO',
+        'TeamLeader':'YooWon Choi',
         'businessCircles':'Industrial and Commercial Registration No',
         'address':'address',
         'addressInfo':'Quasi real estate, 1f, 740 Jingren Road, Nandong District, Incheon City',
