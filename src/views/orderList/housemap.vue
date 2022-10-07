@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 14:21:15
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-26 23:59:03
+ * @LastEditTime: 2022-10-07 12:53:27
  * @FilePath: \jungehousing\src\views\orderList\housemap.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -14,43 +14,28 @@
         <div class="order-search-box">
           <div class="order-search-box-searchEZ">
             <span>{{$t("message.SearchBtn")}}：</span>
-            <el-input
-              class="base-size"
-              size="small"
-              v-model="searchFrom.searchName"
-              :placeholder="$t('message.fuzzySearch')"
-            ></el-input>
+            <el-input class="base-size" size="small" v-model="searchFrom.searchName"
+              :placeholder="$t('message.fuzzySearch')"></el-input>
           </div>
           <div class="order-search-box-searchEZ">
             <span>{{$t('message.SalesType')}}：</span>
-            <el-select class="base-size" size="small" v-model="searchFrom.saleType" collapse-tags :placeholder="$t('message.PleaseSelect')">
-              <el-option
-                v-for="item in saleOptions"
-                :key="item.dictValue"
-                :label="item.dictLabel"
-                :value="item.dictValue"
-              ></el-option>
+            <el-select class="base-size" size="small" v-model="searchFrom.saleType" collapse-tags
+              :placeholder="$t('message.PleaseSelect')">
+              <el-option v-for="item in saleOptions" :key="item.dictValue" :label="item.dictLabel"
+                :value="item.dictValue"></el-option>
             </el-select>
           </div>
           <div class="order-search-box-searchEZ">
             <span>{{$t('message.ResidentialType')}}：</span>
-            <el-select class="base-size" size="small" v-model="searchFrom.house" collapse-tags :placeholder="$t('message.PleaseSelect')">
-              <el-option
-                v-for="item in houseOptions"
-                :key="item.dictValue"
-                :label="item.dictLabel"
-                :value="item.dictValue"
-              ></el-option>
+            <el-select class="base-size" size="small" v-model="searchFrom.house" collapse-tags
+              :placeholder="$t('message.PleaseSelect')">
+              <el-option v-for="item in houseOptions" :key="item.dictValue" :label="item.dictLabel"
+                :value="item.dictValue"></el-option>
             </el-select>
           </div>
           <div class="order-search-box-searchEZ">
             <span>{{$t('message.MetroSearch')}}：</span>
-            <el-input
-              class="base-size"
-              size="small"
-              v-model="searchFrom.subway"
-              placeholder="请输入地铁线路"
-            ></el-input>
+            <el-input class="base-size" size="small" v-model="searchFrom.subway" placeholder="请输入地铁线路"></el-input>
             <!-- <el-select
               class="base-size"
               size="small"
@@ -106,61 +91,57 @@
           </div>
           <div class="map_list_5" id="map_list">
             <div id="map_search_list">
-              <div
-                class="relists relist list_21382"
-                v-for="(house, index) in houseList"
-                :key="index"
-                @click="seDetail(house)"
-              >
-                <div class="info_image" style="margin-right: 5px">
-                  <a
-                    class="view_product"
-                    data-toggle="modal"
-                    data-target="#view_dialog"
-                    href="#"
-                    :data-id="house.homeNum"
-                  >
-                    <img :src="house.image" class="thumb img-responsive" />
-                  </a>
-                </div>
-                <div class="info_desc">
-                  <div>
-                    <a class="view_product" data-toggle="modal" data-target="#view_dialog" href="#">
-                      <font style="vertical-align: inherit">
-                        <font style="vertical-align: inherit; ">【 {{ house.familyNum }} {{$t('message.between')}}】 {{ house.title }}</font>
-                      </font>
+              <div class="relists relist list_21382" v-for="(house, index) in houseList" :key="index"
+                @click="seDetail(house)">
+                <div class="top-mokeer">
+                  <div class="info_image" style="margin-right: 5px">
+                    <a class="view_product" data-toggle="modal" data-target="#view_dialog" href="#"
+                      :data-id="house.homeNum">
+                      <img :src="house.image" class="thumb img-responsive" />
                     </a>
-                    <div class="address">
-                      <small>
-                        <div class="link">
-                          <i class="fa fa-map-marker"></i>
-                          <font style="vertical-align: inherit">
-                            <font style="vertical-align: inherit">{{ house.address }}</font>
-                          </font>
-                          <!--비밀메모-->
-                        </div>
-                        <div class="link">
-                          <font style="vertical-align: inherit">
-                            <font style="vertical-align: inherit">{{$t('message.region')}}：</font>
-                          </font>
-                          <div style="display: inline" class="help" data-toggle="tooltip" title="22坪">
+                  </div>
+                  <div class="info_desc">
+                    <div>
+                      <a class="view_product" data-toggle="modal" data-target="#view_dialog" href="#">
+                        <font style="vertical-align: inherit">
+                          <p class="order-title" style="vertical-align: inherit; ">【 {{ house.familyNum }}
+                            {{$t('message.between')}}】 {{
+                            house.title }}</p>
+                        </font>
+                      </a>
+                      <div class="address">
+                        <small>
+                          <div class="link">
+                            <i class="fa fa-map-marker"></i>
                             <font style="vertical-align: inherit">
-                              <font style="vertical-align: inherit">{{ house.actualArea }}㎡ |</font>
+                              <font style="vertical-align: inherit">{{ house.address }}</font>
+                            </font>
+                            <!--비밀메모-->
+                          </div>
+                          <div class="link">
+                            <font style="vertical-align: inherit">
+                              <font style="vertical-align: inherit">{{$t('message.region')}}：</font>
+                            </font>
+                            <div style="display: inline" class="help" data-toggle="tooltip" title="22坪">
+                              <font style="vertical-align: inherit">
+                                <font style="vertical-align: inherit">{{ house.actualArea }}㎡ |</font>
+                              </font>
+                            </div>
+                            <font style="vertical-align: inherit">
+                              <font style="vertical-align: inherit">&nbsp;{{$t('message.waterproof')}}： {{
+                              house.familyNum }}{{$t('message.between')}} | {{$t('message.ShowerRoom')}} {{
+                                house.showerRoom }}{{$t('message.between')}}</font>
                             </font>
                           </div>
-                          <font style="vertical-align: inherit">
-                            <font style="vertical-align: inherit"
-                              >&nbsp;{{$t('message.waterproof')}}： {{ house.familyNum }}{{$t('message.between')}} | {{$t('message.ShowerRoom')}} {{ house.showerRoom }}{{$t('message.between')}}</font
-                            >
-                          </font>
-                        </div>
-                      </small>
+                        </small>
+                      </div>
                     </div>
                   </div>
                 </div>
+
+
                 <div style="clear: both"></div>
-                <div
-                  style="
+                <div style="
                     width: 375px;
                     letter-spacing: -1px;
                     padding: 5px 10px;
@@ -168,20 +149,16 @@
                     overflow: hidden;
                     white-space: nowrap;
                     text-overflow: ellipsis;
-                  "
-                >
+                  ">
                   <div class="price_wrap" style="color: #f6910b">
-                    <span
-                      class="price_sell_span installation_span"
-                      style="
+                    <span class="price_sell_span installation_span" style="
                         font-size: 12px;
                         color: white;
                         padding: 1px 5px 1px 5px;
                         margin-right: 3px;
                         background-color: #f6910b;
                         margin-right: 5px;
-                      "
-                    >
+                      ">
                       <font style="vertical-align: inherit">
                         <font style="vertical-align: inherit">{{$t('message.TotalPrice')}}</font>
                       </font>
@@ -191,9 +168,7 @@
                         <font style="vertical-align: inherit">{{ house.lastPrice }}</font>
                       </font>
                     </strong>
-                    <span
-                      class="price_sell_span installation_span"
-                      style="
+                    <span class="price_sell_span installation_span" style="
                         font-size: 12px;
                         color: white;
                         padding: 1px 5px 1px 5px;
@@ -201,8 +176,7 @@
                         margin-left: 5px;
                         background-color: #f6910b;
                         margin-right: 5px;
-                      "
-                    >
+                      ">
                       <font style="vertical-align: inherit">
                         <font style="vertical-align: inherit">{{$t('message.downPayments')}}</font>
                       </font>
@@ -212,9 +186,7 @@
                         <font style="vertical-align: inherit">{{ house.roomPrice }}</font>
                       </font>
                     </strong>
-                    <span
-                      class="price_sell_span installation_span installation_loan"
-                      style="
+                    <span class="price_sell_span installation_span installation_loan" style="
                         font-size: 12px;
                         color: white;
                         padding: 1px 5px 1px 5px;
@@ -222,8 +194,7 @@
                         margin-left: 5px;
                         background-color: #f6910b;
                         margin-right: 5px;
-                      "
-                    >
+                      ">
                       <font style="vertical-align: inherit">
                         <font style="vertical-align: inherit">{{$t('message.loan')}}</font>
                       </font>
@@ -245,12 +216,8 @@
             </div>
             <!--   分页   -->
             <div class="pagination-box" v-if="total > 10">
-              <pagination
-                :total="total"
-                :page.sync="queryParams.pageNum"
-                :limit.sync="queryParams.pageSize"
-                @pagination="getList"
-              />
+              <pagination :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
+                @pagination="getList" />
             </div>
           </div>
         </div>
@@ -293,7 +260,7 @@ export default {
     this.getSaletype();
     this.getHousetype();
   },
-  mounted() {},
+  mounted() { },
   methods: {
     searchSub() {
       this.getList();
@@ -434,12 +401,29 @@ export default {
   justify-content: left;
   width: 82%;
   margin-left: 10px;
+
   &-searchEZ {
     margin-right: 6px;
   }
 }
+
 .base-size {
   width: 50%;
   // margin: 0 6px;
+}
+
+.top-mokeer {
+  display: flex;
+}
+
+::v-deep .info_desc {
+  width: 270px;
+}
+
+.order-title {
+  width: 97%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>

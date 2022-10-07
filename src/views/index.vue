@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-29 21:19:39
+ * @LastEditTime: 2022-10-07 12:33:21
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -239,7 +239,7 @@
       <h3>준각하우징</h3>
       <img src="@/assets/images/logo.png" class="avatar-lg" alt="프로필">
       <!-- <h4>{{ $t("message.representativeFigure") }} : {{ $t("message.TeamLeader") }}</h4> -->
-      <h4>대표담당자: 소해은</h4>
+      <!-- <h4>대표담당자: 소해은</h4> -->
       <p class="text-muted m-t-sm">{{ $t("message.addressInfo") }}</p>
       <h5><i class="el-icon-phone"></i> 032-361-8884</h5>
       <h5><i class="el-icon-mobile"></i> 032-361-8884</h5>
@@ -547,11 +547,13 @@ export default {
       });
     },
     goList(item) {
+      console.log(item);
+      let search = {
+        searchName: item.dictLabel
+      }
       this.$router.push({
         name: 'housemap',
-        query: {
-          id: item.id
-        }
+        query: search
       });
     },
     megaHover(item) {

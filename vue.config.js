@@ -1,3 +1,11 @@
+/*
+ * @Author: wangcc 1053578651@qq.com
+ * @Date: 2022-09-21 21:56:02
+ * @LastEditors: wangcc 1053578651@qq.com
+ * @LastEditTime: 2022-10-01 09:57:43
+ * @FilePath: \jungehousing\vue.config.js
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 const { defineConfig } = require('@vue/cli-service')
 const { resolve } = require("path");
 const port = 9010
@@ -5,7 +13,7 @@ const name = '俊阁家园'
 module.exports = defineConfig({
   transpileDependencies: true,
   lintOnSave: false,
-  publicPath:'./',
+  publicPath: process.env.NODE_ENV === "production" ? "/" : "/",
   devServer: {
     host: "0.0.0.0",
     port,
