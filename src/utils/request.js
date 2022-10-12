@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Notification, MessageBox, Message, Loading } from 'element-ui'
+import { Notification, MessageBox, Message } from 'element-ui'
 import { getToken } from '@/utils/auth'
 import { tansParams } from '@/utils/utils'
 
@@ -8,7 +8,6 @@ axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 const service = axios.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分
   baseURL: process.env.VUE_APP_BASE_API,
-  // baseURL:'http://1785s28l17.iask.in:36629',
   // 超时
   timeout: 60000
 })
@@ -28,7 +27,7 @@ service.interceptors.request.use(
       config.headers['Authorization'] = `Bearer ${getToken()}`
     }
     // url拼接时间戳参数
-    config.url = `${config.url}`
+    config.url = `${config.url}?_t=${new Date().getTime()}`
     // get请求映射params参数
     if (config.method === 'get' && config.params) {
       let url = config.url + '&' + tansParams(config.params)
@@ -40,15 +39,14 @@ service.interceptors.request.use(
   },
   (error) => {
     Promise.reject(error)
-  }
-)
+  })
 
 // 响应拦截器
-service.interceptors.response.use(
-  (res) => {
+service.interceptors.response.use((res) => {
     // 未设置状态码则默认成功状态
     const code = res.data.code || 200,
-    msg = res?.data?.msg
+      // msg = res?.data?.msg
+      msg = res.data.msg
     // 鉴权校验
     if (code === 401) {
       MessageBox.confirm(
@@ -79,7 +77,7 @@ service.interceptors.response.use(
       })
       return Promise.reject('error')
     } else {
-      return res.data
+      return Promise.resolve(res.data)
     }
   },
   (error) => {

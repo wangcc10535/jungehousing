@@ -1,5 +1,5 @@
 //将拦截器整体导入
-import request from '@/utils/request'; //导入已经写好的拦截器
+import request from '@/utils/request.js'; //导入已经写好的拦截器
 
 // 获取banner
 export function getBanners() {
