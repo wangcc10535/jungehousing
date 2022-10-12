@@ -2,7 +2,7 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-21 21:56:02
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-25 00:06:24
+ * @LastEditTime: 2022-10-12 21:48:06
  * @FilePath: \jungehousing\src\App.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -33,17 +33,15 @@ export default {
   },
   mounted() {
     if (this.isMobile()) {
-      console.log('移动端');
       this.header_show = false;
       this.footer_show = false;
       this.mStyle = 'bodyStyle'
-      this.$router.replace('/m_index');
+      // this.$router.replace('/m_index');
     } else {
-      console.log('pc端');
       this.mStyle = ''
       this.header_show = true;
       this.footer_show = true;
-      this.$router.replace('/');
+      // this.$router.replace('/');
     }
   },
   methods: {

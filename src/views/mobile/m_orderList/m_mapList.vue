@@ -98,8 +98,8 @@ export default {
                 });
                 naver.maps.Event.addListener(this.marker, 'click', function (e) {
                     //点击marker获取商品列表
-                    console.log(e);
-                    console.log(spot);
+                    // console.log(e);
+                    // console.log(spot);
                 });
                 markers.push(this.marker);
             }

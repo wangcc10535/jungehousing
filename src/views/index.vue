@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-07 12:33:21
+ * @LastEditTime: 2022-10-12 21:49:26
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -436,7 +436,6 @@ export default {
     },
     // 获取城市
     getCity(index, e) {
-      console.log(e);
       if (index == 1) {
         this.pid = e.value;
       } else if (index == 2) {
@@ -445,7 +444,6 @@ export default {
         this.pid = '0';
       }
       address({ pid: this.pid }).then((res) => {
-        console.log(res);
         if (index == 1) {
           this.countyOptions = res.rows;
         } else if (index == 2) {
@@ -457,8 +455,6 @@ export default {
     },
     // 选择城市
     cityChange(index, e) {
-      console.log(index);
-      console.log(e);
       this.getCity(index, e);
     },
     // 获取房产列表
@@ -472,7 +468,7 @@ export default {
         this.houseList.forEach((item) => {
           item.titleLabel = item.titleLabel.split(',');
         });
-        console.log(this.houseList);
+        // console.log(this.houseList);
       });
     },
     // 获取标题标签
@@ -536,7 +532,7 @@ export default {
         this.searchFrom.city = this.cityFrom.label + ',' + this.countyFrom.label + ',' + this.streetFrom.label;
       }
 
-      console.log(this.searchFrom);
+      // console.log(this.searchFrom);
       if (JSON.stringify(this.searchFrom) == '{}') {
         this.$message.error('请选择搜索条件！');
         return false;
@@ -547,7 +543,7 @@ export default {
       });
     },
     goList(item) {
-      console.log(item);
+      // console.log(item);
       let search = {
         searchName: item.dictLabel
       }

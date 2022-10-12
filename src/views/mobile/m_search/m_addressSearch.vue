@@ -62,7 +62,7 @@ export default {
     methods: {
         // 获取城市
         getCity(index, e) {
-            console.log(e);
+            // console.log(e);
             if (index == 1) {
                 this.pid = e.value;
             } else if (index == 2) {
@@ -71,7 +71,7 @@ export default {
                 this.pid = '0';
             }
             address({ pid: this.pid }).then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (index == 1) {
                     this.countyOptions = res.rows;
                 } else if (index == 2) {
@@ -83,8 +83,8 @@ export default {
         },
         // 选择城市
         cityChange(index, e) {
-            console.log(index);
-            console.log(e);
+            // console.log(index);
+            // console.log(e);
             this.getCity(index, e);
         },
         react() {

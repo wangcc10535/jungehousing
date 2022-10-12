@@ -9,6 +9,9 @@ export default {
         'CN': '中文',
         'EN': 'english',
         'KO': '한국어',
+        'toDay':'today',
+        'nowDay':'Current',
+        'losDay':'Cumulative',
         //底部
         'corporateName':'corporate name',
         'junge':'junge housing',

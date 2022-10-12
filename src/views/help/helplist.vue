@@ -39,7 +39,7 @@ export default {
   methods:{
     getHelp() {
       listFaq({}).then( res =>{
-        console.log(res);
+        // console.log(res);
         this.helpFrom = res.rows;
       })
     }

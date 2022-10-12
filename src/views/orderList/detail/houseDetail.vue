@@ -268,7 +268,7 @@ export default {
     // 获取经纪人
     getlistmiddleman() {
       listmiddleman({}).then(res => {
-        console.log(res.rows);
+        // console.log(res.rows);
         this.middleman = res.rows
       })
     },
@@ -286,7 +286,7 @@ export default {
             this.houseData.middlemanTalk = item.talk;
           }
         })
-        console.log(this.houseData);
+        // console.log(this.houseData);
         this.initMap();
       });
     },
@@ -330,7 +330,7 @@ export default {
       }
       const marr = this.houseData.roomNeighbors;
       if (icon.className == 'MT1') {
-        console.log('超级市场');
+        // console.log('超级市场');
         // this.iconMarker.remove()
         marr.forEach((item) => {
           if (item.type == icon.id) {
@@ -345,7 +345,7 @@ export default {
           }
         });
       } else if (icon.className == 'CS2') {
-        console.log('便利店');
+        // console.log('便利店');
         marr.forEach((item) => {
           if (item.type == icon.id) {
             let latlng = new naver.maps.LatLng(item.lat, item.lon);
@@ -359,7 +359,7 @@ export default {
           }
         });
       } else if (icon.className == 'PS3') {
-        console.log('幼儿园');
+        // console.log('幼儿园');
         marr.forEach((item) => {
           if (item.type == icon.id) {
             let latlng = new naver.maps.LatLng(item.lat, item.lon);
@@ -373,7 +373,7 @@ export default {
           }
         });
       } else if (icon.className == 'SC4') {
-        console.log('学校');
+        // console.log('学校');
         marr.forEach((item) => {
           if (item.type == icon.id) {
             let latlng = new naver.maps.LatLng(item.lat, item.lon);
@@ -387,7 +387,7 @@ export default {
           }
         });
       } else if (icon.className == 'BK9') {
-        console.log('银行');
+        // console.log('银行');
         marr.forEach((item) => {
           if (item.type == icon.id) {
             let latlng = new naver.maps.LatLng(item.lat, item.lon);
@@ -401,7 +401,7 @@ export default {
           }
         });
       } else if (icon.className == 'CT1') {
-        console.log('娱乐设施');
+        // console.log('娱乐设施');
         marr.forEach((item) => {
           if (item.type == icon.id) {
             let latlng = new naver.maps.LatLng(item.lat, item.lon);
@@ -415,7 +415,7 @@ export default {
           }
         });
       } else if (icon.className == 'PO3') {
-        console.log('公共机构');
+        // console.log('公共机构');
         marr.forEach((item) => {
           if (item.type == icon.id) {
             let latlng = new naver.maps.LatLng(item.lat, item.lon);
@@ -429,7 +429,7 @@ export default {
           }
         });
       } else if (icon.className == 'AT4') {
-        console.log('景点');
+        // console.log('景点');
         marr.forEach((item) => {
           if (item.type == icon.id) {
             let latlng = new naver.maps.LatLng(item.lat, item.lon);
@@ -443,7 +443,7 @@ export default {
           }
         });
       } else if (icon.className == 'HP8') {
-        console.log('医院');
+        // console.log('医院');
         marr.forEach((item) => {
           if (item.type == icon.id) {
             let latlng = new naver.maps.LatLng(item.lat, item.lon);

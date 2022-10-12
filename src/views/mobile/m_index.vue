@@ -274,7 +274,7 @@ export default {
         this.houseList.forEach((item) => {
           item.titleLabel = item.titleLabel.split(',');
         });
-        console.log(this.houseList);
+        // console.log(this.houseList);
       });
     },
     // 获取客户评论列表
@@ -293,7 +293,7 @@ export default {
       this.$refs.navRef.openNav()
     },
     customerClick(item) {
-      console.log(item);
+      // console.log(item);
       this.dialogVisible = true;
       this.dialogImg = item.image
     },
@@ -304,7 +304,7 @@ export default {
       this.$router.push({ name: 'm_mapList' })
     },
     setList(item) {
-      console.log(item);
+      // console.log(item);
       this.$router.push({ name: 'm_detail', query: {id:item.id} })
     },
     jumpSearch() {

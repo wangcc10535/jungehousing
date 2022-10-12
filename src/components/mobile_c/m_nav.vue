@@ -110,7 +110,7 @@ export default {
         this.$i18n.locale = e
         this.handleClose()
       }).catch(() => {
-        console.log('catch');
+        // console.log('catch');
       });
     }
   }

@@ -278,7 +278,7 @@ export default {
     handleCheckedCitiesChange() { },
     // 获取城市
     getCity(index, e) {
-      console.log(e);
+      // console.log(e);
       if (index == 1) {
         this.pid = e.value;
       } else if (index == 2) {
@@ -287,7 +287,7 @@ export default {
         this.pid = '0';
       }
       address({ pid: this.pid }).then((res) => {
-        console.log(res);
+        // console.log(res);
         if (index == 1) {
           this.countyOptions = res.rows;
         } else if (index == 2) {
@@ -340,7 +340,7 @@ export default {
       this.fromAddData.district = this.districtFrom.label;
       this.fromAddData.homeType = this.houseTypecheckList.toString();
       this.fromAddData.dealType = this.saleTypecheckList.toString();
-      console.log(this.fromAddData);
+      // console.log(this.fromAddData);
       addQna({ ...this.fromAddData }).then((res) => {
         if (res.code == 200) {
           this.$message.success('제출 성공!');
@@ -355,7 +355,7 @@ export default {
       this.tableData = [];
       listQna({ type: '-1', show: '1', ...this.queryParams }).then((res) => {
         if (res.code == 200) {
-          console.log(res);
+          // console.log(res);
           this.tableData = res.rows;
           this.total = res.total
         }

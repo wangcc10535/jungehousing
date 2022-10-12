@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:01:35
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-24 21:35:15
+ * @LastEditTime: 2022-10-12 22:00:51
  * @FilePath: \jungehousing\src\components\header.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -20,6 +20,11 @@
           <span>{{ $t("message.topPhone") }}</span>
           <big>032-361-8884</big>
         </div>
+      </div>
+      <div class="num-to" v-if="this.$route.name != 'index'">
+        <span class="num-to-box toDay"><span>{{ $t("message.toDay") }}</span> <br /> <countTo :startVal='0' :endVal='142' :duration='3000'></countTo></span>
+        <span class="num-to-box nowDay"><span>{{ $t("message.nowDay") }}</span> <br /><countTo :startVal='0' :endVal='23' :duration='6000'></countTo></span>
+        <span class="num-to-box losDay"><span>{{ $t("message.losDay") }}</span><br /><countTo :startVal='0' :endVal='715524' :duration='4200'></countTo></span>
       </div>
       <div class="header-navigation pull-right">
         <ul>
@@ -61,8 +66,12 @@
 </template>
 
 <script>
+  import countTo from 'vue-count-to'
 export default {
   name: 'app-header',
+  components: {
+    countTo
+  },
   data() {
     return {
       value: this.$i18n.locale,
@@ -86,7 +95,6 @@ export default {
 
   },
   mounted() {
-    console.log(this.$route.path.query);
   },
   methods: {
 
@@ -98,7 +106,7 @@ export default {
       }).then(() => {
         this.$i18n.locale = e
       }).catch(() => {
-        console.log('catch');
+        // console.log('catch');
       });
     }
   },
@@ -163,7 +171,27 @@ export default {
 }
 
 
-
+.num-to{
+  display: inline-flex;
+  margin-left: 20px;
+  height: 100%;
+  &-box {
+    display: inline-block;
+    text-align: right;
+    margin: 0 10px;
+    font-weight: 600;
+    
+  }
+  .toDay{
+      color:#bd413f;
+    }
+    .nowDay{
+      color: #ee8e1e;
+    }
+    .losDay{
+      color: #6c9ee5;
+    }
+}
 .call_box {
   font-size: 15px;
   font-weight: bold;

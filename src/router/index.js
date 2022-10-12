@@ -1,3 +1,11 @@
+/*
+ * @Author: wangcc 1053578651@qq.com
+ * @Date: 2022-09-21 21:56:02
+ * @LastEditors: wangcc 1053578651@qq.com
+ * @LastEditTime: 2022-10-12 22:12:36
+ * @FilePath: \jungehousing\src\router\index.js
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
@@ -6,8 +14,12 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: () => import('../views/index.vue'),
+    redirect:'/index'
+  },
+  {
+    path: '/index',
+    name: 'index',
+    component: () => import('../views/index'),
     meta: {
       title: '首页'
     }
@@ -190,8 +202,26 @@ const routes = [
   },
 ];
 
-
 const router = new VueRouter({
   routes
+});
+
+async function getTerminalType(){
+  if (/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i.test(navigator.userAgent)) {
+      return  'mobile';
+  } else {
+      return 'pc';
+  }
+}
+
+router.beforeEach(async (to, from, next)=>{
+  let terminalType = await getTerminalType();
+  if (terminalType === 'mobile' && to.fullPath.indexOf('/index')!==-1) {
+      await next({path: '/m_index'})
+  } else if (terminalType === 'pc' && to.fullPath.indexOf('/m_index')!==-1) {
+      await next({path: '/index'})
+  } else {
+      await next()
+  }
 });
 export default router;

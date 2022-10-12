@@ -165,7 +165,7 @@ export default {
         // 获取经纪人
         getlistmiddleman() {
             listmiddleman({}).then(res => {
-                console.log(res.rows);
+                // console.log(res.rows);
                 this.middleman = res.rows
             })
         },

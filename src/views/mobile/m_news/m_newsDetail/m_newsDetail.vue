@@ -30,7 +30,7 @@ export default {
     },
     created() {
         newsDetail({ id: this.qId }).then((res) => {
-            console.log(res);
+            // console.log(res);
             this.baseFrom = res.data;
         });
     },

@@ -36,7 +36,7 @@ export default {
     if (this.requestName == 'news') {
       this.detailTitle = '新闻';
       newsDetail({ id: this.qId }).then((res) => {
-        console.log(res);
+        // console.log(res);
         this.baseFrom = res.data;
       });
     } else if (this.requestName == 'see') {

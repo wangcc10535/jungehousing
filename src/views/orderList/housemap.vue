@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 14:21:15
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-07 12:53:27
+ * @LastEditTime: 2022-10-12 22:18:56
  * @FilePath: \jungehousing\src\views\orderList\housemap.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -114,7 +114,7 @@
                           <div class="link">
                             <i class="fa fa-map-marker"></i>
                             <font style="vertical-align: inherit">
-                              <font style="vertical-align: inherit">{{ house.address }}</font>
+                              <font style="vertical-align: inherit">{{ house.addressName }}</font>
                             </font>
                             <!--비밀메모-->
                           </div>
@@ -273,6 +273,11 @@ export default {
     getList() {
 
       searchRoom({ ...this.queryParams, ...this.searchFrom }).then((res) => {
+        if (res.rows) {
+          res.rows.forEach( item =>{
+            item.addressName = item.city.split(',').splice(0,2).join("")
+          })
+        }
         this.houseList = res.rows;
         this.total = res.total;
         this.initMap();
@@ -337,7 +342,9 @@ export default {
       };
       for (var i = 0, ii = data.length; i < ii; i++) {
         var spot = data[i],
-          number = data[i].homeNum,
+          // number = data[i].homeNum,
+          number = '1',
+          // address = spot.city.split(',').splice(0,2).join(""),
           address = data[i].address,
           latlng = new naver.maps.LatLng(spot.lat, spot.lon);
         var htmlMarker1 = {
@@ -357,13 +364,13 @@ export default {
         });
         naver.maps.Event.addListener(this.marker, 'click', function (e) {
           //点击marker获取商品列表
-          console.log(e);
-          console.log(spot);
+          // console.log(e);
+          // console.log(spot);
         });
         markers.push(this.marker);
       }
       var markerClustering = new MarkerClustering({
-        minClusterSize: 16, // 控制聚点数量从几个开始
+        minClusterSize: 5, // 控制聚点数量从几个开始
         maxZoom: 14, // 最大层级
         map: map,
         markers: markers, // 标记点数组

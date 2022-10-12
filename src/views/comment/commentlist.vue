@@ -67,7 +67,7 @@ export default {
       });
     },
     addMore() {
-      console.log('加载更多');
+      // console.log('加载更多');
       
     },
     // 获取客户评论列表
