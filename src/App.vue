@@ -2,7 +2,7 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-21 21:56:02
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-12 21:48:06
+ * @LastEditTime: 2022-10-13 20:36:44
  * @FilePath: \jungehousing\src\App.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -11,7 +11,6 @@
     <app-header v-if="header_show"></app-header>
     <router-view v-on:header="header" v-on:footer="footer" />
     <app-footer v-if="footer_show"></app-footer>
-    <el-backtop :bottom="100" :visibility-height="50" v-if="header_show"></el-backtop>
   </div>
 </template>
 

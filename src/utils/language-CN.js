@@ -21,7 +21,7 @@ export default {
         'TeamLeader':'崔代表',
         'businessCircles':'工商登记号',
         'address':'地址',
-        'addressInfo':'仁川市南东区京仁路740 1层准房地产',
+        'addressInfo':'仁川市南东区京仁路740 一楼俊不动产',
         'phone':'电话',
         'copyright':'2018 © junland。照片、列表、社区 - 网站上的所有信息都受到保护。由junland housing提供支持',
         'aboutUs':'关于我们',

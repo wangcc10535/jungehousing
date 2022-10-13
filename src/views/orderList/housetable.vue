@@ -2,8 +2,8 @@
  * @Description: 
  * @Author: wangcc
  * @Date: 2022-08-23 14:21:53
- * @LastEditors: wangcc
- * @LastEditTime: 2022-08-31 11:58:30
+ * @LastEditors: wangcc 1053578651@qq.com
+ * @LastEditTime: 2022-10-13 21:02:11
  * @FilePath: \jungehousing\src\views\orderList\housetable.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -131,8 +131,16 @@ export default {
   methods: {
     getList() {
       searchRoom({ ...this.queryParams, ...this.searchFrom }).then((res) => {
-        this.houseList = res.rows;
-        this.total = res.total;
+        if (res.code == 200) {
+          this.houseList = []
+          res.rows.forEach( item =>{
+            item.addressName = item.city.split(',').splice(0,2).join("")
+            if (item.status != 0) {
+              this.houseList.push(item)
+            }
+          })
+          this.total = res.total;
+        }
       });
     },
     seDetail(item) {

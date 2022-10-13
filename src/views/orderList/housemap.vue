@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 14:21:15
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-12 22:18:56
+ * @LastEditTime: 2022-10-13 22:23:27
  * @FilePath: \jungehousing\src\views\orderList\housemap.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -90,7 +90,7 @@
             <div id="map" style="width: 100%; height: 766px; position: relative"></div>
           </div>
           <div class="map_list_5" id="map_list">
-            <div id="map_search_list">
+            <div id="map_search_list" v-if="houseList.length > 0">
               <div class="relists relist list_21382" v-for="(house, index) in houseList" :key="index"
                 @click="seDetail(house)">
                 <div class="top-mokeer">
@@ -213,7 +213,9 @@
                   </div>
                 </div>
               </div>
+
             </div>
+            <el-empty v-else :description="$t('message.NoDataYet')"></el-empty>
             <!--   分页   -->
             <div class="pagination-box" v-if="total > 10">
               <pagination :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
@@ -271,15 +273,18 @@ export default {
     },
     // 获取房产列表
     getList() {
-
       searchRoom({ ...this.queryParams, ...this.searchFrom }).then((res) => {
-        if (res.rows) {
-          res.rows.forEach( item =>{
-            item.addressName = item.city.split(',').splice(0,2).join("")
+        if (res.code == 200) {
+          this.houseList = []
+          res.rows.forEach(item => {
+            item.addressName = item.city.split(',').splice(0, 2).join("")
+            if (item.status != 0) {
+              this.houseList.push(item)
+            }
           })
+          this.total = res.total;
         }
-        this.houseList = res.rows;
-        this.total = res.total;
+
         this.initMap();
       });
     },
@@ -341,33 +346,36 @@ export default {
         anchor: N.Point(20, 20)
       };
       for (var i = 0, ii = data.length; i < ii; i++) {
-        var spot = data[i],
-          // number = data[i].homeNum,
-          number = '1',
-          // address = spot.city.split(',').splice(0,2).join(""),
-          address = data[i].address,
-          latlng = new naver.maps.LatLng(spot.lat, spot.lon);
-        var htmlMarker1 = {
-          content:
-            '<div class="marker-box"><span class="num">' +
-            number +
-            '</span><font class="marker-name">' +
-            address +
-            '</font></div>',
-          size: N.Size(40, 40),
-          anchor: N.Point(20, 20)
-        };
-        this.marker = new naver.maps.Marker({
-          position: latlng,
-          draggable: false,
-          icon: htmlMarker1
-        });
-        naver.maps.Event.addListener(this.marker, 'click', function (e) {
-          //点击marker获取商品列表
-          // console.log(e);
-          // console.log(spot);
-        });
-        markers.push(this.marker);
+        if (data[i].status != 0) {
+          var spot = data[i],
+            // number = data[i].homeNum,
+            number = '1',
+            address = spot.city.split(',').splice(2).join(''),
+            // address = data[i].address,
+            latlng = new naver.maps.LatLng(spot.lat, spot.lon);
+          var htmlMarker1 = {
+            content:
+              '<div class="marker-box"><span class="num">' +
+              number +
+              '</span><font class="marker-name">' +
+              address +
+              '</font></div>',
+            size: N.Size(40, 40),
+            anchor: N.Point(20, 20)
+          };
+          this.marker = new naver.maps.Marker({
+            position: latlng,
+            draggable: false,
+            icon: htmlMarker1
+          });
+          naver.maps.Event.addListener(this.marker, 'click', function (e) {
+            //点击marker获取商品列表
+            // console.log(e);
+            // console.log(spot);
+          });
+          markers.push(this.marker);
+        }
+
       }
       var markerClustering = new MarkerClustering({
         minClusterSize: 5, // 控制聚点数量从几个开始

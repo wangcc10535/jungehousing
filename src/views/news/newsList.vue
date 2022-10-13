@@ -2,8 +2,8 @@
  * @Description: 
  * @Author: wangcc
  * @Date: 2022-08-23 14:33:28
- * @LastEditors: wangcc
- * @LastEditTime: 2022-08-29 17:56:51
+ * @LastEditors: wangcc 1053578651@qq.com
+ * @LastEditTime: 2022-10-13 21:02:42
  * @FilePath: \jungehousing\src\views\news\newsList.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -94,7 +94,15 @@ export default {
         pageSize: 10
       };
       roomSelectHot({...queryParams }).then((res) => {
-        this.houseList = res.rows;
+        if (res.code == 200) {
+          this.houseList = []
+          res.rows.forEach( item =>{
+            item.addressName = item.city.split(',').splice(0,2).join("")
+            if (item.status != 0) {
+              this.houseList.push(item)
+            }
+          })
+        }
       });
     }
   }

@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-12 21:49:26
+ * @LastEditTime: 2022-10-13 20:43:26
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -243,10 +243,11 @@
       <p class="text-muted m-t-sm">{{ $t("message.addressInfo") }}</p>
       <h5><i class="el-icon-phone"></i> 032-361-8884</h5>
       <h5><i class="el-icon-mobile"></i> 032-361-8884</h5>
-      <h5><i class="el-icon-chat-dot-round"></i> weChat:zjzsedx</h5>
+      <h5><i class="el-icon-chat-dot-round"></i> weChat: 
+        <div><img style="width:80px;height:80px" src="@/assets/images/weChatimg.png" alt="" /></div>
+      </h5>
       <div class="snsBox">
-        <a  href="https://open.kakao.com/me/zjlik"
-          class="btn btn-kakao_open btn-xs" target="_blank">
+        <a href="https://open.kakao.com/me/zjlik" class="btn btn-kakao_open btn-xs" target="_blank">
           <h5><i class="el-icon-chat-line-round"></i> 오픈채팅</h5>
         </a>
       </div>
@@ -977,81 +978,95 @@ hr {
     height: 100%;
   }
 }
+
 .main_admin_banner {
-    padding: 20px;
-    background-color: rgba(255,255,255,0.7);
-    width: 280px;
-    border-radius: 4px;
-    border: 1px solid #dcdcdc;
-    text-align: center;
-    position: fixed;
-    z-index: 10;
-    bottom: 150px;
-    right: 20px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 200px;
+  border-radius: 4px;
+  border: 1px solid #dcdcdc;
+  text-align: center;
+  position: fixed;
+  z-index: 10;
+  bottom: 10px;
+  right: 10px;
 }
+
 .main_admin_banner h3 {
-    margin: 0;
+  margin: 0;
 }
+
 .avatar-lg {
-    width: 200px !important;
-    height: 60px !important;
-    // border-radius: 50%;
-    max-width: 100%;
+  width: 200px !important;
+  height: 60px !important;
+  // border-radius: 50%;
+  max-width: 100%;
 }
+
 .main_admin_banner h4 {
-    margin: 10px 0;
+  margin: 10px 0;
 }
+
 .m-t-sm {
-    margin-top: 10px;
+  margin-top: 10px;
 }
+
 .text-muted {
-    color: #777;
+  color: #777;
 }
+
 .main_admin_banner .snsBox {
-    display: inline-block;
-    width: 100%;
-    margin-bottom: -5px;
-    float: left;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: -5px;
+  float: left;
 }
+
 .main_admin_banner .snsBox>*:not(:last-child) {
-    margin-right: 5px;
+  margin-right: 5px;
 }
+
 .main_admin_banner .snsBox>* {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
+
 .btn-naver_talk {
-    color: #fff !important;
-    background-color: #00c73c;
+  color: #fff !important;
+  background-color: #00c73c;
 }
+
 .btn-kakao_open {
-    color: #fff !important;
-    background-color: #ffb341;
+  color: #fff !important;
+  background-color: #ffb341;
 }
-.btn-group-xs>.btn, .btn-xs {
-    padding: 1px 5px;
-    font-size: 12px;
-    line-height: 1.5;
-    border-radius: 3px;
+
+.btn-group-xs>.btn,
+.btn-xs {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
 }
+
 .btn {
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
 }
 </style>

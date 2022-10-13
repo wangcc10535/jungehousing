@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-29 13:49:18
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-07 12:55:47
+ * @LastEditTime: 2022-10-14 00:15:55
  * @FilePath: \jungehousing\src\views\orderList\detail\houseDetail.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -240,7 +240,8 @@ export default {
       iconMarkerArr: [],
       iconMarker: null,
       houseData: {},
-      middleman: []
+      middleman: [],
+      iconName: '',
     };
   },
   created() {
@@ -301,25 +302,51 @@ export default {
         }
       })
     },
+
+    // initMap() {
+    //   let lat = this.houseData.lat;
+    //   let lng = this.houseData.lon;
+    //   var mapOptions = {
+    //     center: new kakao.maps.LatLng(lat, lng),
+    //     level: 4,
+    //     mapTypeControl: true,
+    //     mapTypeControlOptions: {
+    //       style: naver.maps.MapTypeControlStyle.BUTTON,
+    //       position: naver.maps.Position.RIGHT_TOP
+    //     },
+    //     zoomControl: true,
+    //     zoomControlOptions: {
+    //       position: naver.maps.Position.RIGHT_CENTER
+    //       // style: naver.maps.ZoomControlStyle.SMALL
+    //     }
+    //   };
+    //   this.map = new naver.maps.Map('map', mapOptions);
+    //   // this.onLoad(map);
+    // },
     initMap() {
+      let mapInit = document.getElementById('map')
       let lat = this.houseData.lat;
       let lng = this.houseData.lon;
-      var mapOptions = {
-        center: new naver.maps.LatLng(lat, lng),
-        zoom: 16,
-        mapTypeControl: true,
-        mapTypeControlOptions: {
-          style: naver.maps.MapTypeControlStyle.BUTTON,
-          position: naver.maps.Position.RIGHT_TOP
-        },
-        zoomControl: true,
-        zoomControlOptions: {
-          position: naver.maps.Position.RIGHT_CENTER
-          // style: naver.maps.ZoomControlStyle.SMALL
-        }
+      let mapOption = {
+        center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
       };
-      this.map = new naver.maps.Map('map', mapOptions);
-      // this.onLoad(map);
+      this.map = new kakao.maps.Map(mapInit, mapOption);
+
+      // 지도에 표시할 원을 생성합니다
+      var circle = new kakao.maps.Circle({
+        center: new kakao.maps.LatLng(lat, lng),  // 원의 중심좌표 입니다 
+        radius: 100, // 미터 단위의 원의 반지름입니다 
+        strokeWeight: 1, // 선의 두께입니다 
+        strokeColor: '#75B8FA', // 선의 색깔입니다
+        strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+        //  strokeStyle: 'dashed', // 선의 스타일 입니다
+        fillColor: '#CFE7FF', // 채우기 색깔입니다
+        fillOpacity: 0.7  // 채우기 불투명도 입니다   
+      });
+
+      // 지도에 원을 표시합니다 
+      circle.setMap(this.map);
     },
     iconTab(icon, index) {
       let _this = this;
@@ -328,137 +355,69 @@ export default {
           item.setMap(null);
         });
       }
-      const marr = this.houseData.roomNeighbors;
-      if (icon.className == 'MT1') {
+      this.iconMarkerArr = []
+      // 장소 검색 객체를 생성합니다
+      var ps = new kakao.maps.services.Places(this.map);
+      ps.categorySearch(icon.className, this.placesSearchCB, { useMapBounds: true });
+      this.iconName = icon.className
+      this.iconIndex = index;
+    },
+    placesSearchCB(data, status, pagination) {
+      if (status === kakao.maps.services.Status.OK) {
+        for (var i = 0; i < data.length; i++) {
+          this.displayMarker(data[i]);
+        }
+      }
+    },
+    displayMarker(place) {
+      let imageSrc = null
+      if (this.iconName == 'MT1') {
         // console.log('超级市场');
-        // this.iconMarker.remove()
-        marr.forEach((item) => {
-          if (item.type == icon.id) {
-            let latlng = new naver.maps.LatLng(item.lat, item.lon);
-            this.iconMarker = new naver.maps.Marker({
-              position: latlng,
-              draggable: false,
-              map: this.map,
-              icon: require('@/assets/images/marker/mt1_o.png')
-            });
-            this.iconMarkerArr.push(this.iconMarker);
-          }
-        });
-      } else if (icon.className == 'CS2') {
+        imageSrc = require('@/assets/images/marker/mt1_o.png')
+      } else if (this.iconName == 'CS2') {
         // console.log('便利店');
-        marr.forEach((item) => {
-          if (item.type == icon.id) {
-            let latlng = new naver.maps.LatLng(item.lat, item.lon);
-            this.iconMarker = new naver.maps.Marker({
-              position: latlng,
-              draggable: false,
-              map: this.map,
-              icon: require('@/assets/images/marker/cs2.png')
-            });
-            this.iconMarkerArr.push(this.iconMarker);
-          }
-        });
-      } else if (icon.className == 'PS3') {
+        imageSrc = require('@/assets/images/marker/cs2.png')
+      } else if (this.iconName == 'PS3') {
         // console.log('幼儿园');
-        marr.forEach((item) => {
-          if (item.type == icon.id) {
-            let latlng = new naver.maps.LatLng(item.lat, item.lon);
-            this.iconMarker = new naver.maps.Marker({
-              position: latlng,
-              draggable: false,
-              map: this.map,
-              icon: require('@/assets/images/marker/ps3.png')
-            });
-            this.iconMarkerArr.push(this.iconMarker);
-          }
-        });
-      } else if (icon.className == 'SC4') {
+        imageSrc = require('@/assets/images/marker/ps3.png')
+      } else if (this.iconName == 'SC4') {
         // console.log('学校');
-        marr.forEach((item) => {
-          if (item.type == icon.id) {
-            let latlng = new naver.maps.LatLng(item.lat, item.lon);
-            this.iconMarker = new naver.maps.Marker({
-              position: latlng,
-              draggable: false,
-              map: this.map,
-              icon: require('@/assets/images/marker/sc4.png')
-            });
-            this.iconMarkerArr.push(this.iconMarker);
-          }
-        });
-      } else if (icon.className == 'BK9') {
+        imageSrc = require('@/assets/images/marker/sc4.png')
+      } else if (this.iconName == 'BK9') {
         // console.log('银行');
-        marr.forEach((item) => {
-          if (item.type == icon.id) {
-            let latlng = new naver.maps.LatLng(item.lat, item.lon);
-            this.iconMarker = new naver.maps.Marker({
-              position: latlng,
-              draggable: false,
-              map: this.map,
-              icon: require('@/assets/images/marker/bk9.png')
-            });
-            this.iconMarkerArr.push(this.iconMarker);
-          }
-        });
-      } else if (icon.className == 'CT1') {
+        imageSrc = require('@/assets/images/marker/bk9.png')
+      } else if (this.iconName == 'CT1') {
         // console.log('娱乐设施');
-        marr.forEach((item) => {
-          if (item.type == icon.id) {
-            let latlng = new naver.maps.LatLng(item.lat, item.lon);
-            this.iconMarker = new naver.maps.Marker({
-              position: latlng,
-              draggable: false,
-              map: this.map,
-              icon: require('@/assets/images/marker/ct1.png')
-            });
-            this.iconMarkerArr.push(this.iconMarker);
-          }
-        });
-      } else if (icon.className == 'PO3') {
+        imageSrc = require('@/assets/images/marker/ct1.png')
+      } else if (this.iconName == 'PO3') {
         // console.log('公共机构');
-        marr.forEach((item) => {
-          if (item.type == icon.id) {
-            let latlng = new naver.maps.LatLng(item.lat, item.lon);
-            this.iconMarker = new naver.maps.Marker({
-              position: latlng,
-              draggable: false,
-              map: this.map,
-              icon: require('@/assets/images/marker/po3.png')
-            });
-            this.iconMarkerArr.push(this.iconMarker);
-          }
-        });
-      } else if (icon.className == 'AT4') {
+        imageSrc = require('@/assets/images/marker/po3.png')
+      } else if (this.iconName == 'AT4') {
         // console.log('景点');
-        marr.forEach((item) => {
-          if (item.type == icon.id) {
-            let latlng = new naver.maps.LatLng(item.lat, item.lon);
-            this.iconMarker = new naver.maps.Marker({
-              position: latlng,
-              draggable: false,
-              map: this.map,
-              icon: require('@/assets/images/marker/at4.png')
-            });
-            this.iconMarkerArr.push(this.iconMarker);
-          }
-        });
-      } else if (icon.className == 'HP8') {
+        imageSrc = require('@/assets/images/marker/at4.png')
+      } else if (this.iconName == 'HP8') {
         // console.log('医院');
-        marr.forEach((item) => {
-          if (item.type == icon.id) {
-            let latlng = new naver.maps.LatLng(item.lat, item.lon);
-            this.iconMarker = new naver.maps.Marker({
-              position: latlng,
-              draggable: false,
-              map: this.map,
-              icon: require('@/assets/images/marker/hp8.png')
-            });
-            this.iconMarkerArr.push(this.iconMarker);
-          }
+        imageSrc = require('@/assets/images/marker/hp8.png')
+      }
+      let imageSize = new kakao.maps.Size(28, 28);
+      let imageOption = { offset: new kakao.maps.Point(28, 28) };
+      let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+      // 마커를 생성하고 지도에 표시합니다
+      this.iconMarker = new kakao.maps.Marker({
+        // map: this.map,
+        position: new kakao.maps.LatLng(place.y, place.x),
+        image: markerImage
+      });
+      this.iconMarkerArr.push(this.iconMarker);
+      this.initMarkers(this.map)
+    },
+    initMarkers(map) {
+      if (map != null) {
+        this.iconMarkerArr.forEach((item) => {
+          item.setMap(map);
         });
       }
 
-      this.iconIndex = index;
     },
     // 获取房产列表
     getList() {
@@ -467,7 +426,15 @@ export default {
         pageSize: 10
       };
       roomSelectHot({ ...queryParams }).then((res) => {
-        this.houseList = res.rows;
+        if (res.code == 200) {
+          this.houseList = []
+          res.rows.forEach(item => {
+            item.addressName = item.city.split(',').splice(0, 2).join("")
+            if (item.status != 0) {
+              this.houseList.push(item)
+            }
+          })
+        }
       });
     }
   }

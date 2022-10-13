@@ -123,8 +123,16 @@ export default {
     getList() {
 
       searchRoom({ ...this.queryParams,...this.searchFrom }).then((res) => {
-        this.houseList = res.rows;
-        this.total = res.total
+        if (res.code == 200) {
+          this.houseList = []
+          res.rows.forEach( item =>{
+            item.addressName = item.city.split(',').splice(0,2).join("")
+            if (item.status != 0) {
+              this.houseList.push(item)
+            }
+          })
+          this.total = res.total;
+        }
       });
     },
     seDetail(item) {
