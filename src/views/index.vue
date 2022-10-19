@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-13 20:43:26
+ * @LastEditTime: 2022-10-17 12:02:30
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -799,6 +799,7 @@ hr {
   img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 }
 

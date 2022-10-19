@@ -63,6 +63,7 @@ ul{
 .holder {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .search-item-wide .item_title {
