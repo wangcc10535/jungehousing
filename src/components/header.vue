@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:01:35
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-12 22:00:51
+ * @LastEditTime: 2022-10-23 00:29:11
  * @FilePath: \jungehousing\src\components\header.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -23,7 +23,7 @@
       </div>
       <div class="num-to" v-if="this.$route.name != 'index'">
         <span class="num-to-box toDay"><span>{{ $t("message.toDay") }}</span> <br /> <countTo :startVal='0' :endVal='142' :duration='3000'></countTo></span>
-        <span class="num-to-box nowDay"><span>{{ $t("message.nowDay") }}</span> <br /><countTo :startVal='0' :endVal='23' :duration='6000'></countTo></span>
+        <span class="num-to-box nowDay"><span>{{ $t("message.nowDay") }}</span> <br /><countTo :startVal='0' :endVal='75201' :duration='6000'></countTo></span>
         <span class="num-to-box losDay"><span>{{ $t("message.losDay") }}</span><br /><countTo :startVal='0' :endVal='715524' :duration='4200'></countTo></span>
       </div>
       <div class="header-navigation pull-right">
