@@ -2,7 +2,7 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-26 21:08:31
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-27 00:57:31
+ * @LastEditTime: 2022-10-24 10:41:57
  * @FilePath: \jungehousing\src\views\mobile\m_orderList\m_list.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -17,7 +17,7 @@
                             <img :src="item.image" alt />
                         </div>
                         <div class="marg-right">
-                            <p class="marg-title">[{{item.address.slice(0,6)}}] {{item.title}}</p>
+                            <p class="marg-title">[{{item.addressName}}] {{item.title}}</p>
                             <div class="price_wrap">
                                 <span class="installation_span">{{$t('message.TotalPrice')}}</span>
                                 <strong class="price_strong">{{item.lastPrice}}</strong>
@@ -79,6 +79,12 @@ export default {
             this.loading = true
             searchRoom({ ...this.searchFrom }).then((res) => {
                 if (res.code == 200) {
+                    res.rows.forEach(element => {
+                        if (element.address) {
+                            element.addressName = element.address.slice(0, 6)
+                        }
+
+                    })
                     this.houseList = res.rows;
                     this.loading = false;
                 }
