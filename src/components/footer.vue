@@ -2,18 +2,15 @@
  * @Description: 
  * @Author: wangcc
  * @Date: 2022-08-23 10:07:07
- * @LastEditors: wangcc
- * @LastEditTime: 2022-08-23 15:23:31
+ * @LastEditors: wangcc 1053578651@qq.com
+ * @LastEditTime: 2022-10-24 16:29:01
  * @FilePath: \jungehousing\src\components\footer.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
 <template>
   <div class="footer" id="app-footer">
     <div class="_container">
-      <div
-        class="row"
-        style="border-bottom:1px solid rgba(255, 255, 255, .5);padding-bottom:5px;overflow: hidden;"
-      >
+      <div class="row" style="border-bottom:1px solid rgba(255, 255, 255, .5);padding-bottom:5px;overflow: hidden;">
         <div class="col-md-8">
           <ul class="footer-menu seperator list-unstyled list-inline">
             <li>
@@ -49,6 +46,16 @@
                 </a>
               </span>
             </li>
+            <li>
+              <span>
+                <a href="javascript:;">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;"><a href="http://admin.junlandhousing.com/" target="_blank"
+                        rel="noopener noreferrer"><i class="el-icon-s-tools"></i></a></font>
+                  </font>
+                </a>
+              </span>
+            </li>
           </ul>
           <span id="footer_menu"></span>
         </div>
@@ -69,14 +76,17 @@
             <li>
               <span>
                 <font style="vertical-align: inherit;">
-                  <font style="vertical-align: inherit;">{{ $t("message.corporateName") }}：{{ $t("message.junge") }}</font>
+                  <font style="vertical-align: inherit;">{{ $t("message.corporateName") }}：{{ $t("message.junge") }}
+                  </font>
                 </font>
               </span>
             </li>
             <li>
               <span>
                 <font style="vertical-align: inherit;">
-                  <font style="vertical-align: inherit;">{{ $t("message.representativeFigure") }}：{{ $t("message.TeamLeader") }}</font>
+                  <font style="vertical-align: inherit;">{{ $t("message.representativeFigure") }}：{{
+                      $t("message.TeamLeader")
+                  }}</font>
                 </font>
               </span>
             </li>
@@ -146,58 +156,73 @@ export default {
   font-size: 13px;
   padding: 19px 0;
 }
+
 .row {
   margin-right: -15px;
   margin-left: -15px;
 }
+
 .col-md-8 {
   position: relative;
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
 }
+
 .list-inline {
   padding-left: 0;
   margin-left: -5px;
   list-style: none;
   line-height: 24px;
 }
-.list-inline > li {
+
+.list-inline>li {
   display: inline-block;
   padding-right: 5px;
   padding-left: 5px;
 }
+
 .seperator li span {
   padding-right: 10px;
 }
-.footer ul.footer-menu > li a {
+
+.footer ul.footer-menu>li a {
   font-size: 15px;
 }
+
 .seperator li:after {
   content: '|';
 }
+
 .seperator li:last-child:after {
   content: '';
 }
+
 .margin-top-20 {
   margin-top: 20px !important;
 }
+
 .footer a {
   color: #ffffff;
   display: inline-block;
 }
+
 .footer_logo {
   max-width: 200px;
 }
+
 .margin-top-40 {
   margin-top: 30px !important;
 }
+
 ul.resp-tabs-list,
 p {
   /* margin: 0px; */
   padding: 0px;
 }
+
 @media (min-width: 992px) {
+
   .col-md-1,
   .col-md-2,
   .col-md-3,
@@ -212,9 +237,11 @@ p {
   .col-md-12 {
     float: left;
   }
+
   .col-md-9 {
     width: 75%;
   }
+
   .col-xs-1,
   .col-sm-1,
   .col-md-1,

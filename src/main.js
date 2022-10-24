@@ -2,7 +2,7 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-21 21:56:02
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-27 02:46:26
+ * @LastEditTime: 2022-10-24 15:28:16
  * @FilePath: \jungehousing\src\main.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -14,7 +14,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import i18n from './utils/index'
-import 'swiper/css/swiper.css'
+import 'swiper/dist/css/swiper.css'
 import breadcrumb from '@/components/breadcrumb.vue'
 import navDrawer from '@/components/mobile_c/m_header.vue'
 import '@/assets/css/iconfont/iconfont.css'

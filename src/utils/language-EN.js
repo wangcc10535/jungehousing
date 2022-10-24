@@ -77,6 +77,7 @@ export default {
         'between': 'between',
         'region':'region',
         'waterproof': 'Room',
+        'family':'Household Number',
         'ShowerRoom': 'ShowerRoom',
         'Photo': 'PHOTO',
         'type': 'TYPE',

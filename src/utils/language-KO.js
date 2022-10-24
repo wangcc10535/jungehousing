@@ -5,7 +5,7 @@ export default {
         'navList': '부동산',
         'news': '뉴스', 
         'entrust': '의뢰하기', 
-        'problem': ' 자주 뭇는 질문',
+        'problem': ' 자주 묻는 질문',
         'language': '언어', 
         'CN': '中文', 
         'EN': 'english', 
@@ -64,8 +64,8 @@ export default {
         'Partner': '부동산싸이트', 
 
         // 组件
-        'LanguageSwitching': '언어밖구겠습니까?',
-        'Tips' : '윗잎', 
+        'LanguageSwitching': '언어 바꾸겠습니다?',
+        'Tips' : '힌트', 
         'yes': '네', 
         'no': '아니요', 
         'home': '홈페이지', 
@@ -80,6 +80,7 @@ export default {
         'between': '룸', 
         'region':'지방', 
         'waterproof': '방', 
+        'family':'세대주 수',
         'ShowerRoom': '욕실', 
         'Photo': '사진', 
         'type': '유형', 
@@ -91,7 +92,7 @@ export default {
         // 新闻列表页
         'AllNews': '부동산뉴스', 
         'inputPlaceholder': '내용입력', 
-        'LatestProperty': '뉴부동산', 
+        'LatestProperty': '최신 매물', 
 
         // 委托页面 
         'entrust': '의뢰하기', 
@@ -120,7 +121,7 @@ export default {
         'SubmissionDate': '등록 시간', 
 
         // 常见问题 
-        'commonProblem': '자주 뭇는 질문' ,
+        'commonProblem': '자주 묻는 질문' ,
         
         // 房产详情页
         'ArticleNo': '상품id', 

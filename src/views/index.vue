@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-17 12:02:30
+ * @LastEditTime: 2022-10-24 16:23:57
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -105,7 +105,7 @@
           <el-radio-group v-model="houseFrom.value" size="small" @change="radioChange">
             <el-radio-button :label="''">{{ $t('message.whole') }}</el-radio-button>
             <el-radio-button v-for="(item, index) in saleList" :key="index" :label="item.id">{{
-            item.name
+                item.name
             }}</el-radio-button>
           </el-radio-group>
         </div>
@@ -203,9 +203,13 @@
         <div class="megafolio-container">
           <swiper :options="swiperOption">
             <swiper-slide v-for="(img, index) in itemList" :key="index">
-              <div class="news-box" @click="geoNews(img)">
-                <img :src="img.image" alt="" />
-              </div>
+              <a :href="link.name" target="_blank" >
+                <div class="news-box">
+                  <img :src="img.image" alt="" />
+                  <h3>{{ img.newsTitle }}</h3>
+                </div>
+              </a>
+
             </swiper-slide>
           </swiper>
         </div>
@@ -243,7 +247,7 @@
       <p class="text-muted m-t-sm">{{ $t("message.addressInfo") }}</p>
       <h5><i class="el-icon-phone"></i> 032-361-8884</h5>
       <h5><i class="el-icon-mobile"></i> 032-361-8884</h5>
-      <h5><i class="el-icon-chat-dot-round"></i> weChat: 
+      <h5><i class="el-icon-chat-dot-round"></i> weChat:
         <div><img style="width:80px;height:80px" src="@/assets/images/weChatimg.png" alt="" /></div>
       </h5>
       <div class="snsBox">
@@ -943,6 +947,18 @@ hr {
   width: 272px;
   height: 272px;
   overflow: hidden;
+  position: relative;
+
+  h3 {
+    position: absolute;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 30px;
+    line-height: 30px;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+  }
 }
 
 .news-box img {

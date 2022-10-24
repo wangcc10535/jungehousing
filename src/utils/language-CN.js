@@ -80,6 +80,7 @@ export default {
         'between': '间',
         'region':'区域',
         'waterproof': '房间',
+        'family':'户主数',
         'ShowerRoom': '浴室',
         'Photo': '照片',
         'type': '类型',
@@ -94,6 +95,7 @@ export default {
         'LatestProperty': '最新房产',
 
         // 委托页面
+        // eslint-disable-next-line no-dupe-keys
         'entrust': '委托',
         'tabFirst': '委托（购买）',
         'tabSale': '委托（出售）',

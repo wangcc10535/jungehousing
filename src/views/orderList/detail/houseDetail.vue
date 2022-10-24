@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-29 13:49:18
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-14 00:15:55
+ * @LastEditTime: 2022-10-24 16:06:21
  * @FilePath: \jungehousing\src\views\orderList\detail\houseDetail.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -11,7 +11,7 @@
   <div class="_container main">
     <div class="left">
       <div class="article">
-        <h3>{{$t('message.ArticleNo')}}：{{ houseData.homeNum }}</h3>
+        <h3>{{ $t('message.ArticleNo') }}：{{ houseData.homeNum }}</h3>
       </div>
       <div class="banner-icon">
         <div class="megafolio-container">
@@ -20,17 +20,18 @@
             <div class="swiper-button-next"></div> -->
             <div class="centerDiv">
               <div class="thumb-example">
-                <swiper class="swiper gallery-top" :options="swiperOptionTop" ref="swiperTop">
-                  <swiper-slide v-for="(link, index) in houseData.roomImages" :key="index">
+                <swiper :options="swiperOptionTop" class="swiper gallery-top" ref="swiperTop">
+                  <swiper-slide v-for="(item, index) in houseData.roomImages" :key="index">
                     <div class="friendship-link">
-                      <img :src="link.image" alt />
+                      <img :src="item.image" alt="">
                     </div>
                   </swiper-slide>
                 </swiper>
-                <swiper class="swiper gallery-thumbs" :options="swiperOptionThums" ref="swiperThumbs">
-                  <swiper-slide class="slide-list" v-for="(link, index) in houseData.roomImages" :key="index">
+                <swiper  :options="swiperOptionThumbs" class="swiper gallery-thumbs"
+                  ref="swiperThumbs">
+                  <swiper-slide class="slide-list" v-for="(item, index) in houseData.roomImages" :key="index">
                     <div class="friendship-Thums">
-                      <img :src="link.image" alt />
+                      <img :src="item.image" alt="">
                     </div>
                   </swiper-slide>
                 </swiper>
@@ -42,12 +43,12 @@
             <el-descriptions :title="$t('message.essentialInformation')" :column="1" border>
               <el-descriptions-item :label="$t('message.AmountInformation')">
                 <div class="price_wrap">
-                  <span class="installation_span">{{$t('message.TotalPrice')}}</span>
+                  <span class="installation_span">{{ $t('message.TotalPrice') }}</span>
                   <strong class="price_strong">{{ houseData.lastPrice }}</strong>
-                  <span class="installation_span">{{$t('message.downPayments')}}</span>
+                  <span class="installation_span">{{ $t('message.downPayments') }}</span>
                   <strong class="price_strong">{{ houseData.roomPrice }}</strong>
-                  <span class="installation_span">{{$t('message.loan')}}</span>
-                  <strong class="price_strong">{{ houseData.loans }}{{$t('message.TenThousandWon')}}</strong>
+                  <span class="installation_span">{{ $t('message.loan') }}</span>
+                  <strong class="price_strong">{{ houseData.loans }}{{ $t('message.TenThousandWon') }}</strong>
                 </div>
               </el-descriptions-item>
               <el-descriptions-item :label="$t('message.LocationInformation')">
@@ -62,30 +63,34 @@
               </el-descriptions-item>
               <el-descriptions-item :label="$t('message.BuildingInformation')">
                 <p class="base-row">
-                  <span class="tags">{{$t('message.floor')}}</span>
+                  <span class="tags">{{ $t('message.floor') }}</span>
                   {{ houseData.floor }}
                 </p>
               </el-descriptions-item>
               <el-descriptions-item :label="$t('message.MoreInformation')">
                 <p class="base-row">
-                  <span class="tags">{{$t('message.area')}}</span>
+                  <span class="tags">{{ $t('message.area') }}</span>
                   {{ houseData.actualArea }}㎡
                 </p>
                 <p class="base-row base-play">
                   <span class="base-play-box">
-                    <span class="tags">{{$t('message.waterproof')}}</span>
-                    {{ houseData.familyNum }}{{$t('message.Room')}}
+                    <span class="tags">{{ $t('message.family') }}</span>
+                    {{ houseData.familyNum }}{{ $t('message.Room') }}
                   </span>
                   <span class="base-play-box">
-                    <span class="tags">{{$t('message.ShowerRoom')}}</span>
-                    {{ houseData.showerRoom }}{{$t('message.Room')}}
+                    <span class="tags">{{ $t('message.waterproof') }}</span>
+                    {{ houseData.roomNum }}{{ $t('message.Room') }}
+                  </span>
+                  <span class="base-play-box">
+                    <span class="tags">{{ $t('message.ShowerRoom') }}</span>
+                    {{ houseData.showerRoom }}{{ $t('message.Room') }}
                   </span>
                 </p>
                 <p class="base-row base-play">
                   <span class="base-play-box">
-                    <span class="tags">{{$t('message.heating')}}</span>
-                    <span v-if="houseData.heat == 2">{{$t('message.NoHeating')}}</span>
-                    <span v-if="houseData.heat == 1">{{$t('message.UrbanHeating')}}</span>
+                    <span class="tags">{{ $t('message.heating') }}</span>
+                    <span v-if="houseData.heat == 1">{{ $t('message.NoHeating') }}</span>
+                    <span v-if="houseData.heat == 2">{{ $t('message.UrbanHeating') }}</span>
                   </span>
                   <span class="base-play-box"></span>
                   <!-- <span class="base-play-box">
@@ -98,7 +103,7 @@
                 <div class="option-box">
                   <!-- <i class="iconfont icon-tingchechang"></i> -->
                   <span class="option-box-label" v-for="(metro, index) in houseData.option" :key="index">{{
-                  metro
+                      metro
                   }}</span>
                 </div>
               </el-descriptions-item>
@@ -108,7 +113,7 @@
             </el-descriptions>
           </div>
           <div class="order-list-detail">
-            <h3>{{$t('message.detailedDescription')}}</h3>
+            <h3>{{ $t('message.detailedDescription') }}</h3>
             <div class="order-list-detail-center" v-html="houseData.item"></div>
           </div>
           <div class="map-box">
@@ -127,28 +132,28 @@
     <div class="right-box">
       <div class="agent-box">
         <div class="agent-box-header">
-          <h4>{{houseData.middlemanJob}}</h4>
+          <h4>{{ houseData.middlemanJob }}</h4>
           <div class="agent-box-header-img">
             <img v-if="houseData.middlemanImg" :src="houseData.middlemanImg" alt />
             <el-avatar v-else :size="50" style="width:100%;height:100%" :src="circleUrl"></el-avatar>
           </div>
-          <p class="agent-box-header-name"><i class="iconfont icon-yonghufill"></i> {{houseData.middlemanName}}</p>
+          <p class="agent-box-header-name"><i class="iconfont icon-yonghufill"></i> {{ houseData.middlemanName }}</p>
         </div>
         <div class="agent-box-contact">
-          <span class="agent-box-contact-phone"> <i class="iconfont icon-dianhua"></i>{{houseData.phone}} </span>
+          <span class="agent-box-contact-phone"> <i class="iconfont icon-dianhua"></i>{{ houseData.phone }} </span>
           <span class="agent-box-contact-kakao">
-            <i class="iconfont icon-kakao-talk-fill kakao-talk-fill"></i>{{houseData.middlemanTalk}}
+            <i class="iconfont icon-kakao-talk-fill kakao-talk-fill"></i>{{ houseData.middlemanTalk }}
           </span>
         </div>
         <div class="agent-box-customer">
-          <p class="agent-box-customer-ps">{{$t('message.pis')}}</p>
+          <p class="agent-box-customer-ps">{{ $t('message.pis') }}</p>
           <el-input class="agent-box-customer-input" v-model="customerFrom.adsw"
             :placeholder="$t('message.PhoneNumberOrEmail')"></el-input>
           <el-input class="agent-box-customer-textarea" type="textarea" :rows="3"
             :placeholder="$t('message.ConsultationContents')" v-model="customerFrom.qwera"></el-input>
           <div class="agent-box-customer-submit">
             <el-button class="agent-box-customer-submit-btn" type="warning" @click="addRequireUse">
-              {{$t('message.KeepInContact')}}</el-button>
+              {{ $t('message.KeepInContact') }}</el-button>
           </div>
         </div>
       </div>
@@ -219,23 +224,47 @@ export default {
       customerFrom: {},
       rightTitle: this.$t('message.PopularRealEstate'),
       swiperOptionTop: {
+        // spaceBetween:10,
+        effect: 'fade',
         loop: true,
-        loopedSlides: 8,
-        spaceBetween: 10,
-        navigation: {
-          nextEl: 'swiper-button-next',
-          prevEl: 'swiper-button-prev'
-        }
+        loopedSlides: 4,
+        // zoom: true,//双击放大
+        // navigation: {
+        // nextEl: '.swiper-button-next',
+        // prevEl: '.swiper-button-prev'
+        // },
+        observer: true,
+        observeParents: true,
+        grabCursor: true // 抓手
       },
-      swiperOptionThums: {
-        loop: true,
-        loopedSlides: 8,
-        spaceBetween: 10,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        touchRatio: 0.2,
-        slideToClickedSlide: true
+      swiperOptionThumbs: {
+        loop: true,    //开启无限轮播  
+        slidesPerView: 4,    //显示几个图片
+        spaceBetween: 10,	//小图之间得距离 
+        direction: 'horizontal',
+        // centeredSlides: true, // 设置活动块居中
+        grabCursor: true, // 抓手,
+        slideToClickedSlide: true,
+        watchSlidesVisibility: true // 防止不可点击
       },
+      // swiperOptionTop: {
+      //   loop: true,
+      //   loopedSlides: 8,
+      //   spaceBetween: 10,
+      //   navigation: {
+      //     nextEl: 'swiper-button-next',
+      //     prevEl: 'swiper-button-prev'
+      //   }
+      // },
+      // swiperOptionThums: {
+      //   loop: true,
+      //   loopedSlides: 8,
+      //   spaceBetween: 10,
+      //   centeredSlides: true,
+      //   slidesPerView: 'auto',
+      //   touchRatio: 0.2,
+      //   slideToClickedSlide: true
+      // },
       houseList: [],
       iconMarkerArr: [],
       iconMarker: null,
@@ -258,11 +287,18 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      const swiperTop = this.$refs.swiperTop.$swiper;
-      const swiperThumbs = this.$refs.swiperThumbs.$swiper;
-      swiperTop.controller.control = swiperThumbs;
-      swiperThumbs.controller.control = swiperTop;
-    });
+      // 实现swiper双向控制
+      const swiperTop = this.$refs.swiperTop.swiper
+      const swiperThumbs = this.$refs.swiperThumbs.swiper
+      swiperTop.controller.control = swiperThumbs
+      swiperThumbs.controller.control = swiperTop
+    })
+    // this.$nextTick(() => {
+    //   const swiperTop = this.$refs.swiperTop.$swiper;
+    //   const swiperThumbs = this.$refs.swiperThumbs.$swiper;
+    //   swiperTop.controller.control = swiperThumbs;
+    //   swiperThumbs.controller.control = swiperTop;
+    // });
   },
 
   methods: {
@@ -477,12 +513,13 @@ export default {
 }
 
 .friendship-Thums {
-  width: 96px;
+  width: 100%;
   height: 72px;
 
   img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 }
 
