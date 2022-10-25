@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-29 13:49:18
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-24 16:06:21
+ * @LastEditTime: 2022-10-25 20:46:44
  * @FilePath: \jungehousing\src\views\orderList\detail\houseDetail.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -22,13 +22,13 @@
               <div class="thumb-example">
                 <swiper :options="swiperOptionTop" class="swiper gallery-top" ref="swiperTop">
                   <swiper-slide v-for="(item, index) in houseData.roomImages" :key="index">
-                    <div class="friendship-link">
-                      <img :src="item.image" alt="">
+                    <div class="friendship-link" v-viewer>
+                      <video :src="item.image" v-if="item.videoType == 1"></video>
+                      <img :src="item.image" v-if="item.videoType == 0" alt="">
                     </div>
                   </swiper-slide>
                 </swiper>
-                <swiper  :options="swiperOptionThumbs" class="swiper gallery-thumbs"
-                  ref="swiperThumbs">
+                <swiper :options="swiperOptionThumbs" class="swiper gallery-thumbs" ref="swiperThumbs">
                   <swiper-slide class="slide-list" v-for="(item, index) in houseData.roomImages" :key="index">
                     <div class="friendship-Thums">
                       <img :src="item.image" alt="">
@@ -133,7 +133,7 @@
       <div class="agent-box">
         <div class="agent-box-header">
           <h4>{{ houseData.middlemanJob }}</h4>
-          <div class="agent-box-header-img">
+          <div class="agent-box-header-img" v-viewer>
             <img v-if="houseData.middlemanImg" :src="houseData.middlemanImg" alt />
             <el-avatar v-else :size="50" style="width:100%;height:100%" :src="circleUrl"></el-avatar>
           </div>
@@ -225,6 +225,12 @@ export default {
       rightTitle: this.$t('message.PopularRealEstate'),
       swiperOptionTop: {
         // spaceBetween:10,
+        autoplay: {
+          delay: 2000,
+          stopOnLastSlide: false,
+          disableOnInteraction: false, //操作swiper后不会停止播放
+
+        },
         effect: 'fade',
         loop: true,
         loopedSlides: 4,
@@ -247,24 +253,6 @@ export default {
         slideToClickedSlide: true,
         watchSlidesVisibility: true // 防止不可点击
       },
-      // swiperOptionTop: {
-      //   loop: true,
-      //   loopedSlides: 8,
-      //   spaceBetween: 10,
-      //   navigation: {
-      //     nextEl: 'swiper-button-next',
-      //     prevEl: 'swiper-button-prev'
-      //   }
-      // },
-      // swiperOptionThums: {
-      //   loop: true,
-      //   loopedSlides: 8,
-      //   spaceBetween: 10,
-      //   centeredSlides: true,
-      //   slidesPerView: 'auto',
-      //   touchRatio: 0.2,
-      //   slideToClickedSlide: true
-      // },
       houseList: [],
       iconMarkerArr: [],
       iconMarker: null,
@@ -315,6 +303,16 @@ export default {
         this.houseData = res.data;
         // this.houseData.city = this.houseData.city.split(',');
         this.houseData.option = this.houseData.option.split(',');
+        let videoLink = 'http://vd3.bdstatic.com/mda-njq43x4n6p63efdc/360p/h264/1666666466379002453/mda-njq43x4n6p63efdc.mp4'
+        
+        this.houseData.roomImages.forEach(item =>{
+          item.videoType = 0
+        })
+        this.houseData.roomImages.push({
+          image: videoLink,
+          videoType: 1,
+        })
+        console.log(this.houseData);
         this.middleman.forEach(item => {
           if (item.id == this.houseData.middlemanId) {
             this.houseData.middlemanImg = item.headerImg;
@@ -508,7 +506,8 @@ export default {
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: #0c0c0c;
   }
 }
 

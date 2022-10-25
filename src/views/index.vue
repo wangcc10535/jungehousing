@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-24 16:23:57
+ * @LastEditTime: 2022-10-25 15:15:10
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -203,7 +203,7 @@
         <div class="megafolio-container">
           <swiper :options="swiperOption">
             <swiper-slide v-for="(img, index) in itemList" :key="index">
-              <a :href="link.name" target="_blank" >
+              <a :href="img.name" target="_blank" >
                 <div class="news-box">
                   <img :src="img.image" alt="" />
                   <h3>{{ img.newsTitle }}</h3>
