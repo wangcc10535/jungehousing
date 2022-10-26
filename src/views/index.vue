@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-25 15:15:10
+ * @LastEditTime: 2022-10-26 14:02:24
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -251,7 +251,7 @@
         <div><img style="width:80px;height:80px" src="@/assets/images/weChatimg.png" alt="" /></div>
       </h5>
       <div class="snsBox">
-        <a href="https://open.kakao.com/me/zjlik" class="btn btn-kakao_open btn-xs" target="_blank">
+        <a href="https://open.kakao.com/o/g3u7ORJe" class="btn btn-kakao_open btn-xs" target="_blank">
           <h5><i class="el-icon-chat-line-round"></i> 오픈채팅</h5>
         </a>
       </div>
