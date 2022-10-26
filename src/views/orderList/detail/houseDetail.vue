@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-29 13:49:18
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-25 20:46:44
+ * @LastEditTime: 2022-10-26 23:46:33
  * @FilePath: \jungehousing\src\views\orderList\detail\houseDetail.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -23,7 +23,7 @@
                 <swiper :options="swiperOptionTop" class="swiper gallery-top" ref="swiperTop">
                   <swiper-slide v-for="(item, index) in houseData.roomImages" :key="index">
                     <div class="friendship-link" v-viewer>
-                      <video :src="item.image" v-if="item.videoType == 1"></video>
+                      <video :src="item.image" v-if="item.videoType == 1" controls="controls" autoplay="autoplay"></video>
                       <img :src="item.image" v-if="item.videoType == 0" alt="">
                     </div>
                   </swiper-slide>
@@ -31,7 +31,8 @@
                 <swiper :options="swiperOptionThumbs" class="swiper gallery-thumbs" ref="swiperThumbs">
                   <swiper-slide class="slide-list" v-for="(item, index) in houseData.roomImages" :key="index">
                     <div class="friendship-Thums">
-                      <img :src="item.image" alt="">
+                      <video :src="item.image" v-if="item.videoType == 1" ></video>
+                      <img :src="item.image" v-if="item.videoType == 0" alt="">
                     </div>
                   </swiper-slide>
                 </swiper>
@@ -225,12 +226,7 @@ export default {
       rightTitle: this.$t('message.PopularRealEstate'),
       swiperOptionTop: {
         // spaceBetween:10,
-        autoplay: {
-          delay: 2000,
-          stopOnLastSlide: false,
-          disableOnInteraction: false, //操作swiper后不会停止播放
-
-        },
+        autoplay:false,
         effect: 'fade',
         loop: true,
         loopedSlides: 4,
@@ -303,15 +299,15 @@ export default {
         this.houseData = res.data;
         // this.houseData.city = this.houseData.city.split(',');
         this.houseData.option = this.houseData.option.split(',');
-        let videoLink = 'http://vd3.bdstatic.com/mda-njq43x4n6p63efdc/360p/h264/1666666466379002453/mda-njq43x4n6p63efdc.mp4'
-        
         this.houseData.roomImages.forEach(item =>{
-          item.videoType = 0
+          if (this.matchType(item.image) == 'video') {
+            item.videoType = 1
+          }
+          if (this.matchType(item.image) == 'image') {
+            item.videoType = 0
+          }
         })
-        this.houseData.roomImages.push({
-          image: videoLink,
-          videoType: 1,
-        })
+        // this.houseData.roomImages.reverse()
         console.log(this.houseData);
         this.middleman.forEach(item => {
           if (item.id == this.houseData.middlemanId) {
@@ -453,6 +449,113 @@ export default {
       }
 
     },
+    // 根据文件名后缀区分 文件类型
+    /*
+     * @param: fileName - 文件名称
+     * @param: 数据返回 1) 无后缀匹配 - false
+     * @param: 数据返回 2) 匹配图片 - image
+     * @param: 数据返回 3) 匹配 txt - txt
+     * @param: 数据返回 4) 匹配 excel - excel
+     * @param: 数据返回 5) 匹配 word - word
+     * @param: 数据返回 6) 匹配 pdf - pdf
+     * @param: 数据返回 7) 匹配 ppt - ppt
+     * @param: 数据返回 8) 匹配 视频 - video
+     * @param: 数据返回 9) 匹配 音频 - radio
+     * @param: 数据返回 10) 其他匹配项 - other
+     */
+     matchType(fileName) {
+      // 后缀获取
+      var suffix = '';
+      // 获取类型结果
+      var result = '';
+      try {
+        var flieArr = fileName.split('.');
+        suffix = flieArr[flieArr.length - 1];
+      } catch (err) {
+        suffix = '';
+      }
+      // fileName无后缀返回 false
+      if (!suffix) {
+        result = false;
+        return result;
+      }
+      // 图片格式
+      var imglist = ['png', 'jpg', 'jpeg', 'bmp', 'gif'];
+      // 进行图片匹配
+      result = imglist.some(function (item) {
+        return item == suffix;
+      });
+      if (result) {
+        result = 'image';
+        return result;
+      };
+      // 匹配txt
+      var txtlist = ['txt'];
+      result = txtlist.some(function (item) {
+        return item == suffix;
+      });
+      if (result) {
+        result = 'txt';
+        return result;
+      };
+      // 匹配 excel
+      var excelist = ['xls', 'xlsx'];
+      result = excelist.some(function (item) {
+        return item == suffix;
+      });
+      if (result) {
+        result = 'excel';
+        return result;
+      };
+      // 匹配 word
+      var wordlist = ['doc', 'docx'];
+      result = wordlist.some(function (item) {
+        return item == suffix;
+      });
+      if (result) {
+        result = 'word';
+        return result;
+      };
+      // 匹配 pdf
+      var pdflist = ['pdf'];
+      result = pdflist.some(function (item) {
+        return item == suffix;
+      });
+      if (result) {
+        result = 'pdf';
+        return result;
+      };
+      // 匹配 ppt
+      var pptlist = ['ppt'];
+      result = pptlist.some(function (item) {
+        return item == suffix;
+      });
+      if (result) {
+        result = 'ppt';
+        return result;
+      };
+      // 匹配 视频
+      var videolist = ['mp4', 'm2v', 'mkv'];
+      result = videolist.some(function (item) {
+        return item == suffix;
+      });
+      if (result) {
+        result = 'video';
+        return result;
+      };
+      // 匹配 音频
+      var radiolist = ['mp3', 'wav', 'wmv'];
+      result = radiolist.some(function (item) {
+        return item == suffix;
+      });
+      if (result) {
+        result = 'radio';
+        return result;
+      }
+      // 其他 文件类型
+      result = 'other';
+      return result;
+    },
     // 获取房产列表
     getList() {
       let queryParams = {
@@ -515,7 +618,7 @@ export default {
   width: 100%;
   height: 72px;
 
-  img {
+  img ,video{
     width: 100%;
     height: 100%;
     object-fit: cover;
