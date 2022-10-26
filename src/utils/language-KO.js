@@ -21,7 +21,7 @@ export default {
         'TeamLeader':'최요원', 
         'businessCircles':'사업자 등록번호', 
         'address':'주소', 
-        'addressInfo':'인천시 남동구 경연로740 준하우징', 
+        'addressInfo':'인천 남동구 경인로740 준하우징', 
         'phone':'전화번호', 
         'copyright':'2018@ junland housing,사진,메물,커뮤니티-사이트내 모든 정보는 보호됩니다.。Junland housing에서 지원', 
         'aboutUs':'회사소개', 
