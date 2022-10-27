@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-26 14:02:24
+ * @LastEditTime: 2022-10-28 02:12:29
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -471,7 +471,10 @@ export default {
       searchRoom({ saleType: saleType, ...queryParams }).then((res) => {
         this.houseList = res.rows;
         this.houseList.forEach((item) => {
-          item.titleLabel = item.titleLabel.split(',');
+          if (item.titleLabel) {
+            item.titleLabel = item.titleLabel.split(',');
+          }
+          
         });
         // console.log(this.houseList);
       });

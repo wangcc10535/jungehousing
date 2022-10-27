@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-29 13:49:18
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-26 23:46:33
+ * @LastEditTime: 2022-10-28 01:54:10
  * @FilePath: \jungehousing\src\views\orderList\detail\houseDetail.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -23,7 +23,7 @@
                 <swiper :options="swiperOptionTop" class="swiper gallery-top" ref="swiperTop">
                   <swiper-slide v-for="(item, index) in houseData.roomImages" :key="index">
                     <div class="friendship-link" v-viewer>
-                      <video :src="item.image" v-if="item.videoType == 1" controls="controls" autoplay="autoplay"></video>
+                      <video :src="item.image" style="height: 100%;" v-if="item.videoType == 1" controls="controls"></video>
                       <img :src="item.image" v-if="item.videoType == 0" alt="">
                     </div>
                   </swiper-slide>
@@ -31,7 +31,7 @@
                 <swiper :options="swiperOptionThumbs" class="swiper gallery-thumbs" ref="swiperThumbs">
                   <swiper-slide class="slide-list" v-for="(item, index) in houseData.roomImages" :key="index">
                     <div class="friendship-Thums">
-                      <video :src="item.image" v-if="item.videoType == 1" ></video>
+                      <video :src="item.image" v-if="item.videoType == 1"></video>
                       <img :src="item.image" v-if="item.videoType == 0" alt="">
                     </div>
                   </swiper-slide>
@@ -226,7 +226,7 @@ export default {
       rightTitle: this.$t('message.PopularRealEstate'),
       swiperOptionTop: {
         // spaceBetween:10,
-        autoplay:false,
+        autoplay: false,
         effect: 'fade',
         loop: true,
         loopedSlides: 4,
@@ -237,6 +237,7 @@ export default {
         // },
         observer: true,
         observeParents: true,
+        watchSlidesVisibility: true,/*避免出现bug*/
         grabCursor: true // 抓手
       },
       swiperOptionThumbs: {
@@ -244,7 +245,7 @@ export default {
         slidesPerView: 4,    //显示几个图片
         spaceBetween: 10,	//小图之间得距离 
         direction: 'horizontal',
-        // centeredSlides: true, // 设置活动块居中
+        centeredSlides: true, // 设置活动块居中
         grabCursor: true, // 抓手,
         slideToClickedSlide: true,
         watchSlidesVisibility: true // 防止不可点击
@@ -297,9 +298,17 @@ export default {
     getDetail() {
       roomDetail({ id: this.houseId }).then((res) => {
         this.houseData = res.data;
+        console.log(this.houseData.roomImages.length > 0);
         // this.houseData.city = this.houseData.city.split(',');
-        this.houseData.option = this.houseData.option.split(',');
-        this.houseData.roomImages.forEach(item =>{
+        if (this.houseData.option) {
+          this.houseData.option = this.houseData.option.split(',');
+        }
+        if (this.houseData.video) {
+          this.houseData.roomImages.unshift({
+            image:this.houseData.video
+          })
+        }
+        this.houseData.roomImages.forEach(item => {
           if (this.matchType(item.image) == 'video') {
             item.videoType = 1
           }
@@ -463,7 +472,7 @@ export default {
      * @param: 数据返回 9) 匹配 音频 - radio
      * @param: 数据返回 10) 其他匹配项 - other
      */
-     matchType(fileName) {
+    matchType(fileName) {
       // 后缀获取
       var suffix = '';
       // 获取类型结果
@@ -566,7 +575,10 @@ export default {
         if (res.code == 200) {
           this.houseList = []
           res.rows.forEach(item => {
-            item.addressName = item.city.split(',').splice(0, 2).join("")
+            if (item.city) {
+              item.addressName = item.city.split(',').splice(0, 2).join("")
+            }
+
             if (item.status != 0) {
               this.houseList.push(item)
             }
@@ -605,7 +617,8 @@ export default {
 .friendship-link {
   width: 100%;
   height: 458px;
-
+  background-color: #0c0c0c;
+  text-align: center;
   img {
     width: 100%;
     height: 100%;
@@ -618,7 +631,8 @@ export default {
   width: 100%;
   height: 72px;
 
-  img ,video{
+  img,
+  video {
     width: 100%;
     height: 100%;
     object-fit: cover;
