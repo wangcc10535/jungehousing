@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-29 13:49:18
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-28 01:54:10
+ * @LastEditTime: 2022-10-28 10:16:23
  * @FilePath: \jungehousing\src\views\orderList\detail\houseDetail.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -23,7 +23,7 @@
                 <swiper :options="swiperOptionTop" class="swiper gallery-top" ref="swiperTop">
                   <swiper-slide v-for="(item, index) in houseData.roomImages" :key="index">
                     <div class="friendship-link" v-viewer>
-                      <video :src="item.image" style="height: 100%;" v-if="item.videoType == 1" controls="controls"></video>
+                      <video :src="item.image" style="height: 100%;width:100%" v-if="item.videoType == 1" controls="controls"></video>
                       <img :src="item.image" v-if="item.videoType == 0" alt="">
                     </div>
                   </swiper-slide>
@@ -39,7 +39,7 @@
               </div>
             </div>
           </div>
-          <p class="order-name">【{{ houseData.address }}】{{ houseData.title }}</p>
+          <p class="order-name">【{{ houseData.addressName }}】{{ houseData.title }}</p>
           <div class="information">
             <el-descriptions :title="$t('message.essentialInformation')" :column="1" border>
               <el-descriptions-item :label="$t('message.AmountInformation')">
@@ -578,7 +578,6 @@ export default {
             if (item.city) {
               item.addressName = item.city.split(',').splice(0, 2).join("")
             }
-
             if (item.status != 0) {
               this.houseList.push(item)
             }
@@ -616,7 +615,7 @@ export default {
 
 .friendship-link {
   width: 100%;
-  height: 458px;
+  height: 645px;
   background-color: #0c0c0c;
   text-align: center;
   img {
@@ -653,20 +652,20 @@ export default {
 
 .firstDiv {
   width: 100%;
-  height: 550px;
+  height: 740px;
   position: relative;
 }
 
 .centerDiv {
   width: 100%;
-  height: 550px;
+  height: 645px;
   position: absolute;
   left: 0;
   top: 0;
 }
 
 .thumb-example {
-  height: 550px;
+  height: 645px;
   background-color: transparent;
 }
 
@@ -692,7 +691,7 @@ export default {
 }
 
 .gallery-top {
-  height: 83%;
+  height: 100%;
   width: 100%;
 }
 
