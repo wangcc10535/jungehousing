@@ -2,14 +2,14 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-21 21:56:02
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-13 20:36:44
+ * @LastEditTime: 2022-10-29 12:03:56
  * @FilePath: \jungehousing\src\App.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
   <div id="app" :class="mStyle">
     <app-header v-if="header_show"></app-header>
-    <router-view v-on:header="header" v-on:footer="footer" />
+    <router-view v-on:header="header" v-on:footer="footer"  v-if="isRouterAlive" />
     <app-footer v-if="footer_show"></app-footer>
   </div>
 </template>
@@ -23,13 +23,19 @@ export default {
     return {
       header_show: true,
       footer_show: true,
-      mStyle: ''
+      mStyle: '',
+      isRouterAlive: true
     };
   },
   components: {
     'app-header': Header,
     'app-footer': Footer
   },
+  provide () {
+   return{
+     reload: this.reload
+   }
+ },
   mounted() {
     if (this.isMobile()) {
       this.header_show = false;
@@ -44,6 +50,12 @@ export default {
     }
   },
   methods: {
+    reload(){
+     this.isRouterAlive = false
+     this.$nextTick(function(){
+       this.isRouterAlive = true
+     })
+   },
     // 添加判断方法
     isMobile() {
       let flag = navigator.userAgent.match(

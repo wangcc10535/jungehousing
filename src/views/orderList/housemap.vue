@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 14:21:15
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-13 22:23:27
+ * @LastEditTime: 2022-10-29 00:07:24
  * @FilePath: \jungehousing\src\views\orderList\housemap.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -13,12 +13,12 @@
       <div class="btn-group">
         <div class="order-search-box">
           <div class="order-search-box-searchEZ">
-            <span>{{$t("message.SearchBtn")}}：</span>
+            <span>{{ $t("message.SearchBtn") }}：</span>
             <el-input class="base-size" size="small" v-model="searchFrom.searchName"
               :placeholder="$t('message.fuzzySearch')"></el-input>
           </div>
           <div class="order-search-box-searchEZ">
-            <span>{{$t('message.SalesType')}}：</span>
+            <span>{{ $t('message.SalesType') }}：</span>
             <el-select class="base-size" size="small" v-model="searchFrom.saleType" collapse-tags
               :placeholder="$t('message.PleaseSelect')">
               <el-option v-for="item in saleOptions" :key="item.dictValue" :label="item.dictLabel"
@@ -26,7 +26,7 @@
             </el-select>
           </div>
           <div class="order-search-box-searchEZ">
-            <span>{{$t('message.ResidentialType')}}：</span>
+            <span>{{ $t('message.ResidentialType') }}：</span>
             <el-select class="base-size" size="small" v-model="searchFrom.house" collapse-tags
               :placeholder="$t('message.PleaseSelect')">
               <el-option v-for="item in houseOptions" :key="item.dictValue" :label="item.dictLabel"
@@ -34,7 +34,7 @@
             </el-select>
           </div>
           <div class="order-search-box-searchEZ">
-            <span>{{$t('message.MetroSearch')}}：</span>
+            <span>{{ $t('message.MetroSearch') }}：</span>
             <el-input class="base-size" size="small" v-model="searchFrom.subway" placeholder="请输入地铁线路"></el-input>
             <!-- <el-select
               class="base-size"
@@ -58,28 +58,28 @@
             <span>-</span>
             <el-input class="base-size" size="small" v-model="searchFrom.mj2" placeholder="请输入内容"></el-input>
           </div> -->
-          <el-button size="small" @click="searchSub">{{$t('message.SearchBtn')}}</el-button>
-          <el-button size="small" @click="react">{{$t('message.Reset')}}</el-button>
+          <el-button size="small" @click="searchSub">{{ $t('message.SearchBtn') }}</el-button>
+          <el-button size="small" @click="react">{{ $t('message.Reset') }}</el-button>
         </div>
         <div class="btn-a">
           <a href="javascript:;" class="icom-class active">
             <router-link to="/housemap" class="router-test">
               <img src="@/assets/images/icon/weizhi.png" alt />
-              <span>{{$t('message.location')}}</span>
+              <span>{{ $t('message.location') }}</span>
             </router-link>
           </a>
 
           <a href="javascript:;" class="icom-class">
             <router-link to="/houseList" class="router-test">
               <img src="@/assets/images/icon/shuanglieliebiao.png" alt />
-              <span>{{$t('message.LargePicture')}}</span>
+              <span>{{ $t('message.LargePicture') }}</span>
             </router-link>
           </a>
 
           <a href="javascript:;" class="icom-class">
             <router-link to="/housetable" class="router-test">
               <img src="@/assets/images/icon/liebiaomoshi_kuai.png" alt />
-              <span>{{$t('message.list')}}</span>
+              <span>{{ $t('message.list') }}</span>
             </router-link>
           </a>
         </div>
@@ -105,8 +105,9 @@
                       <a class="view_product" data-toggle="modal" data-target="#view_dialog" href="#">
                         <font style="vertical-align: inherit">
                           <p class="order-title" style="vertical-align: inherit; ">【 {{ house.familyNum }}
-                            {{$t('message.between')}}】 {{
-                            house.title }}</p>
+                            {{ $t('message.between') }}】 {{
+                                house.title
+                            }}</p>
                         </font>
                       </a>
                       <div class="address">
@@ -120,7 +121,7 @@
                           </div>
                           <div class="link">
                             <font style="vertical-align: inherit">
-                              <font style="vertical-align: inherit">{{$t('message.region')}}：</font>
+                              <font style="vertical-align: inherit">{{ $t('message.region') }}：</font>
                             </font>
                             <div style="display: inline" class="help" data-toggle="tooltip" title="22坪">
                               <font style="vertical-align: inherit">
@@ -128,9 +129,11 @@
                               </font>
                             </div>
                             <font style="vertical-align: inherit">
-                              <font style="vertical-align: inherit">&nbsp;{{$t('message.waterproof')}}： {{
-                              house.familyNum }}{{$t('message.between')}} | {{$t('message.ShowerRoom')}} {{
-                                house.showerRoom }}{{$t('message.between')}}</font>
+                              <font style="vertical-align: inherit">&nbsp;{{ $t('message.waterproof') }}： {{
+                                  house.familyNum
+                              }}{{ $t('message.between') }} | {{ $t('message.ShowerRoom') }} {{
+    house.showerRoom
+}}{{ $t('message.between') }}</font>
                             </font>
                           </div>
                         </small>
@@ -160,7 +163,7 @@
                         margin-right: 5px;
                       ">
                       <font style="vertical-align: inherit">
-                        <font style="vertical-align: inherit">{{$t('message.TotalPrice')}}</font>
+                        <font style="vertical-align: inherit">{{ $t('message.TotalPrice') }}</font>
                       </font>
                     </span>
                     <strong class="price_strong" style="font-size: 16px; font-weight: normal">
@@ -178,7 +181,7 @@
                         margin-right: 5px;
                       ">
                       <font style="vertical-align: inherit">
-                        <font style="vertical-align: inherit">{{$t('message.downPayments')}}</font>
+                        <font style="vertical-align: inherit">{{ $t('message.downPayments') }}</font>
                       </font>
                     </span>
                     <strong class="price_strong" style="font-size: 16px; font-weight: normal">
@@ -196,7 +199,7 @@
                         margin-right: 5px;
                       ">
                       <font style="vertical-align: inherit">
-                        <font style="vertical-align: inherit">{{$t('message.loan')}}</font>
+                        <font style="vertical-align: inherit">{{ $t('message.loan') }}</font>
                       </font>
                     </span>
                     <strong class="price_strong" style="font-size: 16px; font-weight: normal">
@@ -207,7 +210,7 @@
 
                     <span class="price_unit">
                       <font style="vertical-align: inherit">
-                        <font style="vertical-align: inherit">{{$t('message.TenThousandWon')}}</font>
+                        <font style="vertical-align: inherit">{{ $t('message.TenThousandWon') }}</font>
                       </font>
                     </span>
                   </div>
@@ -217,7 +220,7 @@
             </div>
             <el-empty v-else :description="$t('message.NoDataYet')"></el-empty>
             <!--   分页   -->
-            <div class="pagination-box" v-if="total > 10">
+            <div class="pagination-box">
               <pagination :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
                 @pagination="getList" />
             </div>
@@ -273,14 +276,12 @@ export default {
     },
     // 获取房产列表
     getList() {
-      searchRoom({ ...this.queryParams, ...this.searchFrom }).then((res) => {
+      searchRoom({ ...this.queryParams, ...this.searchFrom, status: '1' }).then((res) => {
         if (res.code == 200) {
           this.houseList = []
           res.rows.forEach(item => {
             item.addressName = item.city.split(',').splice(0, 2).join("")
-            if (item.status != 0) {
-              this.houseList.push(item)
-            }
+            this.houseList.push(item)
           })
           this.total = res.total;
         }
@@ -440,5 +441,10 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+::v-deep .pagination-container {
+  padding: 2px 16px;
+  text-align: center;
 }
 </style>

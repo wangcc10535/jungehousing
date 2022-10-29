@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:01:35
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-23 00:29:11
+ * @LastEditTime: 2022-10-29 12:10:10
  * @FilePath: \jungehousing\src\components\header.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -105,6 +105,7 @@ export default {
         type: 'warning'
       }).then(() => {
         this.$i18n.locale = e
+        localStorage.setItem('lang',e)
       }).catch(() => {
         // console.log('catch');
       });

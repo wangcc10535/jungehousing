@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-28 02:12:29
+ * @LastEditTime: 2022-10-29 12:49:10
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -118,7 +118,7 @@
                   <div class="item_title">
                     <h3>[{{ house.homeNum }}] {{ house.title }}</h3>
                     <div class="address">
-                      <span>{{ house.address }}</span>
+                      <span>{{ house.addressName }}</span>
                     </div>
                   </div>
                   <div class="tags">
@@ -468,15 +468,18 @@ export default {
         pageNum: 1,
         pageSize: 16
       };
-      searchRoom({ saleType: saleType, ...queryParams }).then((res) => {
+      searchRoom({ saleType: saleType, ...queryParams,status: '1' }).then((res) => {
         this.houseList = res.rows;
         this.houseList.forEach((item) => {
+          if (item.address) {
+            item.addressName = item.city.split(',').slice(0,2).join('')
+          }
           if (item.titleLabel) {
             item.titleLabel = item.titleLabel.split(',');
           }
           
         });
-        // console.log(this.houseList);
+        console.log(this.houseList);
       });
     },
     // 获取标题标签

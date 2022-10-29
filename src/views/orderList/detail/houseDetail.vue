@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-29 13:49:18
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-28 10:16:23
+ * @LastEditTime: 2022-10-29 12:05:15
  * @FilePath: \jungehousing\src\views\orderList\detail\houseDetail.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -23,16 +23,16 @@
                 <swiper :options="swiperOptionTop" class="swiper gallery-top" ref="swiperTop">
                   <swiper-slide v-for="(item, index) in houseData.roomImages" :key="index">
                     <div class="friendship-link" v-viewer>
-                      <video :src="item.image" style="height: 100%;width:100%" v-if="item.videoType == 1" controls="controls"></video>
-                      <img :src="item.image" v-if="item.videoType == 0" alt="">
+                      <video :src="item.image" style="height: 100%;width:100%" v-if="item.videoType == '1'" controls="controls"></video>
+                      <img :src="item.image" v-else alt="">
                     </div>
                   </swiper-slide>
                 </swiper>
                 <swiper :options="swiperOptionThumbs" class="swiper gallery-thumbs" ref="swiperThumbs">
                   <swiper-slide class="slide-list" v-for="(item, index) in houseData.roomImages" :key="index">
                     <div class="friendship-Thums">
-                      <video :src="item.image" v-if="item.videoType == 1"></video>
-                      <img :src="item.image" v-if="item.videoType == 0" alt="">
+                      <video :src="item.image" v-if="item.videoType == '1'"></video>
+                      <img :src="item.image" v-else alt="">
                     </div>
                   </swiper-slide>
                 </swiper>
@@ -158,7 +158,7 @@
           </div>
         </div>
       </div>
-      <rightList :rightTitle="rightTitle" :houseList="houseList"></rightList>
+      <rightList :rightTitle="rightTitleM.name" :houseList="houseList"></rightList>
     </div>
   </div>
 </template>
@@ -263,10 +263,18 @@ export default {
     this.getList();
     this.getDetail();
   },
+  computed:{
+    rightTitleM() {
+      return{
+        name:this.$t('message.PopularRealEstate'),
+      }
+    }
+  },
   watch: {
     '$route.query.id': {
       handler(newName, oldName) {
-        location.reload()
+        console.log('123');
+        this.$router.go(0)
       }
     }
   },
@@ -305,17 +313,18 @@ export default {
         }
         if (this.houseData.video) {
           this.houseData.roomImages.unshift({
-            image:this.houseData.video
+            image:this.houseData.video,
+            videoType: '1'
           })
         }
-        this.houseData.roomImages.forEach(item => {
-          if (this.matchType(item.image) == 'video') {
-            item.videoType = 1
-          }
-          if (this.matchType(item.image) == 'image') {
-            item.videoType = 0
-          }
-        })
+        // this.houseData.roomImages.forEach(item => {
+        //   if (this.matchType(item.image) == 'video') {
+        //     item.videoType = '1'
+        //   }
+        //   if (this.matchType(item.image) == 'image') {
+        //     item.videoType = '0'
+        //   }
+        // })
         // this.houseData.roomImages.reverse()
         console.log(this.houseData);
         this.middleman.forEach(item => {
@@ -457,113 +466,6 @@ export default {
         });
       }
 
-    },
-    // 根据文件名后缀区分 文件类型
-    /*
-     * @param: fileName - 文件名称
-     * @param: 数据返回 1) 无后缀匹配 - false
-     * @param: 数据返回 2) 匹配图片 - image
-     * @param: 数据返回 3) 匹配 txt - txt
-     * @param: 数据返回 4) 匹配 excel - excel
-     * @param: 数据返回 5) 匹配 word - word
-     * @param: 数据返回 6) 匹配 pdf - pdf
-     * @param: 数据返回 7) 匹配 ppt - ppt
-     * @param: 数据返回 8) 匹配 视频 - video
-     * @param: 数据返回 9) 匹配 音频 - radio
-     * @param: 数据返回 10) 其他匹配项 - other
-     */
-    matchType(fileName) {
-      // 后缀获取
-      var suffix = '';
-      // 获取类型结果
-      var result = '';
-      try {
-        var flieArr = fileName.split('.');
-        suffix = flieArr[flieArr.length - 1];
-      } catch (err) {
-        suffix = '';
-      }
-      // fileName无后缀返回 false
-      if (!suffix) {
-        result = false;
-        return result;
-      }
-      // 图片格式
-      var imglist = ['png', 'jpg', 'jpeg', 'bmp', 'gif'];
-      // 进行图片匹配
-      result = imglist.some(function (item) {
-        return item == suffix;
-      });
-      if (result) {
-        result = 'image';
-        return result;
-      };
-      // 匹配txt
-      var txtlist = ['txt'];
-      result = txtlist.some(function (item) {
-        return item == suffix;
-      });
-      if (result) {
-        result = 'txt';
-        return result;
-      };
-      // 匹配 excel
-      var excelist = ['xls', 'xlsx'];
-      result = excelist.some(function (item) {
-        return item == suffix;
-      });
-      if (result) {
-        result = 'excel';
-        return result;
-      };
-      // 匹配 word
-      var wordlist = ['doc', 'docx'];
-      result = wordlist.some(function (item) {
-        return item == suffix;
-      });
-      if (result) {
-        result = 'word';
-        return result;
-      };
-      // 匹配 pdf
-      var pdflist = ['pdf'];
-      result = pdflist.some(function (item) {
-        return item == suffix;
-      });
-      if (result) {
-        result = 'pdf';
-        return result;
-      };
-      // 匹配 ppt
-      var pptlist = ['ppt'];
-      result = pptlist.some(function (item) {
-        return item == suffix;
-      });
-      if (result) {
-        result = 'ppt';
-        return result;
-      };
-      // 匹配 视频
-      var videolist = ['mp4', 'm2v', 'mkv'];
-      result = videolist.some(function (item) {
-        return item == suffix;
-      });
-      if (result) {
-        result = 'video';
-        return result;
-      };
-      // 匹配 音频
-      var radiolist = ['mp3', 'wav', 'wmv'];
-      result = radiolist.some(function (item) {
-        return item == suffix;
-      });
-      if (result) {
-        result = 'radio';
-        return result;
-      }
-      // 其他 文件类型
-      result = 'other';
-      return result;
     },
     // 获取房产列表
     getList() {
