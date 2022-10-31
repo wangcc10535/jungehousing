@@ -19,7 +19,7 @@ export default {
         'TeamLeader':'YooWon Choi',
         'businessCircles':'Industrial and Commercial Registration No',
         'address':'address',
-        'addressInfo':'Quasi real estate, 1f, 740 Jingren Road, Nandong District, Incheon City',
+        'addressInfo':'740 Gyeongin-ro, Nandong District, Incheon City',
         'phone':'phone',
         'copyright':'2018 © junland。Photos, lists, communities - all information on the website is protected. Supported by junland housing',
         'aboutUs':'About Us',

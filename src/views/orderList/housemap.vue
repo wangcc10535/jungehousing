@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 14:21:15
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-29 00:07:24
+ * @LastEditTime: 2022-10-31 21:47:20
  * @FilePath: \jungehousing\src\views\orderList\housemap.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -281,6 +281,7 @@ export default {
           this.houseList = []
           res.rows.forEach(item => {
             item.addressName = item.city.split(',').splice(0, 2).join("")
+            item.addressDong = item.city.split(',').splice(2).join(''),
             this.houseList.push(item)
           })
           this.total = res.total;
@@ -346,13 +347,25 @@ export default {
         size: N.Size(40, 40),
         anchor: N.Point(20, 20)
       };
-      for (var i = 0, ii = data.length; i < ii; i++) {
-        if (data[i].status != 0) {
-          var spot = data[i],
-            // number = data[i].homeNum,
-            number = '1',
+      var obj = this.getEleNums(data);
+      // console.log(this.getEleNums(data));
+      const cache = [];
+      for (const t of data) {
+        // 检查缓存中是否已经存在
+        if (cache.find(c => c.addressDong === t.addressDong)) {
+          // 已经存在说明以前记录过，现在这个就是多余的，直接忽略
+          continue;
+        }
+        t.numberR = obj[t.addressDong]
+        // 不存在就说明以前没遇到过，把它记录下来
+        cache.push(t);
+      }
+      console.log(cache);
+      for (var i = 0, ii = cache.length; i < ii; i++) {
+        if (cache[i].status != 0) {
+          var spot = cache[i],
+            number = spot.numberR,
             address = spot.city.split(',').splice(2).join(''),
-            // address = data[i].address,
             latlng = new naver.maps.LatLng(spot.lat, spot.lon);
           var htmlMarker1 = {
             content:
@@ -369,11 +382,11 @@ export default {
             draggable: false,
             icon: htmlMarker1
           });
-          naver.maps.Event.addListener(this.marker, 'click', function (e) {
-            //点击marker获取商品列表
-            // console.log(e);
-            // console.log(spot);
-          });
+          // naver.maps.Event.addListener(this.marker, 'click', function (e) {
+          //   //点击marker获取商品列表
+          //   console.log(spot.address);
+          //   console.log(e);
+          // });
           markers.push(this.marker);
         }
 
@@ -391,6 +404,19 @@ export default {
           $(clusterMarker.getElement()).find('div.marker-box-html').text(count);
         }
       });
+    },
+    getEleNums(data) {
+      var map = {}
+      for (let i = 0; i < data.length; i++) {
+        var key = data[i];
+        let cityName = key.city.split(',').splice(2).join('')
+        if (map[cityName]) {
+          map[cityName] += 1
+        } else {
+          map[cityName] = 1
+        }
+      }
+      return map
     },
     seDetail(item) {
       this.$router.push({
