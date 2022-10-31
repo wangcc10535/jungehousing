@@ -440,8 +440,7 @@ td, th {
   right: 0px;
   height: 82%;
   width: 420px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 #map_list.map_list_5 {
@@ -459,7 +458,7 @@ td, th {
 .relist {
   width: 49%;
   float: left;
-  height: 142px;
+  height: 138px;
 }
 
 .relist {

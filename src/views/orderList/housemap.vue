@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 14:21:15
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-31 22:03:49
+ * @LastEditTime: 2022-10-31 22:14:20
  * @FilePath: \jungehousing\src\views\orderList\housemap.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -220,7 +220,7 @@
             </div>
             <el-empty v-else :description="$t('message.NoDataYet')"></el-empty>
             <!--   分页   -->
-            <div class="pagination-box">
+            <div class="pagination-box" v-if="total >10">
               <pagination :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize"
                 @pagination="getList" />
             </div>
@@ -348,7 +348,6 @@ export default {
         anchor: N.Point(20, 20)
       };
       var obj = this.getEleNums(data);
-      console.log(this.getEleNums(data));
       const cache = [];
       for (const t of data) {
         // 检查缓存中是否已经存在
@@ -360,7 +359,6 @@ export default {
         // 不存在就说明以前没遇到过，把它记录下来
         cache.push(t);
       }
-      console.log(cache)
       cache.forEach((item, index) => {
         let latlng = new naver.maps.LatLng(item.lat, item.lon);
         let number = item.numberR;

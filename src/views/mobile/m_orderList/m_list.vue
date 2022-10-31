@@ -2,7 +2,7 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-26 21:08:31
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-24 10:41:57
+ * @LastEditTime: 2022-10-31 22:17:50
  * @FilePath: \jungehousing\src\views\mobile\m_orderList\m_list.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -11,27 +11,27 @@
         <navDrawer></navDrawer>
         <div class="infinite-list-wrapper" style="overflow:auto">
             <ul class="list_widget" v-infinite-scroll="load" infinite-scroll-disabled="disabled">
-                <li class="list-item list" v-for="(item,index) in houseList" :key="index" @click="seDetail(item)">
+                <li class="list-item list" v-for="(item, index) in houseList" :key="index" @click="seDetail(item)">
                     <div class="row-box">
                         <div class="rowImg">
                             <img :src="item.image" alt />
                         </div>
                         <div class="marg-right">
-                            <p class="marg-title">[{{item.addressName}}] {{item.title}}</p>
+                            <p class="marg-title">[{{ item.addressName }}] {{ item.title }}</p>
                             <div class="price_wrap">
-                                <span class="installation_span">{{$t('message.TotalPrice')}}</span>
-                                <strong class="price_strong">{{item.lastPrice}}</strong>
-                                <span class="installation_span">{{$t('message.downPayments')}}</span>
-                                <strong class="price_strong">{{item.roomPrice}}</strong>
-                                <span class="installation_span">{{$t('message.loan')}}</span>
-                                <strong class="price_strong">{{item.loans}}{{$t('message.TenThousandWon')}}</strong>
+                                <span class="installation_span">{{ $t('message.TotalPrice') }}</span>
+                                <strong class="price_strong">{{ item.lastPrice }}</strong>
+                                <span class="installation_span">{{ $t('message.downPayments') }}</span>
+                                <strong class="price_strong">{{ item.roomPrice }}</strong>
+                                <span class="installation_span">{{ $t('message.loan') }}</span>
+                                <strong class="price_strong">{{ item.loans }}{{ $t('message.TenThousandWon') }}</strong>
                             </div>
-                            <p class="list-cm"> {{ item.familyNum }} {{$t('message.between')}}| {{ item.address }}</p>
+                            <p class="list-cm"> {{ item.familyNum }} {{ $t('message.between') }}| {{ item.address }}</p>
                             <p>
-                                <el-tag type="warning" size="mini" style="margin-right:6px">{{item.actualArea}} ㎡
+                                <el-tag type="warning" size="mini" style="margin-right:6px">{{ item.actualArea }} ㎡
                                 </el-tag>
-                                <el-tag type="warning" size="mini">{{$t('message.ShowerRoom')}} {{ item.showerRoom
-                                }}{{$t('message.between')}}</el-tag>
+                                <el-tag type="warning" size="mini">{{ $t('message.ShowerRoom') }} {{ item.showerRoom
+                                }}{{ $t('message.between') }}</el-tag>
                             </p>
                         </div>
                     </div>
@@ -56,6 +56,9 @@ export default {
         }
     },
     created() {
+        if (JSON.stringify(this.$route.query) != '{}') {
+            this.searchFrom = this.$route.query;
+        }
         this.getList();
     },
     computed: {

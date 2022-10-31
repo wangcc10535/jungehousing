@@ -2,7 +2,7 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-26 21:07:59
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-24 10:19:30
+ * @LastEditTime: 2022-10-31 22:19:56
  * @FilePath: \jungehousing\src\views\mobile\m_orderList\m_mapList.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,7 +10,8 @@
     <div>
         <navDrawer></navDrawer>
         <div id="map" style="width: 100%; height: 92vh; position: relative">
-            <el-button type="primary" round class="btn-pos" @click="jumpList">{{ $t("message.lookMapList") }}</el-button>
+            <el-button type="primary" round class="btn-pos" @click="jumpList">{{ $t("message.lookMapList") }}
+            </el-button>
         </div>
     </div>
 </template>
@@ -23,6 +24,7 @@ export default {
             map: null,
             marker: null,
             searchFrom: {},
+            houseList: []
         }
     },
     created() {
@@ -36,9 +38,13 @@ export default {
     methods: {
         // 获取房产列表
         getList() {
-            searchRoom({ ...this.searchFrom }).then((res) => {
+            searchRoom({ ...this.searchFrom, status: '1' }).then((res) => {
                 if (res.code == 200) {
-                    this.houseList = res.rows;
+                    res.rows.forEach(item => {
+                        item.addressName = item.city.split(',').splice(0, 2).join("")
+                        item.addressDong = item.city.split(',').splice(2).join(''),
+                            this.houseList.push(item)
+                    })
                     this.initMap();
                 }
 
@@ -68,19 +74,30 @@ export default {
             this.onLoad(this.map);
         },
         onLoad(map) {
+            let _this = this;
             var markers = [],
-                number = null,
                 data = this.houseList;
             var htmlMarker2 = {
                 content: '<div class="marker-box-html"></div>',
                 size: N.Size(40, 40),
                 anchor: N.Point(20, 20)
             };
-            for (var i = 0, ii = data.length; i < ii; i++) {
-                var spot = data[i],
-                    number = '1',
-                    address = spot.city.split(',').splice(2).join(''),
-                    latlng = new naver.maps.LatLng(spot.lat, spot.lon);
+            var obj = this.getEleNums(data);
+            const cache = [];
+            for (const t of data) {
+                // 检查缓存中是否已经存在
+                if (cache.find(c => c.addressDong === t.addressDong)) {
+                    // 已经存在说明以前记录过，现在这个就是多余的，直接忽略
+                    continue;
+                }
+                t.numberR = obj[t.addressDong]
+                // 不存在就说明以前没遇到过，把它记录下来
+                cache.push(t);
+            }
+            cache.forEach((item, index) => {
+                let latlng = new naver.maps.LatLng(item.lat, item.lon);
+                let number = item.numberR;
+                let address = item.city.split(',').splice(2).join('');
                 var htmlMarker1 = {
                     content:
                         '<div class="marker-box"><span class="num">' +
@@ -91,18 +108,24 @@ export default {
                     size: N.Size(40, 40),
                     anchor: N.Point(20, 20)
                 };
-                this.marker = new naver.maps.Marker({
+                _this.marker = new naver.maps.Marker({
                     position: latlng,
                     draggable: false,
                     icon: htmlMarker1
                 });
-                naver.maps.Event.addListener(this.marker, 'click', function (e) {
+                naver.maps.Event.addListener(_this.marker, 'click', function (e) {
                     //点击marker获取商品列表
-                    // console.log(e);
-                    // console.log(spot);
+                    // _this.searchFrom.city = item.city
+                    _this.$router.push({
+                        name: 'm_list',
+                        query: {
+                            city: item.city
+                        }
+                    });
                 });
-                markers.push(this.marker);
-            }
+                markers.push(_this.marker);
+
+            })
             var markerClustering = new MarkerClustering({
                 minClusterSize: 16, // 控制聚点数量从几个开始
                 maxZoom: 16, // 最大层级
@@ -117,6 +140,19 @@ export default {
                 }
             });
         },
+        getEleNums(data) {
+            var map = {}
+            for (let i = 0; i < data.length; i++) {
+                var key = data[i];
+                let cityName = key.city.split(',').splice(2).join('')
+                if (map[cityName]) {
+                    map[cityName] += 1
+                } else {
+                    map[cityName] = 1
+                }
+            }
+            return map
+        },
     }
 };
 </script>
@@ -126,7 +162,8 @@ export default {
 ::v-deep .index-beader {
     margin-bottom: 0;
 }
-.btn-pos{
+
+.btn-pos {
     position: absolute;
     bottom: 3rem;
     left: 35%;
