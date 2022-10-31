@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 14:21:15
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-31 21:47:20
+ * @LastEditTime: 2022-10-31 22:03:49
  * @FilePath: \jungehousing\src\views\orderList\housemap.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -282,7 +282,7 @@ export default {
           res.rows.forEach(item => {
             item.addressName = item.city.split(',').splice(0, 2).join("")
             item.addressDong = item.city.split(',').splice(2).join(''),
-            this.houseList.push(item)
+              this.houseList.push(item)
           })
           this.total = res.total;
         }
@@ -339,8 +339,8 @@ export default {
       this.onLoad(this.map);
     },
     onLoad(map) {
+      let _this = this;
       var markers = [],
-        number = null,
         data = this.houseList;
       var htmlMarker2 = {
         content: '<div class="marker-box-html"></div>',
@@ -348,7 +348,7 @@ export default {
         anchor: N.Point(20, 20)
       };
       var obj = this.getEleNums(data);
-      // console.log(this.getEleNums(data));
+      console.log(this.getEleNums(data));
       const cache = [];
       for (const t of data) {
         // 检查缓存中是否已经存在
@@ -360,37 +360,34 @@ export default {
         // 不存在就说明以前没遇到过，把它记录下来
         cache.push(t);
       }
-      console.log(cache);
-      for (var i = 0, ii = cache.length; i < ii; i++) {
-        if (cache[i].status != 0) {
-          var spot = cache[i],
-            number = spot.numberR,
-            address = spot.city.split(',').splice(2).join(''),
-            latlng = new naver.maps.LatLng(spot.lat, spot.lon);
-          var htmlMarker1 = {
-            content:
-              '<div class="marker-box"><span class="num">' +
-              number +
-              '</span><font class="marker-name">' +
-              address +
-              '</font></div>',
-            size: N.Size(40, 40),
-            anchor: N.Point(20, 20)
-          };
-          this.marker = new naver.maps.Marker({
-            position: latlng,
-            draggable: false,
-            icon: htmlMarker1
-          });
-          // naver.maps.Event.addListener(this.marker, 'click', function (e) {
-          //   //点击marker获取商品列表
-          //   console.log(spot.address);
-          //   console.log(e);
-          // });
-          markers.push(this.marker);
-        }
+      console.log(cache)
+      cache.forEach((item, index) => {
+        let latlng = new naver.maps.LatLng(item.lat, item.lon);
+        let number = item.numberR;
+        let address = item.city.split(',').splice(2).join('');
+        var htmlMarker1 = {
+          content:
+            '<div class="marker-box"><span class="num">' +
+            number +
+            '</span><font class="marker-name">' +
+            address +
+            '</font></div>',
+          size: N.Size(40, 40),
+          anchor: N.Point(20, 20)
+        };
+        _this.marker = new naver.maps.Marker({
+          position: latlng,
+          draggable: false,
+          icon: htmlMarker1
+        });
+        naver.maps.Event.addListener(_this.marker, 'click', function (e) {
+          //点击marker获取商品列表
+          _this.searchFrom.city = item.city
+          _this.getList()
+        });
+        markers.push(_this.marker);
 
-      }
+      })
       var markerClustering = new MarkerClustering({
         minClusterSize: 5, // 控制聚点数量从几个开始
         maxZoom: 14, // 最大层级
