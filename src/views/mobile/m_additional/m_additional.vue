@@ -2,7 +2,7 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-24 22:15:16
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-25 00:43:02
+ * @LastEditTime: 2022-11-02 15:13:37
  * @FilePath: \jungehousing\src\views\mobile\m_additional\m_additional.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -136,7 +136,7 @@ export default {
     methods: {
         // 获取城市
         getCity(index, e) {
-            // console.log(e);
+            // //console.log(e);
             if (index == 1) {
                 this.pid = e.value;
             } else if (index == 2) {
@@ -145,7 +145,7 @@ export default {
                 this.pid = '0';
             }
             address({ pid: this.pid }).then((res) => {
-                // console.log(res);
+                // //console.log(res);
                 if (index == 1) {
                     this.countyOptions = res.rows;
                 } else if (index == 2) {
@@ -157,8 +157,8 @@ export default {
         },
         // 选择城市
         cityChange(index, e) {
-            // console.log(index);
-            // console.log(e);
+            // //console.log(index);
+            // //console.log(e);
             this.getCity(index, e);
         },
         getEntrustType() {

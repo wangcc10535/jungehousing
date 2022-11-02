@@ -2,8 +2,8 @@
  * @Description: 
  * @Author: wangcc
  * @Date: 2022-08-23 14:41:12
- * @LastEditors: wangcc
- * @LastEditTime: 2022-08-23 14:41:13
+ * @LastEditors: wangcc 1053578651@qq.com
+ * @LastEditTime: 2022-11-02 15:13:39
  * @FilePath: \jungehousing\src\views\help\helplist.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -39,7 +39,7 @@ export default {
   methods:{
     getHelp() {
       listFaq({}).then( res =>{
-        // console.log(res);
+        // //console.log(res);
         this.helpFrom = res.rows;
       })
     }

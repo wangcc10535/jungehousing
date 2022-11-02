@@ -2,7 +2,7 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-21 21:56:02
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-31 20:14:36
+ * @LastEditTime: 2022-11-02 15:14:15
  * @FilePath: \jungehousing\src\views\mobile\m_index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -274,7 +274,7 @@ export default {
         this.houseList.forEach((item) => {
           item.titleLabel = item.titleLabel.split(',');
         });
-        // console.log(this.houseList);
+        // //console.log(this.houseList);
       });
     },
     // 获取客户评论列表
@@ -293,7 +293,7 @@ export default {
       this.$refs.navRef.openNav()
     },
     customerClick(item) {
-      // console.log(item);
+      // //console.log(item);
       this.dialogVisible = true;
       this.dialogImg = item.image
     },
@@ -304,7 +304,7 @@ export default {
       this.$router.push({ name: 'm_mapList' })
     },
     setList(item) {
-      // console.log(item);
+      // //console.log(item);
       this.$router.push({ name: 'm_detail', query: {id:item.id} })
     },
     jumpSearch() {

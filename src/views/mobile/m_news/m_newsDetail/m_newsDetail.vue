@@ -2,7 +2,7 @@
  * @Author: wangcc 1053578651@qq.com
  * @Date: 2022-09-25 00:13:47
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-09-25 00:29:44
+ * @LastEditTime: 2022-11-02 15:13:38
  * @FilePath: \jungehousing\src\views\mobile\m_news\m_newsDetail\m_newsDetail.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -30,7 +30,7 @@ export default {
     },
     created() {
         newsDetail({ id: this.qId }).then((res) => {
-            // console.log(res);
+            // //console.log(res);
             this.baseFrom = res.data;
         });
     },

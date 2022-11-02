@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-29 13:49:18
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-29 12:05:15
+ * @LastEditTime: 2022-11-02 15:14:06
  * @FilePath: \jungehousing\src\views\orderList\detail\houseDetail.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -39,7 +39,7 @@
               </div>
             </div>
           </div>
-          <p class="order-name">【{{ houseData.addressName }}】{{ houseData.title }}</p>
+          <p class="order-name">{{ houseData.title }}</p>
           <div class="information">
             <el-descriptions :title="$t('message.essentialInformation')" :column="1" border>
               <el-descriptions-item :label="$t('message.AmountInformation')">
@@ -273,7 +273,7 @@ export default {
   watch: {
     '$route.query.id': {
       handler(newName, oldName) {
-        console.log('123');
+        //console.log('123');
         this.$router.go(0)
       }
     }
@@ -298,7 +298,7 @@ export default {
     // 获取经纪人
     getlistmiddleman() {
       listmiddleman({}).then(res => {
-        // console.log(res.rows);
+        // //console.log(res.rows);
         this.middleman = res.rows
       })
     },
@@ -306,7 +306,7 @@ export default {
     getDetail() {
       roomDetail({ id: this.houseId }).then((res) => {
         this.houseData = res.data;
-        console.log(this.houseData.roomImages.length > 0);
+        //console.log(this.houseData.roomImages.length > 0);
         // this.houseData.city = this.houseData.city.split(',');
         if (this.houseData.option) {
           this.houseData.option = this.houseData.option.split(',');
@@ -326,7 +326,7 @@ export default {
         //   }
         // })
         // this.houseData.roomImages.reverse()
-        console.log(this.houseData);
+        //console.log(this.houseData);
         this.middleman.forEach(item => {
           if (item.id == this.houseData.middlemanId) {
             this.houseData.middlemanImg = item.headerImg;
@@ -335,7 +335,7 @@ export default {
             this.houseData.middlemanTalk = item.talk;
           }
         })
-        // console.log(this.houseData);
+        // //console.log(this.houseData);
         this.initMap();
       });
     },
@@ -420,31 +420,31 @@ export default {
     displayMarker(place) {
       let imageSrc = null
       if (this.iconName == 'MT1') {
-        // console.log('超级市场');
+        // //console.log('超级市场');
         imageSrc = require('@/assets/images/marker/mt1_o.png')
       } else if (this.iconName == 'CS2') {
-        // console.log('便利店');
+        // //console.log('便利店');
         imageSrc = require('@/assets/images/marker/cs2.png')
       } else if (this.iconName == 'PS3') {
-        // console.log('幼儿园');
+        // //console.log('幼儿园');
         imageSrc = require('@/assets/images/marker/ps3.png')
       } else if (this.iconName == 'SC4') {
-        // console.log('学校');
+        // //console.log('学校');
         imageSrc = require('@/assets/images/marker/sc4.png')
       } else if (this.iconName == 'BK9') {
-        // console.log('银行');
+        // //console.log('银行');
         imageSrc = require('@/assets/images/marker/bk9.png')
       } else if (this.iconName == 'CT1') {
-        // console.log('娱乐设施');
+        // //console.log('娱乐设施');
         imageSrc = require('@/assets/images/marker/ct1.png')
       } else if (this.iconName == 'PO3') {
-        // console.log('公共机构');
+        // //console.log('公共机构');
         imageSrc = require('@/assets/images/marker/po3.png')
       } else if (this.iconName == 'AT4') {
-        // console.log('景点');
+        // //console.log('景点');
         imageSrc = require('@/assets/images/marker/at4.png')
       } else if (this.iconName == 'HP8') {
-        // console.log('医院');
+        // //console.log('医院');
         imageSrc = require('@/assets/images/marker/hp8.png')
       }
       let imageSize = new kakao.maps.Size(28, 28);

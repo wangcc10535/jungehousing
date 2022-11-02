@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:07:07
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-24 16:29:01
+ * @LastEditTime: 2022-11-02 15:10:01
  * @FilePath: \jungehousing\src\components\footer.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -152,7 +152,7 @@ export default {
 <style  lang='scss' scoped>
 .footer {
   color: #ffffff;
-  background-color: #ebb000;
+  background-color: #9b5f2b;
   font-size: 13px;
   padding: 19px 0;
 }

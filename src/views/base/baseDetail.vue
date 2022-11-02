@@ -1,3 +1,11 @@
+<!--
+ * @Author: wangcc 1053578651@qq.com
+ * @Date: 2022-09-21 21:56:02
+ * @LastEditors: wangcc 1053578651@qq.com
+ * @LastEditTime: 2022-11-02 15:13:41
+ * @FilePath: \jungehousing\src\views\base\baseDetail.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <template>
   <div class="base-box">
     <breadcrumb></breadcrumb>
@@ -36,7 +44,7 @@ export default {
     if (this.requestName == 'news') {
       this.detailTitle = '新闻';
       newsDetail({ id: this.qId }).then((res) => {
-        // console.log(res);
+        // //console.log(res);
         this.baseFrom = res.data;
       });
     } else if (this.requestName == 'see') {

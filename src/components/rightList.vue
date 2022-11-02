@@ -8,7 +8,7 @@
             <img :src="item.image" alt />
           </div>
           <div class="marg-right">
-            <p class="marg-title">[{{item.address}}] {{item.title}}</p>
+            <p class="marg-title">[{{item.addressName}}] {{item.title}}</p>
             <div class="price_wrap">
               <span class="installation_span">{{$t('message.TotalPrice')}}</span>
               <strong class="price_strong">{{item.lastPrice}}</strong>

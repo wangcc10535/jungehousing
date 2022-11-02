@@ -3,7 +3,7 @@
  * @Author: wangcc
  * @Date: 2022-08-23 10:11:24
  * @LastEditors: wangcc 1053578651@qq.com
- * @LastEditTime: 2022-10-29 12:49:10
+ * @LastEditTime: 2022-11-02 15:15:23
  * @FilePath: \jungehousing\src\views\index.vue
  * @Copyright: Copyright (c) 2016~2022 by wangcc, All Rights Reserved. 
 -->
@@ -203,7 +203,7 @@
         <div class="megafolio-container">
           <swiper :options="swiperOption">
             <swiper-slide v-for="(img, index) in itemList" :key="index">
-              <a :href="img.name" target="_blank" >
+              <a :href="img.name" target="_blank">
                 <div class="news-box">
                   <img :src="img.image" alt="" />
                   <h3>{{ img.newsTitle }}</h3>
@@ -448,7 +448,7 @@ export default {
       } else {
         this.pid = '0';
       }
-      address({ pid: this.pid }).then((res) => {
+      address({ pid: this.pid, pageSize: 99 }).then((res) => {
         if (index == 1) {
           this.countyOptions = res.rows;
         } else if (index == 2) {
@@ -468,18 +468,18 @@ export default {
         pageNum: 1,
         pageSize: 16
       };
-      searchRoom({ saleType: saleType, ...queryParams,status: '1' }).then((res) => {
+      searchRoom({ saleType: saleType, ...queryParams, status: '1' }).then((res) => {
         this.houseList = res.rows;
         this.houseList.forEach((item) => {
           if (item.address) {
-            item.addressName = item.city.split(',').slice(0,2).join('')
+            item.addressName = item.city.split(',').slice(0, 2).join('')
           }
           if (item.titleLabel) {
             item.titleLabel = item.titleLabel.split(',');
           }
-          
+
         });
-        console.log(this.houseList);
+        //console.log(this.houseList);
       });
     },
     // 获取标题标签
@@ -543,7 +543,7 @@ export default {
         this.searchFrom.city = this.cityFrom.label + ',' + this.countyFrom.label + ',' + this.streetFrom.label;
       }
 
-      // console.log(this.searchFrom);
+      // //console.log(this.searchFrom);
       if (JSON.stringify(this.searchFrom) == '{}') {
         this.$message.error('请选择搜索条件！');
         return false;
@@ -554,7 +554,7 @@ export default {
       });
     },
     goList(item) {
-      // console.log(item);
+      // //console.log(item);
       let search = {
         searchName: item.dictLabel
       }
@@ -651,7 +651,7 @@ export default {
 
 .nav-search>li.activeX a {
   font-weight: bold;
-  color: #ffc525;
+  color: #9b5f2b;
   background-color: transparent;
 }
 
@@ -680,8 +680,8 @@ export default {
 
   .el-button--warning {
     // #ffc525
-    background-color: #ffc525;
-    border-color: #ffc525;
+    background-color: #9b5f2b;
+    border-color: #9b5f2b;
   }
 
   .el-button {
@@ -728,6 +728,7 @@ export default {
     font-weight: 600;
     margin: 0 0 10px;
     font-size: 24px;
+    color: #000;
   }
 
   ::v-deep .el-radio-button__orig-radio:checked+.el-radio-button__inner {
@@ -759,8 +760,8 @@ hr {
 .hr_color,
 .hr_color hr,
 .hr_dots span {
-  color: #636363;
-  background: #636363;
+  color: #9b5f2b;
+  background: #9b5f2b;
 }
 
 .row {
@@ -1060,7 +1061,7 @@ hr {
 
 .btn-kakao_open {
   color: #fff !important;
-  background-color: #ffb341;
+  background-color: #9b5f2b;
 }
 
 .btn-group-xs>.btn,
